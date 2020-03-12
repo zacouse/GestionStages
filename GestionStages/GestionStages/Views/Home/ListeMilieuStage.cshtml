@@ -6,9 +6,9 @@
 <h1>@lang.ListeMilieuStage</h1>
 
 @{ 
-    if(ViewBag.error)
+    if(ViewBag.error != "" && ViewBag.error != null)
     {
-        @Html.Raw("penis");
+        @Html.Raw(ViewBag.error);
     }
 }
 

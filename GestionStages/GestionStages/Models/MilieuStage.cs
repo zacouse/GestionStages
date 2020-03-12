@@ -17,7 +17,7 @@ namespace GestionStages.Models
         public string Province { get; set; }
         public string Pays { get; set; }
         public string NoTelephone { get; set; }
-        public int Etat { get; set; }
+        public bool Etat { get; set; }
 
         public MilieuStage()
         {
@@ -31,10 +31,10 @@ namespace GestionStages.Models
             Province = "";
             Pays = "";
             NoTelephone = "";
-            Etat = 0;
+            Etat = false;
         }
 
-        public MilieuStage(int idmilieu,string titre,string description, string nocivique, string rue, string codepostal, string ville, string province, string pays, string notelephone, int etat)
+        public MilieuStage(int idmilieu,string titre,string description, string nocivique, string rue, string codepostal, string ville, string province, string pays, string notelephone, bool etat)
         {
             IDMilieuStage = idmilieu;
             Titre = titre;
