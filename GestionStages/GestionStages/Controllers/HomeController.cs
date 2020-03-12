@@ -80,19 +80,19 @@ namespace GestionStages.Controllers
                     milieu.CodePostal = (string)dr.GetValue(5);
                     milieu.Ville = (string)dr.GetValue(6);
                     milieu.Province = (string)dr.GetValue(7);
-                    milieu.Pays = (string)dr.GetValue(7);
-                    milieu.NoTelephone = (string)dr.GetValue(7);
-                    milieu.Etat = (int)dr.GetValue(8);
+                    milieu.Pays = (string)dr.GetValue(8);
+                    milieu.NoTelephone = (string)dr.GetValue(9);
+                    milieu.Etat = (bool)dr.GetValue(10);
                     lesMilieus.Add(milieu);
                 }
                 ViewBag.lesMilieus = lesMilieus;
-                ViewBag.error = false;
+                ViewBag.error = "";
                 return View();
             }
-            catch
+            catch(Exception e)
             {
                 ViewBag.lesMilieus = lesMilieus;
-                ViewBag.error = true;
+                ViewBag.error = e.Message;
                 return Error();
             }
             finally

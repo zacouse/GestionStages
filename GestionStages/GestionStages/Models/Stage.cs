@@ -17,7 +17,7 @@ namespace GestionStages.Models
         public int NbHeureSemaine { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
-        public int Etat { get; set; }
+        public bool Etat { get; set; }
 
         public Stage()
         {
@@ -31,10 +31,10 @@ namespace GestionStages.Models
             NbHeureSemaine = 0;
             DateDebut = DateTime.MinValue;
             DateFin = DateTime.MinValue;
-            Etat = 0;
+            Etat = false;
         }
 
-        public Stage(int idstage, int idmilieu, string titre, string descr, int nbpostes, int status, int periode, int nbheure, DateTime datedebut, DateTime datefin, int etat)
+        public Stage(int idstage, int idmilieu, string titre, string descr, int nbpostes, int status, int periode, int nbheure, DateTime datedebut, DateTime datefin, bool etat)
         {
             IDStage = idstage;
             IDMilieuStage = idmilieu;
