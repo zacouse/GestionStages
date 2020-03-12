@@ -6,7 +6,7 @@
 <h1>@lang.ListeMilieuStage</h1>
 
 @{ 
-    if(ViewBag.error != "" && ViewBag.error != null)
+    if( ViewBag.error != null && ViewBag.error != "")
     {
         @Html.Raw(ViewBag.error);
     }
@@ -18,6 +18,7 @@
             <td>@lang.Titre</td>
             <td>@lang.Description</td>
             <td>@lang.Adresse</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -25,15 +26,12 @@
             List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
             for (int i = 0; i < lesMilieus.Count; i++)
             {
-                @Html.Raw("<tr>");
-                @Html.Raw("<td><input type=\"hidden\" value=\"" + lesMilieus[i].IDMilieuStage + "\"/>" + lesMilieus[i].Titre + "</td>");
-                @Html.Raw("<td>" + lesMilieus[i].Description + "</td>");
-                @Html.Raw("<td>" + lesMilieus[i].NoCivique);
-                @Html.Raw(", " + lesMilieus[i].Rue);
-                @Html.Raw(", " + lesMilieus[i].Ville);
-                @Html.Raw(" " + lesMilieus[i].Province);
-                @Html.Raw(", " + lesMilieus[i].Pays + "</td>");
-                @Html.Raw("</tr>");
+                <tr>
+                    <td><input type="hidden" value="@lesMilieus[i].IDMilieuStage"/>@lesMilieus[i].Titre</td>
+                    <td>@lesMilieus[i].Description</td>
+                    <td>@lesMilieus[i].NoCivique @lesMilieus[i].Rue, @lesMilieus[i].Ville &nbsp; @lesMilieus[i].Province, @lesMilieus[i].Pays </td>
+                    <td><a href="@Url.Action("Test", "Home")"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                </tr>
             }
         }
     </tbody>
