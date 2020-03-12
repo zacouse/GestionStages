@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = lang.ListeMilieuStage;
+}
+
+<h1>@lang.ListeMilieuStage</h1>
+
+@{ 
+    if(ViewBag.error)
+    {
+        @Html.Raw("penis");
+    }
+}
+
+<table class="highlight responsive-table">
+    <thead>
+        <tr>
+            <td>@lang.Titre</td>
+            <td>@lang.Description</td>
+            <td>@lang.Adresse</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
+            for (int i = 0; i < lesMilieus.Count; i++)
+            {
+                @Html.Raw("<tr>");
+                @Html.Raw("<td><input type=\"hidden\" value=\"" + lesMilieus[i].IDMilieuStage + "\"/>" + lesMilieus[i].Titre + "</td>");
+                @Html.Raw("<td>" + lesMilieus[i].Description + "</td>");
+                @Html.Raw("<td>" + lesMilieus[i].NoCivique);
+                @Html.Raw(", " + lesMilieus[i].Rue);
+                @Html.Raw(", " + lesMilieus[i].Ville);
+                @Html.Raw(" " + lesMilieus[i].Province);
+                @Html.Raw(", " + lesMilieus[i].Pays + "</td>");
+                @Html.Raw("</tr>");
+            }
+        }
+    </tbody>
+</table>

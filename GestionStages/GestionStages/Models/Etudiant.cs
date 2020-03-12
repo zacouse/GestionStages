@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace GestionStages.Models
 {
-    public class Etudiant
+    public class Etudiant : Personne
     {
         public int IDEtudiant { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
         public int NoDA { get; set; }
-        public string Email { get; set; }
         public string Programme { get; set; }
         public Byte[] Photo { get; set; }
 
@@ -21,7 +18,7 @@ namespace GestionStages.Models
             Nom = "";
             Prenom = "";
             NoDA = 0;
-            Email = "";
+            Courriel = "";
             Programme = "";
             Photo = null;
         }
@@ -32,7 +29,7 @@ namespace GestionStages.Models
             Prenom = prenom;
             Nom = nom;
             NoDA = noDA;
-            Email = email;
+            Courriel = email;
             Programme = progamme;
             Photo = photo;
         }

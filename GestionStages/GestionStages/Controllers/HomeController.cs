@@ -42,26 +42,63 @@ namespace GestionStages.Controllers
                     etudiant.NoDA = (int)dr.GetValue(2);
                     etudiant.Prenom = (string)dr.GetValue(3);
                     etudiant.Nom = (string)dr.GetValue(4);
-                    etudiant.Email = (string)dr.GetValue(5);
+                    etudiant.Courriel = (string)dr.GetValue(5);
                     lesEtudiants.Add(etudiant);
                 }
                 ViewBag.lesEtudiants = lesEtudiants;
+                return View();
             }
             catch
             {
+                ViewBag.lesEtudiants = lesEtudiants;
                 return Error();
             }
             finally
             {
                 conn.Close();
             }
-            return View();
         }
 
         public IActionResult ListeMilieuStage()
         {
-
-            return View();
+            List<MilieuStage> lesMilieus = new List<MilieuStage>();
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pGetAllMilieuStage";
+                dr = sql.ExecuteReader();
+                while (dr.Read())
+                {
+                    MilieuStage milieu = new MilieuStage();
+                    milieu.IDMilieuStage = (int)dr.GetValue(0);
+                    milieu.Titre = (string)dr.GetValue(1);
+                    milieu.Description = (string)dr.GetValue(2);
+                    milieu.NoCivique = (string)dr.GetValue(3);
+                    milieu.Rue = (string)dr.GetValue(4);
+                    milieu.CodePostal = (string)dr.GetValue(5);
+                    milieu.Ville = (string)dr.GetValue(6);
+                    milieu.Province = (string)dr.GetValue(7);
+                    milieu.Pays = (string)dr.GetValue(7);
+                    milieu.NoTelephone = (string)dr.GetValue(7);
+                    milieu.Etat = (int)dr.GetValue(8);
+                    lesMilieus.Add(milieu);
+                }
+                ViewBag.lesMilieus = lesMilieus;
+                ViewBag.error = false;
+                return View();
+            }
+            catch
+            {
+                ViewBag.lesMilieus = lesMilieus;
+                ViewBag.error = true;
+                return Error();
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -34,7 +34,7 @@ namespace GestionStages.Models
             Etat = 0;
         }
 
-        public Stage(int idstage,int idmilieu,string titre,string descr,int nbpostes,int status,int periode,int nbheure,DateTime datedebut,DateTime datefin,int etat)
+        public Stage(int idstage, int idmilieu, string titre, string descr, int nbpostes, int status, int periode, int nbheure, DateTime datedebut, DateTime datefin, int etat)
         {
             IDStage = idstage;
             IDMilieuStage = idmilieu;

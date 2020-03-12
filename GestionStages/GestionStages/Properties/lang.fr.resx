@@ -103,4 +103,16 @@
 	<data name="Welcome" xml:space="preserve">
 		<value>Bienvenue</value>
 	</data>
+	<data name="Titre" xml:space="preserve">
+		<value>Titre</value>
+	</data>
+	<data name="Description" xml:space="preserve">
+		<value>Description</value>
+	</data>
+	<data name="Adresse" xml:space="preserve">
+		<value>Adresse</value>
+	</data>
+	<data name="ListeMilieuStage" xml:space="preserve">
+		<value>Liste des milieux de stages</value>
+	</data>
 </root>

@@ -61,11 +61,47 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Address.
+        /// </summary>
+        public static string Adresse {
+            get {
+                return ResourceManager.GetString("Adresse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Hello.
         /// </summary>
         public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship site list.
+        /// </summary>
+        public static string ListeMilieuStage {
+            get {
+                return ResourceManager.GetString("ListeMilieuStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Title.
+        /// </summary>
+        public static string Titre {
+            get {
+                return ResourceManager.GetString("Titre", resourceCulture);
             }
         }
         
