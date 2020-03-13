@@ -12,7 +12,7 @@ namespace GestionStages.Models
         public string Titre { get; set; }
         public string Description { get; set; }
         public int nbPostes { get; set; }
-        public int Status { get; set; }//Peut être changé dans le futur
+        public int Statut { get; set; }//Peut être changé dans le futur
         public int PeriodeTravail { get; set; }//Peut être changé dans le futur
         public int NbHeureSemaine { get; set; }
         public DateTime DateDebut { get; set; }
@@ -26,7 +26,7 @@ namespace GestionStages.Models
             Titre = "";
             Description = "";
             nbPostes = 0;
-            Status = 0;
+            Statut = 0;
             PeriodeTravail = 0;
             NbHeureSemaine = 0;
             DateDebut = DateTime.MinValue;
@@ -41,7 +41,7 @@ namespace GestionStages.Models
             Titre = titre;
             Description = descr;
             nbPostes = nbpostes;
-            Status = status;
+            Statut = status;
             PeriodeTravail = periode;
             NbHeureSemaine = nbheure;
             DateDebut = datedebut;
