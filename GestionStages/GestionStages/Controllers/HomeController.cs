@@ -11,7 +11,7 @@ namespace GestionStages.Controllers
 {
     public class HomeController : Controller
     {
-        Repositories.repoMSSQL repo = new Repositories.repoMSSQL();
+        protected Repositories.Repository repo = new Repositories.repoMSSQL();
         public IActionResult Index()
         {
             return View();
@@ -26,12 +26,6 @@ namespace GestionStages.Controllers
         {
             ViewBag.id = id;
             ViewBag.lesEtudiants = repo.getAllEtudiants();
-            return View();
-        }
-
-        public IActionResult ListeMilieuStage()
-        {
-            ViewBag.lesMilieus = repo.getAllMilieuStage();
             return View();
         }
 
