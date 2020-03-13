@@ -29,18 +29,6 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult ListeMilieuStage()
-        {
-            ViewBag.lesMilieus = repo.GetAllMilieuStage();
-            return View();
-        }
-
-        public IActionResult ListeStage()
-        {
-            ViewBag.lesStages = repo.GetAllStage();
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
