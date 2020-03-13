@@ -8,6 +8,7 @@ namespace GestionStages.Controllers
 {
     public class StageController : Controller
     {
+        Repositories.IStageRepository repo = new Repositories.repoStageMSSQL();
         public IActionResult Index()
         {
             return View();

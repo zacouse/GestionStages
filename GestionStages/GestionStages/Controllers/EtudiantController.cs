@@ -8,9 +8,6 @@ namespace GestionStages.Controllers
 {
     public class EtudiantController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+
     }
 }
