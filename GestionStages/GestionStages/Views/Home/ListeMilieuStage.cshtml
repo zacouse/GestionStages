@@ -27,7 +27,7 @@
             for (int i = 0; i < lesMilieus.Count; i++)
             {
                 <tr>
-                    <td><input type="hidden" value="@lesMilieus[i].IDMilieuStage" />@lesMilieus[i].Titre</td>
+                    <td>@lesMilieus[i].Titre</td>
                     <td>@lesMilieus[i].Description</td>
                     <td>@lesMilieus[i].NoCivique @lesMilieus[i].Rue, @lesMilieus[i].Ville &nbsp; @lesMilieus[i].Province, @lesMilieus[i].Pays </td>
                     <td><a href="@Url.Action("Test", "Home", new { id = lesMilieus[i].IDMilieuStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
@@ -36,3 +36,8 @@
         }
     </tbody>
 </table>
+
+<div class="row">
+    <div class="s2 push-s1"></div>
+    <div class="s2 push-s8"></div>
+</div>
