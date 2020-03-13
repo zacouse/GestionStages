@@ -9,7 +9,7 @@
 @{
     if (ViewBag.error != null && ViewBag.error != "")
     {
-        @Html.Raw(ViewBag.error);
+    @Html.Raw(ViewBag.error);
     }
 }
 
@@ -27,12 +27,12 @@
             List<Stage> lesStages = ViewBag.lesStages;
             for (int i = 0; i < lesStages.Count; i++)
             {
-                <tr>
-                    <td>@lesStages[i].Titre</td>
-                    <td>@lesStages[i].Description</td>
-                    <td></td>
-                    <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
-                </tr>
+            <tr>
+                <td>@lesStages[i].Titre</td>
+                <td>@lesStages[i].Description</td>
+                <td></td>
+                <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+            </tr>
             }
         }
     </tbody>
