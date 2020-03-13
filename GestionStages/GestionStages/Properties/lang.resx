@@ -115,4 +115,97 @@
 	<data name="ListeMilieuStage" xml:space="preserve">
 		<value>Internship site list</value>
 	</data>
+	<data name="Ville" xml:space="preserve">
+		<value>City</value>
+	</data>
+	<data name="Telephone" xml:space="preserve">
+		<value>Phone</value>
+	</data>
+	<data name="FiltreDeRecherche" xml:space="preserve">
+		<value>Search criteria</value>
+	</data>
+	<data name="MilieuDeStagesDisponibles" xml:space="preserve">
+		<value>Available Internship site </value>
+	</data>
+	<data name="Imprimer" xml:space="preserve">
+		<value>Print</value>
+	</data>
+	<data name="Retour" xml:space="preserve">
+		<value>Back</value>
+	</data>
+	<data name="Ajouter" xml:space="preserve">
+		<value>Add</value>
+	</data>
+	<data name="NumeroCivique" xml:space="preserve">
+		<value>Civic number</value>
+	</data>
+	<data name="Rue" xml:space="preserve">
+		<value>Road</value>
+	</data>
+	<data name="CodePostal" xml:space="preserve">
+		<value>Post code</value>
+	</data>
+	<data name="Province" xml:space="preserve">
+		<value>Province</value>
+	</data>
+	<data name="Pays" xml:space="preserve">
+		<value>Country</value>
+	</data>
+	<data name="NumeroDeTelephone" xml:space="preserve">
+		<value>Phone number</value>
+	</data>
+	<data name="Actif" xml:space="preserve">
+		<value>Active</value>
+	</data>
+	<data name="AjouterUnMilieuDeStage" xml:space="preserve">
+		<value>Add an internship site</value>
+	</data>
+	<data name="ModifierUnMilieuDeStage" xml:space="preserve">
+		<value>Update an internship site</value>
+	</data>
+	<data name="Modifier" xml:space="preserve">
+		<value>Update</value>
+	</data>
+	<data name="VisionnerunMilieuDeStage" xml:space="preserve">
+		<value>View an intership site</value>
+	</data>
+	<data name="StagesDisponiblesDansCeMilieu" xml:space="preserve">
+		<value>Intership available at this site</value>
+	</data>
+	<data name="MilieuDeStage" xml:space="preserve">
+		<value>Intership site</value>
+	</data>
+	<data name="PeriodeDeTravail" xml:space="preserve">
+		<value>Work shift</value>
+	</data>
+	<data name="NombreDHeureParSemaine" xml:space="preserve">
+		<value>Weekly work hours</value>
+	</data>
+	<data name="Statut" xml:space="preserve">
+		<value>Status</value>
+	</data>
+	<data name="DateDeDebut" xml:space="preserve">
+		<value>Start date</value>
+	</data>
+	<data name="DateDeFin" xml:space="preserve">
+		<value>End date</value>
+	</data>
+	<data name="CreerUneCopie" xml:space="preserve">
+		<value>Create Copy</value>
+	</data>
+	<data name="Jour" xml:space="preserve">
+		<value>Day</value>
+	</data>
+	<data name="Soiree" xml:space="preserve">
+		<value>Evening</value>
+	</data>
+	<data name="Nuit" xml:space="preserve">
+		<value>Night</value>
+	</data>
+	<data name="TempsPartiel" xml:space="preserve">
+		<value>Part-time</value>
+	</data>
+	<data name="TempsPleins" xml:space="preserve">
+		<value>Full-Time</value>
+	</data>
 </root>
