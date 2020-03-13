@@ -8,7 +8,8 @@ namespace GestionStages.Repositories
 {
     public abstract class Repository
     {
-        public abstract List<MilieuStage> getAllMilieuStage();
-        public abstract List<Etudiant> getAllEtudiants();
+        public abstract List<MilieuStage> GetAllMilieuStage();
+        public abstract List<Etudiant> GetAllEtudiants();
+        public abstract Stage pAddSetStage(int idStage, int idMilieuStage, string titre, string description, int nbPoste, int statut, int periodeTravail, int nbHeureSemaine, DateTime dateDebut, DateTime dateFin, bool etat, DateTime dateHeureCreation);
     }
 }

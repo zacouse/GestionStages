@@ -12,7 +12,7 @@ namespace GestionStages.Repositories
         private static SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=GestionStage;Integrated Security=True");
         private SqlDataReader dr;
         private SqlCommand sql;
-        public override List<MilieuStage> getAllMilieuStage()
+        public override List<MilieuStage> GetAllMilieuStage()
         {
             List<MilieuStage> lesMilieus = new List<MilieuStage>();
             sql = new SqlCommand();
@@ -41,7 +41,7 @@ namespace GestionStages.Repositories
             }
             catch
             {
-                
+
             }
             finally
             {
@@ -50,7 +50,7 @@ namespace GestionStages.Repositories
             return lesMilieus;
         }
 
-        public override List<Etudiant> getAllEtudiants()
+        public override List<Etudiant> GetAllEtudiants()
         {
             List<Etudiant> lesEtudiants = new List<Etudiant>();
             sql = new SqlCommand();
@@ -81,6 +81,35 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
             return lesEtudiants;
+        }
+
+        public override Stage pAddSetStage(int idStage, int idMilieuStage, string titre, string description, int nbPoste, int statut, int periodeTravail, int nbHeureSemaine, DateTime dateDebut, DateTime dateFin, bool etat, DateTime dateHeureCreation)
+        {
+            Stage LeStage = new Stage();
+            sql = new SqlCommand();
+            try
+            {
+                sql = new SqlCommand("pAddSetStage", conn);
+                sql.CommandType = System.Data.CommandType.StoredProcedure;
+                sql.Parameters.AddWithValue("@IDStage_IN", idStage);
+                sql.Parameters.AddWithValue("@IDMilieuStage_IN", idMilieuStage);
+                sql.Parameters.AddWithValue("@Titre_IN", titre);
+                sql.Parameters.AddWithValue("@Description_IN", description);
+                sql.Parameters.AddWithValue("@NbPoste_IN", nbPoste);
+                sql.Parameters.AddWithValue("@Statut_IN", statut);
+                sql.Parameters.AddWithValue("@PeriodeTravail_IN", periodeTravail);
+                sql.Parameters.AddWithValue("@NbHeureSemaine_IN", nbHeureSemaine);
+                sql.Parameters.AddWithValue("@DateDebut_IN", dateDebut);
+                sql.Parameters.AddWithValue("@DateFin_IN", dateFin);
+                sql.Parameters.AddWithValue("@Etat_IN", etat);
+                sql.Parameters.AddWithValue("@DateHeureCreation", dateHeureCreation);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return LeStage;
         }
     }
 }
