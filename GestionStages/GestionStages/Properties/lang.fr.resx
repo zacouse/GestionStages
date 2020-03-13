@@ -115,4 +115,13 @@
 	<data name="ListeMilieuStage" xml:space="preserve">
 		<value>Liste des milieux de stages</value>
 	</data>
+	<data name="Ajouter" xml:space="preserve">
+		<value>Ajouter</value>
+	</data>
+	<data name="Retour" xml:space="preserve">
+		<value>Retour</value>
+	</data>
+	<data name="ListeStage" xml:space="preserve">
+		<value>Liste de stages</value>
+	</data>
 </root>

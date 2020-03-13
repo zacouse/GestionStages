@@ -115,4 +115,13 @@
 	<data name="ListeMilieuStage" xml:space="preserve">
 		<value>Internship site list</value>
 	</data>
+	<data name="Ajouter" xml:space="preserve">
+		<value>Add</value>
+	</data>
+	<data name="Retour" xml:space="preserve">
+		<value>Return</value>
+	</data>
+	<data name="ListeStage" xml:space="preserve">
+		<value>Internship list</value>
+	</data>
 </root>

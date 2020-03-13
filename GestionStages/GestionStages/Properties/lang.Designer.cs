@@ -70,6 +70,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add.
+        /// </summary>
+        public static string Ajouter {
+            get {
+                return ResourceManager.GetString("Ajouter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Description.
         /// </summary>
         public static string Description {
@@ -93,6 +102,24 @@ namespace GestionStages.Properties {
         public static string ListeMilieuStage {
             get {
                 return ResourceManager.GetString("ListeMilieuStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship list.
+        /// </summary>
+        public static string ListeStage {
+            get {
+                return ResourceManager.GetString("ListeStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return.
+        /// </summary>
+        public static string Retour {
+            get {
+                return ResourceManager.GetString("Retour", resourceCulture);
             }
         }
         
