@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.TitrePage;
+}
+
+<div style="font-size:24px;text-align:center;" class="light-blue-text">
+    <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">add_circle</i>
+    @ViewBag.TitrePage
+    <hr />
+</div>
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    MilieuStage MilieuAModifier = ViewBag.Milieu != null ? ViewBag.Milieu : new MilieuStage();
+    if(MilieuAModifier.IDMilieuStage == 0)
+    {
+        MilieuAModifier.Etat = true;
+    }
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)">
+                <label for="TxtTitre">@lang.Titre</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <textarea id="TxaDescription" class="materialize-textarea">@Html.Raw(@MilieuAModifier.Description)</textarea>
+                <label for="TxaDescription">@lang.Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)">
+                <label for="TxtNoCivique">@lang.NumeroCivique</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)">
+                <label for="TxtRue">@lang.Rue</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)">
+                <label for="TxtCodePostal">@lang.CodePostal</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)">
+                <label for="TxtVille">@lang.Ville</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)">
+                <label for="TxtProvince">@lang.Province</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)">
+                <label for="TxtPays">@lang.Pays</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)">
+                <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <div class="switch" style="text-align:center">
+                    <label>
+                        Inactif
+                        <input type="checkbox" checked="@MilieuAModifier.Etat">
+                        <span class="lever"></span>
+                        Actif
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col push-s3 s2">
+                <a class="waves-effect waves-light btn grey" href="@Url.Action("AjouterModifierMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage+1 })">Retour</a>
+            </div>
+            <div class="col push-s6 s2">
+                <button class="btn waves-effect waves-light darken-1 green" type="submit" name="action">
+                    Ajouter
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+}

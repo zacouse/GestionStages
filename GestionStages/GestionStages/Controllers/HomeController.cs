@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GestionStages.Models;
 using System.Data.SqlClient;
+using GestionStages.Properties;
 
 namespace GestionStages.Controllers
 {
     public class HomeController : Controller
     {
-        Repositories.repoMSSQL repo = new Repositories.repoMSSQL();
+        Repositories.RepoMSSQL repo = new Repositories.RepoMSSQL();
         public IActionResult Index()
         {
             return View();
@@ -32,6 +33,21 @@ namespace GestionStages.Controllers
         public IActionResult ListeMilieuStage()
         {
             ViewBag.lesMilieus = repo.getAllMilieuStage();
+            return View();
+        }
+
+        public IActionResult AjouterModifierMilieuStage(int id=0)
+        {
+             
+            if (id != 0)
+            {
+                ViewBag.TitrePage = lang.ModifierUnMilieuDeStage;
+                ViewBag.Milieu = repo.getMilieuStage(id);
+            }
+            else
+            {
+                ViewBag.TitrePage = lang.AjouterUnMilieuDeStage;
+            }
             return View();
         }
 

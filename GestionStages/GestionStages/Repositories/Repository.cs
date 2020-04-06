@@ -9,6 +9,7 @@ namespace GestionStages.Repositories
     public abstract class Repository
     {
         public abstract List<MilieuStage> getAllMilieuStage();
+        public abstract MilieuStage getMilieuStage(int id);
         public abstract List<Etudiant> getAllEtudiants();
     }
 }
