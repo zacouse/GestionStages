@@ -13,5 +13,6 @@ namespace GestionStages.Controllers
         {
             return View();
         }
+
     }
 }
