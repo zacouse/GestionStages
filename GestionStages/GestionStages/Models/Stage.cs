@@ -18,6 +18,10 @@ namespace GestionStages.Models
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
         public bool Etat { get; set; }
+        public string TitreMilieuStage { get; set; }
+
+        private string[] periode = {""};
+        private string[] status = {""};
 
         public Stage()
         {
@@ -47,6 +51,36 @@ namespace GestionStages.Models
             DateDebut = datedebut;
             DateFin = datefin;
             Etat = etat;
+        }
+
+        public string GetPeriode()
+        {
+            string periodeString;
+            try 
+            {
+                periodeString = periode[PeriodeTravail];
+            }
+            catch
+            {
+                periodeString = "";
+            }
+
+            return periodeString;
+        }
+
+        public string GetStatus()
+        {
+            string statusString;
+            try
+            {
+                statusString = status[Status];
+            }
+            catch
+            {
+                statusString = "";
+            }
+
+            return statusString;
         }
     }
 }

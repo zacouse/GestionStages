@@ -206,3 +206,20 @@ AS
 	INNER JOIN Programme ON Etudiant.IDProgramme = Programme.IDProgramme
 	WHERE Etudiant.Etat = 1
 GO
+
+INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
+VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),
+	('Milieu2','descr','2','2','B2B 2B2','Quebec','QC','Canada','(123) 123-5678',1)
+GO
+
+INSERT INTO Stage([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat])
+VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
+	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
+GO
+
+CREATE PROC pGetAllStage
+AS
+	SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre
+	FROM Stage
+	INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
+GO

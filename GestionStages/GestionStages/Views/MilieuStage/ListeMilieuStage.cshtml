@@ -5,8 +5,8 @@
 
 <h1>@lang.ListeMilieuStage</h1>
 
-@{ 
-    if( ViewBag.error != null && ViewBag.error != "")
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
     {
         @Html.Raw(ViewBag.error);
     }
@@ -33,12 +33,12 @@
                     <td><a href="@Url.Action("Test", "Home", new { id = lesMilieus[i].IDMilieuStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
-            
         }
     </tbody>
 </table>
 
-<div class="row">
-    <div class="s2 push-s1"></div>
-    <div class="s2 push-s8"></div>
+
+<div class="row" style="padding-top:5px;">
+    <div class="col s2"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Retour</a></div>
+    <div class="col s2 push-s9"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
 </div>

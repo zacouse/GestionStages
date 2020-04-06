@@ -9,7 +9,7 @@
 @{
     if (ViewBag.error != null && ViewBag.error != "")
     {
-    @Html.Raw(ViewBag.error);
+        @Html.Raw(ViewBag.error);
     }
 }
 
@@ -18,7 +18,12 @@
         <tr>
             <td>@lang.Titre</td>
             <td>@lang.Description</td>
-            <td>@lang.Adresse</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
         </tr>
     </thead>
@@ -27,13 +32,25 @@
             List<Stage> lesStages = ViewBag.lesStages;
             for (int i = 0; i < lesStages.Count; i++)
             {
-            <tr>
-                <td>@lesStages[i].Titre</td>
-                <td>@lesStages[i].Description</td>
-                <td></td>
-                <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
-            </tr>
+                <tr>
+                    <td>@lesStages[i].Titre</td>
+                    <td>@lesStages[i].Description</td>
+                    <td>@lesStages[i].TitreMilieuStage</td>
+                    <td>@lesStages[i].GetPeriode()</td>
+                    <td>@lesStages[i].GetStatus()</td>
+                    <td>@lesStages[i].NbHeureSemaine h</td>
+                    <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
+                    <td>@{@lesStages[i].DateFin.ToString("d");}</td>
+                    <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                </tr>
             }
         }
     </tbody>
 </table>
+
+<div class="row" style="padding-top:5px;">
+    <div class="col s2"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Retour</a></div>
+    <div class="col s2 push-s9"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
+</div>
+
+<input type="button" value="Print Form" onclick="window.print()" />
