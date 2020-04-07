@@ -47,7 +47,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Etudiant\" />
-    <Folder Include="Views\Stage\" />
   </ItemGroup>
 
 </Project>

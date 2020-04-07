@@ -48,5 +48,10 @@ namespace GestionStages.Models
             DateFin = datefin;
             Etat = etat;
         }
+        public enum StatutTemps
+        {
+            Plein,
+            Partiel
+        }
     }
 }

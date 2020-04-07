@@ -1,0 +1,94 @@
+﻿@using GestionStages.Controllers
+@{
+    ViewData["Title"] = "TestStage";
+}
+
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    Stage StageAModifier = ViewBag.stage != null ? ViewBag.stage : new Stage();
+
+    if (StageAModifier.IDStage == 0)
+    {
+        StageAModifier.Etat = true;
+    }
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(StageAModifier.Titre)">
+                <label for="TxtTitre">@lang.Titre</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea">@Html.Raw(StageAModifier.Description)</textarea>
+                <label for="TxaDescription">@lang.Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNbPostes" name="TxtNbPostes" type="text" class="validate" value="@Html.Raw(StageAModifier.NbPostes)">
+                <label for="TxtNbPostes">@lang.NombreDePostes</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtStatut" name="TxtStatut" type="text" class="validate" value="@Html.Raw(StageAModifier.Statut)">
+                <label for="TxtStatut">@lang.Statut</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtPeriodeTravail" name="TxtPeriodeTravail" type="text" class="validate" value="@Html.Raw(StageAModifier.PeriodeTravail)">
+                <label for="TxtPeriodeTravail">@lang.PeriodeDeTravail</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNombreDHeureParSemaine" name="TxtNombreDHeureParSemaine" type="text" class="validate" value="@Html.Raw(StageAModifier.NbHeureSemaine)">
+                <label for="TxtNombreDHeureParSemaine">@lang.NombreDHeureParSemaine</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtDateDeDebut" name="TxtDateDeDebut" type="text" class="validate" value="@Html.Raw(StageAModifier.DateDebut)">
+                <label for="TxtDateDeDebut">@lang.DateDeDebut</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtDateDeFin" name="TxtDateDeFin" type="text" class="validate" value="@Html.Raw(StageAModifier.DateFin)">
+                <label for="TxtDateDeFin">@lang.DateDeFin</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <div class="switch" style="text-align:center">
+                    <label>
+                        Inactif
+                        <input type="checkbox" checked="@StageAModifier.Etat">
+                        <span class="lever"></span>
+                        Actif
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col push-s3 s2">
+                <a class="waves-effect waves-light btn grey" href="@Url.Action("Test", "Home", new { id = StageAModifier.IDStage + 1 })">Retour</a>
+            </div>
+            <div class="col push-s6 s2">
+                <button class="btn waves-effect waves-light darken-1 green" type="submit" name="action">
+                    Ajouter
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+}

@@ -95,7 +95,26 @@ namespace GestionStages.Properties {
                 return ResourceManager.GetString("ListeMilieuStage", resourceCulture);
             }
         }
-        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship site list.
+        /// </summary>
+        public static string ListeStage
+        {
+            get
+            {
+                return ResourceManager.GetString("ListeStage", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship site list.
+        /// </summary>
+        public static string AddSetStage
+        {
+            get
+            {
+                return ResourceManager.GetString("AddSetStage", resourceCulture);
+            }
+        }
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Title.
         /// </summary>
@@ -111,6 +130,97 @@ namespace GestionStages.Properties {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add.
+        /// </summary>
+        public static string Ajouter
+        {
+            get
+            {
+                return ResourceManager.GetString("Ajouter", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Active.
+        /// </summary>
+        public static string Actif
+        {
+            get
+            {
+                return ResourceManager.GetString("Actif", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Start date.
+        /// </summary>
+        public static string DateDeDebut
+        {
+            get
+            {
+                return ResourceManager.GetString("DateDeDebut", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à End date.
+        /// </summary>
+        public static string DateDeFin
+        {
+            get
+            {
+                return ResourceManager.GetString("DateDeFin", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Weekly work hours.
+        /// </summary>
+        public static string NombreDHeureParSemaine
+        {
+            get
+            {
+                return ResourceManager.GetString("NombreDHeureParSemaine", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Work shift.
+        /// </summary>
+        public static string PeriodeDeTravail
+        {
+            get
+            {
+                return ResourceManager.GetString("PeriodeDeTravail", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Work shift.
+        /// </summary>
+        public static string NombreDePostes
+        {
+            get
+            {
+                return ResourceManager.GetString("NombreDePostes", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Back.
+        /// </summary>
+        public static string Retour
+        {
+            get
+            {
+                return ResourceManager.GetString("Retour", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Status.
+        /// </summary>
+        public static string Statut
+        {
+            get
+            {
+                return ResourceManager.GetString("Statut", resourceCulture);
             }
         }
     }

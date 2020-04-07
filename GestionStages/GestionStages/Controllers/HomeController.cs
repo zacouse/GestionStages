@@ -12,6 +12,7 @@ namespace GestionStages.Controllers
     public class HomeController : Controller
     {
         Repositories.IEtudiantRepository repo = new Repositories.repoEtudiantMSSQL();
+        Repositories.IStageRepository repostage = new Repositories.repoStageMSSQL();
         public IActionResult Index()
         {
             return View();
@@ -26,6 +27,13 @@ namespace GestionStages.Controllers
         {
             ViewBag.id = id;
             ViewBag.lesEtudiants = repo.GetAllEtudiants();
+            return View();
+        }
+
+        //[HttpPost]
+        public ActionResult TestStage(Models.Stage stage)
+        {
+            //repostage.AddSetStage(stage);
             return View();
         }
 

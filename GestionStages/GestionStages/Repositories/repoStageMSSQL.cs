@@ -30,7 +30,7 @@ namespace GestionStages.Repositories
                     stage.IDMilieuStage = (int)dr.GetValue(1);
                     stage.Titre = (string)dr.GetValue(2);
                     stage.Description = (string)dr.GetValue(3);
-                    stage.nbPostes = (int)dr.GetValue(4);
+                    stage.NbPostes = (int)dr.GetValue(4);
                     stage.Statut = (byte)dr.GetValue(5);
                     stage.PeriodeTravail = (byte)dr.GetValue(6);
                     stage.NbHeureSemaine = (int)dr.GetValue(7);
@@ -69,7 +69,7 @@ namespace GestionStages.Repositories
                         stage.IDMilieuStage = (int)dr.GetValue(1);
                         stage.Titre = (string)dr.GetValue(2);
                         stage.Description = (string)dr.GetValue(3);
-                        stage.nbPostes = (int)dr.GetValue(4);
+                        stage.NbPostes = (int)dr.GetValue(4);
                         stage.Statut = (byte)dr.GetValue(5);
                         stage.PeriodeTravail = (byte)dr.GetValue(6);
                         stage.NbHeureSemaine = (int)dr.GetValue(7);
@@ -109,7 +109,7 @@ namespace GestionStages.Repositories
                         stage.IDMilieuStage = (int)dr.GetValue(1);
                         stage.Titre = (string)dr.GetValue(2);
                         stage.Description = (string)dr.GetValue(3);
-                        stage.nbPostes = (int)dr.GetValue(4);
+                        stage.NbPostes = (int)dr.GetValue(4);
                         stage.Statut = (byte)dr.GetValue(5);
                         stage.PeriodeTravail = (byte)dr.GetValue(6);
                         stage.NbHeureSemaine = (int)dr.GetValue(7);
@@ -130,7 +130,7 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
-        public void AddSetStage(Stage stage)
+        public void AddSetStageV1(Stage stage)
         {
             sql = new SqlCommand("pAddSetStage", conn);
             try
@@ -142,13 +142,36 @@ namespace GestionStages.Repositories
                 sql.Parameters.AddWithValue("@IDMilieuStage_IN", stage.IDMilieuStage);
                 sql.Parameters.AddWithValue("@Titre_IN", stage.Titre);
                 sql.Parameters.AddWithValue("@Description_IN", stage.Description);
-                sql.Parameters.AddWithValue("@NbPostes_IN", stage.nbPostes);
+                sql.Parameters.AddWithValue("@NbPostes_IN", stage.NbPostes);
                 sql.Parameters.AddWithValue("@Statut_IN", stage.Statut);
                 sql.Parameters.AddWithValue("@PeriodeTravail_IN", stage.PeriodeTravail);
                 sql.Parameters.AddWithValue("@NbHeureSemaine_IN", stage.NbHeureSemaine);
                 sql.Parameters.AddWithValue("@DateDebut_IN", stage.DateDebut);
                 sql.Parameters.AddWithValue("@DateFin_IN", stage.DateFin);
                 sql.Parameters.AddWithValue("@Etat_IN", stage.Etat);
+                sql.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                
+            }
+        }
+        public void AddSetStage(Stage stage)
+        {
+           // sql = new SqlCommand("pAddSetStage", conn);
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pAddSetStage" + "','" + stage.IDStage + "','" + stage.IDMilieuStage + "','" + stage.Titre + "','" +
+                    stage.Description + "','" + stage.NbPostes + "','" + stage.Statut + "','" + stage.PeriodeTravail + "','" + 
+                    stage.NbHeureSemaine + "','" + stage.DateDebut + "','" + stage.DateFin + "','" + stage.Etat;
                 sql.ExecuteNonQuery();
             }
             catch
@@ -160,7 +183,6 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
-
         public Stage GetStageByID(int stageId)
         {
             Stage LeStage = new Stage();
@@ -180,7 +202,7 @@ namespace GestionStages.Repositories
                         stage.IDMilieuStage = (int)dr.GetValue(1);
                         stage.Titre = (string)dr.GetValue(2);
                         stage.Description = (string)dr.GetValue(3);
-                        stage.nbPostes = (int)dr.GetValue(4);
+                        stage.NbPostes = (int)dr.GetValue(4);
                         stage.Statut = (byte)dr.GetValue(5);
                         stage.PeriodeTravail = (byte)dr.GetValue(6);
                         stage.NbHeureSemaine = (int)dr.GetValue(7);
