@@ -3,10 +3,14 @@
     ViewData["Title"] = ViewBag.TitrePage;
 }
 
-<div style="font-size:24px;text-align:center;" class="light-blue-text">
-    <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">add_circle</i>
-    @ViewBag.TitrePage
-    <hr />
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+        @ViewBag.TitrePage
+    </div>
+    <div class="col push-s4 s4">
+        <hr />
+    </div>
 </div>
 
 @{
@@ -22,58 +26,58 @@
     {
         MilieuAModifier.Etat = true;
     }
-    <form class="col s12">
-        <div class="row">
+    <form class="col s12" method="post" action="@Url.Action("SaveMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage })">
+        <div class="row" >
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)">
+                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" required maxlength="100">
                 <label for="TxtTitre">@lang.Titre</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <textarea id="TxaDescription" class="materialize-textarea">@Html.Raw(@MilieuAModifier.Description)</textarea>
+                <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea" required maxlength="1000">@Html.Raw(@MilieuAModifier.Description)</textarea>
                 <label for="TxaDescription">@lang.Description</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)">
+                <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" required maxlength="10">
                 <label for="TxtNoCivique">@lang.NumeroCivique</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)">
+                <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" required maxlength="100">
                 <label for="TxtRue">@lang.Rue</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)">
+                <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" required maxlength="7">
                 <label for="TxtCodePostal">@lang.CodePostal</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)">
+                <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" required maxlength="100">
                 <label for="TxtVille">@lang.Ville</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)">
+                <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" required maxlength="100">
                 <label for="TxtProvince">@lang.Province</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)">
+                <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" required maxlength="100">
                 <label for="TxtPays">@lang.Pays</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)">
+                <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" required maxlength="20">
                 <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
             </div>
         </div>
@@ -81,22 +85,22 @@
             <div class="input-field col push-s3 s6 ">
                 <div class="switch" style="text-align:center">
                     <label>
-                        Inactif
-                        <input type="checkbox" checked="@MilieuAModifier.Etat">
+                        @lang.Inactif
+                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuAModifier.Etat">
                         <span class="lever"></span>
-                        Actif
+                        @lang.Actif
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col push-s3 s2">
-                <a class="waves-effect waves-light btn grey" href="@Url.Action("AjouterModifierMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage+1 })">Retour</a>
+                <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
             </div>
             <div class="col push-s6 s2">
-                <button class="btn waves-effect waves-light darken-1 green" type="submit" name="action">
-                    Ajouter
-                    <i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="submit" name="action">
+                    @Html.Raw(ViewBag.TexteBouton)
+                    <i class="material-icons right">@Html.Raw(ViewBag.IconeBouton)</i>
                 </button>
             </div>
         </div>

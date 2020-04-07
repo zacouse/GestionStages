@@ -106,6 +106,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Create.
+        /// </summary>
+        public static string Creer {
+            get {
+                return ResourceManager.GetString("Creer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Create Copy.
         /// </summary>
         public static string CreerUneCopie {
@@ -165,6 +174,15 @@ namespace GestionStages.Properties {
         public static string Imprimer {
             get {
                 return ResourceManager.GetString("Imprimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disabled.
+        /// </summary>
+        public static string Inactif {
+            get {
+                return ResourceManager.GetString("Inactif", resourceCulture);
             }
         }
         

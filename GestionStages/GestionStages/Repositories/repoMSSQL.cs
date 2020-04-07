@@ -41,7 +41,7 @@ namespace GestionStages.Repositories
             }
             catch
             {
-                
+
             }
             finally
             {
@@ -91,11 +91,11 @@ namespace GestionStages.Repositories
             {
                 conn.Open();
                 sql.Connection = conn;
-                sql.CommandText = "EXEC pGetMilieuStageById'"+id+"'";
+                sql.CommandText = "EXEC pGetMilieuStageById'" + id + "'";
                 dr = sql.ExecuteReader();
                 while (dr.Read())
                 {
-                    
+
                     milieu.IDMilieuStage = (int)dr.GetValue(0);
                     milieu.Titre = (string)dr.GetValue(1);
                     milieu.Description = (string)dr.GetValue(2);
@@ -118,6 +118,29 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
             return milieu;
+        }
+
+        public override void SaveMilieuStage(MilieuStage milieu)
+        {
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pAddSetMilieuStage'" + milieu.IDMilieuStage + "','" + milieu.Titre + "','" +
+                    milieu.Description + "','" + milieu.NoCivique + "','" + milieu.Rue + "','" + milieu.CodePostal + 
+                    "','" + milieu.Ville + "','" + milieu.Province + "','" + milieu.Pays + "','" + milieu.NoTelephone +
+                    "','" + milieu.Etat +"'";
+                int row = sql.ExecuteNonQuery();
+            }
+            catch 
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

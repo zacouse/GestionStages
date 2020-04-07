@@ -36,19 +36,52 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult AjouterModifierMilieuStage(int id=0)
+        public IActionResult VisionnerMilieuStage(int id = 0)
         {
-             
             if (id != 0)
             {
-                ViewBag.TitrePage = lang.ModifierUnMilieuDeStage;
                 ViewBag.Milieu = repo.getMilieuStage(id);
+                ViewBag.TitrePage = lang.VisionnerunMilieuDeStage;
+                ViewBag.IconeTitre = "remove_red_eye";
+                ViewBag.TexteBouton = lang.Creer;
+            }
+            return View();
+        }
+
+        public IActionResult AjouterModifierMilieuStage(int id=0,bool CreationCopie = false)
+        {
+            if (CreationCopie)
+            {
+                ViewBag.Milieu = repo.getMilieuStage(id);
+                ViewBag.Milieu.IDMilieuStage = 0;
+                id = 0;
+            }
+            if (id == 0)
+            {
+                ViewBag.TitrePage = lang.AjouterUnMilieuDeStage;
+                ViewBag.IconeTitre = "add_circle";
+                ViewBag.IconeBouton = "send";
+                ViewBag.CouleurBouton = "green";
+                ViewBag.TexteBouton = lang.Creer;
+                ViewBag.LienRetour = "../ListeMilieuStage";
             }
             else
             {
-                ViewBag.TitrePage = lang.AjouterUnMilieuDeStage;
+                ViewBag.TitrePage = lang.ModifierUnMilieuDeStage;
+                ViewBag.IconeTitre = "create";
+                ViewBag.Milieu = repo.getMilieuStage(id);
+                ViewBag.IconeBouton = "create";
+                ViewBag.CouleurBouton = "orange";
+                ViewBag.TexteBouton = lang.Modifier;
+                ViewBag.LienRetour = "../VisionnerMilieuStage/"+id;
             }
             return View();
+        }
+
+        public void SaveMilieuStage(int id = 0)
+        {
+            repo.SaveMilieuStage( new MilieuStage(id, Request.Form["TxtTitre"], Request.Form["TxaDescription"], Request.Form["TxtNoCivique"], Request.Form["TxtRue"], Request.Form["TxtCodePostal"], Request.Form["TxtVille"], Request.Form["TxtProvince"], Request.Form["TxtPays"], Request.Form["TxtNumeroTelephone"], Request.Form["ChkEtat"] == "on"));
+            Response.Redirect("../ListeMilieuStage");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

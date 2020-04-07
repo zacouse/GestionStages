@@ -208,4 +208,10 @@
 	<data name="TempsPleins" xml:space="preserve">
 		<value>Full-Time</value>
 	</data>
+	<data name="Inactif" xml:space="preserve">
+		<value>Disabled</value>
+	</data>
+	<data name="Creer" xml:space="preserve">
+		<value>Create</value>
+	</data>
 </root>

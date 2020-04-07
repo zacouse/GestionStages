@@ -11,5 +11,6 @@ namespace GestionStages.Repositories
         public abstract List<MilieuStage> getAllMilieuStage();
         public abstract MilieuStage getMilieuStage(int id);
         public abstract List<Etudiant> getAllEtudiants();
+        public abstract void SaveMilieuStage(MilieuStage milieu);
     }
 }
