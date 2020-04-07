@@ -1,24 +1,16 @@
 ﻿
 @{
     ViewData["Title"] = "ListeStage";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
 }
 
-<h1>@lang.ListeStage</h1>
-
-
-@{
-    if (ViewBag.error != null && ViewBag.error != "")
-    {
-        @Html.Raw(ViewBag.error);
-    }
-}
+<h1>ListeStage</h1>
 
 <table id="liste" class="highlight">
     <thead>
         <tr>
             <td>@lang.Titre</td>
             <td>@lang.Description</td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -41,28 +33,8 @@
                     <td>@lesStages[i].NbHeureSemaine h</td>
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
-                    <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
         }
     </tbody>
 </table>
-
-<div class="row" style="padding-top:5px;">
-    <div class="col s2"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Retour</a></div>
-    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">Print</a></div>
-    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
-</div>
-
-<script>
-    function PrintElem(elem) {
-        var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
-
-        mywindow.print();
-
-        return true;
-    }
-</script>

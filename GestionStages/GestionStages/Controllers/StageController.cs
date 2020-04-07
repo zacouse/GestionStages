@@ -19,5 +19,11 @@ namespace GestionStages.Controllers
             ViewBag.lesStages = repo.GetAllStage();
             return View();
         }
+
+        public IActionResult PrintListeStage()
+        {
+            ViewBag.lesStages = repo.GetAllStage();
+            return View();
+        }
     }
 }

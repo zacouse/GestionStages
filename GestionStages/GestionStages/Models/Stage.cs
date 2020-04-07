@@ -11,7 +11,7 @@ namespace GestionStages.Models
         public int IDMilieuStage { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }
-        public int nbPostes { get; set; }
+        public int NbPostes { get; set; }
         public int Status { get; set; }//Peut être changé dans le futur
         public int PeriodeTravail { get; set; }//Peut être changé dans le futur
         public int NbHeureSemaine { get; set; }
@@ -29,7 +29,7 @@ namespace GestionStages.Models
             IDMilieuStage = 0;
             Titre = "";
             Description = "";
-            nbPostes = 0;
+            NbPostes = 0;
             Status = 0;
             PeriodeTravail = 0;
             NbHeureSemaine = 0;
@@ -44,7 +44,7 @@ namespace GestionStages.Models
             IDMilieuStage = idmilieu;
             Titre = titre;
             Description = descr;
-            nbPostes = nbpostes;
+            NbPostes = nbpostes;
             Status = status;
             PeriodeTravail = periode;
             NbHeureSemaine = nbheure;

@@ -29,7 +29,7 @@ namespace GestionStages.Repositories
                     stage.IDMilieuStage = (int)dr.GetValue(1);
                     stage.Titre = (string)dr.GetValue(2);
                     stage.Description = (string)dr.GetValue(3);
-                    stage.nbPostes = (int)dr.GetValue(4);
+                    stage.NbPostes = (int)dr.GetValue(4);
                     stage.Status = (byte)dr.GetValue(5);
                     stage.PeriodeTravail = (byte)dr.GetValue(6);
                     stage.NbHeureSemaine = (int)dr.GetValue(7);
