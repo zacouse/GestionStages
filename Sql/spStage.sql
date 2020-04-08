@@ -3,10 +3,15 @@ GO
 
 CREATE PROC pGetAllStage
 AS
-SELECT [IDStage], [IDMilieuStage], [Titre], [Description], [Statut], [NbPostes], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+SELECT [IDStage], [IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
 FROM Stage
 GO
-
+CREATE PROC pGetAllStageWithMilieuTitre
+AS
+SELECT [IDStage], MilieuStage.Titre, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat]
+FROM Stage
+left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
+GO
 CREATE PROC pAddSetStage @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPoste_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit
 AS
 IF @IDStage_IN = 0
@@ -25,7 +30,20 @@ GO
 
 CREATE PROC pGetStageByID(@IDStage_IN INT)
 AS
-SELECT [IDMilieuStage], [Titre], [Description], [Statut], [NbPostes], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
 FROM Stage
 WHERE [IDStage] = @IDStage_IN;
 GO
+CREATE PROC pGetMilieuStageForStage(@IDStage_IN INT)
+AS
+SELECT MilieuStage.[Titre]
+FROM Stage
+Left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
+WHERE [IDStage] = @IDStage_IN;
+GO
+
+INSERT INTO Stage ([IDMilieuStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
+VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', '2020-04-01', '2020-04-30', 'true', GETDATE(), GETDATE())
+
+INSERT INTO MilieuStage ([Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat],[DateHeureCreation],[DateHeureModification])
+VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())

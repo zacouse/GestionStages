@@ -1,9 +1,17 @@
 ﻿
 @{
-    ViewData["Title"] = "Ajouter un stage";
+    ViewData["Title"] = ViewBag.PageTitle;
 }
 
-<h1>@lang.AddSetStage</h1>
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconTitle)</i>
+        @ViewBag.PageTitle
+    </div>
+    <div class="col push-s4 s4">
+        <hr />
+    </div>
+</div>
 @{
     if (ViewBag.error != null && ViewBag.error != "")
     {
@@ -12,7 +20,8 @@
 }
 
 @{
-    Stage StageAModifier = ViewBag.stage != null ? ViewBag.stage : new Stage();
+    @model Stage
+    Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
 
     if (StageAModifier.IDStage == 0)
     {
@@ -21,44 +30,63 @@
     <form class="col s12" method="post" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtMilieuStage" name="TxtMilieuStage" type="number" class="validate" value="@Html.Raw(StageAModifier.IDMilieuStage)">
-                <label for="TxtMilieuStage">@lang.ListeMilieuStage</label>
+                @*<input id="TxtMilieuStage" name="TxtMilieuStage" type="number" class="validate" value="@Html.Raw(StageAModifier.IDMilieuStage)">*@
+                @Html.TextBox("TxtMilieuStage", @Html.Raw(StageAModifier.IDMilieuStage), new { @class = "validate" })
+                @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
+                @*<label for="TxtMilieuStage">@lang.ListeMilieuStage</label>*@
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(StageAModifier.Titre)">
-                <label for="TxtTitre">@lang.Titre</label>
+                @Html.TextBox("TxtTitre", @Html.Raw(StageAModifier.Titre), new { @class = "validate" })
+                @Html.Label("TxtTitre", @lang.Titre)
+                @*<label for="TxtTitre">@lang.Titre</label>*@
             </div>
         </div>
+
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea">@Html.Raw(StageAModifier.Description)</textarea>
-                <label for="TxtaDescription">@lang.Description</label>
+                @Html.Label("TxtaDescription", @lang.Description)
+                @*<label for="TxtaDescription">@lang.Description</label>*@
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtNbPostes" name="TxtNbPostes" type="number" class="validate" value="@Html.Raw(StageAModifier.NbPostes)">
-                <label for="TxtNbPostes">@lang.NombreDePostes</label>
+                @*<input id="TxtNbPostes" name="TxtNbPostes" type="number" class="validate" value="@Html.Raw(StageAModifier.NbPostes)">*@
+                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate" })
+                @Html.Label("TxtNbPostes", @lang.NombreDePostes)
+                @*<label for="TxtNbPostes">@lang.NombreDePostes</label>*@
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtStatut" name="TxtStatut" type="number" class="validate" value="@Html.Raw(StageAModifier.Statut)">
-                <label for="TxtStatut">@lang.Statut</label>
+                @Html.DropDownList("TxtStatut",
+                                    new SelectList(Enum.GetValues(typeof(Stage.StatutTemps))),
+                                    null,
+                                    new { @class = "Validate" })
+                @Html.Label("TxtStatut", @lang.Statut)
+                @*<label for="TxtStatut">@lang.Statut</label>*@
             </div>
         </div>
+
+
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtPeriodeTravail" name="TxtPeriodeTravail" type="number" class="validate" value="@Html.Raw(StageAModifier.PeriodeTravail)">
-                <label for="TxtPeriodeTravail">@lang.PeriodeDeTravail</label>
+                @*<input id="TxtPeriodeTravail" name="TxtPeriodeTravail" type="number" class="validate" value="@Html.Raw(StageAModifier.PeriodeTravail)">
+                <label for="TxtPeriodeTravail">@lang.PeriodeDeTravail</label>*@
+                @Html.DropDownList("TxtPeriodeTravail",
+                                    new SelectList(Enum.GetValues(typeof(Stage.PeriodeDeTravail))),
+                                    null,
+                                    new { @class = "Validate" })
+                @Html.Label("TxtPeriodeTravail", @lang.PeriodeDeTravail)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <input id="TxtNombreDHeureParSemaine" name="TxtNombreDHeureParSemaine" type="number" class="validate" value="@Html.Raw(StageAModifier.NbHeureSemaine)">
-                <label for="TxtNombreDHeureParSemaine">@lang.NombreDHeureParSemaine</label>
+                @*<label for="TxtNombreDHeureParSemaine">@lang.NombreDHeureParSemaine</label>*@
+                @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
             </div>
         </div>
         <div class="row">
@@ -70,34 +98,49 @@
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <input id="TxtDateDeFin" name="TxtDateDeFin" type="date" class="validate" value="@Html.Raw(StageAModifier.DateFin)">
-                <label for="TxtDateDeFin">@lang.DateDeFin</label>
+                @Html.Label("TxtDateDeFin", @lang.DateDeFin)
+                @*<label for="TxtDateDeFin">@lang.DateDeFin</label>*@
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <div class="switch" style="text-align:center">
                     <label>
-                        Inactif
-                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@StageAModifier.Etat">
+                        @*@lang.Actif*@
+                        @Html.Label("ChkEtat", @lang.Actif)
+                        @*<input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@StageAModifier.Etat">*@
+                        @Html.CheckBox("ChkEtat", @StageAModifier.Etat)
                         <span class="lever"></span>
-                        Actif
+                        @Html.Label("ChkEtat", @lang.Inactif)
+                        @*@lang.Inactif*@
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col push-s3 s2">
-                <a class="waves-effect waves-light btn grey" href="@Url.Action("Test", "Home", new { id = StageAModifier.IDStage + 1 })">Retour</a>
+                <a class="waves-effect waves-light btn grey" href="@ViewBag.ColorButton">@lang.Back</a>
             </div>
             <div class="col push-s6 s2">
-                <button class="btn waves-effect waves-light darken-1 green" type="submit" name="action">
-                    Ajouter
-                    <i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+                    @Html.Raw(ViewBag.TextButton)
+                    <i class="material-icons right">@Html.Raw(ViewBag.IconButton)</i>
                 </button>
             </div>
         </div>
     </form>
 }
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+}
+
+
+
+
 
 
 

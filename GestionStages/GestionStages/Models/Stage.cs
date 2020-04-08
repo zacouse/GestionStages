@@ -50,8 +50,14 @@ namespace GestionStages.Models
         }
         public enum StatutTemps
         {
-            Plein,
-            Partiel
+            TempsPlein,
+            TempsPartiel
+        }
+        public enum PeriodeDeTravail
+        {
+            Jour,
+            Soir,
+            Nuit
         }
     }
 }
