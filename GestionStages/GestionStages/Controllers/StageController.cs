@@ -20,10 +20,18 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult PrintListeStage()
+        [HttpGet]
+        public IActionResult PrintListeStage(string txtTitre,string txtDescription)
         {
-            ViewBag.lesStages = repo.GetAllStage();
+            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription);
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchListeStage(string txtTitre, string txtDescription)
+        {
+            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription);
+            return View("ListeStage");
         }
     }
 }

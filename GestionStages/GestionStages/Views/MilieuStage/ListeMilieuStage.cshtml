@@ -13,24 +13,24 @@
 }
 
 <div id="search">
-    <form name="searchform" action="@Url.Action("SearchStage", "Stage")">
+    <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">
         <table>
             <tr>
                 <td>
                     <div class="input-field">
-                        @Html.TextBox("Title", "", new { @id = "Title" })
+                        @Html.TextBox("txtTitre", "")
                         <label for="Title">Title</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
-                        @Html.TextBox("Descr", "")
+                        @Html.TextBox("txtDescr", "")
                         <label for="Descr">Descr</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
-                        @Html.TextBox("Address", "")
+                        @Html.TextBox("txtAdresse", "")
                         <label for="Address">Address</label>
                     </div>
                 </td>
@@ -69,6 +69,6 @@
 
 
 <div class="row" style="padding-top:5px;">
-    <div class="col s2"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Retour</a></div>
+    <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     <div class="col s2 push-s9"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
 </div>

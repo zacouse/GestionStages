@@ -217,9 +217,33 @@ VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
 	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
 GO
 
-CREATE PROC pGetAllStage
+ALTER PROC pGetAllStage
 AS
 	SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre
 	FROM Stage
 	INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
+GO
+
+CREATE PROC pGetMilieuStage(
+@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Adresse_IN VARCHAR(1000) =''
+)AS
+	
+DECLARE @SQL NVARCHAR(4000)
+
+SET @SQL = 'SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat] '
+         + 'FROM MilieuStage '
+
+IF @Titre_IN <> '' OR @Description_IN <> '' OR @Adresse_IN <> ''
+    SET @SQL = @SQL + ' WHERE '
+	
+IF @Titre_IN <> ''
+    SET @SQL = @SQL + ' Titre LIKE ''%' + @Titre_IN + '%'' '
+
+IF @Description_IN <> ''
+    SET @SQL = @SQL + ' AND Description LIKE ''%' + @Description_IN + '%'' '
+
+IF @Adresse_IN <> ''
+    SET @SQL = @SQL + ' AND NoCivique + '' '' + Rue + '', '' + Ville + ''   '' + Province + '', '' + Pays LIKE ''%' + @Adresse_IN + '%'' '
+
+EXEC sp_executesql @SQL
 GO

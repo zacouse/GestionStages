@@ -14,5 +14,12 @@ namespace GestionStages.Controllers
             ViewBag.lesMilieus = repo.GetAllMilieuStage();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult SearchListeMilieuStage(string txtTitre,string txtDescr,string txtAdresse)
+        {
+            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtDescr,txtAdresse);
+            return View("ListeMilieuStage");
+        }
     }
 }
