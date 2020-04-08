@@ -63,7 +63,7 @@ namespace GestionStages.Controllers
                 ViewBag.IconeBouton = "send";
                 ViewBag.CouleurBouton = "green";
                 ViewBag.TexteBouton = lang.Creer;
-                ViewBag.LienRetour = "../ListeMilieuStage";
+                ViewBag.LienRetour = "../Home/ListeMilieuStage";
             }
             else
             {

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = ViewBag.TitrePage;
 }
 
@@ -22,62 +21,62 @@
 
 @{
     MilieuStage MilieuAModifier = ViewBag.Milieu != null ? ViewBag.Milieu : new MilieuStage();
-    if(MilieuAModifier.IDMilieuStage == 0)
+    if (MilieuAModifier.IDMilieuStage == 0)
     {
         MilieuAModifier.Etat = true;
     }
-    <form class="col s12" method="post" action="@Url.Action("SaveMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage })">
-        <div class="row" >
+    <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage })">
+        <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" required maxlength="100">
+                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100">
                 <label for="TxtTitre">@lang.Titre</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea" required maxlength="1000">@Html.Raw(@MilieuAModifier.Description)</textarea>
+                <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000">@Html.Raw(@MilieuAModifier.Description)</textarea>
                 <label for="TxaDescription">@lang.Description</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" required maxlength="10">
+                <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" maxlength="10">
                 <label for="TxtNoCivique">@lang.NumeroCivique</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" required maxlength="100">
+                <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" maxlength="100">
                 <label for="TxtRue">@lang.Rue</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" required maxlength="7">
+                <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" maxlength="7">
                 <label for="TxtCodePostal">@lang.CodePostal</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" required maxlength="100">
+                <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" maxlength="100">
                 <label for="TxtVille">@lang.Ville</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" required maxlength="100">
+                <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" maxlength="100">
                 <label for="TxtProvince">@lang.Province</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" required maxlength="100">
+                <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" maxlength="100">
                 <label for="TxtPays">@lang.Pays</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" required maxlength="20">
+                <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" maxlength="20">
                 <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
             </div>
         </div>
@@ -98,7 +97,7 @@
                 <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
             </div>
             <div class="col push-s6 s2">
-                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="submit" name="action">
+                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
                     @Html.Raw(ViewBag.TexteBouton)
                     <i class="material-icons right">@Html.Raw(ViewBag.IconeBouton)</i>
                 </button>
@@ -106,3 +105,59 @@
         </div>
     </form>
 }
+<script type='text/javascript'>
+    $("#TxtCodePostal").rules("add", { custom_rules: /[A - Z]\d[A - Z]\s\d[A - Z]\d/ });
+    function validate() {
+        var isValid = $("#form").validate({
+            errorElement: "span",
+            rules: {
+                TxtTitre: {
+                    required: true
+                },
+                TxaDescription: {
+                    required: true
+                },
+                TxtCodePostal: {
+                    required: true,
+                    minlength: 7
+                },
+                TxtRue: {
+                    required: true
+                },
+                TxtVille: {
+                    required: true
+                },
+                TxtProvince: {
+                    required: true
+                },
+                TxtPays: {
+                    required: true
+                },
+                TxtNumeroTelephone: {
+                    required: true
+                }
+            },
+            messages: {
+                TxtTitre: "Champs requis",
+                TxaDescription:"Champs requis",
+                TxtRue:"Champs requis",
+                TxtVille:"Champs requis",
+                TxtProvince:"Champs requis",
+                TxtPays:"Champs requis",
+                TxtNumeroTelephone:"Champs requis",
+                TxtCodePostal: {
+                    required: "Champs requis"
+                },
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        if (isValid.form()) {
+            M.toast({ html: 'Enregistré avec succès!', displayLength: 500, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
+        }
+        else {
+            M.toast({ html: 'Une ou des erreur(s) sont présente dans le formulaire', classes: 'rounded', displayLength: 5000 });
+        }
+    };
+</script>

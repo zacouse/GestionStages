@@ -100,13 +100,13 @@
         </form>
         <div class="col s12">
             <div class="row">
-                <div class="col push-s2 s2">
+                <div class="col push-s1 s3">
                     <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeMilieuStage", "Home")">@lang.Retour</a>
                 </div>
-                <div class="col push-s3 s2">
+                <div class="col push-s3 s3">
                     <a class="waves-effect waves-light btn blue" href="@Url.Action("AjouterModifierMilieuStage", "Home",new { id = @MilieuEnVisionnement.IDMilieuStage , CreationCopie = true })"><i class="material-icons right">content_copy</i>@lang.CreerUneCopie</a>
                 </div>
-                <div class="col push-s5 s2">
+                <div class="col push-s5 s3">
                     <a class="waves-effect waves-light btn orange" href="@Url.Action("AjouterModifierMilieuStage", "Home",new { id = @MilieuEnVisionnement.IDMilieuStage })"><i class="material-icons right">create</i>@lang.Modifier</a>
                 </div>
             </div>
