@@ -97,6 +97,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Required field.
+        /// </summary>
+        public static string ChampRequis {
+            get {
+                return ResourceManager.GetString("ChampRequis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Post code.
         /// </summary>
         public static string CodePostal {
@@ -151,11 +160,38 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sucessfully saved!.
+        /// </summary>
+        public static string EnregistreSucces {
+            get {
+                return ResourceManager.GetString("EnregistreSucces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Form contain one or more error.
+        /// </summary>
+        public static string ErreurPresenteFormulaire {
+            get {
+                return ResourceManager.GetString("ErreurPresenteFormulaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Search criteria.
         /// </summary>
         public static string FiltreDeRecherche {
             get {
                 return ResourceManager.GetString("FiltreDeRecherche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Use a valid format..
+        /// </summary>
+        public static string FormatValide {
+            get {
+                return ResourceManager.GetString("FormatValide", resourceCulture);
             }
         }
         

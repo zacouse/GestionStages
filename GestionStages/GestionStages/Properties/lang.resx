@@ -214,4 +214,16 @@
 	<data name="Creer" xml:space="preserve">
 		<value>Create</value>
 	</data>
+	<data name="EnregistreSucces" xml:space="preserve">
+		<value>Sucessfully saved!</value>
+	</data>
+	<data name="ErreurPresenteFormulaire" xml:space="preserve">
+		<value>Form contain one or more error</value>
+	</data>
+	<data name="FormatValide" xml:space="preserve">
+		<value>Use a valid format.</value>
+	</data>
+	<data name="ChampRequis" xml:space="preserve">
+		<value>Required field</value>
+	</data>
 </root>
