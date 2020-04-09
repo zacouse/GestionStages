@@ -7,6 +7,18 @@ namespace GestionStages.Models
 {
     public class Stage
     {
+        public enum StatutTemps
+        {
+            TempsPlein,
+            TempsPartiel
+        }
+        public enum PeriodeDeTravail
+        {
+            Jour,
+            Soir,
+            Nuit
+        }
+
         public int IDStage { get; set; }
         public int IDMilieuStage { get; set; }
         public string Titre { get; set; }
@@ -47,17 +59,6 @@ namespace GestionStages.Models
             DateDebut = datedebut;
             DateFin = datefin;
             Etat = etat;
-        }
-        public enum StatutTemps
-        {
-            TempsPlein,
-            TempsPartiel
-        }
-        public enum PeriodeDeTravail
-        {
-            Jour,
-            Soir,
-            Nuit
         }
     }
 }

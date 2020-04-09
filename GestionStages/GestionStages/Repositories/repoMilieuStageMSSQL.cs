@@ -85,5 +85,27 @@ namespace GestionStages.Repositories
             }
             return milieu;
         }
+        public void SaveMilieuStage(MilieuStage milieu)
+        {
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pAddSetMilieuStage'" + milieu.IDMilieuStage + "','" + milieu.Titre + "','" +
+                    milieu.Description + "','" + milieu.NoCivique + "','" + milieu.Rue + "','" + milieu.CodePostal +
+                    "','" + milieu.Ville + "','" + milieu.Province + "','" + milieu.Pays + "','" + milieu.NoTelephone +
+                    "','" + milieu.Etat + "'";
+                int row = sql.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

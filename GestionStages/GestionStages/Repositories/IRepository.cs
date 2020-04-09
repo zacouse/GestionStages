@@ -9,6 +9,8 @@ namespace GestionStages.Repositories
     interface IMilieuStageRepository
     {
         List<MilieuStage> GetAllMilieuStage();
+        void SaveMilieuStage(MilieuStage milieu);
+        MilieuStage GetMilieuStageById(int id);
     }
 
     interface IStageRepository

@@ -31,16 +31,16 @@ namespace GestionStages.Controllers
             if (idStage == 0)
             {
                 ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
-                ViewBag.PageTitle = lang.AddStage;
+                ViewBag.PageTitle = lang.AjouterUnStage;
                 ViewBag.IconTitle = "add_circle";
                 ViewBag.IconButton = "send";
                 ViewBag.ColorButton = "green";
-                ViewBag.TextButton = lang.Create;
+                ViewBag.TextButton = lang.Creer;
                 ViewBag.LinkBack = "../ListeStage";
             }
             else
             {
-                ViewBag.PageTitle = lang.ModifyStage;
+                ViewBag.PageTitle = lang.ModifierUnStage;
                 ViewBag.IconTitle = "create";
                 ViewBag.LeStage = repo.GetStageByID(idStage);
                 //ViewBag.LeMilieu = repoMilieu.GetMilieuStageById(idMilieu);

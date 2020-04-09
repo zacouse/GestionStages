@@ -166,7 +166,7 @@
 	<data name="Modifier" xml:space="preserve">
 		<value>Modifier</value>
 	</data>
-	<data name="VisionnerunMilieuDeStage" xml:space="preserve">
+	<data name="VisionnerUnMilieuDeStage" xml:space="preserve">
 		<value>Visionner un mileu de stage</value>
 	</data>
 	<data name="StagesDisponiblesDansCeMilieu" xml:space="preserve">
@@ -225,5 +225,23 @@
 	</data>
 	<data name="ChampRequis" xml:space="preserve">
 		<value>Champ requis</value>
+	</data>
+	<data name="AjouterUnStage" xml:space="preserve">
+		<value>Ajouter un stage</value>
+	</data>
+	<data name="ListeStage" xml:space="preserve">
+		<value>Liste des stages</value>
+	</data>
+	<data name="ModifierUnStage" xml:space="preserve">
+		<value>Modifier un stage</value>
+	</data>
+	<data name="VisionnerUnStage" xml:space="preserve">
+		<value>Visionner un stage</value>
+	</data>
+	<data name="NombreDePostes" xml:space="preserve">
+		<value>Nombre de postes</value>
+	</data>
+	<data name="Voir" xml:space="preserve">
+		<value>Voir</value>
 	</data>
 </root>

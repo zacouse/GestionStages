@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -217,8 +217,8 @@
 	<data name="Modifier" xml:space="preserve">
 		<value>Update</value>
 	</data>
-	<data name="VisionnerunMilieuDeStage" xml:space="preserve">
-		<value>View an intership site</value>
+	<data name="VisionnerUnMilieuDeStage" xml:space="preserve">
+		<value>View an internship site</value>
 	</data>
 	<data name="StagesDisponiblesDansCeMilieu" xml:space="preserve">
 		<value>Intership available at this site</value>
@@ -276,5 +276,23 @@
 	</data>
 	<data name="ChampRequis" xml:space="preserve">
 		<value>Required field</value>
+	</data>
+	<data name="AjouterUnStage" xml:space="preserve">
+		<value>Add an intership</value>
+	</data>
+	<data name="ListeStage" xml:space="preserve">
+		<value>Internship list</value>
+	</data>
+	<data name="ModifierUnStage" xml:space="preserve">
+		<value>Update an internship</value>
+	</data>
+	<data name="VisionnerUnStage" xml:space="preserve">
+		<value>View an internship</value>
+	</data>
+	<data name="NombreDePostes" xml:space="preserve">
+		<value>Available workstation</value>
+	</data>
+	<data name="Voir" xml:space="preserve">
+		<value>See</value>
 	</data>
 </root>

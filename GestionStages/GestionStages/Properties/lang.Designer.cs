@@ -97,6 +97,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add an intership.
+        /// </summary>
+        public static string AjouterUnStage {
+            get {
+                return ResourceManager.GetString("AjouterUnStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Required field.
         /// </summary>
         public static string ChampRequis {
@@ -241,6 +250,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship list.
+        /// </summary>
+        public static string ListeStage {
+            get {
+                return ResourceManager.GetString("ListeStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Intership site.
         /// </summary>
         public static string MilieuDeStage {
@@ -273,6 +291,24 @@ namespace GestionStages.Properties {
         public static string ModifierUnMilieuDeStage {
             get {
                 return ResourceManager.GetString("ModifierUnMilieuDeStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Update an internship.
+        /// </summary>
+        public static string ModifierUnStage {
+            get {
+                return ResourceManager.GetString("ModifierUnStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Available workstation.
+        /// </summary>
+        public static string NombreDePostes {
+            get {
+                return ResourceManager.GetString("NombreDePostes", resourceCulture);
             }
         }
         
@@ -412,42 +448,6 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Voir.
-        /// </summary>
-        public static string See {
-            get {
-                return ResourceManager.GetString("See", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Nombre de postes.
-        /// </summary>
-        public static string NombreDePostes {
-            get {
-                return ResourceManager.GetString("NombreDePostes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Modifier un stage.
-        /// </summary>
-        public static string ModifyStage {
-            get {
-                return ResourceManager.GetString("ModifyStage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Liste de stage.
-        /// </summary>
-        public static string ListeStage {
-            get {
-                return ResourceManager.GetString("ListeStage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Title.
         /// </summary>
         public static string Titre {
@@ -466,20 +466,29 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à View an intership site.
+        ///   Recherche une chaîne localisée semblable à View an internship site.
         /// </summary>
-        public static string VisionnerunMilieuDeStage {
+        public static string VisionnerUnMilieuDeStage {
             get {
-                return ResourceManager.GetString("VisionnerunMilieuDeStage", resourceCulture);
+                return ResourceManager.GetString("VisionnerUnMilieuDeStage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Visionner un stage.
+        ///   Recherche une chaîne localisée semblable à View an internship.
         /// </summary>
         public static string VisionnerUnStage {
             get {
                 return ResourceManager.GetString("VisionnerUnStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à See.
+        /// </summary>
+        public static string Voir {
+            get {
+                return ResourceManager.GetString("Voir", resourceCulture);
             }
         }
         

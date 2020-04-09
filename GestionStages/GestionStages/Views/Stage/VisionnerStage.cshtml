@@ -80,10 +80,10 @@
     <div class="col s12">
         <div class="row">
             <div class="col push-s2 s2">
-                <a class="waves-effect waves-light btn @ViewBag.ColorButton" href="@Url.Action("ListeStage", "Stage")">@lang.Back</a>
+                <a class="waves-effect waves-light btn @ViewBag.ColorButton" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a>
             </div>
             <div class="col push-s3 s2">
-                <a class="waves-effect waves-light btn @ViewBag.ColorButtonCopy" href="@Url.Action("AddSetStage", "Stage",new { id = @VisionnerStage.IDStage , Duplicate = true })"><i class="material-icons right">@ViewBag.IconButtonCopy</i>@lang.CreateCopy</a>
+                <a class="waves-effect waves-light btn @ViewBag.ColorButtonCopy" href="@Url.Action("AddSetStage", "Stage",new { id = @VisionnerStage.IDStage , Duplicate = true })"><i class="material-icons right">@ViewBag.IconButtonCopy</i>@lang.CreerUneCopie</a>
             </div>
             <div class="col push-s5 s2">
                 <a class="waves-effect waves-light btn @ViewBag.ColorButtonModify" href="@Url.Action("AddSetStage", "Stage",new { id = @VisionnerStage.IDStage })"><i class="material-icons right">@ViewBag.IconButton</i>@lang.Modifier</a>

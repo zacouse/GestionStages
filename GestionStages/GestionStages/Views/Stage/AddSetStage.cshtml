@@ -30,12 +30,6 @@
     <form class="col s12" method="post" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtMilieuStage", @Html.Raw(StageAModifier.IDMilieuStage), new { @class = "validate" })
-                @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-s3 s6 ">
                 <select>
                     @{
                         List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
@@ -92,14 +86,14 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate", placeholder = "Placeholder", type = "date" })
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", type = "text" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
         <div class="row">
             
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate", placeholder = "Placeholder", type = "date" })
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker", placeholder = "Placeholder", type = "text" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
@@ -108,7 +102,7 @@
                 <div class="switch" style="text-align:center">
                     <label>
                         @Html.Label("ChkEtat", @lang.Actif)
-                        @Html.CheckBox("ChkEtat", @StageAModifier.Etat)
+                        @Html.CheckBox("ChkEtat", StageAModifier.Etat)
                         <span class="lever"></span>
                         @Html.Label("ChkEtat", @lang.Inactif)
                     </label>
@@ -117,7 +111,7 @@
         </div>
         <div class="row">
             <div class="col push-s3 s2">
-                <a class="waves-effect waves-light btn grey" href="@ViewBag.ColorButton">@lang.Back</a>
+                <a class="waves-effect waves-light btn grey" href="@ViewBag.ColorButton">@lang.Retour</a>
             </div>
             <div class="col push-s6 s2">
                 <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
@@ -132,6 +126,7 @@
     <script>
         $(document).ready(function () {
             $('select').formSelect();
+            $('.datepicker').datepicker();
         });
     </script>
 }
