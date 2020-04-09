@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace GestionStages.Repositories
 {
-    public class repoMilieuStageMSSQL:IMilieuStageRepository
+    public class repoMilieuStageMSSQL : IMilieuStageRepository
     {
         protected static SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=GestionStage;Integrated Security=True");
         protected SqlDataReader dr;
@@ -40,9 +40,9 @@ namespace GestionStages.Repositories
                     lesMilieus.Add(milieu);
                 }
             }
-            catch
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             finally
             {

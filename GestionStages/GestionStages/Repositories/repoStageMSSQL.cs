@@ -50,46 +50,6 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
-        public List<Stage> GetAllStageWithMilieuTitre()
-        {
-
-            List<Stage> lesStages = new List<Stage>();
-
-            sql = new SqlCommand();
-            try
-            {
-                conn.Open();
-                sql.Connection = conn;
-                sql.CommandText = "EXEC pGetAllStageWithMilieuTitre";
-                dr = sql.ExecuteReader();
-                while (dr.Read())
-                {
-                    Stage stage = new Stage();
-                    MilieuStage milieu = new MilieuStage();
-                    stage.IDStage = (int)dr.GetValue(0);
-                    milieu.Titre = (string)dr.GetValue(1);
-                    stage.Titre = (string)dr.GetValue(2);
-                    stage.Description = (string)dr.GetValue(3);
-                    stage.NbPostes = (int)dr.GetValue(4);
-                    stage.Statut = (byte)dr.GetValue(5);
-                    stage.PeriodeTravail = (byte)dr.GetValue(6);
-                    stage.NbHeureSemaine = (int)dr.GetValue(7);
-                    stage.DateDebut = (DateTime)dr.GetValue(8);
-                    stage.DateFin = (DateTime)dr.GetValue(9);
-                    stage.Etat = (bool)dr.GetValue(10);
-                    lesStages.Add(stage);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return lesStages;
-        }
         public List<Stage> GetAllStageActif()
         {
             List<Stage> lesStages = new List<Stage>();
@@ -226,30 +186,6 @@ namespace GestionStages.Repositories
             }
             return stage;
         }
-        public Stage GetMilieuStageForStage(int stageId)
-        {
-            Stage stage = new Stage();
-            sql = new SqlCommand();
-            try
-            {
-                conn.Open();
-                sql.Connection = conn;
-                sql.CommandText = "EXEC pGetMilieuStageForStage'" + stageId + "'";
-                dr = sql.ExecuteReader();
-                while (dr.Read())
-                {
-                    stage.IDStage = (int)dr.GetValue(0);
-                }
-            }
-            catch
-            {
 
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return stage;
-        }
     }
 }

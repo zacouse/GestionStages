@@ -13,26 +13,24 @@ namespace GestionStages.Controllers
     public class StageController : Controller
     {
         Repositories.IStageRepository repo = new Repositories.repoStageMSSQL();
-        public IActionResult ListeStage(int id = 0)
+        Repositories.IMilieuStageRepository repoMilieu = new Repositories.repoMilieuStageMSSQL();
+        public IActionResult ListeStage()
         {
             ViewBag.lesStages = repo.GetAllStage();
-            ViewBag.leMilieu = repo.GetMilieuStageForStage(id);
-            if (id != 0)
-            {
-                
-            }
+            ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
             return View();
         }
-        public IActionResult AddSetStage(int id = 0, bool Duplicate = false)
+        public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
         {
             if (Duplicate)
             {
-                ViewBag.lesStages = repo.GetStageByID(id);
+                ViewBag.lesStages = repo.GetStageByID(idStage);
                 ViewBag.lesStages.IDStage = 0;
-                id = 0;
+                idStage = 0;
             }
-            if (id == 0)
+            if (idStage == 0)
             {
+                ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
                 ViewBag.PageTitle = lang.AddStage;
                 ViewBag.IconTitle = "add_circle";
                 ViewBag.IconButton = "send";
@@ -44,19 +42,20 @@ namespace GestionStages.Controllers
             {
                 ViewBag.PageTitle = lang.ModifyStage;
                 ViewBag.IconTitle = "create";
-                ViewBag.LeStage = repo.GetStageByID(id);
+                ViewBag.LeStage = repo.GetStageByID(idStage);
+                //ViewBag.LeMilieu = repoMilieu.GetMilieuStageById(idMilieu);
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
-                ViewBag.LinkBack = "../ListeStage/" + id;
+                ViewBag.LinkBack = "../ListeStage/" + idStage;
             }
             return View();
         }
 
         public IActionResult VisionnerStage(int id = 0)
         {
-            ViewBag.PageTitle = lang.ModifyStage;
-            ViewBag.IconTitle = "create";
+            ViewBag.PageTitle = lang.VisionnerUnStage;
+            ViewBag.IconTitle = "remove_red_eye";
             ViewBag.leStage = repo.GetStageByID(id);
             ViewBag.IconButton = "create";
             ViewBag.ColorButtonModify = "orange";
