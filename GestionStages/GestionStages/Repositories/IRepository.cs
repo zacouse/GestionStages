@@ -15,7 +15,7 @@ namespace GestionStages.Repositories
     interface IStageRepository
     {
         List<Stage> GetAllStage();
-        List<Stage> GetStage(string titre, string descr);
+        List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,DateTime minDate,DateTime maxDate);
     }
 
     interface IEtudiantRepository

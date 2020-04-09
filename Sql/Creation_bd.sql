@@ -234,16 +234,53 @@ SET @SQL = 'SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], 
          + 'FROM MilieuStage '
 
 IF @Titre_IN <> '' OR @Description_IN <> '' OR @Adresse_IN <> ''
-    SET @SQL = @SQL + ' WHERE '
+    SET @SQL = @SQL + ' WHERE 0 = 0 '
 	
 IF @Titre_IN <> ''
-    SET @SQL = @SQL + ' Titre LIKE ''%' + @Titre_IN + '%'' '
+    SET @SQL = @SQL + ' AND Titre LIKE ''%' + @Titre_IN + '%'' '
 
 IF @Description_IN <> ''
     SET @SQL = @SQL + ' AND Description LIKE ''%' + @Description_IN + '%'' '
 
 IF @Adresse_IN <> ''
     SET @SQL = @SQL + ' AND NoCivique + '' '' + Rue + '', '' + Ville + ''   '' + Province + '', '' + Pays LIKE ''%' + @Adresse_IN + '%'' '
+
+EXEC sp_executesql @SQL
+GO
+
+ALTER PROC pGetStage(
+@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0
+)AS
+	
+DECLARE @SQL NVARCHAR(4000)
+
+SET @SQL = ' SELECT [IDStage], Stage.IDMilieuStage, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre '
+         + ' FROM Stage '
+         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage '
+
+IF ISNULL(@Titre_IN,'') <> '' OR ISNULL(@Description_IN,'') <> '' OR ISNULL(@Milieu_IN,'') <> '' OR ISNULL(@Minh_IN,0) <> 0 OR ISNULL(@Maxh_IN,0) <> 0 OR ISNULL(@MinDate_IN,0) <> 0 OR ISNULL(@MaxDate_IN,0) <> 0
+    SET @SQL = @SQL + ' WHERE 0 = 0 '
+	
+IF ISNULL(@Titre_IN,'') <> ''
+    SET @SQL = @SQL + ' AND Stage.Titre LIKE ''%' + @Titre_IN + '%'' '
+
+IF ISNULL(@Description_IN,'') <> ''
+    SET @SQL = @SQL + ' AND Stage.Description LIKE ''%' + @Description_IN + '%'' '
+
+IF ISNULL(@Milieu_IN,'') <> ''
+    SET @SQL = @SQL + ' AND MilieuStage.Titre LIKE ''%' + @Milieu_IN + '%'' '
+
+IF ISNULL(@Minh_IN,0) <> 0
+    SET @SQL = @SQL + ' AND NbHeureSemaine > ' + CONVERT(VARCHAR,@Minh_IN) + ' '
+
+IF ISNULL(@Maxh_IN,0) <> 0
+    SET @SQL = @SQL + ' AND NbHeureSemaine < ' + CONVERT(VARCHAR,@Maxh_IN) + ' '
+
+IF ISNULL(@MinDate_IN,0) <> 0
+    SET @SQL = @SQL + ' AND DateDebut > ' + CONVERT(VARCHAR,@MinDate_IN) + ' '
+
+IF ISNULL(@MaxDate_IN,0) <> 0
+    SET @SQL = @SQL + ' AND DateFin < ' + CONVERT(VARCHAR,@MaxDate_IN) + ' '
 
 EXEC sp_executesql @SQL
 GO

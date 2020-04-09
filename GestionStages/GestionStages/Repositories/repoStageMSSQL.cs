@@ -41,7 +41,7 @@ namespace GestionStages.Repositories
                     lesStages.Add(stage);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -52,7 +52,7 @@ namespace GestionStages.Repositories
             return lesStages;
         }
 
-        public List<Stage> GetStage(string titre, string descr)
+        public List<Stage> GetStage(string titre, string descr, string milieu, int minh, int maxh, DateTime minDate, DateTime maxDate)
         {
             List<Stage> lesStages = new List<Stage>();
             try
@@ -62,6 +62,11 @@ namespace GestionStages.Repositories
 
                 sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
                 sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = descr;
+                sql.Parameters.Add("@Milieu_IN", SqlDbType.VarChar).Value = milieu;
+                sql.Parameters.Add("@Minh_IN", SqlDbType.Int).Value = minh;
+                sql.Parameters.Add("@Maxh_IN", SqlDbType.Int).Value = maxh;
+                sql.Parameters.Add("@MinDate_IN", SqlDbType.DateTime).Value = minDate;
+                sql.Parameters.Add("@MaxDate_IN", SqlDbType.DateTime).Value = maxDate;
 
                 conn.Open();
                 dr = sql.ExecuteReader();
