@@ -11,8 +11,8 @@ namespace GestionStages.Models
         public int IDMilieuStage { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }
-        public int nbPostes { get; set; }
-        public int Status { get; set; }//Peut être changé dans le futur
+        public int NbPostes { get; set; }
+        public int Statut { get; set; }//Peut être changé dans le futur
         public int PeriodeTravail { get; set; }//Peut être changé dans le futur
         public int NbHeureSemaine { get; set; }
         public DateTime DateDebut { get; set; }
@@ -25,8 +25,8 @@ namespace GestionStages.Models
             IDMilieuStage = 0;
             Titre = "";
             Description = "";
-            nbPostes = 0;
-            Status = 0;
+            NbPostes = 0;
+            Statut = 0;
             PeriodeTravail = 0;
             NbHeureSemaine = 0;
             DateDebut = DateTime.MinValue;
@@ -34,19 +34,30 @@ namespace GestionStages.Models
             Etat = false;
         }
 
-        public Stage(int idstage, int idmilieu, string titre, string descr, int nbpostes, int status, int periode, int nbheure, DateTime datedebut, DateTime datefin, bool etat)
+        public Stage(int idstage, int idmilieu, string titre, string descr, int nbpostes, int statut, int periode, int nbheure, DateTime datedebut, DateTime datefin, bool etat)
         {
             IDStage = idstage;
             IDMilieuStage = idmilieu;
             Titre = titre;
             Description = descr;
-            nbPostes = nbpostes;
-            Status = status;
+            NbPostes = nbpostes;
+            Statut = statut;
             PeriodeTravail = periode;
             NbHeureSemaine = nbheure;
             DateDebut = datedebut;
             DateFin = datefin;
             Etat = etat;
+        }
+        public enum StatutTemps
+        {
+            TempsPlein,
+            TempsPartiel
+        }
+        public enum PeriodeDeTravail
+        {
+            Jour,
+            Soir,
+            Nuit
         }
     }
 }

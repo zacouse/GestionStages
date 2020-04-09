@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = lang.ListeStage;
+}
+
+<table class="highlight responsive-table">
+    <thead>
+        <tr>
+            <td>@lang.Titre</td>
+            <td>@lang.MilieuDeStage</td>
+            <td>@lang.PeriodeDeTravail</td>
+            <td>@lang.NombreDHeureParSemaine</td>
+            <td>@lang.Statut</td>
+            <td>@lang.DateDeDebut</td>
+            <td>@lang.DateDeFin</td>
+            <td>@lang.See</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Stage> lesStages = ViewBag.lesStages;
+            for (int i = 0; i < lesStages.Count; i++)
+            {
+                <tr>
+                    <td><input type="hidden" value="@lesStages[i].IDStage" />@lesStages[i].Titre</td>
+                    <td>@lesStages[i].IDMilieuStage</td>
+                    <td>@lesStages[i].PeriodeTravail</td>
+                    <td>@lesStages[i].NbHeureSemaine</td>
+                    <td>@lesStages[i].Statut</td>
+                    <td>@lesStages[i].DateDebut</td>
+                    <td>@lesStages[i].DateFin</td>
+                    <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+

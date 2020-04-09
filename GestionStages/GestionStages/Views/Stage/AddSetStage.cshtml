@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.PageTitle;
+}
+
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconTitle)</i>
+        @ViewBag.PageTitle
+    </div>
+    <div class="col push-s4 s4">
+        <hr />
+    </div>
+</div>
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
+    
+    if (StageAModifier.IDStage == 0)
+    {
+        StageAModifier.Etat = true;
+    }
+
+    <form class="col s12" method="post" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtMilieuStage", @Html.Raw(StageAModifier.IDMilieuStage), new { @class = "validate" })
+                @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <select>
+                    @{
+                        List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
+                        for (int i = 0; i < lesMilieus.Count; i++)
+                        {
+                            <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                        }
+                    }
+                </select>
+                @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtTitre", @Html.Raw(StageAModifier.Titre), new { @class = "validate" })
+                @Html.Label("TxtTitre", @lang.Titre)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea">@Html.Raw(StageAModifier.Description)</textarea>
+                @Html.Label("TxtaDescription", @lang.Description)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate" })
+                @Html.Label("TxtNbPostes", @lang.NombreDePostes)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.DropDownList("TxtStatut",
+                                    new SelectList(Enum.GetValues(typeof(Stage.StatutTemps))),
+                                    null,
+                                    new { @class = "Validate" })
+                @Html.Label("TxtStatut", @lang.Statut)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.DropDownList("TxtPeriodeTravail",
+                                    new SelectList(Enum.GetValues(typeof(Stage.PeriodeDeTravail))),
+                                    null,
+                                    new { @class = "Validate" })
+                @Html.Label("TxtPeriodeTravail", @lang.PeriodeDeTravail)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", type = "number" })
+                @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate", placeholder = "Placeholder", type = "date" })
+                @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="input-field col push-s3 s6 ">
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate", placeholder = "Placeholder", type = "date" })
+                @Html.Label("TxtDateDeFin", @lang.DateDeFin)
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <div class="switch" style="text-align:center">
+                    <label>
+                        @Html.Label("ChkEtat", @lang.Actif)
+                        @Html.CheckBox("ChkEtat", @StageAModifier.Etat)
+                        <span class="lever"></span>
+                        @Html.Label("ChkEtat", @lang.Inactif)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col push-s3 s2">
+                <a class="waves-effect waves-light btn grey" href="@ViewBag.ColorButton">@lang.Back</a>
+            </div>
+            <div class="col push-s6 s2">
+                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+                    @Html.Raw(ViewBag.TextButton)
+                    <i class="material-icons right">@Html.Raw(ViewBag.IconButton)</i>
+                </button>
+            </div>
+        </div>
+    </form>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+

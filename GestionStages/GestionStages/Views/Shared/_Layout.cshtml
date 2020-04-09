@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - GestionStages</title>
     <link rel="stylesheet" href="~/lib/materialize-v1.0.0/materialize/css/materialize.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,6 +24,18 @@
                     </li>
                     <li>
                         <a asp-area="" asp-controller="MilieuStage" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="TestStage">Stage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Stage" asp-action="AddSetStage">@lang.AddStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Stage" asp-action="ListeStage">@lang.ListeStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Stage" asp-action="VisionnerStage">@lang.VisionnerUnStage</a>
                     </li>
                 </ul>
             </div>

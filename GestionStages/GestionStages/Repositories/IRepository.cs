@@ -14,6 +14,10 @@ namespace GestionStages.Repositories
     interface IStageRepository
     {
         List<Stage> GetAllStage();
+        List<Stage> GetAllStageActif();
+        List<Stage> GetAllStageInactif();
+        void SaveStage(Stage stage);
+        Stage GetStageByID(int stageId);
     }
 
     interface IEtudiantRepository

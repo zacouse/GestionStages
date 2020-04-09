@@ -61,11 +61,74 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Actif.
+        /// </summary>
+        public static string Actif {
+            get {
+                return ResourceManager.GetString("Actif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter un stage.
+        /// </summary>
+        public static string AddStage {
+            get {
+                return ResourceManager.GetString("AddStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Address.
         /// </summary>
         public static string Adresse {
             get {
                 return ResourceManager.GetString("Adresse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Retour.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ajouter.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Créer une copie.
+        /// </summary>
+        public static string CreateCopy {
+            get {
+                return ResourceManager.GetString("CreateCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de debut.
+        /// </summary>
+        public static string DateDeDebut {
+            get {
+                return ResourceManager.GetString("DateDeDebut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date de fin.
+        /// </summary>
+        public static string DateDeFin {
+            get {
+                return ResourceManager.GetString("DateDeFin", resourceCulture);
             }
         }
         
@@ -88,6 +151,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Inactif.
+        /// </summary>
+        public static string Inactif {
+            get {
+                return ResourceManager.GetString("Inactif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Internship site list.
         /// </summary>
         public static string ListeMilieuStage {
@@ -97,11 +169,101 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Liste de stage.
+        /// </summary>
+        public static string ListeStage {
+            get {
+                return ResourceManager.GetString("ListeStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Milieu de stage.
+        /// </summary>
+        public static string MilieuDeStage {
+            get {
+                return ResourceManager.GetString("MilieuDeStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier.
+        /// </summary>
+        public static string Modifier {
+            get {
+                return ResourceManager.GetString("Modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Modifier un stage.
+        /// </summary>
+        public static string ModifyStage {
+            get {
+                return ResourceManager.GetString("ModifyStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nombre de postes.
+        /// </summary>
+        public static string NombreDePostes {
+            get {
+                return ResourceManager.GetString("NombreDePostes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nombre d&apos;heure par semaine.
+        /// </summary>
+        public static string NombreDHeureParSemaine {
+            get {
+                return ResourceManager.GetString("NombreDHeureParSemaine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Periode de travail.
+        /// </summary>
+        public static string PeriodeDeTravail {
+            get {
+                return ResourceManager.GetString("PeriodeDeTravail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Voir.
+        /// </summary>
+        public static string See {
+            get {
+                return ResourceManager.GetString("See", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Statut.
+        /// </summary>
+        public static string Statut {
+            get {
+                return ResourceManager.GetString("Statut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Title.
         /// </summary>
         public static string Titre {
             get {
                 return ResourceManager.GetString("Titre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visionner un stage.
+        /// </summary>
+        public static string VisionnerUnStage {
+            get {
+                return ResourceManager.GetString("VisionnerUnStage", resourceCulture);
             }
         }
         

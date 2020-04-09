@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.PageTitle;
+}
+
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconTitle)</i>
+        @ViewBag.PageTitle
+    </div>
+    <div class="col push-s4 s4">
+        <hr />
+    </div>
+</div>
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    Stage VisionnerStage = ViewBag.leStage;
+<form class="col s4">
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtIDMilieuStage", @Html.Raw(@VisionnerStage.IDMilieuStage), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtIDMilieuStage", @lang.MilieuDeStage)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtTitre", @Html.Raw(@VisionnerStage.Titre), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtTitre", @lang.Titre)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtDescription", @Html.Raw(@VisionnerStage.Description), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtDescription", @lang.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtNombreDePostes", @Html.Raw(@VisionnerStage.NbPostes), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtNombreDePostes", @lang.NombreDePostes)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtStatut", @Html.Raw(@VisionnerStage.Statut), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtStatut", @lang.Statut)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtPeriodeDeTravail", @Html.Raw(@VisionnerStage.PeriodeTravail), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtPeriodeDeTravail", @lang.PeriodeDeTravail)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(@VisionnerStage.NbHeureSemaine), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtDateDeDebut", @Html.Raw(@VisionnerStage.DateDebut), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-s3 s6 ">
+            @Html.TextBox("TxtDateDeFin", @Html.Raw(@VisionnerStage.DateFin), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+            @Html.Label("TxtDateDeFin", @lang.DateDeFin)
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="row">
+            <div class="col push-s2 s2">
+                <a class="waves-effect waves-light btn @ViewBag.ColorButton" href="@Url.Action("ListeStage", "Stage")">@lang.Back</a>
+            </div>
+            <div class="col push-s3 s2">
+                <a class="waves-effect waves-light btn @ViewBag.ColorButtonCopy" href="@Url.Action("AddSetStage", "Stage",new { id = @VisionnerStage.IDStage , Duplicate = true })"><i class="material-icons right">@ViewBag.IconButtonCopy</i>@lang.CreateCopy</a>
+            </div>
+            <div class="col push-s5 s2">
+                <a class="waves-effect waves-light btn @ViewBag.ColorButtonModify" href="@Url.Action("AddSetStage", "Stage",new { id = @VisionnerStage.IDStage })"><i class="material-icons right">@ViewBag.IconButton</i>@lang.Modifier</a>
+            </div>
+        </div>
+    </div>
+</form>
+}
+
