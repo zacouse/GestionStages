@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.TitrePage;
+}
+
+    <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+        <div class="col s4">
+            <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+            @ViewBag.TitrePage
+            <hr />
+        </div>
+        <div class="col s8">
+            <hr /><!--Mettre la liste des stage concernant ce milieu -->
+            <hr />
+            <hr />
+            <hr />
+        </div>
+        <div class="col s4">
+            
+        </div>
+    </div>
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    MilieuStage MilieuEnVisionnement = ViewBag.Milieu;
+    <div class="row">
+        <form class="col s4">
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Titre)">
+                    <label for="TxtTitre">@lang.Titre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <textarea disabled id="TxaDescription" name="TxaDescription" class="materialize-textarea">@Html.Raw(@MilieuEnVisionnement.Description)</textarea>
+                    <label for="TxaDescription">@lang.Description</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoCivique)">
+                    <label for="TxtNoCivique">@lang.NumeroCivique</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Rue)">
+                    <label for="TxtRue">@lang.Rue</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.CodePostal)">
+                    <label for="TxtCodePostal">@lang.CodePostal</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Ville)">
+                    <label for="TxtVille">@lang.Ville</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Province)">
+                    <label for="TxtProvince">@lang.Province</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Pays)">
+                    <label for="TxtPays">@lang.Pays</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <input disabled id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoTelephone)">
+                    <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <div class="switch" style="text-align:center">
+                        <label>
+                            @lang.Inactif
+                            <input disabled id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuEnVisionnement.Etat">
+                            <span class="lever"></span>
+                            @lang.Actif
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col s12">
+            <div class="row">
+                <div class="col push-s1 s3">
+                    <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeMilieuStage", "Home")">@lang.Retour</a>
+                </div>
+                <div class="col push-s3 s3">
+                    <a class="waves-effect waves-light btn blue" href="@Url.Action("AjouterModifierMilieuStage", "Home",new { id = @MilieuEnVisionnement.IDMilieuStage , CreationCopie = true })"><i class="material-icons right">content_copy</i>@lang.CreerUneCopie</a>
+                </div>
+                <div class="col push-s5 s3">
+                    <a class="waves-effect waves-light btn orange" href="@Url.Action("AjouterModifierMilieuStage", "Home",new { id = @MilieuEnVisionnement.IDMilieuStage })"><i class="material-icons right">create</i>@lang.Modifier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

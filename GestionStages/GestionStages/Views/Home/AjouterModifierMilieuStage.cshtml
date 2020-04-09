@@ -1,0 +1,179 @@
+﻿@{
+    ViewData["Title"] = ViewBag.TitrePage;
+}
+
+<div style="font-size:24px;padding-top:5%" class="light-blue-text center-align row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+        @ViewBag.TitrePage
+    </div>
+    <div class="col push-s4 s4">
+        <hr />
+    </div>
+</div>
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    MilieuStage MilieuAModifier = ViewBag.Milieu != null ? ViewBag.Milieu : new MilieuStage();
+    if (MilieuAModifier.IDMilieuStage == 0)
+    {
+        MilieuAModifier.Etat = true;
+    }
+    <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "Home", new { id = @MilieuAModifier.IDMilieuStage })">
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100" required>
+                <label for="TxtTitre">@lang.Titre</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@MilieuAModifier.Description)</textarea>
+                <label for="TxaDescription">@lang.Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" maxlength="10" required>
+                <label for="TxtNoCivique">@lang.NumeroCivique</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" maxlength="100" required>
+                <label for="TxtRue">@lang.Rue</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" maxlength="7" required>
+                <label for="TxtCodePostal">@lang.CodePostal</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" maxlength="100" required>
+                <label for="TxtVille">@lang.Ville</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" maxlength="100" required>
+                <label for="TxtProvince">@lang.Province</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" maxlength="100" required>
+                <label for="TxtPays">@lang.Pays</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" maxlength="20" required>
+                <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-s3 s6 ">
+                <div class="switch" style="text-align:center">
+                    <label>
+                        @lang.Inactif
+                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuAModifier.Etat">
+                        <span class="lever"></span>
+                        @lang.Actif
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col push-s3 s2">
+                <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
+            </div>
+            <div class="col push-s6 s2">
+                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
+                    @Html.Raw(ViewBag.TexteBouton)
+                    <i class="material-icons right">@Html.Raw(ViewBag.IconeBouton)</i>
+                </button>
+            </div>
+        </div>
+    </form>
+}
+<script type='text/javascript'>
+    function validate() {
+        var isValid = $("#form").validate({
+            errorElement: "span",
+            rules: {
+                TxtTitre: {
+                    required: true
+                },
+                TxaDescription: {
+                    required: true
+                },
+                TxtCodePostal: {
+                    required: true,
+                    pattern: new RegExp(/^[A-Z]\d[A-Z]\s\d[A-Z]\d$/)
+                },
+                TxtNoCivique: {
+                    required: true
+                },
+                TxtRue: {
+                    required: true
+                },
+                TxtVille: {
+                    required: true
+                },
+                TxtProvince: {
+                    required: true
+                },
+                TxtPays: {
+                    required: true
+                },
+                TxtNumeroTelephone: {
+                    required: true,
+                    pattern: new RegExp(/^\(\d{3}\)-\d{3}-\d{4}$/)
+                }
+            },
+            messages: {
+                TxtTitre: "@lang.ChampRequis",
+                TxaDescription: "@lang.ChampRequis",
+                TxtNoCivique:"@lang.ChampRequis",
+                TxtRue:"@lang.ChampRequis",
+                TxtVille:"@lang.ChampRequis",
+                TxtProvince:"@lang.ChampRequis",
+                TxtPays:"@lang.ChampRequis",
+                TxtNumeroTelephone: {
+                    required: "@lang.ChampRequis",
+                    pattern: "@lang.FormatValide ex: (111)-111-1111"
+                },
+                TxtCodePostal: {
+                    required: "@lang.ChampRequis",
+                    pattern: "@lang.FormatValide ex: A1A 1A1"
+                },
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        if (isValid.form()) {
+            M.toast({ html: '@lang.EnregistreSucces', displayLength: 500, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
+        }
+        else {
+            M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+        }
+    };
+</script>
+<style>
+    span.error {
+        color: red;
+        padding-right: 2px;
+        padding-left: 2px;
+        border: 2px red solid
+    }
+</style>

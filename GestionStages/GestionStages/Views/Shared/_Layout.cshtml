@@ -23,19 +23,16 @@
                         <a asp-area="" asp-controller="Home" asp-action="Test">Test</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="MilieuStage" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
+                        <a asp-area="" asp-controller="Home" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Home" asp-action="TestStage">Stage</a>
+                        <a asp-area="" asp-controller="Home" asp-action="AjouterModifierMilieuStage">@lang.AjouterUnMilieuDeStage</a>
                     </li>
                     <li>
                         <a asp-area="" asp-controller="Stage" asp-action="AddSetStage">@lang.AddStage</a>
                     </li>
                     <li>
                         <a asp-area="" asp-controller="Stage" asp-action="ListeStage">@lang.ListeStage</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Stage" asp-action="VisionnerStage">@lang.VisionnerUnStage</a>
                     </li>
                 </ul>
             </div>
@@ -56,6 +53,8 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
         <script src="~/lib/materialize-v1.0.0/materialize/js/materialize.js"></script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
