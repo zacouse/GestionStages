@@ -2,7 +2,7 @@
     ViewData["Title"] = ViewBag.TitrePage;
 }
 
-<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+<div style="font-size:24px;padding-top:5%" class="light-blue-text center-align row">
     <div class="col s12">
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
         @ViewBag.TitrePage
@@ -169,3 +169,11 @@
         }
     };
 </script>
+<style>
+    span.error {
+        color: red;
+        padding-right: 2px;
+        padding-left: 2px;
+        border: 2px red solid
+    }
+</style>
