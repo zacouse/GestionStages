@@ -1,18 +1,83 @@
-﻿@{
-    ViewData["Title"] = lang.ListeStage;
+﻿
+@{
+    ViewData["Title"] = "ListeStage";
 }
 
-<table class="highlight responsive-table">
+<h1>@lang.ListeStage</h1>
+
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+<div id="search">
+    <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtTitre", "")
+                        <label for="txtTitre">Title</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtDescr", "")
+                        <label for="txtDescr">Descr</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtMilieu", "")
+                        <label for="txtMilieu">Milieu</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtMinH", "")
+                        <label for="txtMinH">MinH</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtMaxH", "")
+                        <label for="txtMaxH">MinH</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtMinDate", "")
+                        <label for="txtMinDate">Min Date</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.TextBox("txtMaxDate", "")
+                        <label for="txtMaxDate">Min Date</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col s2 push-s11"><a class="btn" href="javascript:document.searchform.submit();">Search</a></div>
+        </div>
+    </form>
+</div>
+
+<table id="liste" class="highlight">
     <thead>
         <tr>
             <td>@lang.Titre</td>
-            <td>@lang.MilieuDeStage</td>
-            <td>@lang.PeriodeDeTravail</td>
-            <td>@lang.NombreDHeureParSemaine</td>
-            <td>@lang.Statut</td>
-            <td>@lang.DateDeDebut</td>
-            <td>@lang.DateDeFin</td>
-            <td>@lang.Voir</td>
+            <td>@lang.Description</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
         </tr>
     </thead>
@@ -22,18 +87,36 @@
             for (int i = 0; i < lesStages.Count; i++)
             {
                 <tr>
-                    <td><input type="hidden" value="@lesStages[i].IDStage" />@lesStages[i].Titre</td>
-                    <td>@lesStages[i].IDMilieuStage</td>
-                    <td>@lesStages[i].PeriodeTravail</td>
-                    <td>@lesStages[i].NbHeureSemaine</td>
-                    <td>@lesStages[i].Statut</td>
-                    <td>@lesStages[i].DateDebut</td>
-                    <td>@lesStages[i].DateFin</td>
-                    <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                    <td>@lesStages[i].Titre</td>
+                    <td>@lesStages[i].Description</td>
+                    <td>@lesStages[i].TitreMilieuStage</td>
+                    <td>@lesStages[i].GetPeriode()</td>
+                    <td>@lesStages[i].GetStatus()</td>
+                    <td>@lesStages[i].NbHeureSemaine h</td>
+                    <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
+                    <td>@{@lesStages[i].DateFin.ToString("d");}</td>
+                    <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
-
         }
     </tbody>
 </table>
 
+<div class="row" style="padding-top:5px;">
+    <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
+    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">Print</a></div>
+    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
+</div>
+
+<script>
+    function PrintElem(elem) {
+        var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        mywindow.print();
+
+        return true;
+    }
+</script>

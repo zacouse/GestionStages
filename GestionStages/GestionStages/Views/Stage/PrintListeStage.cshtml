@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "ListeStage";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<h1>ListeStage</h1>
+
+<table id="liste" class="highlight">
+    <thead>
+        <tr>
+            <td>@lang.Titre</td>
+            <td>@lang.Description</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Stage> lesStages = ViewBag.lesStages;
+            for (int i = 0; i < lesStages.Count; i++)
+            {
+                <tr>
+                    <td>@lesStages[i].Titre</td>
+                    <td>@lesStages[i].Description</td>
+                    <td>@lesStages[i].TitreMilieuStage</td>
+                    <td>@lesStages[i].GetPeriode()</td>
+                    <td>@lesStages[i].GetStatus()</td>
+                    <td>@lesStages[i].NbHeureSemaine h</td>
+                    <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
+                    <td>@{@lesStages[i].DateFin.ToString("d");}</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

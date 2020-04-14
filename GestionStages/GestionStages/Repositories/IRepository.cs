@@ -11,6 +11,7 @@ namespace GestionStages.Repositories
         List<MilieuStage> GetAllMilieuStage();
         void SaveMilieuStage(MilieuStage milieu);
         MilieuStage GetMilieuStageById(int id);
+        List<MilieuStage> GetMilieuStage(string titre, string descr, string address);
     }
 
     interface IStageRepository
@@ -20,6 +21,7 @@ namespace GestionStages.Repositories
         List<Stage> GetAllStageInactif();
         void SaveStage(Stage stage);
         Stage GetStageByID(int stageId);
+        List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate);
     }
 
     interface IEtudiantRepository

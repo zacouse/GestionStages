@@ -64,5 +64,12 @@ namespace GestionStages.Controllers
             repo.SaveMilieuStage(new MilieuStage(id, Request.Form["TxtTitre"], Request.Form["TxaDescription"], Request.Form["TxtNoCivique"], Request.Form["TxtRue"], Request.Form["TxtCodePostal"], Request.Form["TxtVille"], Request.Form["TxtProvince"], Request.Form["TxtPays"], Request.Form["TxtNumeroTelephone"], Request.Form["ChkEtat"] == "on"));
             Response.Redirect("../ListeMilieuStage");
         }
+
+        [HttpPost]
+        public IActionResult SearchListeMilieuStage(string txtTitre,string txtDescr,string txtAdresse)
+        {
+            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtDescr,txtAdresse);
+            return View("ListeMilieuStage");
+        }
     }
 }

@@ -26,6 +26,9 @@
                         <a asp-area="" asp-controller="MilieuStage" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
                     </li>
                     <li>
+                        <a asp-area="" asp-controller="Stage" asp-action="ListeStage">@lang.ListeStage</a>
+                    </li>
+                    <li>
                         <a asp-area="" asp-controller="MilieuStage" asp-action="AjouterModifierMilieuStage">@lang.AjouterUnMilieuDeStage</a>
                     </li>
                     <li>
@@ -40,7 +43,7 @@
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>

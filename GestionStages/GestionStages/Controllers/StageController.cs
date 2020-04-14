@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,12 @@ namespace GestionStages.Controllers
     {
         Repositories.IStageRepository repo = new Repositories.repoStageMSSQL();
         Repositories.IMilieuStageRepository repoMilieu = new Repositories.repoMilieuStageMSSQL();
-        public IActionResult ListeStage()
-        {
-            ViewBag.lesStages = repo.GetAllStage();
-            ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
-            return View();
-        }
+        //public IActionResult ListeStage()
+        //{
+        //    ViewBag.lesStages = repo.GetAllStage();
+        //    ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
+        //    return View();
+        //}
         public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
         {
             if (Duplicate)
@@ -69,6 +70,30 @@ namespace GestionStages.Controllers
         {
             repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"],Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on")); 
             Response.Redirect("../ListeStage");
+        }
+
+        public IActionResult ListeStage()
+        {
+            ViewBag.lesStages = repo.GetAllStage();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
+        {
+            //DateTime minDate = txtMinDate == null ? DateTime.MinValue : DateTime.Parse(txtMinDate);
+            //DateTime maxDate = txtMaxDate == null ? DateTime.MaxValue : DateTime.Parse(txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
+        {
+            //DateTime minDate = (txtMinDate == null) ? DateTime.MinValue : DateTime.Parse(txtMinDate);
+            //DateTime maxDate = (txtMaxDate == null) ? DateTime.Now.AddYears(10) : DateTime.Parse(txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate);
+            return View("ListeStage");
         }
     }
 }
