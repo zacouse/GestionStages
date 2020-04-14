@@ -24,18 +24,18 @@ namespace GestionStages.Controllers
         [HttpGet]
         public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
         {
-            DateTime minDate = txtMinDate == null ? DateTime.MinValue : DateTime.Parse(txtMinDate);
-            DateTime maxDate = txtMaxDate == null ? DateTime.MaxValue : DateTime.Parse(txtMaxDate);
-            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, minDate, maxDate);
+            //DateTime minDate = txtMinDate == null ? DateTime.MinValue : DateTime.Parse(txtMinDate);
+            //DateTime maxDate = txtMaxDate == null ? DateTime.MaxValue : DateTime.Parse(txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate);
             return View();
         }
 
         [HttpPost]
         public IActionResult SearchListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
         {
-            DateTime minDate = (txtMinDate == null) ? DateTime.MinValue : DateTime.Parse(txtMinDate);
-            DateTime maxDate = (txtMaxDate == null) ? DateTime.Now.AddYears(10) : DateTime.Parse(txtMaxDate);
-            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, minDate, maxDate);
+            //DateTime minDate = (txtMinDate == null) ? DateTime.MinValue : DateTime.Parse(txtMinDate);
+            //DateTime maxDate = (txtMaxDate == null) ? DateTime.Now.AddYears(10) : DateTime.Parse(txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate);
             return View("ListeStage");
         }
     }

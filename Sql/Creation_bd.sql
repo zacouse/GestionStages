@@ -248,9 +248,9 @@ IF @Adresse_IN <> ''
 EXEC sp_executesql @SQL
 GO
 
-ALTER PROC pGetStage(
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0
-)AS
+--ALTER PROC pGetStage(
+DECLARE @Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0
+--)AS
 	
 DECLARE @SQL NVARCHAR(4000)
 
@@ -277,10 +277,10 @@ IF ISNULL(@Maxh_IN,0) <> 0
     SET @SQL = @SQL + ' AND NbHeureSemaine < ' + CONVERT(VARCHAR,@Maxh_IN) + ' '
 
 IF ISNULL(@MinDate_IN,0) <> 0
-    SET @SQL = @SQL + ' AND DateDebut > ' + CONVERT(VARCHAR,@MinDate_IN) + ' '
+    SET @SQL = @SQL + ' AND DateDebut > ''' + CONVERT(VARCHAR,@MinDate_IN) + ''' '
 
 IF ISNULL(@MaxDate_IN,0) <> 0
-    SET @SQL = @SQL + ' AND DateFin < ' + CONVERT(VARCHAR,@MaxDate_IN) + ' '
+    SET @SQL = @SQL + ' AND DateFin < ''' + CONVERT(VARCHAR,@MaxDate_IN) + ''' '
 
 EXEC sp_executesql @SQL
 GO

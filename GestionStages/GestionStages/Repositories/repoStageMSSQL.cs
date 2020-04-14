@@ -52,50 +52,54 @@ namespace GestionStages.Repositories
             return lesStages;
         }
 
-        public List<Stage> GetStage(string titre, string descr, string milieu, int minh, int maxh, DateTime minDate, DateTime maxDate)
+        public List<Stage> GetStage(string titre, string descr, string milieu, int minh, int maxh, string minDate, string maxDate)
         {
             List<Stage> lesStages = new List<Stage>();
-            try
-            {
-                sql = new SqlCommand("pGetStage", conn);
-                sql.CommandType = CommandType.StoredProcedure;
+            sql = new SqlCommand("pGetStage", conn);
+            sql.CommandType = CommandType.StoredProcedure;
 
-                sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
-                sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = descr;
-                sql.Parameters.Add("@Milieu_IN", SqlDbType.VarChar).Value = milieu;
-                sql.Parameters.Add("@Minh_IN", SqlDbType.Int).Value = minh;
-                sql.Parameters.Add("@Maxh_IN", SqlDbType.Int).Value = maxh;
-                sql.Parameters.Add("@MinDate_IN", SqlDbType.DateTime).Value = minDate;
-                sql.Parameters.Add("@MaxDate_IN", SqlDbType.DateTime).Value = maxDate;
+            DateTime? varMinDate = null;
+            DateTime? varMaxDate = null;
 
-                conn.Open();
-                dr = sql.ExecuteReader();
-                while (dr.Read())
-                {
-                    Stage stage = new Stage();
-                    stage.IDStage = (int)dr.GetValue(0);
-                    stage.IDMilieuStage = (int)dr.GetValue(1);
-                    stage.Titre = (string)dr.GetValue(2);
-                    stage.Description = (string)dr.GetValue(3);
-                    stage.NbPostes = (int)dr.GetValue(4);
-                    stage.Status = (byte)dr.GetValue(5);
-                    stage.PeriodeTravail = (byte)dr.GetValue(6);
-                    stage.NbHeureSemaine = (int)dr.GetValue(7);
-                    stage.DateDebut = (DateTime)dr.GetValue(8);
-                    stage.DateFin = (DateTime)dr.GetValue(9);
-                    stage.Etat = (bool)dr.GetValue(10);
-                    stage.TitreMilieuStage = (string)dr.GetValue(11);
-                    lesStages.Add(stage);
-                }
-            }
-            catch (Exception e)
+            if (minDate != null)
             {
-                Console.WriteLine(e.Message);
+                varMinDate = DateTime.Parse(minDate);
             }
-            finally
+
+            if (maxDate != null)
             {
-                conn.Close();
+                varMaxDate = DateTime.Parse(maxDate);
             }
+
+            sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
+            sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = descr;
+            sql.Parameters.Add("@Milieu_IN", SqlDbType.VarChar).Value = milieu;
+            sql.Parameters.Add("@Minh_IN", SqlDbType.Int).Value = minh;
+            sql.Parameters.Add("@Maxh_IN", SqlDbType.Int).Value = maxh;
+            sql.Parameters.Add("@MinDate_IN", SqlDbType.DateTime).Value = varMinDate;
+            sql.Parameters.Add("@MaxDate_IN", SqlDbType.DateTime).Value = varMaxDate;
+
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                Stage stage = new Stage();
+                stage.IDStage = (int)dr.GetValue(0);
+                stage.IDMilieuStage = (int)dr.GetValue(1);
+                stage.Titre = (string)dr.GetValue(2);
+                stage.Description = (string)dr.GetValue(3);
+                stage.NbPostes = (int)dr.GetValue(4);
+                stage.Status = (byte)dr.GetValue(5);
+                stage.PeriodeTravail = (byte)dr.GetValue(6);
+                stage.NbHeureSemaine = (int)dr.GetValue(7);
+                stage.DateDebut = (DateTime)dr.GetValue(8);
+                stage.DateFin = (DateTime)dr.GetValue(9);
+                stage.Etat = (bool)dr.GetValue(10);
+                stage.TitreMilieuStage = (string)dr.GetValue(11);
+                lesStages.Add(stage);
+            }
+            conn.Close();
+
             return lesStages;
         }
     }
