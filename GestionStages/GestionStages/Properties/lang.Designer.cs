@@ -322,6 +322,24 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Maximum weekly work hours.
+        /// </summary>
+        public static string NombreMaximumDHeureSemaine {
+            get {
+                return ResourceManager.GetString("NombreMaximumDHeureSemaine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Minimal weekly work hours.
+        /// </summary>
+        public static string NombreMinimumDHeureSemaine {
+            get {
+                return ResourceManager.GetString("NombreMinimumDHeureSemaine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Night.
         /// </summary>
         public static string Nuit {
@@ -372,6 +390,15 @@ namespace GestionStages.Properties {
         public static string Province {
             get {
                 return ResourceManager.GetString("Province", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Search.
+        /// </summary>
+        public static string Rechercher {
+            get {
+                return ResourceManager.GetString("Rechercher", resourceCulture);
             }
         }
         

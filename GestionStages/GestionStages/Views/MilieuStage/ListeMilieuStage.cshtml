@@ -20,25 +20,25 @@
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtTitre", "")
-                        <label for="Title">Title</label>
+                        <label for="Title">@lang.Titre</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtDescr", "")
-                        <label for="Descr">Descr</label>
+                        <label for="Descr">@lang.Description</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtAdresse", "")
-                        <label for="Address">Address</label>
+                        <label for="Address">@lang.Adresse</label>
                     </div>
                 </td>
             </tr>
         </table>
         <div class="row">
-            <div class="col s2 push-s11"><a class="btn" href="javascript:document.searchform.submit();">Search</a></div>
+            <div class="col s2 push-s11"><a class="btn" href="javascript:document.searchform.submit();">@lang.Rechercher</a></div>
         </div>
     </form>
 </div>
@@ -71,5 +71,5 @@
 
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
-    <div class="col s2 push-s9"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
+    <div class="col s2 push-s9"><a class="btn" href="@Url.Action("AjouterModifierMilieuStage", "MilieuStage")">@lang.Ajouter</a></div>
 </div>

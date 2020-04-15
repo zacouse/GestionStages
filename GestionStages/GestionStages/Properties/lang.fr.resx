@@ -244,4 +244,13 @@
 	<data name="Voir" xml:space="preserve">
 		<value>Voir</value>
 	</data>
+	<data name="Rechercher" xml:space="preserve">
+		<value>Rechercher</value>
+	</data>
+	<data name="NombreMaximumDHeureSemaine" xml:space="preserve">
+		<value>Maximum d'heures par semaine</value>
+	</data>
+	<data name="NombreMinimumDHeureSemaine" xml:space="preserve">
+		<value>Minimum d'heures par semaine</value>
+	</data>
 </root>

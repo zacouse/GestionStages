@@ -1,22 +1,22 @@
 ﻿
 @{
-    ViewData["Title"] = "ListeStage";
+    ViewData["Title"] = @lang.ListeStage;
     Layout = "~/Views/Shared/_PrintLayout.cshtml";
 }
 
-<h1>ListeStage</h1>
+<h1>@lang.ListeStage</h1>
 
 <table id="liste" class="highlight">
     <thead>
         <tr>
             <td>@lang.Titre</td>
             <td>@lang.Description</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>@lang.MilieuDeStage</td>
+            <td>@lang.PeriodeDeTravail</td>
+            <td>@lang.Statut</td>
+            <td>@lang.NombreDHeureParSemaine</td>
+            <td>@lang.DateDeDebut</td>
+            <td>@lang.DateDeFin</td>
         </tr>
     </thead>
     <tbody>

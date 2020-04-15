@@ -295,4 +295,13 @@
 	<data name="Voir" xml:space="preserve">
 		<value>See</value>
 	</data>
+	<data name="Rechercher" xml:space="preserve">
+		<value>Search</value>
+	</data>
+	<data name="NombreMaximumDHeureSemaine" xml:space="preserve">
+		<value>Maximum weekly work hours</value>
+	</data>
+	<data name="NombreMinimumDHeureSemaine" xml:space="preserve">
+		<value>Minimal weekly work hours</value>
+	</data>
 </root>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GestionStages.Properties;
 
 namespace GestionStages.Models
 {
@@ -32,8 +33,8 @@ namespace GestionStages.Models
         public bool Etat { get; set; }
         public string TitreMilieuStage { get; set; }
 
-        private string[] periode = {""};
-        private string[] status = {""};
+        private string[] periode = { lang.Jour, lang.Soiree, lang.Nuit};
+        private string[] status = { lang.TempsPleins, lang.TempsPartiel };
 
         public Stage()
         {

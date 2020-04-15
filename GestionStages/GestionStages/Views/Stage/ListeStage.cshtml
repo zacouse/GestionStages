@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "ListeStage";
+    ViewData["Title"] = lang.ListeStage;
 }
 
 <h1>@lang.ListeStage</h1>
@@ -20,49 +20,49 @@
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtTitre", "")
-                        <label for="txtTitre">Title</label>
+                        <label for="txtTitre">@lang.Titre</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtDescr", "")
-                        <label for="txtDescr">Descr</label>
+                        <label for="txtDescr">@lang.Description</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtMilieu", "")
-                        <label for="txtMilieu">Milieu</label>
+                        <label for="txtMilieu">@lang.MilieuDeStage</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtMinH", "")
-                        <label for="txtMinH">MinH</label>
+                        <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
                         @Html.TextBox("txtMaxH", "")
-                        <label for="txtMaxH">MinH</label>
+                        <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
-                        @Html.TextBox("txtMinDate", "")
-                        <label for="txtMinDate">Min Date</label>
+                        @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
+                        <label for="txtMinDate">@lang.DateDeDebut</label>
                     </div>
                 </td>
                 <td>
                     <div class="input-field">
-                        @Html.TextBox("txtMaxDate", "")
-                        <label for="txtMaxDate">Min Date</label>
+                        @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
+                        <label for="txtMaxDate">@lang.DateDeFin</label>
                     </div>
                 </td>
             </tr>
         </table>
         <div class="row">
-            <div class="col s2 push-s11"><a class="btn" href="javascript:document.searchform.submit();">Search</a></div>
+            <div class="col s2 push-s11"><a class="btn" href="javascript:document.searchform.submit();">@lang.Rechercher</a></div>
         </div>
     </form>
 </div>
@@ -72,13 +72,13 @@
         <tr>
             <td>@lang.Titre</td>
             <td>@lang.Description</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>@lang.MilieuDeStage</td>
+            <td>@lang.PeriodeDeTravail</td>
+            <td>@lang.Statut</td>
+            <td>@lang.NombreDHeureParSemaine</td>
+            <td>@lang.DateDeDebut</td>
+            <td>@lang.DateDeFin</td>
+            <td>@lang.Voir</td>
         </tr>
     </thead>
     <tbody>
@@ -95,7 +95,7 @@
                     <td>@lesStages[i].NbHeureSemaine h</td>
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
-                    <td><a href="@Url.Action("AddSetStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                    <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
         }
@@ -104,11 +104,15 @@
 
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
-    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">Print</a></div>
-    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("Test", "Home")">@lang.Ajouter</a></div>
+    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
+    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('select').formSelect();
+        $('.datepicker').datepicker();
+    });
     function PrintElem(elem) {
         var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
 
