@@ -22,8 +22,6 @@
                         @Html.TextBox("txtTitre", "")
                         <label for="txtTitre">@lang.Titre</label>
                     </div>
-                </td>
-                <td>
                     <div class="input-field">
                         @Html.TextBox("txtDescr", "")
                         <label for="txtDescr">@lang.Description</label>
@@ -36,12 +34,25 @@
                     </div>
                 </td>
                 <td>
+                    <label>Period</label>
+                    <div class="input-field row">
+                        @Html.CheckBox("chkIsJour", false)
+                        <span>@lang.Jour</span>
+                    </div>
+                    <div class="input-field row">
+                        @Html.CheckBox("chkIsSoir", false)
+                        <span>@lang.Soiree</span>
+                    </div>
+                    <div class="input-field row">
+                        @Html.CheckBox("chkIsNuit", false)
+                        <span>@lang.Nuit</span>
+                    </div>
+                </td>
+                <td>
                     <div class="input-field">
                         @Html.TextBox("txtMinH", "")
                         <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
                     </div>
-                </td>
-                <td>
                     <div class="input-field">
                         @Html.TextBox("txtMaxH", "")
                         <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
@@ -52,11 +63,26 @@
                         @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
                         <label for="txtMinDate">@lang.DateDeDebut</label>
                     </div>
-                </td>
-                <td>
                     <div class="input-field">
                         @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
                         <label for="txtMaxDate">@lang.DateDeFin</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><label>Etat</label></td>
+                <td>
+                    <div class="input-field">
+                        @Html.CheckBox("chkIsActive", false)
+                        <span>@lang.Actif</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-field">
+                        @Html.CheckBox("chkIsInActive", false)
+                        <span>@lang.Inactif</span>
                     </div>
                 </td>
             </tr>

@@ -282,5 +282,7 @@ IF ISNULL(@MinDate_IN,0) <> 0
 IF ISNULL(@MaxDate_IN,0) <> 0
     SET @SQL = @SQL + ' AND DateFin <= ''' + CONVERT(VARCHAR,@MaxDate_IN) + ''' '
 
+-- Section Restrictions
+
 EXEC sp_executesql @SQL
 GO
