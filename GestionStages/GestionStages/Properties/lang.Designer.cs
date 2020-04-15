@@ -133,7 +133,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Create Copy.
+        ///   Recherche une chaîne localisée semblable à Duplicate.
         /// </summary>
         public static string CreerUneCopie {
             get {

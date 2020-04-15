@@ -11,6 +11,7 @@ namespace GestionStages.Controllers
     public class MilieuStageController : Controller
     {
         Repositories.IMilieuStageRepository repo = new Repositories.repoMilieuStageMSSQL();
+        Repositories.IStageRepository repoStage = new Repositories.repoStageMSSQL();
         public IActionResult ListeMilieuStage()
         {
             ViewBag.lesMilieus = repo.GetAllMilieuStage();
@@ -22,6 +23,7 @@ namespace GestionStages.Controllers
             if (id != 0)
             {
                 ViewBag.Milieu = repo.GetMilieuStageById(id);
+                ViewBag.lesStages = repoStage.GetStagesByIdMilieu(id);
                 ViewBag.TitrePage = lang.VisionnerUnMilieuDeStage;
                 ViewBag.IconeTitre = "remove_red_eye";
                 ViewBag.TexteBouton = lang.Creer;

@@ -42,6 +42,14 @@ Left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 WHERE [IDStage] = @IDStage_IN;
 GO
 
+CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
+AS
+SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+FROM Stage
+WHERE [IDMilieuStage] = @IdMilieu_IN;
+GO
+
+
 INSERT INTO Stage ([IDMilieuStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
 VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', '2020-04-01', '2020-04-30', 'true', GETDATE(), GETDATE())
 

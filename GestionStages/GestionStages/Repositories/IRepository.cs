@@ -22,6 +22,7 @@ namespace GestionStages.Repositories
         void SaveStage(Stage stage);
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate);
+        List<Stage> GetStagesByIdMilieu(int milieu);
     }
 
     interface IEtudiantRepository

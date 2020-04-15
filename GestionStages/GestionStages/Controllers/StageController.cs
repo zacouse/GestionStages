@@ -37,7 +37,7 @@ namespace GestionStages.Controllers
                 ViewBag.IconButton = "send";
                 ViewBag.ColorButton = "green";
                 ViewBag.TextButton = lang.Creer;
-                ViewBag.LinkBack = "../ListeStage";
+                ViewBag.LinkBack = "../Stage/ListeStage";
             }
             else
             {

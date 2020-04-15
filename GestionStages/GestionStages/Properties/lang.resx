@@ -242,7 +242,7 @@
 		<value>End date</value>
 	</data>
 	<data name="CreerUneCopie" xml:space="preserve">
-		<value>Create Copy</value>
+		<value>Duplicate</value>
 	</data>
 	<data name="Jour" xml:space="preserve">
 		<value>Day</value>

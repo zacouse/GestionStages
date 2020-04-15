@@ -191,7 +191,7 @@
 		<value>Date de fin</value>
 	</data>
 	<data name="CreerUneCopie" xml:space="preserve">
-		<value>Créer une copie</value>
+		<value>Dupliquer</value>
 	</data>
 	<data name="Jour" xml:space="preserve">
 		<value>Jour</value>
