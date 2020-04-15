@@ -95,7 +95,7 @@
                     <td>@lesStages[i].NbHeureSemaine h</td>
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
-                    <td><a href="@Url.Action("Test", "Home", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                    <td><a href="@Url.Action("AddSetStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
         }
