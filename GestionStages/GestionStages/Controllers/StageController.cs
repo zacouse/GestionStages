@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using GestionStages.Models;
-using System.Data.SqlClient;
 using GestionStages.Properties;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using static GestionStages.Models.Stage;
+using System;
+using System.Linq;
 
 namespace GestionStages.Controllers
 {
+
     public class StageController : Controller
     {
         Repositories.IStageRepository repo = new Repositories.repoStageMSSQL();
@@ -23,6 +22,7 @@ namespace GestionStages.Controllers
         //}
         public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
         {
+            
             if (Duplicate)
             {
                 ViewBag.lesStages = repo.GetStageByID(idStage);
@@ -44,7 +44,6 @@ namespace GestionStages.Controllers
                 ViewBag.PageTitle = lang.ModifierUnStage;
                 ViewBag.IconTitle = "create";
                 ViewBag.LeStage = repo.GetStageByID(idStage);
-                //ViewBag.LeMilieu = repoMilieu.GetMilieuStageById(idMilieu);
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
@@ -57,13 +56,19 @@ namespace GestionStages.Controllers
         {
             ViewBag.PageTitle = lang.VisionnerUnStage;
             ViewBag.IconTitle = "remove_red_eye";
-            ViewBag.leStage = repo.GetStageByID(id);
-            ViewBag.IconButton = "create";
-            ViewBag.ColorButtonModify = "orange";
-            ViewBag.TextButton = lang.Modifier;
+
+            ViewBag.LeStage = repo.GetStageByID(id);
+
+            ViewBag.ColorButtonBack = "grey";
+            ViewBag.TextButtonBack = lang.Retour;
+
+            ViewBag.ColorButtonCopy = "blue";
             ViewBag.IconButtonCopy = "content_copy";
-            ViewBag.ColorButtonCopy = "Blue";
-            ViewBag.ColorButton = "grey";
+            ViewBag.TextButtonCopy = lang.CreerUneCopie;
+
+            ViewBag.ColorButtonModify = "orange";
+            ViewBag.IconButtonModify = "create";
+            ViewBag.TextButtonModify = lang.Modifier;
             return View();
         }
         public void SaveStage(int id)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestionStages.Models
 {
@@ -18,7 +19,8 @@ namespace GestionStages.Models
         public string Pays { get; set; }
         public string NoTelephone { get; set; }
         public bool Etat { get; set; }
-
+        public SelectList listTitreMilieu { get; set; }
+        public int selectedTitreMilieu { get; set; }
         public MilieuStage()
         {
             IDMilieuStage = 0;

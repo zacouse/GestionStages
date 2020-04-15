@@ -1,5 +1,9 @@
-﻿using System;
+﻿using GestionStages.Properties;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using GestionStages.Properties;
@@ -8,18 +12,6 @@ namespace GestionStages.Models
 {
     public class Stage
     {
-        public enum StatutTemps
-        {
-            TempsPlein,
-            TempsPartiel
-        }
-        public enum PeriodeDeTravail
-        {
-            Jour,
-            Soir,
-            Nuit
-        }
-
         public int IDStage { get; set; }
         public int IDMilieuStage { get; set; }
         public string Titre { get; set; }
@@ -33,8 +25,8 @@ namespace GestionStages.Models
         public bool Etat { get; set; }
         public string TitreMilieuStage { get; set; }
 
-        private string[] periode = { lang.Jour, lang.Soiree, lang.Nuit};
-        private string[] status = { lang.TempsPleins, lang.TempsPartiel };
+        private string[] periode = { lang.Jour, lang.Soiree, lang.Nuit };
+        private string[] statut = { lang.TempsPleins, lang.TempsPartiel };
 
         public Stage()
         {
@@ -81,12 +73,13 @@ namespace GestionStages.Models
             return periodeString;
         }
 
+
         public string GetStatus()
         {
             string statusString;
             try
             {
-                statusString = status[Statut];
+                statusString = statut[Statut];
             }
             catch
             {
@@ -96,4 +89,5 @@ namespace GestionStages.Models
             return statusString;
         }
     }
+
 }

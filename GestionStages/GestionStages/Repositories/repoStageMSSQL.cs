@@ -131,6 +131,10 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
+        public void teststage(string test)
+        {
+            string valueType = test;
+        }
         public void SaveStage(Stage stage)
         {
             sql = new SqlCommand();
@@ -175,6 +179,7 @@ namespace GestionStages.Repositories
                         stage.DateDebut = (DateTime)dr.GetValue(8);
                         stage.DateFin = (DateTime)dr.GetValue(9);
                         stage.Etat = (bool)dr.GetValue(10);
+                        stage.TitreMilieuStage = (string)dr.GetValue(11);
                 }
             }
             catch (Exception e)

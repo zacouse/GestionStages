@@ -20,6 +20,7 @@ namespace GestionStages.Repositories
         List<Stage> GetAllStageActif();
         List<Stage> GetAllStageInactif();
         void SaveStage(Stage stage);
+        void teststage(string test);
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate);
         List<Stage> GetStagesByIdMilieu(int milieu);

@@ -27,11 +27,13 @@
         StageAModifier.Etat = true;
     }
 
-    <form class="col s12" method="post" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
+    <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <select>
+                <select id="TxtMilieuStage" name="TxtMilieuStage">
                     @{
+
+                        <option value=""> </option>
                         List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
                         for (int i = 0; i < lesMilieus.Count; i++)
                         {
@@ -44,56 +46,65 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtTitre", @Html.Raw(StageAModifier.Titre), new { @class = "validate" })
+                @Html.TextBox("TxtTitre", @Html.Raw(StageAModifier.Titre), new { @class = "validate", maxlength = "100", required = "required" })
                 @Html.Label("TxtTitre", @lang.Titre)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea">@Html.Raw(StageAModifier.Description)</textarea>
+                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(StageAModifier.Description)</textarea>
                 @Html.Label("TxtaDescription", @lang.Description)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate" })
+                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate", required = "required" })
                 @Html.Label("TxtNbPostes", @lang.NombreDePostes)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.DropDownList("TxtStatut",
-                                    new SelectList(Enum.GetValues(typeof(Stage.StatutTemps))),
+                <select id="TxtStatut" name="TxtStatut" class = "Validate" required>
+                    <option value="1">@lang.TempsPleins</option>
+                    <option value="2">@lang.TempsPartiel</option>
+                </select>
+                @*@Html.DropDownList("TxtStatut",
+                                    new SelectList(Enum.GetValues(typeof(Stage.ListStatut))),
                                     null,
-                                    new { @class = "Validate" })
+                                    new { @class = "Validate", id = "TxtStatut", name = "TxtStatut", required = "required" })*@
                 @Html.Label("TxtStatut", @lang.Statut)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.DropDownList("TxtPeriodeTravail",
-                                    new SelectList(Enum.GetValues(typeof(Stage.PeriodeDeTravail))),
+                <select id="TxtPeriodeTravail" name="TxtPeriodeTravail" class="Validate" required>
+                    <option value="1">@lang.Jour</option>
+                    <option value="2">@lang.Soiree</option>
+                    <option value="3">@lang.Nuit</option>
+                </select>
+                @*@Html.DropDownList("TxtPeriodeTravail",
+                                    new SelectList(Enum.GetNames(typeof(Stage.PeriodeDeTravail))),
                                     null,
-                                    new { @class = "Validate" })
+                                    new { @class = "Validate", id = "TxtPeriodeTravail", name = "TxtPeriodeTravail", required = "required" })*@
                 @Html.Label("TxtPeriodeTravail", @lang.PeriodeDeTravail)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", type = "number" })
+                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", required = "required" })
                 @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", type = "text" })
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate", type="date", placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
         <div class="row">
             
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker", placeholder = "Placeholder", type = "text" })
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate", type = "date", placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
@@ -126,11 +137,74 @@
     <script>
         $(document).ready(function () {
             $('select').formSelect();
-            $('.datepicker').datepicker();
+            //$('.datepicker').datepicker();
         });
     </script>
 }
-
+<script type="text/javascript">
+    function validate() {
+        var isValid = $("#form").validate({
+            errorElement: "span",
+            rules: {
+                TxtMilieuStage: {
+                    required: true
+                },
+                TxtTitre: {
+                    required: true
+                },
+                TxtaDescription: {
+                    required: true
+                },
+                TxtNbPostes: {
+                    required: true,
+                    pattern: new RegExp(/^\d+$/)
+                },
+                TxtNombreDHeureParSemaine: {
+                    required: true,
+                    pattern: new RegExp(/^\d+$/)
+                },
+                TxtDateDeDebut: {
+                    required: true
+                },
+                TxtDateDeFin: {
+                    required: true
+                }
+            },
+            message: {
+                TxtMilieuStage: "@lang.ChampRequis",
+                TxtTitre: "@lang.ChampRequis",
+                TxTaDescription: "@lang.ChampRequis",
+                TxtNbPostes: {
+                    required: "@lang.ChampRequis",
+                    pattern: "@lang.FormatValide seulement des chiffres"
+                },
+                TxtNombreDHeureParSemaine: {
+                    required: "@lang.ChampRequis",
+                    pattern: "@lang.FormatValide seulement des chiffres"
+                },
+                TxtDateDeDebut: "@lang.ChampRequis",
+                TxtDateDeFin: "@lang.ChampRequis",
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        if (isValid.form()) {
+            M.toast({ html: '@lang.EnregistreSucces', displayLength: 500, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
+        }
+        else {
+            M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+        }
+    };
+</script>
+<style>
+    span.error {
+        color: red;
+        padding-right: 2px;
+        padding-left: 2px;
+        border: 2px red solid
+    }
+</style>
 
 
 
