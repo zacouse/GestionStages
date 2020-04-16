@@ -68,9 +68,9 @@ namespace GestionStages.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchListeMilieuStage(string txtTitre,string txtDescr,string txtAdresse)
+        public IActionResult SearchListeMilieuStage(string txtTitre,string txtAdresse)
         {
-            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtDescr,txtAdresse);
+            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtAdresse);
             return View("ListeMilieuStage");
         }
     }

@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GestionStages.Models;
 using GestionStages.Properties;
@@ -25,13 +30,12 @@ namespace GestionStages.Controllers
             
             if (Duplicate)
             {
-                ViewBag.lesStages = repo.GetStageByID(idStage);
-                ViewBag.lesStages.IDStage = 0;
+                ViewBag.LeStage = repo.GetStageByID(idStage);
+                ViewBag.LeStage.IDStage = 0;
                 idStage = 0;
             }
             if (idStage == 0)
             {
-                ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
                 ViewBag.PageTitle = lang.AjouterUnStage;
                 ViewBag.IconTitle = "add_circle";
                 ViewBag.IconButton = "send";
@@ -47,8 +51,9 @@ namespace GestionStages.Controllers
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
-                ViewBag.LinkBack = "../ListeStage/" + idStage;
+                ViewBag.LinkBack = "../Stage/VisionnerStage/" + idStage;
             }
+            ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
             return View();
         }
 
@@ -84,20 +89,20 @@ namespace GestionStages.Controllers
         }
 
         [HttpGet]
-        public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
+        public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)
         {
             //DateTime minDate = txtMinDate == null ? DateTime.MinValue : DateTime.Parse(txtMinDate);
             //DateTime maxDate = txtMaxDate == null ? DateTime.MaxValue : DateTime.Parse(txtMaxDate);
-            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);
             return View();
         }
 
         [HttpPost]
-        public IActionResult SearchListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate)
+        public IActionResult SearchListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)
         {
             //DateTime minDate = (txtMinDate == null) ? DateTime.MinValue : DateTime.Parse(txtMinDate);
             //DateTime maxDate = (txtMaxDate == null) ? DateTime.Now.AddYears(10) : DateTime.Parse(txtMaxDate);
-            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate);
+            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);
             return View("ListeStage");
         }
     }
