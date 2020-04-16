@@ -38,6 +38,7 @@ namespace GestionStages.Repositories
                     stage.DateDebut = (DateTime)dr.GetValue(8);
                     stage.DateFin = (DateTime)dr.GetValue(9);
                     stage.Etat = (bool)dr.GetValue(10);
+                    stage.TitreMilieuStage = (string)dr.GetValue(11);
                     lesStages.Add(stage);
                 }
             }
@@ -77,6 +78,7 @@ namespace GestionStages.Repositories
                         stage.DateDebut = (DateTime)dr.GetValue(8);
                         stage.DateFin = (DateTime)dr.GetValue(9);
                         stage.Etat = (bool)dr.GetValue(10);
+                        stage.TitreMilieuStage = (string)dr.GetValue(11);
                         lesStages.Add(stage);
                     }
                 }
@@ -117,6 +119,7 @@ namespace GestionStages.Repositories
                         stage.DateDebut = (DateTime)dr.GetValue(8);
                         stage.DateFin = (DateTime)dr.GetValue(9);
                         stage.Etat = (bool)dr.GetValue(10);
+                        stage.TitreMilieuStage = (string)dr.GetValue(11);
                         lesStages.Add(stage);
                     }
                 }
@@ -219,7 +222,7 @@ namespace GestionStages.Repositories
             return lesStages;
         }
 
-        public List<Stage> GetStage(string titre, string descr, string milieu, int minh, int maxh, string minDate, string maxDate)
+        public List<Stage> GetStage(string titre, string descr, string milieu, int minh, int maxh, string minDate, string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)
         {
             List<Stage> lesStages = new List<Stage>();
             sql = new SqlCommand("pGetStage", conn);
@@ -245,6 +248,11 @@ namespace GestionStages.Repositories
             sql.Parameters.Add("@Maxh_IN", SqlDbType.Int).Value = maxh;
             sql.Parameters.Add("@MinDate_IN", SqlDbType.DateTime).Value = varMinDate;
             sql.Parameters.Add("@MaxDate_IN", SqlDbType.DateTime).Value = varMaxDate;
+            sql.Parameters.Add("@isJour_IN", SqlDbType.Bit).Value = chkIsJour;
+            sql.Parameters.Add("@isSoir_IN", SqlDbType.Bit).Value = chkIsSoir;
+            sql.Parameters.Add("@isNuit_IN", SqlDbType.Bit).Value = chkIsNuit;
+            sql.Parameters.Add("@isActive_IN", SqlDbType.Bit).Value = chkIsActive;
+            sql.Parameters.Add("@isInactive_IN", SqlDbType.Bit).Value = chkIsInactive;
 
             conn.Open();
             dr = sql.ExecuteReader();

@@ -249,7 +249,7 @@ EXEC sp_executesql @SQL
 GO
 
 CREATE PROC pGetStage(
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0
+@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0
 )AS
 	
 DECLARE @SQL NVARCHAR(4000)
@@ -281,6 +281,35 @@ IF ISNULL(@MinDate_IN,0) <> 0
 
 IF ISNULL(@MaxDate_IN,0) <> 0
     SET @SQL = @SQL + ' AND DateFin <= ''' + CONVERT(VARCHAR,@MaxDate_IN) + ''' '
+
+IF @isJour_IN = 1 OR @isSoir_IN = 1 OR @isNuit_IN = 1
+BEGIN
+    SET @SQL = @SQL + ' AND ( 1 = 0 '
+
+    IF @isJour_IN = 1
+        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 0 '
+
+    IF @isSoir_IN = 1
+        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 1 '
+
+    IF @isNuit_IN = 1
+        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 2 '
+
+    SET @SQL = @SQL + ' ) '
+END
+
+IF @isActive_IN = 1 OR @isInactive_IN = 1
+BEGIN
+    SET @SQL = @SQL + ' AND ( 1 = 0 '
+
+    IF @isActive_IN = 1
+        SET @SQL = @SQL + ' OR Stage.Etat = 1 '
+
+    IF @isInactive_IN = 1
+        SET @SQL = @SQL + ' OR Stage.Etat = 0 '
+
+    SET @SQL = @SQL + ' ) '
+END
 
 -- Section Restrictions
 
