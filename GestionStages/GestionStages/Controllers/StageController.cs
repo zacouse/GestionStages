@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,13 +25,12 @@ namespace GestionStages.Controllers
         {
             if (Duplicate)
             {
-                ViewBag.lesStages = repo.GetStageByID(idStage);
-                ViewBag.lesStages.IDStage = 0;
+                ViewBag.LeStage = repo.GetStageByID(idStage);
+                ViewBag.LeStage.IDStage = 0;
                 idStage = 0;
             }
             if (idStage == 0)
             {
-                ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
                 ViewBag.PageTitle = lang.AjouterUnStage;
                 ViewBag.IconTitle = "add_circle";
                 ViewBag.IconButton = "send";
@@ -44,12 +43,12 @@ namespace GestionStages.Controllers
                 ViewBag.PageTitle = lang.ModifierUnStage;
                 ViewBag.IconTitle = "create";
                 ViewBag.LeStage = repo.GetStageByID(idStage);
-                //ViewBag.LeMilieu = repoMilieu.GetMilieuStageById(idMilieu);
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
-                ViewBag.LinkBack = "../ListeStage/" + idStage;
+                ViewBag.LinkBack = "../Stage/VisionnerStage/" + idStage;
             }
+            ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
             return View();
         }
 
@@ -68,7 +67,7 @@ namespace GestionStages.Controllers
         }
         public void SaveStage(int id)
         {
-            repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"], Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on"));
+            repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"],Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on")); 
             Response.Redirect("../ListeStage");
         }
 

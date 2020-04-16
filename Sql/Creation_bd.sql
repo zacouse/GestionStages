@@ -190,14 +190,14 @@ CREATE TABLE ChoixStageEtudiant (
 	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant)
 )
 
-INSERT INTO Programme([Nom], [Sigle], [Etat])
-VALUES ('Hamon','123',1)
-		,('Stand','456',1)
+--INSERT INTO Programme([Nom], [Sigle], [Etat])
+--VALUES ('Hamon','123',1)
+--		,('Stand','456',1)
 
-INSERT INTO Etudiant([IDProgramme], [NoDA], [Prenom], [Nom], [Courriel], [Photo], [Etat])
-VALUES (1,'820001','Jonathan','Joestar','',NULL,1)
-		,(2,'950003','Jotaro','Kujo','',NULL,1)
-GO
+--INSERT INTO Etudiant([IDProgramme], [NoDA], [Prenom], [Nom], [Courriel], [Photo], [Etat])
+--VALUES (1,'820001','Jonathan','Joestar','',NULL,1)
+--		,(2,'950003','Jotaro','Kujo','',NULL,1)
+--GO
 
 CREATE PROC pGetAllActiveEtudiant
 AS
@@ -207,111 +207,13 @@ AS
 	WHERE Etudiant.Etat = 1
 GO
 
-INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
-VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),
-	('Milieu2','descr','2','2','B2B 2B2','Quebec','QC','Canada','(123) 123-5678',1)
-GO
+--INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
+--VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),
+--	('Milieu2','descr','2','2','B2B 2B2','Quebec','QC','Canada','(123) 123-5678',1)
+--GO
 
-INSERT INTO Stage([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat])
-VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
-	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
-GO
+--INSERT INTO Stage([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat])
+--VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
+--	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
+--GO
 
-ALTER PROC pGetAllStage
-AS
-	SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre
-	FROM Stage
-	INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
-GO
-
-CREATE PROC pGetMilieuStage(
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Adresse_IN VARCHAR(1000) =''
-)AS
-	
-DECLARE @SQL NVARCHAR(4000)
-
-SET @SQL = 'SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat] '
-         + 'FROM MilieuStage '
-
-IF @Titre_IN <> '' OR @Description_IN <> '' OR @Adresse_IN <> ''
-    SET @SQL = @SQL + ' WHERE 0 = 0 '
-	
-IF @Titre_IN <> ''
-    SET @SQL = @SQL + ' AND Titre LIKE ''%' + @Titre_IN + '%'' '
-
-IF @Description_IN <> ''
-    SET @SQL = @SQL + ' AND Description LIKE ''%' + @Description_IN + '%'' '
-
-IF @Adresse_IN <> ''
-    SET @SQL = @SQL + ' AND NoCivique + '' '' + Rue + '', '' + Ville + ''   '' + Province + '', '' + Pays LIKE ''%' + @Adresse_IN + '%'' '
-
-EXEC sp_executesql @SQL
-GO
-
-CREATE PROC pGetStage(
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0
-)AS
-	
-DECLARE @SQL NVARCHAR(4000)
-
-SET @SQL = ' SELECT [IDStage], Stage.IDMilieuStage, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre '
-         + ' FROM Stage '
-         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage '
-
-IF ISNULL(@Titre_IN,'') <> '' OR ISNULL(@Description_IN,'') <> '' OR ISNULL(@Milieu_IN,'') <> '' OR ISNULL(@Minh_IN,0) <> 0 OR ISNULL(@Maxh_IN,0) <> 0 OR ISNULL(@MinDate_IN,0) <> 0 OR ISNULL(@MaxDate_IN,0) <> 0
-    SET @SQL = @SQL + ' WHERE 0 = 0 '
-	
-IF ISNULL(@Titre_IN,'') <> ''
-    SET @SQL = @SQL + ' AND Stage.Titre LIKE ''%' + @Titre_IN + '%'' '
-
-IF ISNULL(@Description_IN,'') <> ''
-    SET @SQL = @SQL + ' AND Stage.Description LIKE ''%' + @Description_IN + '%'' '
-
-IF ISNULL(@Milieu_IN,'') <> ''
-    SET @SQL = @SQL + ' AND MilieuStage.Titre LIKE ''%' + @Milieu_IN + '%'' '
-
-IF ISNULL(@Minh_IN,0) <> 0
-    SET @SQL = @SQL + ' AND NbHeureSemaine > ' + CONVERT(VARCHAR,@Minh_IN) + ' '
-
-IF ISNULL(@Maxh_IN,0) <> 0
-    SET @SQL = @SQL + ' AND NbHeureSemaine < ' + CONVERT(VARCHAR,@Maxh_IN) + ' '
-
-IF ISNULL(@MinDate_IN,0) <> 0
-    SET @SQL = @SQL + ' AND DateDebut >= ''' + CONVERT(VARCHAR,@MinDate_IN) + ''' '
-
-IF ISNULL(@MaxDate_IN,0) <> 0
-    SET @SQL = @SQL + ' AND DateFin <= ''' + CONVERT(VARCHAR,@MaxDate_IN) + ''' '
-
-IF @isJour_IN = 1 OR @isSoir_IN = 1 OR @isNuit_IN = 1
-BEGIN
-    SET @SQL = @SQL + ' AND ( 1 = 0 '
-
-    IF @isJour_IN = 1
-        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 0 '
-
-    IF @isSoir_IN = 1
-        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 1 '
-
-    IF @isNuit_IN = 1
-        SET @SQL = @SQL + ' OR Stage.PeriodeTravail = 2 '
-
-    SET @SQL = @SQL + ' ) '
-END
-
-IF @isActive_IN = 1 OR @isInactive_IN = 1
-BEGIN
-    SET @SQL = @SQL + ' AND ( 1 = 0 '
-
-    IF @isActive_IN = 1
-        SET @SQL = @SQL + ' OR Stage.Etat = 1 '
-
-    IF @isInactive_IN = 1
-        SET @SQL = @SQL + ' OR Stage.Etat = 0 '
-
-    SET @SQL = @SQL + ' ) '
-END
-
--- Section Restrictions
-
-EXEC sp_executesql @SQL
-GO

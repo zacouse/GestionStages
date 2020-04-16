@@ -35,8 +35,17 @@
                         List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
                         for (int i = 0; i < lesMilieus.Count; i++)
                         {
-                            <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                            if (StageAModifier.IDMilieuStage == @lesMilieus[i].IDMilieuStage)
+                            {
+                                <option type="hidden" selected value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                            }
+                            else
+                            {
+                                <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                            }
+
                         }
+
                     }
                 </select>
                 @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)

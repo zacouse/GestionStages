@@ -108,7 +108,7 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
-        public List<MilieuStage> GetMilieuStage(string titre, string descr, string adresse)
+        public List<MilieuStage> GetMilieuStage(string titre, string adresse)
         {
             List<MilieuStage> lesMilieus = new List<MilieuStage>();
             try
@@ -117,7 +117,6 @@ namespace GestionStages.Repositories
                 sql.CommandType = CommandType.StoredProcedure;
 
                 sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
-                sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = descr;
                 sql.Parameters.Add("@Adresse_IN", SqlDbType.VarChar).Value = adresse;
 
                 conn.Open();

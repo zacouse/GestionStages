@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace GestionStages.Repositories
         List<MilieuStage> GetAllMilieuStage();
         void SaveMilieuStage(MilieuStage milieu);
         MilieuStage GetMilieuStageById(int id);
-        List<MilieuStage> GetMilieuStage(string titre, string descr, string address);
+        List<MilieuStage> GetMilieuStage(string titre, string address);
     }
 
     interface IStageRepository

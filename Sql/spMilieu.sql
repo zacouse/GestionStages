@@ -54,3 +54,23 @@ GO
 
 --exec pAddSetMilieuStage'3','Test','test','213','Avenue','G0M 0G4','ROKE','SOLYD','MEME','6(969)-696-9696','0';
 
+CREATE PROC pGetMilieuStage(
+@Titre_IN VARCHAR(100) = '',@Adresse_IN VARCHAR(1000) =''
+)AS
+	
+DECLARE @SQL NVARCHAR(4000)
+
+SET @SQL = 'SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat] '
+         + 'FROM MilieuStage '
+
+IF @Titre_IN <> '' OR @Adresse_IN <> ''
+    SET @SQL = @SQL + ' WHERE 0 = 0 '
+	
+IF @Titre_IN <> ''
+    SET @SQL = @SQL + ' AND Titre LIKE ''%' + @Titre_IN + '%'' '
+
+IF @Adresse_IN <> ''
+    SET @SQL = @SQL + ' AND NoCivique + '' '' + Rue + '', '' + Ville + ''   '' + Province + '', '' + Pays LIKE ''%' + @Adresse_IN + '%'' '
+
+EXEC sp_executesql @SQL
+GO
