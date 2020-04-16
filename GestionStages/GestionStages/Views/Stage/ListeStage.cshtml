@@ -14,105 +14,111 @@
 }
 
 <div id="search">
-    <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
-        <div class="row">
+    <h3>Section 1</h3>
+    <div>
+        <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
+            <div class="row">
 
-            <div class="col s3">
-                <div class="input-field">
-                    @Html.TextBox("txtTitre", "")
-                    <label for="txtTitre">@lang.Titre</label>
-                </div>
-                <div class="input-field">
-                    @Html.TextBox("txtDescr", "")
-                    <label for="txtDescr">@lang.Description</label>
-                </div>
-                <div class="input-field">
-                    @Html.TextBox("txtMilieu", "")
-                    <label for="txtMilieu">@lang.MilieuDeStage</label>
-                </div>
-            </div>
-
-            <div class="col s2">
-                <label>Period</label>
-                <div class="input-field row">
-                    <p>
-                        <label>
-                            @Html.CheckBox("chkIsJour", true)
-                            <span>@lang.Jour</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="input-field row">
-                    <p>
-                        <label>
-                            @Html.CheckBox("chkIsSoir", true)
-                            <span>@lang.Soiree</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="input-field row">
-                    <p>
-                        <label>
-                            @Html.CheckBox("chkIsNuit", true)
-                            <span>@lang.Nuit</span>
-                        </label>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col s3">
-                <div class="input-field">
-                    @Html.TextBox("txtMinH", "")
-                    <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
-                </div>
-                <div class="input-field">
-                    @Html.TextBox("txtMaxH", "")
-                    <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
-                </div>
-            </div>
-
-            <div class="col s3">
-                <div class="input-field">
-                    @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
-                    <label for="txtMinDate">@lang.DateDeDebut</label>
-                </div>
-                <div class="input-field">
-                    @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
-                    <label for="txtMaxDate">@lang.DateDeFin</label>
-                </div>
-            </div>
-
-            <div class="col s3">
-                <div class="row">
-                    <div class="col s2">
-                        <p>
-                            <label>Etat</label>
-                        </p>
+                <div class="col s3">
+                    <div class="input-field">
+                        @Html.TextBox("txtTitre", "")
+                        <label for="txtTitre">@lang.Titre</label>
                     </div>
-                    <div class="col s4">
+                    <div class="input-field">
+                        @Html.TextBox("txtDescr", "")
+                        <label for="txtDescr">@lang.Description</label>
+                    </div>
+                    <div class="input-field">
+                        @Html.TextBox("txtMilieu", "")
+                        <label for="txtMilieu">@lang.MilieuDeStage</label>
+                    </div>
+                </div>
+
+                <div class="col s2">
+                    <label>Period</label>
+                    <div class="input-field row">
                         <p>
                             <label>
-                                @Html.CheckBox("chkIsActive", true)
-                                <span>@lang.Actif</span>
+                                @Html.CheckBox("chkIsJour", true, new { @class = "filled-in" })
+                                <span>@lang.Jour</span>
                             </label>
                         </p>
                     </div>
-                    <div class="col s4">
+                    <div class="input-field row">
                         <p>
                             <label>
-                                @Html.CheckBox("chkIsInactive", true)
-                                <span>@lang.Inactif</span>
+                                @Html.CheckBox("chkIsSoir", true, new { @class = "filled-in" })
+                                <span>@lang.Soiree</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field row">
+                        <p>
+                            <label>
+                                @Html.CheckBox("chkIsNuit", true, new { @class = "filled-in" })
+                                <span>@lang.Nuit</span>
                             </label>
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <div class="col xl2 l4 m4 s4">
-                <a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                <div class="col s3">
+                    <div class="input-field">
+                        @Html.TextBox("txtMinH", "")
+                        <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
+                    </div>
+                    <div class="input-field">
+                        @Html.TextBox("txtMaxH", "")
+                        <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
+                    </div>
+                </div>
+
+                <div class="col s3">
+                    <div class="input-field">
+                        @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
+                        <label for="txtMinDate">@lang.DateDeDebut</label>
+                    </div>
+                    <div class="input-field">
+                        @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "yyyy-MM-dd", type = "date" })
+                        <label for="txtMaxDate">@lang.DateDeFin</label>
+                    </div>
+                </div>
+
+                <div class="col s3">
+                    <div class="row">
+                        <div class="col s2">
+                            <p>
+                                <label>Etat</label>
+                            </p>
+                        </div>
+                        <div class="col s4">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                    <span>@lang.Actif</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="col s4">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                    <span>@lang.Inactif</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col xl2 l4 m4 s4">
+                    <a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                </div>
+                <div class="col xl2 l4 m4 s4">
+                    <a class="btn light-green" href="@Url.Action("ListeStage", "Stage")">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <table id="liste" class="highlight">
@@ -156,21 +162,27 @@
     <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
 </div>
 
-@section Scripts {
+@section Scripts
+{
     <script>
-    $(document).ready(function () {
-        $('select').formSelect();
-        $('.datepicker').datepicker();
-    });
-    function PrintElem(elem) {
-        var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
+        $(document).ready(function () {
+            $('select').formSelect();
+            $('.datepicker').datepicker();
+        });
 
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
+        function PrintElem(elem) {
+            var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
 
-        mywindow.print();
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
 
-        return true;
-    }
+            mywindow.print();
+
+            return true;
+        }
+
+        $("#search").accordion();
+
+
     </script>
 }
