@@ -15,7 +15,7 @@
 @{
     if (ViewBag.error != null && ViewBag.error != "")
     {
-        @Html.Raw(ViewBag.error);
+    @Html.Raw(ViewBag.error);
     }
 }
 
@@ -25,84 +25,85 @@
     {
         MilieuAModifier.Etat = true;
     }
-    <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "MilieuStage", new { id = @MilieuAModifier.IDMilieuStage })">
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100" required>
-                <label for="TxtTitre">@lang.Titre</label>
+}
+<form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "MilieuStage", new { id = @MilieuAModifier.IDMilieuStage })">
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100" required>
+            <label for="TxtTitre">@lang.Titre</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@MilieuAModifier.Description)</textarea>
+            <label for="TxaDescription">@lang.Description</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" maxlength="10" required>
+            <label for="TxtNoCivique">@lang.NumeroCivique</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" maxlength="100" required>
+            <label for="TxtRue">@lang.Rue</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" maxlength="7" required>
+            <label for="TxtCodePostal">@lang.CodePostal</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" maxlength="100" required>
+            <label for="TxtVille">@lang.Ville</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" maxlength="100" required>
+            <label for="TxtProvince">@lang.Province</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" maxlength="100" required>
+            <label for="TxtPays">@lang.Pays</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" maxlength="20" required>
+            <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12 ">
+            <div class="switch" style="text-align:center">
+                <label>
+                    @lang.Inactif
+                    <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuAModifier.Etat">
+                    <span class="lever"></span>
+                    @lang.Actif
+                </label>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@MilieuAModifier.Description)</textarea>
-                <label for="TxaDescription">@lang.Description</label>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col push-m3 m2 s4">
+            <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
         </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" maxlength="10" required>
-                <label for="TxtNoCivique">@lang.NumeroCivique</label>
-            </div>
+        <div class="col push-s6 s2">
+            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
+                @Html.Raw(ViewBag.TexteBouton)
+                <i class="material-icons right">@Html.Raw(ViewBag.IconeBouton)</i>
+            </button>
         </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" maxlength="100" required>
-                <label for="TxtRue">@lang.Rue</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" maxlength="7" required>
-                <label for="TxtCodePostal">@lang.CodePostal</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" maxlength="100" required>
-                <label for="TxtVille">@lang.Ville</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" maxlength="100" required>
-                <label for="TxtProvince">@lang.Province</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" maxlength="100" required>
-                <label for="TxtPays">@lang.Pays</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" maxlength="20" required>
-                <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col push-m3 m6 s12 ">
-                <div class="switch" style="text-align:center">
-                    <label>
-                        @lang.Inactif
-                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuAModifier.Etat">
-                        <span class="lever"></span>
-                        @lang.Actif
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col push-m3 m2 s4">
-                <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
-            </div>
-            <div class="col push-m6 m2 push-s5 s3" >
-                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
-                    @Html.Raw(ViewBag.TexteBouton)
-                    <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconeBouton)</i>
-                </button>
-            </div>
-        </div>
+    </div>
 </form>
 }
 
