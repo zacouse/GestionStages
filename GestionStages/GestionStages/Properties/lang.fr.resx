@@ -253,4 +253,7 @@
 	<data name="NombreMinimumDHeureSemaine" xml:space="preserve">
 		<value>Minimum d'heures par semaine</value>
 	</data>
+	<data name="Reset" xml:space="preserve">
+		<value>Réinitialiser</value>
+	</data>
 </root>

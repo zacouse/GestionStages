@@ -134,10 +134,6 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
-        public void teststage(string test)
-        {
-            string valueType = test;
-        }
         public void SaveStage(Stage stage)
         {
             sql = new SqlCommand();

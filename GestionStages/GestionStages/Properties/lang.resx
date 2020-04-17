@@ -304,4 +304,7 @@
 	<data name="NombreMinimumDHeureSemaine" xml:space="preserve">
 		<value>Minimal weekly work hours</value>
 	</data>
+	<data name="Reset" xml:space="preserve">
+		<value>Reset</value>
+	</data>
 </root>
