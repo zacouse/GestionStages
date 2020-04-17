@@ -30,10 +30,13 @@ GO
 
 CREATE PROC pGetStageByID(@IDStage_IN INT)
 AS
-SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+SELECT [IDStage],MilieuStage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.[Titre]
 FROM Stage
+Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 GO
+
+
 CREATE PROC pGetMilieuStageForStage(@IDStage_IN INT)
 AS
 SELECT MilieuStage.[Titre]
