@@ -9,8 +9,6 @@ using GestionStages.Models;
 using GestionStages.Properties;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static GestionStages.Models.Stage;
-using System;
-using System.Linq;
 
 namespace GestionStages.Controllers
 {
