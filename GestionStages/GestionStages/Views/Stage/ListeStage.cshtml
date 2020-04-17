@@ -165,10 +165,26 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
-            $('select').formSelect();
-            $('.datepicker').datepicker();
+    $(document).ready(function () {
+        $('select').formSelect();
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            showClearBtn: true,
+            i18n: {
+                months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                weekdaysAbbrev: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                cancel: 'Annuler',
+                clear: 'Effacer',
+                currentText: 'Aujourd\'hui',
+                dateFormat: 'dd-mm-yy'
+            }
         });
+    });
+    function PrintElem(elem) {
+        var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
 
         function PrintElem(elem) {
             var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');
@@ -186,3 +202,16 @@
 
     </script>
 }
+<style>
+    .picker__date-display {
+        background-color: blue;
+    }
+
+    .picker__weekday-display {
+        background-color: red;
+    }
+
+    .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+        background-color: blue;
+    }
+</style>
