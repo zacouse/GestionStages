@@ -14,7 +14,7 @@
 }
 
 <div id="search">
-    <h3>@lang.Rechercher</h3>
+    <h3>@lang.FiltreDeRecherche</h3>
     <div>
         <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
             <div class="row">
@@ -114,7 +114,7 @@
                     <a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
                 </div>
                 <div class="col xl2 l4 m4 s4">
-                    <a class="btn light-green" href="@Url.Action("ListeStage", "Stage")">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                    <a class="btn light-green" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">search</i></a>
                 </div>
             </div>
         </form>
