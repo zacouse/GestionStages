@@ -106,14 +106,14 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate", type="date", placeholder = "Placeholder", required = "required" })
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
         <div class="row">
             
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate", type = "date", placeholder = "Placeholder", required = "required" })
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
@@ -146,7 +146,21 @@
     <script>
         $(document).ready(function () {
             $('select').formSelect();
-            //$('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                showClearBtn: true,
+                i18n: {
+                    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    weekdaysAbbrev: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    cancel: 'Annuler',
+                    clear: 'Effacer',
+                    currentText: 'Aujourd\'hui',
+                    dateFormat: 'dd-mm-yy'
+                }
+            });
         });
     </script>
 }
