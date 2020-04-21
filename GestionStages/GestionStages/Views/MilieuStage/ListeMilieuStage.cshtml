@@ -22,9 +22,8 @@
 }
 
 <div id="search" class="row">
-    <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">
-        <fieldset>
-            <legend>Critère de recherche</legend>
+    <h1>@lang.FiltreDeRecherche</h1>
+    <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")"> 
             <div class="input-field col  m6 s12">
                 @Html.TextBox("txtTitre", "")
                 <label for="Title">@lang.Titre</label>
@@ -37,7 +36,6 @@
             <div class="row">
                 <div class="col xl3 push-xl9 l4 push-l8 m5 push-m7 s4 push-s8 right-align"><a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a></div>
             </div>
-        </fieldset>
     </form>
 </div>
 
@@ -71,3 +69,14 @@
     <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     <div class="col push-l7 l2 s3 push-s7"><a class="btn green" href="@Url.Action("AjouterModifierMilieuStage", "MilieuStage")">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></div>
 </div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#search").accordion({
+                collapsible: true
+            });
+        });
+    </script>
+}
