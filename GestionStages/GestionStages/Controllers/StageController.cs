@@ -57,8 +57,10 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult VisionnerStage(int id = 0)
+        public IActionResult VisionnerStage(int id = 0, bool isStudent = false)
         {
+
+
             ViewBag.PageTitle = lang.VisionnerUnStage;
             ViewBag.IconTitle = "remove_red_eye";
 
@@ -74,6 +76,7 @@ namespace GestionStages.Controllers
             ViewBag.ColorButtonModify = "orange";
             ViewBag.IconButtonModify = "create";
             ViewBag.TextButtonModify = lang.Modifier;
+            ViewBag.isStudent = isStudent;
             return View();
         }
         public void SaveStage(int id)
@@ -82,9 +85,10 @@ namespace GestionStages.Controllers
             Response.Redirect("../ListeStage");
         }
 
-        public IActionResult ListeStage()
+        public IActionResult ListeStage(bool isStudent = false)
         {
             ViewBag.lesStages = repo.GetAllStage();
+            ViewBag.isStudent = isStudent;
             return View();
         }
 

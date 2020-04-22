@@ -149,7 +149,7 @@
                     <td>@lesStages[i].NbHeureSemaine h</td>
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
-                    <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                    <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                 </tr>
             }
         }
@@ -159,8 +159,12 @@
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     @*mettre le if*@
-    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
-    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
+    @if (!ViewBag.isStudent)
+    {
+        <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
+        <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
+    }
+
 </div>
 
 @section Scripts
