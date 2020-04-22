@@ -11,6 +11,7 @@ namespace GestionStages.Models
         public int NoDA { get; set; }
         public string Programme { get; set; }
         public Byte[] Photo { get; set; }
+        public bool isStudent { get; set; }
 
         public Etudiant()
         {

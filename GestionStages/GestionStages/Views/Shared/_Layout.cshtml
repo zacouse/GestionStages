@@ -15,12 +15,27 @@
             <div class="nav-wrapper">
                 <ul class="left">
                     <li>
+                        <form name="user">
+                            <div class="input-field">
+                                <div class="switch" style="text-align:center">
+                                    <label>
+                                        @Html.Label("ChkEtat", "Coordonateur")
+                                        @Html.CheckBox("isStudent", true)
+                                        <span class="lever"></span>
+                                        @Html.Label("ChkEtat", "Etudiant")
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    @*mettre le if*@
+                    <li hidden>
                         <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li>
+                    <li hidden>
                         <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>
-                    <li>
+                    <li hidden>
                         <a asp-area="" asp-controller="Home" asp-action="Test">Test</a>
                     </li>
                     <li>
@@ -32,22 +47,9 @@
                     <li>
                         <a asp-area="" asp-controller="Stage" asp-action="AddSetStage">@lang.AjouterUnStage</a>
                     </li>
+                    @*fin du if*@
                     <li>
                         <a asp-area="" asp-controller="Stage" asp-action="ListeStage">@lang.ListeStage</a>
-                    </li>
-                    <li>
-                        <form name="user">
-                            <div class="input-field">
-                                <div class="switch" style="text-align:center">
-                                    <label>
-                                        @Html.Label("ChkEtat", "Coordonateur")
-                                        @Html.CheckBox("isEtudiant",false)
-                                        <span class="lever"></span>
-                                        @Html.Label("ChkEtat", "Etudiant")
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
                     </li>
                 </ul>
             </div>
