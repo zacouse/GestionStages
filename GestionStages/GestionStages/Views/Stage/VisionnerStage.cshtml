@@ -82,6 +82,7 @@
             <div class="col push-s2 s2">
                 <a class="waves-effect waves-light btn @ViewBag.ColorButtonBack" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a>
             </div>
+            @*mettre le if*@
             <div class="col push-s3 s2">
                 <a class="waves-effect waves-light btn @ViewBag.ColorButtonCopy" href="@Url.Action("AddSetStage", "Stage",new { idStage = @VisionnerStage.IDStage , Duplicate = true })"><i class="material-icons right">@ViewBag.IconButtonCopy</i>@lang.CreerUneCopie</a>
             </div>
