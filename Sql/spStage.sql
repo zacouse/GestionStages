@@ -3,15 +3,11 @@ GO
 
 CREATE PROC pGetAllStage
 AS
-SELECT [IDStage], [IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
-FROM Stage
-GO
-CREATE PROC pGetAllStageWithMilieuTitre
-AS
-SELECT [IDStage], MilieuStage.Titre, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat]
+SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat], MilieuStage.Titre
 FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 GO
+
 CREATE PROC pAddSetStage @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPoste_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit
 AS
 IF @IDStage_IN = 0
@@ -34,22 +30,6 @@ SELECT [IDStage],MilieuStage.[IDMilieuStage], Stage.[Titre], Stage.[Description]
 FROM Stage
 Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
-GO
-
-
-CREATE PROC pGetMilieuStageForStage(@IDStage_IN INT)
-AS
-SELECT MilieuStage.[Titre]
-FROM Stage
-Left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
-WHERE [IDStage] = @IDStage_IN;
-GO
-
-CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
-AS
-SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
-FROM Stage
-WHERE [IDMilieuStage] = @IdMilieu_IN;
 GO
 
 CREATE PROC pGetAllStage
