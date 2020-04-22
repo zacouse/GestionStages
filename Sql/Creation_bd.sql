@@ -171,24 +171,15 @@ CREATE TABLE StageEtudiant (
 	IDStageEtudiant INT IDENTITY PRIMARY KEY,
 	IDStage INT,
 	IDEtudiant INT,
+	NumeroChoix INT,
+	ChoixFinal BIT,
 	Etat BIT,
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate(),
 	FOREIGN KEY (IDStage) REFERENCES Stage(IDStage),
 	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant)
 )
-
-CREATE TABLE ChoixStageEtudiant (
-	IDChoixStageEtudiant INT IDENTITY PRIMARY KEY,
-	IDStage INT,
-	IDEtudiant INT,
-	Ordre TINYINT,
-	Etat BIT,
-	DateHeureCreation DATETIME DEFAULT GetDate(),
-	DateHeureModification DATETIME DEFAULT GetDate(),
-	FOREIGN KEY (IDStage) REFERENCES Stage(IDStage),
-	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant)
-)
+GO
 
 --INSERT INTO Programme([Nom], [Sigle], [Etat])
 --VALUES ('Hamon','123',1)

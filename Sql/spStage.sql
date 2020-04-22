@@ -32,13 +32,6 @@ Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 GO
 
-CREATE PROC pGetAllStage
-AS
-	SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre
-	FROM Stage
-	INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
-GO
-
 CREATE PROC pGetStage(
 @Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0
 )AS
