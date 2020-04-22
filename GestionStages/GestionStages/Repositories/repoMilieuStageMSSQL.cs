@@ -5,14 +5,20 @@ using System.Threading.Tasks;
 using GestionStages.Models;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace GestionStages.Repositories
 {
     public class repoMilieuStageMSSQL : IMilieuStageRepository
     {
-        protected static SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=GestionStage;Integrated Security=True");
+        protected static SqlConnection conn;
         protected SqlDataReader dr;
         protected SqlCommand sql;
+
+        public repoMilieuStageMSSQL(IConfiguration configuration)
+        {
+            conn = new SqlConnection(configuration.GetConnectionString("conn"));
+        }
 
         public List<MilieuStage> GetAllMilieuStage()
         {

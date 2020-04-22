@@ -9,20 +9,22 @@ using GestionStages.Models;
 using GestionStages.Properties;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static GestionStages.Models.Stage;
+using Microsoft.Extensions.Configuration;
 
 namespace GestionStages.Controllers
 {
 
     public class StageController : Controller
     {
-        Repositories.IStageRepository repo = new Repositories.repoStageMSSQL();
-        Repositories.IMilieuStageRepository repoMilieu = new Repositories.repoMilieuStageMSSQL();
-        //public IActionResult ListeStage()
-        //{
-        //    ViewBag.lesStages = repo.GetAllStage();
-        //    ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
-        //    return View();
-        //}
+        Repositories.IStageRepository repo;
+        Repositories.IMilieuStageRepository repoMilieu;
+
+        public StageController(IConfiguration configuration) : base()
+        {
+            repo = new Repositories.repoStageMSSQL(configuration);
+            repoMilieu = new Repositories.repoMilieuStageMSSQL(configuration);
+        }
+
         public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
         {
             

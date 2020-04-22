@@ -7,12 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using GestionStages.Models;
 using System.Data.SqlClient;
 using GestionStages.Properties;
+using Microsoft.Extensions.Configuration;
 
 namespace GestionStages.Controllers
 {
     public class HomeController : Controller
     {
-        Repositories.IEtudiantRepository repoEtu = new Repositories.repoEtudiantMSSQL();
+        Repositories.IEtudiantRepository repoEtu;
+
+        public HomeController(IConfiguration configuration) :base()
+        {
+            repoEtu = new Repositories.repoEtudiantMSSQL(configuration);
+        }
+
         public IActionResult Index()
         {
             return View();

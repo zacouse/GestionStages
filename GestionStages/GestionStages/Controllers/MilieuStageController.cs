@@ -5,13 +5,21 @@ using System.Threading.Tasks;
 using GestionStages.Models;
 using GestionStages.Properties;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace GestionStages.Controllers
 {
     public class MilieuStageController : Controller
     {
-        Repositories.IMilieuStageRepository repo = new Repositories.repoMilieuStageMSSQL();
-        Repositories.IStageRepository repoStage = new Repositories.repoStageMSSQL();
+        Repositories.IMilieuStageRepository repo;
+        Repositories.IStageRepository repoStage;
+
+        public MilieuStageController(IConfiguration configuration) : base()
+        {
+            repo = new Repositories.repoMilieuStageMSSQL(configuration);
+            repoStage = new Repositories.repoStageMSSQL(configuration);
+        }
+
         public IActionResult ListeMilieuStage()
         {
             ViewBag.lesMilieus = repo.GetAllMilieuStage();
