@@ -451,4 +451,7 @@
 	<data name="Etat" xml:space="preserve">
 		<value>Status</value>
 	</data>
+	<data name="Choisir" xml:space="preserve">
+		<value>Choose</value>
+	</data>
 </root>

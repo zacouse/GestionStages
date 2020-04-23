@@ -14,11 +14,10 @@
 }
 
 <div id="search">
-    <h3 >@lang.FiltreDeRecherche</h3>
+    <h3>@lang.FiltreDeRecherche</h3>
     <div>
         <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
             <div class="row">
-
                 <div class="col s3">
                     <div class="input-field">
                         @Html.TextBox("txtTitre", "")
@@ -83,32 +82,34 @@
                         <label for="txtMaxDate">@lang.DateDeFin</label>
                     </div>
                 </div>
-
-                <div class="col s3">
-                    <div class="row">
-                        <div class="col s2">
-                            <p>
-                                <label>@lang.Etat</label>
-                            </p>
-                        </div>
-                        <div class="col s4">
-                            <p>
-                                <label>
-                                    @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                                    <span>@lang.Actif</span>
-                                </label>
-                            </p>
-                        </div>
-                        <div class="col s4">
-                            <p>
-                                <label>
-                                    @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                                    <span>@lang.Inactif</span>
-                                </label>
-                            </p>
+                @if (!ViewBag.isStudent)
+                {
+                    <div class="col s3">
+                        <div class="row">
+                            <div class="col s2">
+                                <p>
+                                    <label>@lang.Etat</label>
+                                </p>
+                            </div>
+                            <div class="col s4">
+                                <p>
+                                    <label>
+                                        @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                        <span>@lang.Actif</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s4">
+                                <p>
+                                    <label>
+                                        @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                        <span>@lang.Inactif</span>
+                                    </label>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
 
                 <div class="col xl3 l4 m4 s4">
                     <a class="btn light-blue white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-med-and-down">search</i></a>
@@ -133,6 +134,10 @@
             <td>@lang.DateDeDebut</td>
             <td>@lang.DateDeFin</td>
             <td>@lang.Voir</td>
+            @if (ViewBag.isStudent)
+            {
+                <td>#Choix</td>
+            }
         </tr>
     </thead>
     <tbody>
@@ -150,11 +155,34 @@
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
                     <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                    @if (ViewBag.isStudent)
+                    {
+                        <td>
+                            <select id="Select_@lesStages[i].IDStage" class="browser-default">
+                                <option></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                    }
                 </tr>
             }
         }
     </tbody>
+
 </table>
+<form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
+    <div class="hiddendiv">
+        <input id="Choix1" name="Choix1" type="text" value="" required>
+    </div>
+    <div class="hiddendiv">
+        <input id="Choix2" name="Choix2" type="text" value="" required>
+    </div>
+    <div class="hiddendiv">
+        <input id="Choix3" name="Choix3" type="text" value="" required>
+    </div>
+</form>
 
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
@@ -163,6 +191,10 @@
     {
         <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>
         <div class="col s2 push-s6"><a class="btn green" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></div>
+    }
+    else
+    {
+        <div class="col s2 push-s8"><a class="btn green" href="document.ChoiceForm.submit();">@lang.Choisir<i class="material-icons right hide-on-small-and-down">check</i></a></div>
     }
 
 </div>
@@ -211,6 +243,4 @@
         background-color: orange;
         color: white;
     }
-
-    
 </style>

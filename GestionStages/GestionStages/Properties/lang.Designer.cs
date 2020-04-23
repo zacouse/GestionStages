@@ -160,6 +160,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose.
+        /// </summary>
+        public static string Choisir {
+            get {
+                return ResourceManager.GetString("Choisir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Post code.
         /// </summary>
         public static string CodePostal {

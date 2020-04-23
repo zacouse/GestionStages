@@ -400,4 +400,7 @@
 	<data name="Etat" xml:space="preserve">
 		<value>État</value>
 	</data>
+	<data name="Choisir" xml:space="preserve">
+		<value>Choisir</value>
+	</data>
 </root>
