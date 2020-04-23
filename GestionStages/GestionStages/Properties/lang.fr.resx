@@ -256,4 +256,148 @@
 	<data name="Reset" xml:space="preserve">
 		<value>Réinitialiser</value>
 	</data>
+	<data name="Janvier" xml:space="preserve">
+		<value>Janvier</value>
+	</data>
+	<data name="Fevrier" xml:space="preserve">
+		<value>Février</value>
+	</data>
+	<data name="Mars" xml:space="preserve">
+		<value>Mars</value>
+	</data>
+	<data name="Avril" xml:space="preserve">
+		<value>Avril</value>
+	</data>
+	<data name="Mai" xml:space="preserve">
+		<value>Mai</value>
+	</data>
+	<data name="Juin" xml:space="preserve">
+		<value>Juin</value>
+	</data>
+	<data name="Juillet" xml:space="preserve">
+		<value>Juillet</value>
+	</data>
+	<data name="Aout" xml:space="preserve">
+		<value>Août</value>
+	</data>
+	<data name="Septembre" xml:space="preserve">
+		<value>Septembre</value>
+	</data>
+	<data name="Octobre" xml:space="preserve">
+		<value>Octobre</value>
+	</data>
+	<data name="Novembre" xml:space="preserve">
+		<value>Novembre</value>
+	</data>
+	<data name="Decembre" xml:space="preserve">
+		<value>Décembre</value>
+	</data>
+	<data name="JanvierShort" xml:space="preserve">
+		<value>Jan</value>
+	</data>
+	<data name="FevrierShort" xml:space="preserve">
+		<value>Fev</value>
+	</data>
+	<data name="MarsShort" xml:space="preserve">
+		<value>Mar</value>
+	</data>
+	<data name="AvrilShort" xml:space="preserve">
+		<value>Avr</value>
+	</data>
+	<data name="MaiShort" xml:space="preserve">
+		<value>Mai</value>
+	</data>
+	<data name="JuinShort" xml:space="preserve">
+		<value>Jun</value>
+	</data>
+	<data name="JuilletShort" xml:space="preserve">
+		<value>Jul</value>
+	</data>
+	<data name="AoutShort" xml:space="preserve">
+		<value>Aou</value>
+	</data>
+	<data name="SeptembreShort" xml:space="preserve">
+		<value>Sep</value>
+	</data>
+	<data name="OctobreShort" xml:space="preserve">
+		<value>Oct</value>
+	</data>
+	<data name="NovembreShort" xml:space="preserve">
+		<value>Nov</value>
+	</data>
+	<data name="DecembreShort" xml:space="preserve">
+		<value>Dec</value>
+	</data>
+	<data name="Dimanche" xml:space="preserve">
+		<value>Dimanche</value>
+	</data>
+	<data name="Lundi" xml:space="preserve">
+		<value>Lundi</value>
+	</data>
+	<data name="Mardi" xml:space="preserve">
+		<value>Mardi</value>
+	</data>
+	<data name="Mercredi" xml:space="preserve">
+		<value>Mercredi</value>
+	</data>
+	<data name="Jeudi" xml:space="preserve">
+		<value>Jeudi</value>
+	</data>
+	<data name="Vendredi" xml:space="preserve">
+		<value>Vendredi</value>
+	</data>
+	<data name="Samedi" xml:space="preserve">
+		<value>Samedi</value>
+	</data>
+	<data name="DimancheShort" xml:space="preserve">
+		<value>Dim</value>
+	</data>
+	<data name="LundiShort" xml:space="preserve">
+		<value>Lun</value>
+	</data>
+	<data name="MardiShort" xml:space="preserve">
+		<value>Mar</value>
+	</data>
+	<data name="MercrediShort" xml:space="preserve">
+		<value>Mer</value>
+	</data>
+	<data name="JeudiShort" xml:space="preserve">
+		<value>Jeu</value>
+	</data>
+	<data name="VendrediShort" xml:space="preserve">
+		<value>Ven</value>
+	</data>
+	<data name="LundiAbbrev" xml:space="preserve">
+		<value>Lu</value>
+	</data>
+	<data name="DimancheAbbrev" xml:space="preserve">
+		<value>Di</value>
+	</data>
+	<data name="MardiAbbrev" xml:space="preserve">
+		<value>Ma</value>
+	</data>
+	<data name="MercrediAbbrev" xml:space="preserve">
+		<value>Me</value>
+	</data>
+	<data name="JeudiAbbrev" xml:space="preserve">
+		<value>Je</value>
+	</data>
+	<data name="VendrediAbbrev" xml:space="preserve">
+		<value>Ve</value>
+	</data>
+	<data name="SamediAbbrev" xml:space="preserve">
+		<value>Sa</value>
+	</data>
+	<data name="Annuler" xml:space="preserve">
+		<value>Annuler</value>
+	</data>
+	<data name="SamediShort" xml:space="preserve">
+		<value>Sam</value>
+	</data>
+	<data name="Effacer" xml:space="preserve">
+		<value>Effacer</value>
+	</data>
+	<data name="Etat" xml:space="preserve">
+		<value>État</value>
+	</data>
 </root>

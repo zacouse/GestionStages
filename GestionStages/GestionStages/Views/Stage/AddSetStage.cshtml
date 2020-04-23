@@ -67,15 +67,15 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate", required = "required" })
+                @Html.TextBox("TxtNbPostes", StageAModifier.NbPostes == 0 ? @Html.Raw(""): @Html.Raw(StageAModifier.NbPostes), new { @class = "validate", required = "required" })
                 @Html.Label("TxtNbPostes", @lang.NombreDePostes)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <select id="TxtStatut" name="TxtStatut" class = "Validate" required>
-                    <option value="1">@lang.TempsPleins</option>
-                    <option value="2">@lang.TempsPartiel</option>
+                    <option selected value="0">@lang.TempsPleins</option>
+                    <option value="1">@lang.TempsPartiel</option>
                 </select>
                 @*@Html.DropDownList("TxtStatut",
                                     new SelectList(Enum.GetValues(typeof(Stage.ListStatut))),
@@ -87,9 +87,9 @@
         <div class="row">
             <div class="input-field col push-s3 s6 ">
                 <select id="TxtPeriodeTravail" name="TxtPeriodeTravail" class="Validate" required>
-                    <option value="1">@lang.Jour</option>
-                    <option value="2">@lang.Soiree</option>
-                    <option value="3">@lang.Nuit</option>
+                    <option selected value="0">@lang.Jour</option>
+                    <option value="1">@lang.Soiree</option>
+                    <option value="2">@lang.Nuit</option>
                 </select>
                 @*@Html.DropDownList("TxtPeriodeTravail",
                                     new SelectList(Enum.GetNames(typeof(Stage.PeriodeDeTravail))),
@@ -100,7 +100,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", required = "required" })
+                @Html.TextBox("TxtNombreDHeureParSemaine",  StageAModifier.NbHeureSemaine == 0 ? @Html.Raw("") : @Html.Raw(StageAModifier.NbHeureSemaine) , new { @class = "validate", required = "required" })
                 @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
             </div>
         </div>
@@ -134,7 +134,7 @@
                 <a class="waves-effect waves-light btn grey" href="@Html.Raw(ViewBag.LinkBack)">@lang.Retour</a>
             </div>
             <div class="col push-s6 s2">
-                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
                     @Html.Raw(ViewBag.TextButton)
                     <i class="material-icons right">@Html.Raw(ViewBag.IconButton)</i>
                 </button>
@@ -149,23 +149,20 @@
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 showClearBtn: true,
+                defaultDate: new Date(),
                 i18n: {
-                    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-                    monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-                    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-                    weekdaysAbbrev: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-                    cancel: 'Annuler',
-                    clear: 'Effacer',
-                    currentText: 'Aujourd\'hui',
+                    months: ['@lang.Janvier' , '@lang.Fevrier', '@lang.Mars','@lang.Avril', '@lang.Mai', '@lang.Juin', '@lang.Juillet', '@lang.Aout', '@lang.Septembre', '@lang.Octobre', '@lang.Novembre', '@lang.Decembre'],
+                    monthsShort: ['@lang.JanvierShort', '@lang.FevrierShort', '@lang.MarsShort', '@lang.AvrilShort', '@lang.MaiShort', '@lang.JuinShort', '@lang.JuilletShort', '@lang.AoutShort', '@lang.SeptembreShort', '@lang.OctobreShort', '@lang.NovembreShort', '@lang.DecembreShort'],
+                    weekdays: ['@lang.Dimanche', '@lang.Lundi', '@lang.Mardi', '@lang.Mercredi', '@lang.Jeudi', '@lang.Vendredi', '@lang.Samedi'],
+                    weekdaysShort: ['@lang.DimancheShort', '@lang.LundiShort', '@lang.MardiShort', '@lang.MercrediShort', '@lang.JeudiShort', '@lang.VendrediShort', '@lang.SamediShort'],
+                    weekdaysAbbrev: ['@lang.DimancheAbbrev', '@lang.LundiAbbrev', '@lang.MardiAbbrev', '@lang.MercrediAbbrev', '@lang.JeudiAbbrev', '@lang.VendrediAbbrev', '@lang.SamediAbbrev'],
+                    cancel: '@lang.Annuler',
+                    clear: '@lang.Effacer',
                     dateFormat: 'dd-mm-yy'
                 }
             });
         });
-    </script>
-}
-<script type="text/javascript">
-    function validate() {
+        function validate() {
         var isValid = $("#form").validate({
             errorElement: "span",
             rules: {
@@ -193,17 +190,17 @@
                     required: true
                 }
             },
-            message: {
+            messages: {
                 TxtMilieuStage: "@lang.ChampRequis",
                 TxtTitre: "@lang.ChampRequis",
-                TxTaDescription: "@lang.ChampRequis",
+                TxtaDescription: "@lang.ChampRequis",
                 TxtNbPostes: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide seulement des chiffres"
+                    pattern: "@lang.FormatValide Seulement des chiffres"
                 },
                 TxtNombreDHeureParSemaine: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide seulement des chiffres"
+                    pattern: "@lang.FormatValide Seulement des chiffres"
                 },
                 TxtDateDeDebut: "@lang.ChampRequis",
                 TxtDateDeFin: "@lang.ChampRequis",
@@ -219,7 +216,8 @@
             M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
         }
     };
-</script>
+    </script>
+}
 <style>
     span.error {
         color: red;

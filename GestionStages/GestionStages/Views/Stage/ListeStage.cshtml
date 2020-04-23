@@ -14,7 +14,7 @@
 }
 
 <div id="search">
-    <h3>@lang.FiltreDeRecherche</h3>
+    <h3 >@lang.FiltreDeRecherche</h3>
     <div>
         <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
             <div class="row">
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="col s2">
-                    <label>Period</label>
+                    <label>@lang.PeriodeDeTravail</label>
                     <div class="input-field row">
                         <p>
                             <label>
@@ -88,7 +88,7 @@
                     <div class="row">
                         <div class="col s2">
                             <p>
-                                <label>Etat</label>
+                                <label>@lang.Etat</label>
                             </p>
                         </div>
                         <div class="col s4">
@@ -110,18 +110,18 @@
                     </div>
                 </div>
 
-                <div class="col xl2 l4 m4 s4">
-                    <a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                <div class="col xl3 l4 m4 s4">
+                    <a class="btn light-blue white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-med-and-down">search</i></a>
                 </div>
-                <div class="col xl2 l4 m4 s4">
-                    <a class="btn light-green" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">search</i></a>
+                <div class="col xl3 l4 m4 s4">
+                    <a class="btn light-green white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-med-and-down">autorenew</i></a>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<table id="liste" class="highlight">
+<table id="liste" class="highlight responsive-table">
     <thead>
         <tr>
             <td>@lang.Titre</td>
@@ -157,12 +157,12 @@
 </table>
 
 <div class="row" style="padding-top:5px;">
-    <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
+    <div class="col s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     @*mettre le if*@
     @if (!ViewBag.isStudent)
     {
-        <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
-        <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
+        <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>
+        <div class="col s2 push-s6"><a class="btn green" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></div>
     }
 
 </div>
@@ -178,15 +178,15 @@
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 showClearBtn: true,
+                defaultDate: new Date(),
                 i18n: {
-                    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-                    monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-                    weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-                    weekdaysAbbrev: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-                    cancel: 'Annuler',
-                    clear: 'Effacer',
-                    currentText: 'Aujourd\'hui',
+                    months: ['@lang.Janvier' , '@lang.Fevrier', '@lang.Mars','@lang.Avril', '@lang.Mai', '@lang.Juin', '@lang.Juillet', '@lang.Aout', '@lang.Septembre', '@lang.Octobre', '@lang.Novembre', '@lang.Decembre'],
+                    monthsShort: ['@lang.JanvierShort', '@lang.FevrierShort', '@lang.MarsShort', '@lang.AvrilShort', '@lang.MaiShort', '@lang.JuinShort', '@lang.JuilletShort', '@lang.AoutShort', '@lang.SeptembreShort', '@lang.OctobreShort', '@lang.NovembreShort', '@lang.DecembreShort'],
+                    weekdays: ['@lang.Dimanche', '@lang.Lundi', '@lang.Mardi', '@lang.Mercredi', '@lang.Jeudi', '@lang.Vendredi', '@lang.Samedi'],
+                    weekdaysShort: ['@lang.DimancheShort', '@lang.LundiShort', '@lang.MardiShort', '@lang.MercrediShort', '@lang.JeudiShort', '@lang.VendrediShort', '@lang.SamediShort'],
+                    weekdaysAbbrev: ['@lang.DimancheAbbrev', '@lang.LundiAbbrev', '@lang.MardiAbbrev', '@lang.MercrediAbbrev', '@lang.JeudiAbbrev', '@lang.VendrediAbbrev', '@lang.SamediAbbrev'],
+                    cancel: '@lang.Annuler',
+                    clear: '@lang.Effacer',
                     dateFormat: 'dd-mm-yy'
                 }
             });
@@ -206,15 +206,11 @@
     </script>
 }
 <style>
-    .picker__date-display {
-        background-color: blue;
+    .ui-state-active {
+        background: none;
+        background-color: orange;
+        color: white;
     }
 
-    .picker__weekday-display {
-        background-color: red;
-    }
-
-    .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
-        background-color: blue;
-    }
+    
 </style>
