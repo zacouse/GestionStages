@@ -102,8 +102,6 @@ BEGIN
     SET @SQL = @SQL + ' ) '
 END
 
--- Section Restrictions
-
 EXEC sp_executesql @SQL
 GO
 

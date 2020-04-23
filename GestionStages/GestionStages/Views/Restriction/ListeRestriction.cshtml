@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "ListeRestriction";
+}
+
+<h1>ListeRestriction</h1>
+
+
+<table class="highlight">
+    <thead>
+        <tr>
+            <td>@lang.Titre</td>
+            <td>@lang.Description</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<Restriction> lesRestrictions = ViewBag.lesRestrictions;
+            for (int i = 0; i < lesRestrictions.Count; i++)
+            {
+                <tr ondblclick="location.href='@Url.Action("ViewRestriction", "Restriction", new { id = lesRestrictions[i].IDRestriction })'">
+                    <td>@lesRestrictions[i].Titre</td>
+                    <td>@lesRestrictions[i].Description</td>
+                    <td><a href="@Url.Action("ViewRestriction", "Restriction", new { id = lesRestrictions[i].IDRestriction })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

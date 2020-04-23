@@ -20,7 +20,7 @@
                                 <div class="switch" style="text-align:center">
                                     <label>
                                         @Html.Label("ChkEtat", "Coordonateur")
-                                        @Html.CheckBox("isStudent", false,new { @onchange = "document.user.submit();"})
+                                        @Html.CheckBox("isStudent", false, new { @onchange = "document.user.submit();" })
                                         <span class="lever"></span>
                                         @Html.Label("ChkEtat", "Etudiant")
                                     </label>
@@ -28,26 +28,29 @@
                             </div>
                         </form>
                     </li>
-                        <li hidden>
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li hidden>
-                            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li hidden>
-                            <a asp-area="" asp-controller="Home" asp-action="Test">Test</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="MilieuStage" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="MilieuStage" asp-action="AjouterModifierMilieuStage">@lang.AjouterUnMilieuDeStage</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Stage" asp-action="AddSetStage">@lang.AjouterUnStage</a>
-                        </li>
+                    <li hidden>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li hidden>
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li hidden>
+                        <a asp-area="" asp-controller="Home" asp-action="Test">Test</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="MilieuStage" asp-action="ListeMilieuStage">@lang.ListeMilieuStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="MilieuStage" asp-action="AjouterModifierMilieuStage">@lang.AjouterUnMilieuDeStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Stage" asp-action="AddSetStage">@lang.AjouterUnStage</a>
+                    </li>
                     <li>
                         <a asp-area="" asp-controller="Stage" asp-action="ListeStage">@lang.ListeStage</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Restriction" asp-action="ListeRestriction">Restriction</a>
                     </li>
                 </ul>
             </div>
@@ -66,12 +69,12 @@
         </div>
     </footer>
 
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-        <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script src="~/lib/materialize-v1.0.0/materialize/js/materialize.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/lib/materialize-v1.0.0/materialize/js/materialize.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 

@@ -27,7 +27,7 @@ namespace GestionStages.Repositories
 
     interface IRestrictionRepository
     {
-        List<>;
+        List<Restriction> GetRestrictions(string titre,string descr);
     }
 
     interface IEtudiantRepository

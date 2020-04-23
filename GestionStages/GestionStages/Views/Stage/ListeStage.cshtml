@@ -5,14 +5,6 @@
 
 <h1>@lang.ListeStage</h1>
 
-
-@{
-    if (ViewBag.error != null && ViewBag.error != "")
-    {
-        @Html.Raw(ViewBag.error);
-    }
-}
-
 <div id="search">
     <h3>@lang.FiltreDeRecherche</h3>
     <div>
@@ -158,13 +150,8 @@
 
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
-    @*mettre le if*@
-    @if (!ViewBag.isStudent)
-    {
-        <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
-        <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
-    }
-
+    <div class="col s2 push-s3"><a class="btn" href="javascript:PrintElem('liste');">@lang.Imprimer</a></div>
+    <div class="col s2 push-s7"><a class="btn" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter</a></div>
 </div>
 
 @section Scripts
@@ -206,6 +193,7 @@
     </script>
 }
 <style>
+
     .picker__date-display {
         background-color: blue;
     }
