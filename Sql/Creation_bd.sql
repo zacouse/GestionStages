@@ -44,7 +44,26 @@ CREATE TABLE Stage (
 	FOREIGN KEY (IDMilieuStage) REFERENCES MilieuStage(IDMilieuStage) 
 )
 GO
-
+EXEC sp_addextendedproperty 
+@name=N'MS_Description',
+@value='0 = Jour, 1 = Soir, 2 = Nuit',
+@Level0Type=N'Schema',
+@Level0Name='dbo',
+@Level1Type=N'Table',
+@Level1Name='Stage',
+@Level2Type=N'Column',
+@Level2Name='PeriodeTravail' 
+GO
+EXEC sp_addextendedproperty 
+@name=N'MS_Description',
+@value='0 = Temps partiel, 1 = Temps plein',
+@Level0Type=N'Schema',
+@Level0Name='dbo',
+@Level1Type=N'Table',
+@Level1Name='Stage',
+@Level2Type=N'Column',
+@Level2Name='Statut' 
+GO
 CREATE TABLE Restriction (
 	IDRestriction INT IDENTITY PRIMARY KEY,
 	Titre VARCHAR(100),
