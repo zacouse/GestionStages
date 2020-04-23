@@ -25,6 +25,11 @@ namespace GestionStages.Repositories
         List<Stage> GetStagesByIdMilieu(int milieu);
     }
 
+    interface IRestrictionRepository
+    {
+        List<>;
+    }
+
     interface IEtudiantRepository
     {
         List<Etudiant> GetAllEtudiants();
