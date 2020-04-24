@@ -285,5 +285,34 @@ namespace GestionStages.Repositories
 
             return lesStages;
         }
+
+        public void SaveChoixStage(ChoixStageEtudiant choixStageEtudiant)
+        {
+            
+            try
+            {
+                sql = new SqlCommand("pAddSetChoixStage", conn);
+                sql.CommandType = CommandType.StoredProcedure;
+
+                sql.Parameters.Add("@IdStageEtudiant_IN", SqlDbType.Int).Value = choixStageEtudiant.IDChoixStageEtudiant;
+                sql.Parameters.Add("@IdStage_IN", SqlDbType.Int).Value = choixStageEtudiant.IDStage;
+                sql.Parameters.Add("@IdEtudiant_IN", SqlDbType.Int).Value = choixStageEtudiant.IDEtudiant;
+                sql.Parameters.Add("@NumeroChoix_IN", SqlDbType.Int).Value = choixStageEtudiant.NumeroChoix;
+                sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = choixStageEtudiant.ChoixFinal;
+                sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = choixStageEtudiant.Etat;
+
+
+                conn.Open();
+                int row = sql.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

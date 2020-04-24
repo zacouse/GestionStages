@@ -110,5 +110,14 @@ namespace GestionStages.Controllers
             ViewBag.isStudent = isStudent;
             return View("ListeStage");
         }
+
+        [HttpPost]
+        public IActionResult AddSetChoixStage(string Choix1,string Choix2, string Choix3,string IdEtudiant)
+        {
+            repo.SaveChoixStage(new ChoixStageEtudiant(0, Convert.ToInt32(Choix1), Convert.ToInt32(IdEtudiant), 1, false, true));
+            repo.SaveChoixStage(new ChoixStageEtudiant(0, Convert.ToInt32(Choix2), Convert.ToInt32(IdEtudiant), 2, false, true));
+            repo.SaveChoixStage(new ChoixStageEtudiant(0, Convert.ToInt32(Choix3), Convert.ToInt32(IdEtudiant), 3, false, true));
+            return View("AddSetStage");
+        }
     }
 }

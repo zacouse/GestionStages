@@ -158,7 +158,7 @@
                     @if (ViewBag.isStudent)
                     {
                         <td>
-                            <select id="Select_@lesStages[i].IDStage" class="browser-default">
+                            <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" class="choixPossible browser-default">
                                 <option></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -182,6 +182,9 @@
     <div class="hiddendiv">
         <input id="Choix3" name="Choix3" type="text" value="" required>
     </div>
+    <div >
+        <input id="IdEtudiant" name="IdEtudiant" type="text" value="" required>
+    </div>
 </form>
 
 <div class="row" style="padding-top:5px;">
@@ -194,7 +197,7 @@
     }
     else
     {
-        <div class="col s2 push-s8"><a class="btn green" href="document.ChoiceForm.submit();">@lang.Choisir<i class="material-icons right hide-on-small-and-down">check</i></a></div>
+        <div class="col s2 push-s8"><a class="btn green" href="javascript:document.ChoiceForm.submit();">@lang.Choisir<i class="material-icons right hide-on-small-and-down">check</i></a></div>
     }
 
 </div>
@@ -223,6 +226,19 @@
                 }
             });
         });
+
+        function applyChoice(sel) {
+             //enlever les autre select avec la même valeur
+            for (var i = 1; i < 4; i++) {
+                if (document.getElementById('Choix' + i).value == sel.id) {
+                    alert("supress");
+                    document.getElementById('Choix' + i).value == "";
+                }
+            }
+            document.getElementById('Choix' + sel.value).value = sel.id;
+            alert('Choix' + sel.value);
+            alert(document.getElementById('Choix' + sel.value).value);
+        }
 
         function PrintElem(elem) {
             var mywindow = window.open('@Url.Action("PrintListeStage", "Stage")', 'PRINT', 'height=1000,width=1000');

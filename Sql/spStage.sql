@@ -112,3 +112,30 @@ WHERE [IDStage] = @IDStage_IN;
 
 --INSERT INTO MilieuStage ([Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat],[DateHeureCreation],[DateHeureModification])
 --VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())
+GO
+CREATE PROC pAddSetChoixStage
+	@IdStageEtudiant_IN INT,
+	@IdStage_IN INT,
+	@IdEtudiant_IN INT,
+	@NumeroChoix_IN INT,
+	@ChoixFinal_IN BIT,
+	@Etat_IN BIT
+	AS
+	IF @IdStageEtudiant_IN = 0
+	BEGIN
+		INSERT INTO [dbo].[StageEtudiant]
+           ([IDStage],[IDEtudiant],[NumeroChoix],[ChoixFinal],[Etat])
+     VALUES
+           (@IdStage_IN,@IdEtudiant_IN,@NumeroChoix_IN,@ChoixFinal_IN,@Etat_IN) 
+	END
+	ELSE
+	BEGIN
+		UPDATE  [dbo].[StageEtudiant]
+		SET [IDStage]				= @IdStage_IN,
+			[IDEtudiant]			= @IdEtudiant_IN,
+			[NumeroChoix]			= @NumeroChoix_IN,
+			[ChoixFinal]			= @ChoixFinal_IN,
+			[Etat]					= @Etat_IN,
+			[DateHeureModification] = GETDATE()
+		WHERE [IDStageEtudiant] = @IdStageEtudiant_IN
+	END
