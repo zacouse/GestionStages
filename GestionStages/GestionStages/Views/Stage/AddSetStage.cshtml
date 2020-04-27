@@ -94,7 +94,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
@@ -103,6 +103,10 @@
                 @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
+        </div>
+        <div class="row">
+            @Html.Label("ChipsRestriction", "Restriction")
+            <div class="input-field col push-m3 m6 s12 chips chips-autocomplete" name="ChipsRestriction" id="ChipsRestriction"></div>
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
@@ -150,6 +154,17 @@
                 }
             });
         });
+        $('.chips-autocomplete').chips({
+            autocompleteOptions: {
+                data: {
+                    'Apple': null,
+                    'Microsoft': null,
+                    'Google': null
+                },
+                limit: Infinity,
+                minLength: 1
+            }
+        });
     </script>
 }
 <script type="text/javascript">
@@ -179,7 +194,7 @@
                 },
                 TxtDateDeFin: {
                     required: true
-                }
+                },
             },
             messages: {
                 TxtMilieuStage: "@lang.ChampRequis",
