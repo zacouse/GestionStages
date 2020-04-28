@@ -46,3 +46,23 @@ BEGIN
     WHERE IDRestriction = @IDRestriction_IN
 END
 GO
+Create Proc pGetAllRestriction
+AS
+Select [IDRestriction],[Titre],[Description],[Etat] FROM Restriction
+GO
+--RestrictionStage
+
+Create Proc pAddSetStageRestriction @IDStageRestriction_IN INT, @IDStage_IN INT,@Titre_IN Varchar(100), @Description_IN Varchar(1000),@Etat_IN Bit
+AS
+IF @IDStageRestriction_IN = 0
+BEGIN
+Insert into StageRestriction([IDStage],[Titre],[Description],[Etat],[DateHeureCreation],[DateHeureModification])
+Values (@IDStage_IN, @Titre_IN, @Description_IN,@Etat_IN, GETDATE(), GETDATE())
+END
+ELSE
+BEGIN
+UPDATE StageRestriction
+SET [IDStage] = @IDStage_IN,[Titre] =@Titre_IN,[Description] =@Description_IN,[Etat] =@Etat_IN,[DateHeureModification] =GETDATE()
+WHERE [IDStageRestriction] = @IDStageRestriction_IN
+END
+GO

@@ -20,6 +20,7 @@ namespace GestionStages.Repositories
         List<Stage> GetAllStageActif();
         List<Stage> GetAllStageInactif();
         void SaveStage(Stage stage);
+        void SaveStageRestriction(Restriction restriction);
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive);
         List<Stage> GetStagesByIdMilieu(int milieu);
@@ -28,6 +29,7 @@ namespace GestionStages.Repositories
     interface IRestrictionRepository
     {
         List<Restriction> GetRestrictions(string titre,string descr);
+        List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
         void SaveRestriction(int id, string titre,string descr,bool etat);
     }

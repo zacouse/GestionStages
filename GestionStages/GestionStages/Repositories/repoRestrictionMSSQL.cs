@@ -42,7 +42,36 @@ namespace GestionStages.Repositories
 
             return laRestriction;
         }
-
+        public List<Restriction> GetAllRestriction()
+        {
+            List<Restriction> lesRestrictions = new List<Restriction>();
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pGetAllRestriction";
+                dr = sql.ExecuteReader();
+                while (dr.Read())
+                {
+                    Restriction restriction = new Restriction();
+                    restriction.IDRestriction = (int)dr.GetValue(0);
+                    restriction.Titre = (string)dr.GetValue(1);
+                    restriction.Description = (string)dr.GetValue(2);
+                    restriction.Etat = (bool)dr.GetValue(3);
+                    lesRestrictions.Add(restriction);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return lesRestrictions;
+        }
         public List<Restriction> GetRestrictions(string titre, string descr)
         {
             List<Restriction> lesRestrictions = new List<Restriction>();

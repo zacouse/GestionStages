@@ -18,11 +18,13 @@ namespace GestionStages.Controllers
     {
         Repositories.IStageRepository repo;
         Repositories.IMilieuStageRepository repoMilieu;
+        Repositories.IRestrictionRepository repoRestriction;
 
         public StageController(IConfiguration configuration) : base()
         {
             repo = new Repositories.repoStageMSSQL(configuration);
             repoMilieu = new Repositories.repoMilieuStageMSSQL(configuration);
+            repoRestriction = new Repositories.repoRestrictionMSSQL(configuration);
         }
 
         public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
@@ -42,6 +44,7 @@ namespace GestionStages.Controllers
                 ViewBag.ColorButton = "green";
                 ViewBag.TextButton = lang.Creer;
                 ViewBag.LinkBack = "../Stage/ListeStage";
+                
             }
             else
             {
@@ -54,6 +57,7 @@ namespace GestionStages.Controllers
                 ViewBag.LinkBack = "../Stage/VisionnerStage/" + idStage;
             }
             ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
+            ViewBag.LesRestriction = repoRestriction.GetAllRestriction();
             return View();
         }
 
@@ -79,7 +83,8 @@ namespace GestionStages.Controllers
         }
         public void SaveStage(int id)
         {
-            repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"],Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on")); 
+            repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"],Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on"));
+            
             Response.Redirect("../ListeStage");
         }
 
