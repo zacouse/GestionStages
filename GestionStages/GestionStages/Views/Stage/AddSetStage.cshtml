@@ -8,7 +8,7 @@
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconTitle)</i>
         @ViewBag.PageTitle
     </div>
-    <div class="col push-s4 s4">
+    <div class="col push-l4 l4 push-m3 m6 s12">
         <hr />
     </div>
 </div>
@@ -29,11 +29,9 @@
 
     <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
-                <select id="TxtMilieuStage" name="TxtMilieuStage">
+            <div class="input-field col push-m3 m6 s12">
+                <select id="TxtMilieuStage" name="TxtMilieuStage" required>
                     @{
-
-                        <option value=""> </option>
                         List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
                         for (int i = 0; i < lesMilieus.Count; i++)
                         {
@@ -45,80 +43,73 @@
                             {
                                 <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
                             }
-
                         }
-
                     }
                 </select>
                 @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
+            <div class="input-field col push-m3 m6 s12">
                 @Html.TextBox("TxtTitre", @Html.Raw(StageAModifier.Titre), new { @class = "validate", maxlength = "100", required = "required" })
                 @Html.Label("TxtTitre", @lang.Titre)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
+            <div class="input-field col push-m3 m6 s12">
                 <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(StageAModifier.Description)</textarea>
                 @Html.Label("TxtaDescription", @lang.Description)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNbPostes", @Html.Raw(StageAModifier.NbPostes), new { @class = "validate", required = "required" })
+            <div class="input-field col push-m3 m6 s12">
+                @Html.TextBox("TxtNbPostes", StageAModifier.NbPostes == 0 ? @Html.Raw("") : @Html.Raw(StageAModifier.NbPostes), new { @class = "validate", required = "required" })
                 @Html.Label("TxtNbPostes", @lang.NombreDePostes)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
+            <div class="input-field col push-m3 m6 s12">
                 <select id="TxtStatut" name="TxtStatut" class = "Validate" required>
-                    <option value="1">@lang.TempsPleins</option>
-                    <option value="2">@lang.TempsPartiel</option>
+                    <option value="0">@lang.TempsPleins</option>
+                    <option value="1">@lang.TempsPartiel</option>
                 </select>
-                @*@Html.DropDownList("TxtStatut",
-                                    new SelectList(Enum.GetValues(typeof(Stage.ListStatut))),
-                                    null,
-                                    new { @class = "Validate", id = "TxtStatut", name = "TxtStatut", required = "required" })*@
                 @Html.Label("TxtStatut", @lang.Statut)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
+            <div class="input-field col push-m3 m6 s12">
                 <select id="TxtPeriodeTravail" name="TxtPeriodeTravail" class="Validate" required>
-                    <option value="1">@lang.Jour</option>
-                    <option value="2">@lang.Soiree</option>
-                    <option value="3">@lang.Nuit</option>
+                    <option value="0">@lang.Jour</option>
+                    <option value="1">@lang.Soiree</option>
+                    <option value="2">@lang.Nuit</option>
                 </select>
-                @*@Html.DropDownList("TxtPeriodeTravail",
-                                    new SelectList(Enum.GetNames(typeof(Stage.PeriodeDeTravail))),
-                                    null,
-                                    new { @class = "Validate", id = "TxtPeriodeTravail", name = "TxtPeriodeTravail", required = "required" })*@
                 @Html.Label("TxtPeriodeTravail", @lang.PeriodeDeTravail)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", required = "required" })
+            <div class="input-field col push-m3 m6 s12">
+                @Html.TextBox("TxtNombreDHeureParSemaine", StageAModifier.NbHeureSemaine == 0 ? @Html.Raw("") : @Html.Raw(StageAModifier.NbHeureSemaine), new { @class = "validate", required = "required" })
                 @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
+            <div class="input-field col push-m3 m6 s12">
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
         <div class="row">
-            
-            <div class="input-field col push-s3 s6 ">
+            <div class="input-field col push-m3 m6 s12">
                 @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
         <div class="row">
-            <div class="input-field col push-s3 s6 ">
+            @Html.Label("ChipsRestriction", "Restriction")
+            <div class="input-field col push-m3 m6 s12 chips chips-autocomplete" name="ChipsRestriction" id="ChipsRestriction"></div>
+        </div>
+        <div class="row">
+            <div class="input-field col push-m3 m6 s12">
                 <div class="switch" style="text-align:center">
                     <label>
                         @Html.Label("ChkEtat", @lang.Inactif)
@@ -130,13 +121,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col push-s3 s2">
+            <div class="col push-m3 m2 s4">
                 <a class="waves-effect waves-light btn grey" href="@Html.Raw(ViewBag.LinkBack)">@lang.Retour</a>
             </div>
-            <div class="col push-s6 s2">
-                <button class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+            <div class="col push-m6 m2 push-s5 s3">
+                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
                     @Html.Raw(ViewBag.TextButton)
-                    <i class="material-icons right">@Html.Raw(ViewBag.IconButton)</i>
+                    <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconButton)</i>
                 </button>
             </div>
         </div>
@@ -149,6 +140,7 @@
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 showClearBtn: true,
+                defaultDate: new Date(),
                 i18n: {
                     months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
                     monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -161,6 +153,17 @@
                     dateFormat: 'dd-mm-yy'
                 }
             });
+        });
+        $('.chips-autocomplete').chips({
+            autocompleteOptions: {
+                data: {
+                    'Apple': null,
+                    'Microsoft': null,
+                    'Google': null
+                },
+                limit: Infinity,
+                minLength: 1
+            }
         });
     </script>
 }
@@ -191,19 +194,19 @@
                 },
                 TxtDateDeFin: {
                     required: true
-                }
+                },
             },
-            message: {
+            messages: {
                 TxtMilieuStage: "@lang.ChampRequis",
                 TxtTitre: "@lang.ChampRequis",
-                TxTaDescription: "@lang.ChampRequis",
+                TxtaDescription: "@lang.ChampRequis",
                 TxtNbPostes: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide seulement des chiffres"
+                    pattern: "@lang.FormatValide Seulement des chiffres"
                 },
                 TxtNombreDHeureParSemaine: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide seulement des chiffres"
+                    pattern: "@lang.FormatValide Seulement des chiffres"
                 },
                 TxtDateDeDebut: "@lang.ChampRequis",
                 TxtDateDeFin: "@lang.ChampRequis",
