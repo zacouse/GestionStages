@@ -28,6 +28,8 @@ namespace GestionStages.Repositories
     interface IRestrictionRepository
     {
         List<Restriction> GetRestrictions(string titre,string descr);
+        Restriction GetRestrictionByID(int id);
+        void SaveRestriction(int id, string titre,string descr,bool etat);
     }
 
     interface IEtudiantRepository

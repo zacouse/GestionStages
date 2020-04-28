@@ -5,19 +5,25 @@
 
 <h1>ViewRestriction</h1>
 
+@{
+    Restriction laRestriction = ViewBag.Restriction != null ? ViewBag.Restriction : new Restriction();
+    if (laRestriction.IDRestriction == 0)
+    {
+        laRestriction.Etat = true;
+    }
+}
 
-
-<form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "MilieuStage", new { id = @MilieuAModifier.IDMilieuStage })">
+<form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveRestriction", "Restriction", new { id = @laRestriction.IDRestriction })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100" required>
+            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@laRestriction.Titre)" maxlength="100" required>
             <label for="TxtTitre">@lang.Titre</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@MilieuAModifier.Description)</textarea>
-            <label for="TxaDescription">@lang.Description</label>
+            <textarea id="TxtDescription" name="TxtDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@laRestriction.Description)</textarea>
+            <label for="TxtDescription">@lang.Description</label>
         </div>
     </div>
     <div class="row">
@@ -25,7 +31,7 @@
             <div class="switch" style="text-align:center">
                 <label>
                     @lang.Inactif
-                    <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@MilieuAModifier.Etat">
+                    <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@laRestriction.Etat">
                     <span class="lever"></span>
                     @lang.Actif
                 </label>
@@ -34,14 +40,52 @@
     </div>
     <div class="row">
         <div class="col push-m3 m2 s4">
-            <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
+            <a class="waves-effect waves-light btn grey" href="@ViewBag.LinkBack">@lang.Retour</a>
         </div>
         <div class="col push-m6 m2 push-s5 s3">
-            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
-                @Html.Raw(ViewBag.TexteBouton)
-                <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconeBouton)</i>
+            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="button" name="action">
+                @Html.Raw(ViewBag.TextButton)
+                <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconButton)</i>
             </button>
         </div>
     </div>
 
 </form>
+
+
+<script type='text/javascript'>
+    function validate() {
+        var isValid = $("#form").validate({
+            errorElement: "span",
+            rules: {
+                TxtTitre: {
+                    required: true
+                },
+                TxtDescription: {
+                    required: true
+                }
+            },
+            messages: {
+                TxtTitre: "@lang.ChampRequis",
+                TxtDescription: "@lang.ChampRequis"
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        if (isValid.form()) {
+            M.toast({ html: '@lang.EnregistreSucces', displayLength: 800, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
+        }
+        else {
+            M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+        }
+    };
+</script>
+<style>
+    span.error {
+        color: red;
+        padding-right: 2px;
+        padding-left: 2px;
+        border: 2px red solid
+    }
+</style>

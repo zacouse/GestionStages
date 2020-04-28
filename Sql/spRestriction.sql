@@ -21,3 +21,28 @@ IF ISNULL(@Descr_IN,'') <> ''
 EXEC sp_executesql @SQL
 
 GO
+
+CREATE PROC pGetRestrictionByID(@IDRestriction_IN INT)
+AS
+
+SELECT IDRestriction,Titre,[Description],Etat FROM Restriction
+WHERE IDRestriction = @IDRestriction_IN
+
+GO
+
+CREATE PROC pAddSetRestriction(@IDRestriction_IN INT,@Titre_IN VARCHAR(100),@Descr_IN VARCHAR(1000),@Etat_IN BIT)
+AS
+IF @IDRestriction_IN = 0
+BEGIN
+    INSERT INTO Restriction(Titre,[Description],Etat)
+    VALUES(@Titre_IN,@Descr_IN,@Etat_IN)
+END
+ELSE
+BEGIN
+    UPDATE Restriction
+    SET Titre = @Titre_IN,
+        [Description] = @Descr_IN,
+        Etat = @Etat_IN
+    WHERE IDRestriction = @IDRestriction_IN
+END
+GO

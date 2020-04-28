@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GestionStages.Properties;
 using GestionStages.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,9 +24,34 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult ViewRestriction()
+        public IActionResult ViewRestriction(int idRestriction)
         {
+            if (idRestriction == 0)
+            {
+                ViewBag.PageTitle = lang.AjouterUnStage;
+                ViewBag.IconTitle = "add_circle";
+                ViewBag.IconButton = "send";
+                ViewBag.ColorButton = "green";
+                ViewBag.TextButton = lang.Creer;
+            }
+            else
+            {
+                ViewBag.PageTitle = lang.ModifierUnStage;
+                ViewBag.IconTitle = "create";
+                ViewBag.Restriction = repo.GetRestrictionByID(idRestriction);
+                ViewBag.IconButton = "create";
+                ViewBag.ColorButton = "orange";
+                ViewBag.TextButton = lang.Modifier;
+            }
+            ViewBag.LinkBack = "../Stage/ListeStage";
+            ViewBag.Restriction = repo.GetRestrictionByID(idRestriction);
             return View();
+        }
+
+        public IActionResult SaveRestriction(int idRestriction,string txtTitre,string txtDescription, bool ChkEtat)
+        {
+            repo.SaveRestriction(idRestriction, txtTitre, txtDescription, ChkEtat);
+            return View("ListeRestriction");
         }
     }
 }

@@ -20,6 +20,29 @@ namespace GestionStages.Repositories
             conn = new SqlConnection(configuration.GetConnectionString("conn"));
         }
 
+        public Restriction GetRestrictionByID(int id)
+        {
+            Restriction laRestriction = new Restriction();
+
+            sql = new SqlCommand("pGetRestrictionByID", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDRestriction_IN", SqlDbType.Int).Value = id;
+
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                laRestriction.IDRestriction = (int)dr.GetValue(0);
+                laRestriction.Titre = (string)dr.GetValue(1);
+                laRestriction.Description = (string)dr.GetValue(2);
+                laRestriction.Etat = (bool)dr.GetValue(3);
+            }
+            conn.Close();
+
+            return laRestriction;
+        }
+
         public List<Restriction> GetRestrictions(string titre, string descr)
         {
             List<Restriction> lesRestrictions = new List<Restriction>();
@@ -41,8 +64,24 @@ namespace GestionStages.Repositories
                 restriction.Etat = (bool)dr.GetValue(3);
                 lesRestrictions.Add(restriction);
             }
+            conn.Close();
 
             return lesRestrictions;
+        }
+
+        public void SaveRestriction(int id, string titre, string descr, bool etat)
+        {
+            sql = new SqlCommand("pAddSetRestriction", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDRestriction_IN", SqlDbType.Int).Value = id;
+            sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
+            sql.Parameters.Add("@Descr_IN", SqlDbType.VarChar).Value = descr;
+            sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = etat;
+
+            conn.Open();
+            sql.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }
