@@ -454,4 +454,22 @@
 	<data name="Choisir" xml:space="preserve">
 		<value>Choose</value>
 	</data>
+	<data name="Oui" xml:space="preserve">
+		<value>Yes</value>
+	</data>
+	<data name="Non" xml:space="preserve">
+		<value>No</value>
+	</data>
+	<data name="ConfirmerLaSelection" xml:space="preserve">
+		<value>Confirm selection?</value>
+	</data>
+	<data name="VeuillezConfirmerLaSelection" xml:space="preserve">
+		<value>Please confirm selection</value>
+	</data>
+	<data name="Erreur" xml:space="preserve">
+		<value>Error</value>
+	</data>
+	<data name="NombreDeStagesSelectionnesInsufisant" xml:space="preserve">
+		<value>Not enought intership selected</value>
+	</data>
 </root>

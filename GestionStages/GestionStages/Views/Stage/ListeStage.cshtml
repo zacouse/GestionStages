@@ -160,9 +160,31 @@
                         <td>
                             <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" class="choixPossible browser-default">
                                 <option></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                @if (@ViewBag.Choix1 == @lesStages[i].IDStage)
+                                {
+                                    <option selected value="1">1</option>
+                                }
+                                else
+                                {
+                                    <option value="1">1</option>
+                                }
+                                @if (@ViewBag.Choix2 == @lesStages[i].IDStage)
+                                {
+                                    <option selected value="2">2</option>
+                                }
+                                else
+                                {
+                                    <option value="2">2</option>
+                                }
+                                @if (@ViewBag.Choix3 == @lesStages[i].IDStage)
+                                {
+                                    <option selected value="3">3</option>
+                                }
+                                else
+                                {
+                                    <option value="3">3</option>
+                                }
+
                             </select>
                         </td>
                     }
@@ -172,21 +194,23 @@
     </tbody>
 
 </table>
-<form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
-    <div class="hiddendiv">
-        <input id="Choix1" name="Choix1" type="text" value="" required>
-    </div>
-    <div class="hiddendiv">
-        <input id="Choix2" name="Choix2" type="text" value="" required>
-    </div>
-    <div class="hiddendiv">
-        <input id="Choix3" name="Choix3" type="text" value="" required>
-    </div>
-    <div >
-        <input id="IdEtudiant" name="IdEtudiant" type="text" value="" required>
-    </div>
-</form>
-
+@if (ViewBag.isStudent)
+{
+    <form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
+        <div class="hiddendiv">
+            <input id="Choix1" name="Choix1" type="text" value="@ViewBag.Choix1">
+        </div>
+        <div class="hiddendiv">
+            <input id="Choix2" name="Choix2" type="text" value="@ViewBag.Choix2">
+        </div>
+        <div class="hiddendiv">
+            <input id="Choix3" name="Choix3" type="text" value="@ViewBag.Choix3">
+        </div>
+        <div class="hiddendiv">
+            <input id="IdEtudiant" name="IdEtudiant" type="text" value="@ViewBag.IdEtudiant" required>
+        </div>
+    </form>
+}
 <div class="row" style="padding-top:5px;">
     <div class="col s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     @*mettre le if*@
@@ -197,9 +221,15 @@
     }
     else
     {
-        <div class="col s2 push-s8"><a class="btn green" href="javascript:document.ChoiceForm.submit();">@lang.Choisir<i class="material-icons right hide-on-small-and-down">check</i></a></div>
+        <div class="col s2 push-s8"><a class="btn green" href="javascript: askConfirm();">@lang.Choisir<i class="material-icons right hide-on-small-and-down">check</i></a></div>
     }
 
+</div>
+<div id="dialog-confirm" class="hiddendiv" title="@lang.ConfirmerLaSelection">
+    @lang.VeuillezConfirmerLaSelection
+</div>
+<div id="dialog-error" class="hiddendiv" title="@lang.Erreur">
+    @lang.Erreur! @lang.NombreDeStagesSelectionnesInsufisant .
 </div>
 
 @section Scripts
@@ -210,6 +240,7 @@
                 collapsible: true
             });
             $('select').formSelect();
+
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 showClearBtn: true,
@@ -230,14 +261,15 @@
         function applyChoice(sel) {
              //enlever les autre select avec la même valeur
             for (var i = 1; i < 4; i++) {
-                if (document.getElementById('Choix' + i).value == sel.id) {
-                    alert("supress");
-                    document.getElementById('Choix' + i).value == "";
+                if (document.getElementById('Choix' + i).value == sel.id || document.getElementById('Choix' + i).value == 0) {
+                    document.getElementById('Choix' + i).value = ""; //Vide les autre choix avec cet id ou les choix vide si un sumbit a été fait sans être completé
                 }
             }
-            document.getElementById('Choix' + sel.value).value = sel.id;
-            alert('Choix' + sel.value);
-            alert(document.getElementById('Choix' + sel.value).value);
+
+            if (document.getElementById('Choix' + sel.value).value != "") {//Vide le select avec le même numéro de choix
+                document.getElementById(document.getElementById('Choix' + sel.value).value).value = "";
+            }
+            document.getElementById('Choix' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
         }
 
         function PrintElem(elem) {
@@ -249,7 +281,81 @@
             mywindow.print();
 
             return true;
+            }
+
+        function askConfirm() {
+            if (validateEnoughtChoice()) {
+               document.getElementById("dialog-confirm").classList.remove('hiddendiv');
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        @lang.Oui: function() {
+                            document.ChoiceForm.submit();
+                            $(this).dialog("close");
+                        },
+                        @lang.Non: function () {
+                            document.getElementById("dialog-confirm").classList.add('hiddendiv');
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            }
+            else {
+                showErrorDialog();
+            }
         }
+        function showErrorDialog() {
+            document.getElementById("dialog-error").classList.remove('hiddendiv');
+            $("#dialog-error").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 300,
+                    modal: true,
+                    buttons: {
+                        "Ok": function () {
+                            document.getElementById("dialog-error").classList.add('hiddendiv');
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+        }
+
+            function validateEnoughtChoice() {
+                var valid = true
+                 @{
+                     int NumberOfRequiredChoices ;
+                     switch (lesStages.Count)
+                     {
+                         case 0:
+                             NumberOfRequiredChoices = 0;
+                             break;
+                         case 1:
+                             NumberOfRequiredChoices = 1;
+                             break;
+                         case 2:
+                             NumberOfRequiredChoices = 2;
+                             break;
+                         default:
+                             NumberOfRequiredChoices = 3;
+                             break;
+                     }
+                             }
+                if (@NumberOfRequiredChoices != 0) {
+                    for (var i = 1; i < @NumberOfRequiredChoices + 1; i++) {
+                        if (document.getElementById('Choix' + i).value == null || document.getElementById('Choix' + i).value == 0 || document.getElementById('Choix' + i).value == "") {
+                            valid = false;
+                        }
+                    }
+                }
+                else {
+                    valid = false;
+                }
+                return valid
+            }
+
 
     </script>
 }

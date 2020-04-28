@@ -107,8 +107,8 @@ FROM Stage
 Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 
---INSERT INTO Stage ([IDMilieuStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
---VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', '2020-04-01', '2020-04-30', 'true', GETDATE(), GETDATE())
+--INSERT INTO Stage ([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
+--VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', GETDATE(), GETDATE(), '1', GETDATE(), GETDATE())
 
 --INSERT INTO MilieuStage ([Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat],[DateHeureCreation],[DateHeureModification])
 --VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())
@@ -123,10 +123,14 @@ CREATE PROC pAddSetChoixStage
 	AS
 	IF @IdStageEtudiant_IN = 0
 	BEGIN
+		UPDATE  [dbo].[StageEtudiant]
+		SET [Etat] = '0',[DateHeureModification] = GETDATE()
+		WHERE [IDEtudiant] = @IdEtudiant_IN AND [NumeroChoix] = @NumeroChoix_IN ;
+
 		INSERT INTO [dbo].[StageEtudiant]
            ([IDStage],[IDEtudiant],[NumeroChoix],[ChoixFinal],[Etat])
      VALUES
-           (@IdStage_IN,@IdEtudiant_IN,@NumeroChoix_IN,@ChoixFinal_IN,@Etat_IN) 
+           (@IdStage_IN,@IdEtudiant_IN,@NumeroChoix_IN,@ChoixFinal_IN,@Etat_IN); 
 	END
 	ELSE
 	BEGIN
@@ -139,3 +143,31 @@ CREATE PROC pAddSetChoixStage
 			[DateHeureModification] = GETDATE()
 		WHERE [IDStageEtudiant] = @IdStageEtudiant_IN
 	END
+go
+--exec pAddSetChoixStage'0','1','1','2','0','1'
+CREATE PROC pAddSetRetirerChoixStage
+@IdEtudiant_IN INT,
+@NumeroChoix_IN INT
+AS
+UPDATE  [dbo].[StageEtudiant]
+		SET [Etat] = '0',[DateHeureModification] = GETDATE()
+		WHERE [IDEtudiant] = @IdEtudiant_IN AND [NumeroChoix] = @NumeroChoix_IN ;
+go
+delete from StageEtudiant
+go
+CREATE PROC pGetChoixStageByIdEtudiant
+@IdEtudiant_IN INT
+AS
+SELECT [IDStageEtudiant]
+      ,[IDStage]
+      ,[IDEtudiant]
+      ,[NumeroChoix]
+      ,[ChoixFinal]
+      ,[Etat] FROM StageEtudiant WHERE IDEtudiant = @IdEtudiant_IN and Etat = '1' ;
+go
+CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
+AS
+SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+FROM Stage
+WHERE [IDMilieuStage] = @IdMilieu_IN;
+GO
