@@ -24,9 +24,9 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult ViewRestriction(int idRestriction)
+        public IActionResult ViewRestriction(int id)
         {
-            if (idRestriction == 0)
+            if (id == 0)
             {
                 ViewBag.PageTitle = lang.AjouterUnStage;
                 ViewBag.IconTitle = "add_circle";
@@ -38,13 +38,12 @@ namespace GestionStages.Controllers
             {
                 ViewBag.PageTitle = lang.ModifierUnStage;
                 ViewBag.IconTitle = "create";
-                ViewBag.Restriction = repo.GetRestrictionByID(idRestriction);
+                ViewBag.Restriction = repo.GetRestrictionByID(id);
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
             }
-            ViewBag.LinkBack = "../Stage/ListeStage";
-            ViewBag.Restriction = repo.GetRestrictionByID(idRestriction);
+            ViewBag.LinkBack = "../ListeRestriction";
             return View();
         }
 

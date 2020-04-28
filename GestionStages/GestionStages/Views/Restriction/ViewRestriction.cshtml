@@ -16,13 +16,13 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveRestriction", "Restriction", new { id = @laRestriction.IDRestriction })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@laRestriction.Titre)" maxlength="100" required>
+            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@laRestriction.Titre" maxlength="100" required>
             <label for="TxtTitre">@lang.Titre</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <textarea id="TxtDescription" name="TxtDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@laRestriction.Description)</textarea>
+            <textarea id="TxtDescription" name="TxtDescription" class="materialize-textarea validate" maxlength="1000" required>@laRestriction.Description</textarea>
             <label for="TxtDescription">@lang.Description</label>
         </div>
     </div>
@@ -52,8 +52,9 @@
 
 </form>
 
-
-<script type='text/javascript'>
+@section Scripts
+{
+    <script type='text/javascript'>
     function validate() {
         var isValid = $("#form").validate({
             errorElement: "span",
@@ -80,7 +81,8 @@
             M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
         }
     };
-</script>
+    </script>
+}
 <style>
     span.error {
         color: red;
