@@ -78,8 +78,6 @@ CREATE TABLE MilieuStageRestriction (
 	IDMilieuStageRestriction INT IDENTITY PRIMARY KEY,
 	IDRestriction INT,
 	IDMilieuStage INT,
-	Titre VARCHAR(100),
-	[Description] VARCHAR(1000),
 	Etat BIT,
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate(),
@@ -88,12 +86,10 @@ CREATE TABLE MilieuStageRestriction (
 )
 GO
 
-CREATE TABLE StageRestriction (
+Create TABLE StageRestriction (
 	IDStageRestriction INT IDENTITY PRIMARY KEY,
 	IDStage INT,
 	IDRestriction INT,
-	Titre VARCHAR(100),
-	[Description] VARCHAR(1000),
 	Etat BIT,
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate(),

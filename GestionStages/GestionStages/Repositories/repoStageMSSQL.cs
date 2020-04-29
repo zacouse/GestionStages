@@ -141,16 +141,25 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
-        public void SaveStage(Stage stage)
+        public void SaveStage(Stage stage, string[] idRestriction)
         {
-            sql = new SqlCommand();
+            sql = new SqlCommand("pAddSetStage", conn);
             try
             {
+                sql.CommandType = CommandType.StoredProcedure;
+                sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = stage.IDStage;
+                sql.Parameters.Add("@IDMilieuStage_IN", SqlDbType.Int).Value = stage.IDMilieuStage;
+                sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = stage.Titre;
+                sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = stage.Description;
+                sql.Parameters.Add("@NbPostes_IN", SqlDbType.Int).Value = stage.NbPostes;
+                sql.Parameters.Add("@Statut_IN", SqlDbType.Int).Value = stage.Statut;
+                sql.Parameters.Add("@PeriodeTravail_IN", SqlDbType.Int).Value = stage.PeriodeTravail;
+                sql.Parameters.Add("@NbHeureSemaine_IN", SqlDbType.Int).Value = stage.NbHeureSemaine;
+                sql.Parameters.Add("@DateDebut_IN", SqlDbType.DateTime).Value = stage.DateDebut;
+                sql.Parameters.Add("@DateFin_IN", SqlDbType.DateTime).Value = stage.DateFin;
+                sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = stage.Etat;
+                sql.Parameters.Add("@IDRestriction_IN", SqlDbType.VarChar).Value = idRestriction;
                 conn.Open();
-                sql.Connection = conn;
-                sql.CommandText = "EXEC pAddSetStage'" + stage.IDStage + "','" + stage.IDMilieuStage + "','" + stage.Titre + "','" +
-                    stage.Description + "','" + stage.NbPostes + "','" + stage.Statut + "','" + stage.PeriodeTravail + "','" + 
-                    stage.NbHeureSemaine + "','" + stage.DateDebut + "','" + stage.DateFin + "','" + stage.Etat + "'";
                 sql.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -163,21 +172,6 @@ namespace GestionStages.Repositories
             }
         }
 
-        public void SaveStageRestriction(Restriction restriction, int idStage)
-        {
-            sql = new SqlCommand();
-            try
-            {
-                conn.Open();
-                sql.Connection = conn;
-                sql.CommandText = "EXEC pAddStageRestriction'" + idStage + "','" + restriction.IDRestriction + "','" + restriction.Titre + "','" +
-                    restriction.Description + "','" + restriction.Etat + "'";
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
         public Stage GetStageByID(int stageId)
         {
             Stage stage = new Stage();

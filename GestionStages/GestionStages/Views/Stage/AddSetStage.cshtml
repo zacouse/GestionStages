@@ -69,7 +69,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
-                <select id="TxtStatut" name="TxtStatut" class = "Validate" required>
+                <select id="TxtStatut" name="TxtStatut" class="Validate" required>
                     <option value="0">@lang.TempsPleins</option>
                     <option value="1">@lang.TempsPartiel</option>
                 </select>
@@ -100,7 +100,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
-                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker",  placeholder = "Placeholder", required = "required" })
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
@@ -125,11 +125,14 @@
                 <a class="waves-effect waves-light btn grey" href="@Html.Raw(ViewBag.LinkBack)">@lang.Retour</a>
             </div>
             <div class="col push-m6 m2 push-s5 s3">
-                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+                <button id="button" @*onclick="validate()"*@ class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
                     @Html.Raw(ViewBag.TextButton)
                     <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconButton)</i>
                 </button>
             </div>
+        </div>
+        <div class="">
+            <input id="Restriction" name="Restriction" type="text" value="">
         </div>
     </form>
 }
@@ -161,14 +164,23 @@
                         List<Restriction> lesRestriction = ViewBag.LesRestriction;
                         for (int i = 0; i < lesRestriction.Count; i++)
                         {
-                            @Html.Raw("'") @Html.Raw(lesRestriction[i].Titre) @Html.Raw("'") @Html.Raw(": null,");
+                            @Html.Raw("'") @Html.Raw(lesRestriction[i].Titre) @*<input type="hidden" value="@Html.Raw(lesRestriction[i].IDRestriction)"/>*@ @Html.Raw("'") @Html.Raw(": null,");
                         }
                     }
                 },
                 limit: Infinity,
                 minLength: 1
             }
+
         });
+        $('#button').click(function () {
+            alert(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
+            for (var i = 0; i < (M.Chips.getInstance($('.chips')).chipsData).length; i++) {
+                document.getElementById("Restriction").value += (M.Chips.getInstance($('.chips')).chipsData)[i].tag;
+            }
+
+        });
+
     </script>
 }
 <script type="text/javascript">
