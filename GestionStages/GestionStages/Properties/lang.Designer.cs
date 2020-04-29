@@ -736,6 +736,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choice#.
+        /// </summary>
+        public static string NumeroChoix {
+            get {
+                return ResourceManager.GetString("NumeroChoix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Civic number.
         /// </summary>
         public static string NumeroCivique {

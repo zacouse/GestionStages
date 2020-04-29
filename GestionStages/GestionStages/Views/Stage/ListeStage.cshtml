@@ -136,7 +136,7 @@
             <td>@lang.Voir</td>
             @if (ViewBag.isStudent)
             {
-                <td>#Choix</td>
+                <td>@lang.NumeroChoix</td>
             }
         </tr>
     </thead>
@@ -285,7 +285,14 @@
 
         function askConfirm() {
             if (validateEnoughtChoice()) {
-               document.getElementById("dialog-confirm").classList.remove('hiddendiv');
+                showConfirmDialog();
+            }
+            else {
+                showErrorDialog();
+            }
+        }
+        function showConfirmDialog() {
+            document.getElementById("dialog-confirm").classList.remove('hiddendiv');
                 $("#dialog-confirm").dialog({
                     resizable: false,
                     height: "auto",
@@ -302,10 +309,6 @@
                         }
                     }
                 });
-            }
-            else {
-                showErrorDialog();
-            }
         }
         function showErrorDialog() {
             document.getElementById("dialog-error").classList.remove('hiddendiv');

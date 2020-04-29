@@ -472,4 +472,7 @@
 	<data name="NombreDeStagesSelectionnesInsufisant" xml:space="preserve">
 		<value>Not enought intership selected</value>
 	</data>
+	<data name="NumeroChoix" xml:space="preserve">
+		<value>Choice#</value>
+	</data>
 </root>

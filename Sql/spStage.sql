@@ -154,6 +154,7 @@ UPDATE  [dbo].[StageEtudiant]
 		WHERE [IDEtudiant] = @IdEtudiant_IN AND [NumeroChoix] = @NumeroChoix_IN ;
 go
 delete from StageEtudiant
+delete from Stage where IDStage = 1003
 go
 CREATE PROC pGetChoixStageByIdEtudiant
 @IdEtudiant_IN INT

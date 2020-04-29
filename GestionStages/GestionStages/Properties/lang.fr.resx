@@ -421,4 +421,7 @@
 	<data name="NombreDeStagesSelectionnesInsufisant" xml:space="preserve">
 		<value>Le nombre de stages sélectionnés est insuffisant</value>
 	</data>
+	<data name="NumeroChoix" xml:space="preserve">
+		<value>#Choix</value>
+	</data>
 </root>
