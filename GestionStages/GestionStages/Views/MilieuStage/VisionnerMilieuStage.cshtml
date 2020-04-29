@@ -2,19 +2,22 @@
 @{
     ViewData["Title"] = ViewBag.TitrePage;
 }
+    <br/>
+    <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+        <div class="col l5 s12">
+            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+            @ViewBag.TitrePage
+            <hr />
+        </div>
+        <!--<div class="col push-l4 l4 push-m3 m6 s12">
 
-<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
-    <div class="col l4 m12 s12">
-        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
-        @ViewBag.TitrePage
-        <hr />
+    </div>-->
+        <div class="col l7 hide-on-med-and-down">
+            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+            @lang.StagesDisponiblesDansCeMilieu
+            <hr />
+        </div>
     </div>
-    <div class="col l8 hide-on-med-and-down">
-        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-        @lang.StagesDisponiblesDansCeMilieu
-        <hr />
-    </div>
-</div>
 
 @{
     if (ViewBag.error != null && ViewBag.error != "")
@@ -26,7 +29,7 @@
 @{
     MilieuStage MilieuEnVisionnement = ViewBag.Milieu;
     <div class="row">
-        <form class="col l4 s12">
+        <form class="col l5 s12">
             <div class="row">
                 <div class="input-field col s12 ">
                     <input disabled id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Titre)">
@@ -99,13 +102,11 @@
             @lang.StagesDisponiblesDansCeMilieu
             <hr />
         </div>
-        <div class="col l8 s12">
+        <div class="col l7 s12">
             <table id="liste" class="highlight responsive-table">
                 <thead>
                     <tr>
                         <td>@lang.Titre</td>
-                        <td>@lang.Description</td>
-                        <td>@lang.MilieuDeStage</td>
                         <td>@lang.PeriodeDeTravail</td>
                         <td>@lang.Statut</td>
                         <td>@lang.NombreDHeureParSemaine</td>
@@ -121,8 +122,6 @@
                         {
                             <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })'">
                                 <td>@lesStages[i].Titre</td>
-                                <td>@lesStages[i].Description</td>
-                                <td>@lesStages[i].TitreMilieuStage</td>
                                 <td>@lesStages[i].GetPeriode()</td>
                                 <td>@lesStages[i].GetStatus()</td>
                                 <td>@lesStages[i].NbHeureSemaine h</td>

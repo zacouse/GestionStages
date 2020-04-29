@@ -167,7 +167,7 @@
 		<value>Modifier</value>
 	</data>
 	<data name="VisionnerUnMilieuDeStage" xml:space="preserve">
-		<value>Visionner un mileu de stage</value>
+		<value>Visionner un milieu de stage</value>
 	</data>
 	<data name="StagesDisponiblesDansCeMilieu" xml:space="preserve">
 		<value>Stages disponibles dans ce milieu</value>
@@ -179,7 +179,7 @@
 		<value>Période de travail</value>
 	</data>
 	<data name="NombreDHeureParSemaine" xml:space="preserve">
-		<value>Nombre d'heures par semaine</value>
+		<value>Heures par semaine</value>
 	</data>
 	<data name="Statut" xml:space="preserve">
 		<value>Statut</value>

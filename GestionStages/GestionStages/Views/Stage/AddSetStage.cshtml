@@ -3,7 +3,7 @@
     ViewData["Title"] = ViewBag.PageTitle;
 }
 
-<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+<div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text row">
     <div class="col s12">
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconTitle)</i>
         @ViewBag.PageTitle
@@ -201,7 +201,7 @@
             }
         });
         if (isValid.form()) {
-            M.toast({ html: '@lang.EnregistreSucces', displayLength: 500, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
+            M.toast({ html: '@lang.EnregistreSucces', displayLength: 1000, classes: 'rounded', completeCallback: function () { document.form.submit(); } })
         }
         else {
             M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });

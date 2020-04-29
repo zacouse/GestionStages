@@ -8,6 +8,13 @@ FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 GO
 
+CREATE PROC pGetAllStageActif
+AS
+SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat], MilieuStage.Titre
+FROM Stage
+left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage] where Stage.Etat = 1
+GO
+
 CREATE PROC pAddSetStage @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPoste_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit
 AS
 IF @IDStage_IN = 0
@@ -94,9 +101,6 @@ BEGIN
 
     SET @SQL = @SQL + ' ) '
 END
-
--- Section Restrictions
-
 EXEC sp_executesql @SQL
 GO
 
@@ -108,7 +112,7 @@ Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 
 --INSERT INTO Stage ([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
---VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', GETDATE(), GETDATE(), '1', GETDATE(), GETDATE())
+--VALUES ('1', 'Chercheur test2 ultra long parce que ca me tente', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', GETDATE(), GETDATE(), '1', GETDATE(), GETDATE())
 
 --INSERT INTO MilieuStage ([Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat],[DateHeureCreation],[DateHeureModification])
 --VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())
@@ -143,7 +147,7 @@ CREATE PROC pAddSetChoixStage
 			[DateHeureModification] = GETDATE()
 		WHERE [IDStageEtudiant] = @IdStageEtudiant_IN
 	END
-go
+GO
 --exec pAddSetChoixStage'0','1','1','2','0','1'
 CREATE PROC pAddSetRetirerChoixStage
 @IdEtudiant_IN INT,
@@ -152,10 +156,7 @@ AS
 UPDATE  [dbo].[StageEtudiant]
 		SET [Etat] = '0',[DateHeureModification] = GETDATE()
 		WHERE [IDEtudiant] = @IdEtudiant_IN AND [NumeroChoix] = @NumeroChoix_IN ;
-go
-delete from StageEtudiant
-delete from Stage where IDStage = 1003
-go
+GO
 CREATE PROC pGetChoixStageByIdEtudiant
 @IdEtudiant_IN INT
 AS

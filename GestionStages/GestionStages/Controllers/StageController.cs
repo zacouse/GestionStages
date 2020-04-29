@@ -87,7 +87,15 @@ namespace GestionStages.Controllers
 
         public IActionResult ListeStage(bool isStudent = false, string IdEtudiant = "")
         {
-            ViewBag.lesStages = repo.GetAllStage();
+            if(isStudent)
+            {
+                ViewBag.lesStages = repo.GetAllStageActif();
+            }
+            else
+            {
+                ViewBag.lesStages = repo.GetAllStage();
+            }
+            
             ViewBag.isStudent = isStudent;
             ViewBag.IdEtudiant = IdEtudiant;
             if (isStudent &&IdEtudiant!= null)
@@ -100,12 +108,15 @@ namespace GestionStages.Controllers
 
         private void AfficherChoixEtudiant(string IdEtudiant)
         {
-            List<ChoixStageEtudiant> choixStages = repo.getChoixStage(IdEtudiant);
-            if(choixStages.Count >0)
+            if(int.TryParse(IdEtudiant,out int intIdEtudiant))
             { 
-                ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.IDStage).FirstOrDefault();
-                ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.IDStage).FirstOrDefault();
-                ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.IDStage).FirstOrDefault();
+                List<ChoixStageEtudiant> choixStages = repo.getChoixStage(IdEtudiant);
+                if(choixStages.Count >0)
+                { 
+                    ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.IDStage).FirstOrDefault();
+                    ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.IDStage).FirstOrDefault();
+                    ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.IDStage).FirstOrDefault();
+                }
             }
         }
 
@@ -123,6 +134,11 @@ namespace GestionStages.Controllers
         {
             //DateTime minDate = (txtMinDate == null) ? DateTime.MinValue : DateTime.Parse(txtMinDate);
             //DateTime maxDate = (txtMaxDate == null) ? DateTime.Now.AddYears(10) : DateTime.Parse(txtMaxDate);
+            if(isStudent)
+            {
+                chkIsActive = true;
+                chkIsInactive = false;
+            }
             ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);
             ViewBag.isStudent = isStudent;
             if (isStudent && IdEtudiant != null)

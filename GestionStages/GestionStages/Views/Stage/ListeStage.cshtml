@@ -2,8 +2,15 @@
 @{
     ViewData["Title"] = lang.ListeStage;
 }
-
-<h1>@lang.ListeStage</h1>
+<div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text  row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.ListeStage
+    </div>
+    <div class="col push-l4 l4 push-m3 m6 s12">
+        <hr />
+    </div>
+</div>
 
 
 @{
@@ -31,11 +38,11 @@
                 <div class="col s12 m6 l3">
                     <div class="input-field">
                         @Html.TextBox("txtMinH", "")
-                        <label for="txtMinH">Heure minimum par semaine</label> @*@lang.NombreMinimumDHeureSemaine*@
+                        <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
                     </div>
                     <div class="input-field">
                         @Html.TextBox("txtMaxH", "")
-                        <label for="txtMaxH">Heure maximun par semaine</label> @*@lang.NombreMaximumDHeureSemaine*@
+                        <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
                     </div>
                 </div>
                 <div class="col s12 m6 l2">
@@ -75,30 +82,36 @@
                         </p>
                     </div>
                 </div>
-                <div class="col s12 m3 l2">
-                    <label>Etat</label>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                                <span>@lang.Actif</span>
-                            </label>
-                        </p>
+                @if (!ViewBag.isStudent)
+                {
+                    <div class="col s12 m3 l2">
+                        <label>Etat</label>
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                    <span>@lang.Actif</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                    <span>@lang.Inactif</span>
+                                </label>
+                            </p>
+                        </div>
                     </div>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                                <span>@lang.Inactif</span>
-                            </label>
-                        </p>
-                    </div>
+                }
+                <div class="hiddendiv">
+                    @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
                 </div>
                 <div class="col s6 m6 l6">
-                    <a class="btn light-green" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
+                    <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
                 </div>
                 <div class="col s6 m6 l6 right-align">
-                    <a class="btn light-blue" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                    <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
                 </div>
             </div>
         </form>
@@ -127,7 +140,7 @@
             List<Stage> lesStages = ViewBag.lesStages;
             for (int i = 0; i < lesStages.Count; i++)
             {
-                <tr>
+                <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">
                     <td>@lesStages[i].Titre</td>
                     <td>@lesStages[i].TitreMilieuStage</td>
                     <td>@lesStages[i].GetPeriode()</td>
@@ -193,12 +206,12 @@
     </form>
 }
 <div class="row" style="padding-top:5px;">
-    <div class="col s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
+    <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
     @*mettre le if*@
     @if (!ViewBag.isStudent)
     {
         <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>
-        <div class="col s2 push-s6"><a class="btn green" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></div>
+        <div class="col push-l6 l2 s2 push-s6"><a class="btn green" href="@Url.Action("AddSetStage", "Stage")">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></div>
     }
     else
     {
@@ -349,5 +362,10 @@
         background: none;
         background-color: orange;
         color: white;
+    }
+
+    [type="checkbox"].filled-in:checked + span:not(.lever):after {
+        background-color: orange;
+        border: 2px solid grey;
     }
 </style>

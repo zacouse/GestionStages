@@ -67,27 +67,25 @@ namespace GestionStages.Repositories
             {
                 conn.Open();
                 sql.Connection = conn;
-                sql.CommandText = "EXEC pGetAllStage";
+                sql.CommandText = "EXEC pGetAllStageActif";
                 dr = sql.ExecuteReader();
                 while (dr.Read())
                 {
                     Stage stage = new Stage();
-                    if (stage.Etat == true)
-                    {
-                        stage.IDStage = (int)dr.GetValue(0);
-                        stage.IDMilieuStage = (int)dr.GetValue(1);
-                        stage.Titre = (string)dr.GetValue(2);
-                        stage.Description = (string)dr.GetValue(3);
-                        stage.NbPostes = (int)dr.GetValue(4);
-                        stage.Statut = (byte)dr.GetValue(5);
-                        stage.PeriodeTravail = (byte)dr.GetValue(6);
-                        stage.NbHeureSemaine = (int)dr.GetValue(7);
-                        stage.DateDebut = (DateTime)dr.GetValue(8);
-                        stage.DateFin = (DateTime)dr.GetValue(9);
-                        stage.Etat = (bool)dr.GetValue(10);
-                        stage.TitreMilieuStage = (string)dr.GetValue(11);
-                        lesStages.Add(stage);
-                    }
+                    stage.IDStage = (int)dr.GetValue(0);
+                    stage.IDMilieuStage = (int)dr.GetValue(1);
+                    stage.Titre = (string)dr.GetValue(2);
+                    stage.Description = (string)dr.GetValue(3);
+                    stage.NbPostes = (int)dr.GetValue(4);
+                    stage.Statut = (byte)dr.GetValue(5);
+                    stage.PeriodeTravail = (byte)dr.GetValue(6);
+                    stage.NbHeureSemaine = (int)dr.GetValue(7);
+                    stage.DateDebut = (DateTime)dr.GetValue(8);
+                    stage.DateFin = (DateTime)dr.GetValue(9);
+                    stage.Etat = (bool)dr.GetValue(10);
+                    stage.TitreMilieuStage = (string)dr.GetValue(11);
+                    lesStages.Add(stage);
+
                 }
             }
             catch
@@ -149,7 +147,7 @@ namespace GestionStages.Repositories
                 conn.Open();
                 sql.Connection = conn;
                 sql.CommandText = "EXEC pAddSetStage'" + stage.IDStage + "','" + stage.IDMilieuStage + "','" + stage.Titre + "','" +
-                    stage.Description + "','" + stage.NbPostes + "','" + stage.Statut + "','" + stage.PeriodeTravail + "','" + 
+                    stage.Description + "','" + stage.NbPostes + "','" + stage.Statut + "','" + stage.PeriodeTravail + "','" +
                     stage.NbHeureSemaine + "','" + stage.DateDebut + "','" + stage.DateFin + "','" + stage.Etat + "'";
                 sql.ExecuteNonQuery();
             }
@@ -170,22 +168,22 @@ namespace GestionStages.Repositories
             {
                 conn.Open();
                 sql.Connection = conn;
-                sql.CommandText = "EXEC pGetStageByID'" + stageId +"'";
+                sql.CommandText = "EXEC pGetStageByID'" + stageId + "'";
                 dr = sql.ExecuteReader();
                 while (dr.Read())
                 {
-                        stage.IDStage = (int)dr.GetValue(0);
-                        stage.IDMilieuStage = (int)dr.GetValue(1);
-                        stage.Titre = (string)dr.GetValue(2);
-                        stage.Description = (string)dr.GetValue(3);
-                        stage.NbPostes = (int)dr.GetValue(4);
-                        stage.Statut = (byte)dr.GetValue(5);
-                        stage.PeriodeTravail = (byte)dr.GetValue(6);
-                        stage.NbHeureSemaine = (int)dr.GetValue(7);
-                        stage.DateDebut = (DateTime)dr.GetValue(8);
-                        stage.DateFin = (DateTime)dr.GetValue(9);
-                        stage.Etat = (bool)dr.GetValue(10);
-                        stage.TitreMilieuStage = (string)dr.GetValue(11);
+                    stage.IDStage = (int)dr.GetValue(0);
+                    stage.IDMilieuStage = (int)dr.GetValue(1);
+                    stage.Titre = (string)dr.GetValue(2);
+                    stage.Description = (string)dr.GetValue(3);
+                    stage.NbPostes = (int)dr.GetValue(4);
+                    stage.Statut = (byte)dr.GetValue(5);
+                    stage.PeriodeTravail = (byte)dr.GetValue(6);
+                    stage.NbHeureSemaine = (int)dr.GetValue(7);
+                    stage.DateDebut = (DateTime)dr.GetValue(8);
+                    stage.DateFin = (DateTime)dr.GetValue(9);
+                    stage.Etat = (bool)dr.GetValue(10);
+                    stage.TitreMilieuStage = (string)dr.GetValue(11);
                 }
             }
             catch (Exception e)
@@ -288,7 +286,7 @@ namespace GestionStages.Repositories
 
         public void SaveChoixStage(ChoixStageEtudiant choixStageEtudiant)
         {
-            
+
             try
             {
                 sql = new SqlCommand("pAddSetChoixStage", conn);
@@ -343,7 +341,7 @@ namespace GestionStages.Repositories
 
         public void RemoveChoixStage(int idEtudiant, int numeroChoix)
         {
-            
+
             sql = new SqlCommand("pAddSetRetirerChoixStage", conn);
             sql.CommandType = CommandType.StoredProcedure;
 
