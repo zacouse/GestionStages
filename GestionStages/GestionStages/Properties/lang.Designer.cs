@@ -160,11 +160,29 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose.
+        /// </summary>
+        public static string Choisir {
+            get {
+                return ResourceManager.GetString("Choisir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Post code.
         /// </summary>
         public static string CodePostal {
             get {
                 return ResourceManager.GetString("CodePostal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm selection?.
+        /// </summary>
+        public static string ConfirmerLaSelection {
+            get {
+                return ResourceManager.GetString("ConfirmerLaSelection", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace GestionStages.Properties {
         public static string EnregistreSucces {
             get {
                 return ResourceManager.GetString("EnregistreSucces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error.
+        /// </summary>
+        public static string Erreur {
+            get {
+                return ResourceManager.GetString("Erreur", resourceCulture);
             }
         }
         
@@ -637,6 +664,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not enought intership selected.
+        /// </summary>
+        public static string NombreDeStagesSelectionnesInsufisant {
+            get {
+                return ResourceManager.GetString("NombreDeStagesSelectionnesInsufisant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Weekly work hours.
         /// </summary>
         public static string NombreDHeureParSemaine {
@@ -664,6 +700,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à No.
+        /// </summary>
+        public static string Non {
+            get {
+                return ResourceManager.GetString("Non", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à November.
         /// </summary>
         public static string Novembre {
@@ -687,6 +732,15 @@ namespace GestionStages.Properties {
         public static string Nuit {
             get {
                 return ResourceManager.GetString("Nuit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choice#.
+        /// </summary>
+        public static string NumeroChoix {
+            get {
+                return ResourceManager.GetString("NumeroChoix", resourceCulture);
             }
         }
         
@@ -723,6 +777,15 @@ namespace GestionStages.Properties {
         public static string OctobreShort {
             get {
                 return ResourceManager.GetString("OctobreShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Yes.
+        /// </summary>
+        public static string Oui {
+            get {
+                return ResourceManager.GetString("Oui", resourceCulture);
             }
         }
         
@@ -921,6 +984,15 @@ namespace GestionStages.Properties {
         public static string VendrediShort {
             get {
                 return ResourceManager.GetString("VendrediShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please confirm selection.
+        /// </summary>
+        public static string VeuillezConfirmerLaSelection {
+            get {
+                return ResourceManager.GetString("VeuillezConfirmerLaSelection", resourceCulture);
             }
         }
         
