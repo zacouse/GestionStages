@@ -162,6 +162,22 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
+
+        public void SaveStageRestriction(Restriction restriction, int idStage)
+        {
+            sql = new SqlCommand();
+            try
+            {
+                conn.Open();
+                sql.Connection = conn;
+                sql.CommandText = "EXEC pAddStageRestriction'" + idStage + "','" + restriction.IDRestriction + "','" + restriction.Titre + "','" +
+                    restriction.Description + "','" + restriction.Etat + "'";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public Stage GetStageByID(int stageId)
         {
             Stage stage = new Stage();

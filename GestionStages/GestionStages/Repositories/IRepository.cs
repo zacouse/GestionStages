@@ -20,7 +20,7 @@ namespace GestionStages.Repositories
         List<Stage> GetAllStageActif();
         List<Stage> GetAllStageInactif();
         void SaveStage(Stage stage);
-        void SaveStageRestriction(Restriction restriction);
+        void SaveStageRestriction(Restriction restriction, int idStage);
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive);
         List<Stage> GetStagesByIdMilieu(int milieu);
