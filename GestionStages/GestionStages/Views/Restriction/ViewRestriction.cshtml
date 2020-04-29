@@ -3,7 +3,15 @@
     ViewData["Title"] = "ViewRestriction";
 }
 
-<h1>ViewRestriction</h1>
+    <div style="font-size:24px;padding-top:5%" class="light-blue-text center-align row">
+        <div class="col s12">
+            <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+            @ViewBag.TitrePage
+        </div>
+        <div class="col push-l4 l4 push-m3 m6 s12">
+            <hr />
+        </div>
+    </div>
 
 @{
     Restriction laRestriction = ViewBag.Restriction != null ? ViewBag.Restriction : new Restriction();

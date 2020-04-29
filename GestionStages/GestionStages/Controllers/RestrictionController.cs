@@ -28,7 +28,7 @@ namespace GestionStages.Controllers
         {
             if (id == 0)
             {
-                ViewBag.PageTitle = lang.AjouterUnStage;
+                ViewBag.PageTitle = lang.AjouterRestriction;
                 ViewBag.IconTitle = "add_circle";
                 ViewBag.IconButton = "send";
                 ViewBag.ColorButton = "green";
@@ -36,7 +36,7 @@ namespace GestionStages.Controllers
             }
             else
             {
-                ViewBag.PageTitle = lang.ModifierUnStage;
+                ViewBag.PageTitle = lang.AjouterUnMilieuDeStage;
                 ViewBag.IconTitle = "create";
                 ViewBag.Restriction = repo.GetRestrictionByID(id);
                 ViewBag.IconButton = "create";

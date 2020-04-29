@@ -42,7 +42,8 @@ BEGIN
     UPDATE Restriction
     SET Titre = @Titre_IN,
         [Description] = @Descr_IN,
-        Etat = @Etat_IN
+        Etat = @Etat_IN,
+        DateHeureModification = GETDATE()
     WHERE IDRestriction = @IDRestriction_IN
 END
 GO

@@ -88,6 +88,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a restriction.
+        /// </summary>
+        public static string AjouterRestriction {
+            get {
+                return ResourceManager.GetString("AjouterRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add an internship site.
         /// </summary>
         public static string AjouterUnMilieuDeStage {
@@ -250,6 +259,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restrictions list.
+        /// </summary>
+        public static string ListeRestriction {
+            get {
+                return ResourceManager.GetString("ListeRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internship list.
         /// </summary>
         public static string ListeStage {
@@ -282,6 +300,15 @@ namespace GestionStages.Properties {
         public static string Modifier {
             get {
                 return ResourceManager.GetString("Modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify a restriction.
+        /// </summary>
+        public static string ModifierRestriction {
+            get {
+                return ResourceManager.GetString("ModifierRestriction", resourceCulture);
             }
         }
         
@@ -403,7 +430,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Reset.
+        ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Reset {
             get {
@@ -412,7 +439,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Back.
+        ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Retour {
             get {

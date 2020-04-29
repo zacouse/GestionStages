@@ -307,4 +307,13 @@
 	<data name="Reset" xml:space="preserve">
 		<value>Reset</value>
 	</data>
+	<data name="ListeRestriction" xml:space="preserve">
+		<value>Restrictions list</value>
+	</data>
+	<data name="AjouterRestriction" xml:space="preserve">
+		<value>Add a restriction</value>
+	</data>
+	<data name="ModifierRestriction" xml:space="preserve">
+		<value>Modify a restriction</value>
+	</data>
 </root>
