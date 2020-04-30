@@ -37,11 +37,11 @@
                         {
                             if (StageAModifier.IDMilieuStage == @lesMilieus[i].IDMilieuStage)
                             {
-                                <option type="hidden" selected value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                        <option type="hidden" selected value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
                             }
                             else
                             {
-                                <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                        <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
                             }
                         }
                     }
@@ -69,7 +69,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
-                <select id="TxtStatut" name="TxtStatut" class = "Validate" required>
+                <select id="TxtStatut" name="TxtStatut" class="Validate" required>
                     <option value="0">@lang.TempsPleins</option>
                     <option value="1">@lang.TempsPartiel</option>
                 </select>
@@ -109,13 +109,13 @@
             <div class="input-field col push-m3 m6 s12 chips chips-autocomplete" name="ChipsRestriction" id="ChipsRestriction"></div>
         </div>
         <div class="row">
-            <div class="input-field col push-m3 m6 s12">
+            <div class="input-field col push-m3 m6 s12 ">
                 <div class="switch" style="text-align:center">
                     <label>
-                        @Html.Label("ChkEtat", @lang.Inactif)
-                        @Html.CheckBox("ChkEtat", StageAModifier.Etat)
+                        @lang.Inactif
+                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@StageAModifier.Etat ">
                         <span class="lever"></span>
-                        @Html.Label("ChkEtat", @lang.Actif)
+                        @lang.Actif
                     </label>
                 </div>
             </div>

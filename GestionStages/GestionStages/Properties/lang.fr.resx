@@ -424,4 +424,10 @@
 	<data name="NumeroChoix" xml:space="preserve">
 		<value>#Choix</value>
 	</data>
+	<data name="Coordinateur" xml:space="preserve">
+		<value>Coordinateur</value>
+	</data>
+	<data name="Etudiant" xml:space="preserve">
+		<value>Étudiant</value>
+	</data>
 </root>

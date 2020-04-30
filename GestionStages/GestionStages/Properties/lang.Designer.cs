@@ -187,6 +187,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Coordinator.
+        /// </summary>
+        public static string Coordinateur {
+            get {
+                return ResourceManager.GetString("Coordinateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Create.
         /// </summary>
         public static string Creer {
@@ -322,6 +331,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Student.
+        /// </summary>
+        public static string Etudiant {
+            get {
+                return ResourceManager.GetString("Etudiant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à February.
         /// </summary>
         public static string Fevrier {
@@ -376,7 +394,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Disabled.
+        ///   Recherche une chaîne localisée semblable à Inactive.
         /// </summary>
         public static string Inactif {
             get {

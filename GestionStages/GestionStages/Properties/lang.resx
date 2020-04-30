@@ -260,7 +260,7 @@
 		<value>Full-Time</value>
 	</data>
 	<data name="Inactif" xml:space="preserve">
-		<value>Disabled</value>
+		<value>Inactive</value>
 	</data>
 	<data name="Creer" xml:space="preserve">
 		<value>Create</value>
@@ -474,5 +474,11 @@
 	</data>
 	<data name="NumeroChoix" xml:space="preserve">
 		<value>Choice#</value>
+	</data>
+	<data name="Coordinateur" xml:space="preserve">
+		<value>Coordinator</value>
+	</data>
+	<data name="Etudiant" xml:space="preserve">
+		<value>Student</value>
 	</data>
 </root>
