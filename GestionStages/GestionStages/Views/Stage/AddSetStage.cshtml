@@ -21,7 +21,7 @@
 
 @{
     Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
-    
+
     if (StageAModifier.IDStage == 0)
     {
         StageAModifier.Etat = true;
@@ -113,7 +113,7 @@
                 <div class="switch" style="text-align:center">
                     <label>
                         @Html.Label("ChkEtat", @lang.Inactif)
-                        @Html.CheckBox("ChkEtat", StageAModifier.Etat)
+                        <input id="ChkEtat" name="ChkEtat" type="checkbox" checked="@StageAModifier.Etat">
                         <span class="lever"></span>
                         @Html.Label("ChkEtat", @lang.Actif)
                     </label>
@@ -157,27 +157,40 @@
                 }
             });
         });
-        $('.chips-autocomplete').chips({
-            autocompleteOptions: {
-                data: {
-                    @{
+
+
+        var external_data = {
+             @{
                         List<Restriction> lesRestriction = ViewBag.LesRestriction;
                         for (int i = 0; i < lesRestriction.Count; i++)
                         {
-                            @Html.Raw("'") @Html.Raw(lesRestriction[i].Titre) @*<input type="hidden" value="@Html.Raw(lesRestriction[i].IDRestriction)"/>*@ @Html.Raw("'") @Html.Raw(": null,");
+                            @Html.Raw("'") @Html.Raw(lesRestriction[i].Titre) @Html.Raw("'") @Html.Raw(": null,");
                         }
-                    }
-                },
-                limit: Infinity,
-                minLength: 1
-            }
+           }
+        }
 
+        $('.chips.chips-autocomplete').chips({
+            autocompleteOptions: {
+                data: external_data,
+                activeIndex: 1
+                //data: [{ id: 1, text: 'Apple' }]
+            },
+            limit: Infinity,
+            onChipAdd: function (e, chip) {
+                var $this = this;
+                $this.chipsData.forEach(function (e, index) {
+                    if (!(e.tag in external_data))
+                        $this.deleteChip(index);
+                })
+            }
         });
         $('#button').click(function () {
-            alert(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData));
-            for (var i = 0; i < (M.Chips.getInstance($('.chips')).chipsData).length; i++) {
-                document.getElementById("Restriction").value += (M.Chips.getInstance($('.chips')).chipsData)[i].tag;
-            }
+            
+            //for (var i = 0; i < (M.Chips.getInstance($('.chips')).chipsData).length; i++) {
+            //    document.getElementById("Restriction").value += (M.Chips.getInstance($('.chips')).chipsData)[i].id;
+            //}
+            alert($('#ChipsRestriction').data('id'));
+            //alert(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData).activeIndex);
 
         });
 
