@@ -107,13 +107,11 @@
         <div class="row" >
             @Html.Label("Restrictions")
             <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
-                
                 <div  class="col m4 s6 black-text" >
                     @Html.Raw("Restrictions possibles")
                     <ul id="sortable1" class="connectedSortable grey">
                     </ul>
                 </div>
-                
                 <div id="Apres" class="col push-m4 m4 s6">
                     @Html.Raw("Restrictions actives")
                     <ul id="sortable2" class="connectedSortable grey">
@@ -144,9 +142,7 @@
                 </button>
             </div>
         </div>
-        <div class="hiddendiv">
-            <input id="Restriction" name="Restriction" type="text" value="">
-        </div>
+            <input id="Restriction" name="Restriction" type="hidden" value="">
     </form>
 }
 @section Scripts {
@@ -211,7 +207,7 @@
         $('#sortable2 li').each(function () {
             ids.push($(this).attr('id'));
         });
-        document.getElementById("Restriction").value = ids.toString();
+        document.getElementById("Restriction").value = ids.toString() ;
     }
     function validate() {
         var isValid = $("#form").validate({

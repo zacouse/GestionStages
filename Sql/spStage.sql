@@ -8,47 +8,48 @@ FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 GO
 
-CREATE Proc pAddSetStageRestriction @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
+Create Proc [dbo].[pAddSetStageRestriction] @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
 AS
 IF @New_IN = 1
 BEGIN
 Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
-select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(@IDRestriction_IN) /*Ajout des restrictions*/
+select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des restrictions*/
 END
 ELSE
 BEGIN
 UPDATE StageRestriction
 SET [Etat] = 0 ,[DateHeureModification] =GETDATE()/*Enlever les ancients qui ne sont pas dans la nouvelle liste*/
-WHERE [IDRestriction] not in (@IDRestriction_IN) and IDStage = @IDStage_IN 
+WHERE [IDRestriction] not in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN 
 
 Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
-select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(@IDRestriction_IN) /*Ajout des nouvelles restrictions*/
-and IDRestriction not in (select IDRestriction  from StageRestriction where IDRestriction in(@IDRestriction_IN) and [IDStage] = @IDStage_IN)
+select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des nouvelles restrictions*/
+and IDRestriction not in (select IDRestriction  from StageRestriction where IDRestriction in(select value from STRING_SPLIT(@IDRestriction_IN,',')) and [IDStage] = @IDStage_IN)
 
 UPDATE StageRestriction
-SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'�tat des restrictions*/
-WHERE [IDRestriction] in (@IDRestriction_IN) and IDStage = @IDStage_IN
+SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restrictions*/
+WHERE [IDRestriction] in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN
 END
 GO
 
-Create PROC pAddSetStage @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPoste_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit, @IDRestriction_IN Varchar(4000),@isNew Bit
+Create PROC [dbo].[pAddSetStage] @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPostes_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit, @IDRestriction_IN Varchar(4000)
 AS
+DECLARE @isNew Bit;
 IF @IDStage_IN = 0
 BEGIN
 INSERT INTO Stage ([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
-VALUES (@IDMilieuStage_IN, @Titre_IN, @Description_IN, @NbPoste_IN, @Statut_IN, @PeriodeTravail_IN, @NbHeureSemaine_IN, @DateDebut_IN, @DateFin_IN, @Etat_IN, GETDATE(), GETDATE())
+VALUES (@IDMilieuStage_IN, @Titre_IN, @Description_IN, @NbPostes_IN, @Statut_IN, @PeriodeTravail_IN, @NbHeureSemaine_IN, @DateDebut_IN, @DateFin_IN, @Etat_IN, GETDATE(), GETDATE())
 set @IDStage_IN =SCOPE_IDENTITY()
 Set @isNew = 1
 END
 ELSE
 BEGIN
 UPDATE Stage 
-SET [IDMilieuStage] = @IDMilieuStage_IN, [Titre] = @Titre_IN, [Description] = @Description_IN, [NbPostes] = @NbPoste_IN, [Statut] = @Statut_IN, [PeriodeTravail] = @PeriodeTravail_IN, [NbHeureSemaine] = @NbHeureSemaine_IN,
+SET [IDMilieuStage] = @IDMilieuStage_IN, [Titre] = @Titre_IN, [Description] = @Description_IN, [NbPostes] = @NbPostes_IN, [Statut] = @Statut_IN, [PeriodeTravail] = @PeriodeTravail_IN, [NbHeureSemaine] = @NbHeureSemaine_IN,
 [DateDebut] = @DateDebut_IN, [DateFin] = @DateFin_IN,[Etat] = @Etat_IN, [DateHeureModification] = GETDATE() 
 WHERE [IDStage] = @IDStage_IN
 Set @isNew = 0
 END
-exec pAddSetStageRestriction @IDStage_IN, @IDRestriction_IN , @isNew 
+exec pAddSetStageRestriction @IDStage_IN, @IDRestriction_IN , @isNew
 GO
 
 CREATE PROC pGetStageByID(@IDStage_IN INT)
