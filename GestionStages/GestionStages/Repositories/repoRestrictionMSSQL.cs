@@ -131,5 +131,24 @@ namespace GestionStages.Repositories
 
             return lesIds;
         }
+
+        public List<Restriction> GetAllStageRestrictionByIdStage(int idStage)
+        {
+            List<Restriction> lesRestriction = new List<Restriction>();
+            sql = new SqlCommand("pGetAllStageRestrictionByIdStage", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = idStage;
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                Restriction restriction = new Restriction();
+                restriction.Titre = (string)dr.GetValue(0);
+                restriction.Description = (string)dr.GetValue(1);
+                lesRestriction.Add(restriction);
+            }
+            conn.Close();
+            return lesRestriction;
+        }
     }
 }

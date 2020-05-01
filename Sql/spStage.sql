@@ -126,13 +126,6 @@ END
 EXEC sp_executesql @SQL
 GO
 
-ALTER PROC [dbo].[pGetStageByID](@IDStage_IN INT)
-AS
-SELECT [IDStage],MilieuStage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.[Titre]
-FROM Stage
-Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
-WHERE [IDStage] = @IDStage_IN;
-
 --INSERT INTO Stage ([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
 --VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', GETDATE(), GETDATE(), 'true', GETDATE(), GETDATE())
 
@@ -140,4 +133,17 @@ WHERE [IDStage] = @IDStage_IN;
 --VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())
 
 GO
+
+create Proc pGetAllStageRestrictionByIdStage @IDStage_IN INT
+AS
+BEGIN
+SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
+Left join StageRestriction ON StageRestriction.IDRestriction = Restriction.IDRestriction
+WHERE StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1
+END
+GO
+
+
+
+
 

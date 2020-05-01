@@ -66,3 +66,7 @@ SET [IDStage] = @IDStage_IN,[Titre] =@Titre_IN,[Description] =@Description_IN,[E
 WHERE [IDStageRestriction] = @IDStageRestriction_IN
 END
 GO
+
+CREATE PROC pGetRestrictionIdByIdStage(@IDStage_IN INT)
+AS
+SELECT IDRestriction FROM StageRestriction WHERE IDStage=@IDStage_IN AND Etat = 1

@@ -30,6 +30,7 @@ namespace GestionStages.Repositories
         List<Restriction> GetRestrictions(string titre,string descr);
         List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
+        List<Restriction> GetAllStageRestrictionByIdStage(int idStage);
         void SaveRestriction(int id, string titre,string descr,bool etat);
         List<int> GetRestrictionIDFromStageID(int StageId);
     }

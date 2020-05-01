@@ -45,7 +45,7 @@ namespace GestionStages.Controllers
                 ViewBag.ColorButton = "green";
                 ViewBag.TextButton = lang.Creer;
                 ViewBag.LinkBack = "../Stage/ListeStage";
-                
+                ViewBag.LesRestrictionUtilise = new List<int>();
             }
             else
             {
@@ -69,6 +69,8 @@ namespace GestionStages.Controllers
             ViewBag.IconTitle = "remove_red_eye";
 
             ViewBag.LeStage = repo.GetStageByID(id);
+
+            ViewBag.LesRestrictions = repoRestriction.GetAllStageRestrictionByIdStage(id);
 
             ViewBag.ColorButtonBack = "grey";
             ViewBag.TextButtonBack = lang.Retour;
