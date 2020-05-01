@@ -104,9 +104,22 @@
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
-        <div class="row">
-            @Html.Label("ChipsRestriction", "Restriction")
-            <div class="input-field col push-m3 m6 s12 chips chips-autocomplete" name="ChipsRestriction" id="ChipsRestriction"></div>
+        <div class="row" >
+            @Html.Label("Restrictions")
+            <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
+                
+                <div  class="col m4 s6 black-text" >
+                    @Html.Raw("Restrictions possibles")
+                    <ul id="sortable1" class="connectedSortable grey">
+                    </ul>
+                </div>
+                
+                <div id="Apres" class="col push-m4 m4 s6">
+                    @Html.Raw("Restrictions actives")
+                    <ul id="sortable2" class="connectedSortable grey">
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="input-field col push-m3 m6 s12">
@@ -125,13 +138,13 @@
                 <a class="waves-effect waves-light btn grey" href="@Html.Raw(ViewBag.LinkBack)">@lang.Retour</a>
             </div>
             <div class="col push-m6 m2 push-s5 s3">
-                <button id="button" @*onclick="validate()"*@ class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
+                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.ColorButton)" type="submit" name="action">
                     @Html.Raw(ViewBag.TextButton)
                     <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconButton)</i>
                 </button>
             </div>
         </div>
-        <div class="">
+        <div class="hiddendiv">
             <input id="Restriction" name="Restriction" type="text" value="">
         </div>
     </form>
@@ -156,47 +169,50 @@
                     dateFormat: 'dd-mm-yy'
                 }
             });
+            /***********************************************************/
+            $(function () {
+                $("#sortable1, #sortable2").sortable({
+                    connectWith: ".connectedSortable",
+                    update: function (event, ui) { readRestriction(); }
+                }).disableSelection();
+            });
+
+            fillPossibleRestriction();
+        /***********************************************************/
         });
-
-
-        var external_data = {
-             @{
-                        List<Restriction> lesRestriction = ViewBag.LesRestriction;
-                        for (int i = 0; i < lesRestriction.Count; i++)
-                        {
-                            @Html.Raw("'") @Html.Raw(lesRestriction[i].Titre) @Html.Raw("'") @Html.Raw(": null,");
-                        }
-           }
-        }
-
-        $('.chips.chips-autocomplete').chips({
-            autocompleteOptions: {
-                data: external_data,
-                activeIndex: 1
-                //data: [{ id: 1, text: 'Apple' }]
-            },
-            limit: Infinity,
-            onChipAdd: function (e, chip) {
-                var $this = this;
-                $this.chipsData.forEach(function (e, index) {
-                    if (!(e.tag in external_data))
-                        $this.deleteChip(index);
-                })
-            }
-        });
-        $('#button').click(function () {
-            
-            //for (var i = 0; i < (M.Chips.getInstance($('.chips')).chipsData).length; i++) {
-            //    document.getElementById("Restriction").value += (M.Chips.getInstance($('.chips')).chipsData)[i].id;
-            //}
-            alert($('#ChipsRestriction').data('id'));
-            //alert(JSON.stringify(M.Chips.getInstance($('.chips')).chipsData).activeIndex);
-
-        });
-
     </script>
 }
 <script type="text/javascript">
+    function fillPossibleRestriction() {
+        var ul = document.getElementById("sortable1");
+        @{
+            List<Restriction> lesRestriction = ViewBag.LesRestriction;
+        }
+        var lesRestric = [
+        @for (int i = 0; lesRestriction.Count>i;i++ ) {
+            @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "' }");
+            if(i<lesRestriction.Count-1)
+            {
+                @Html.Raw(",");
+            }
+        }
+        ];
+        for (i = 0; i < lesRestric.length; i++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(lesRestric[i].Titre.toString()));
+            li.setAttribute("id", lesRestric[i].IDRestriction.toString());
+            li.setAttribute("class", "ui-state-default ui-sortable-handle hoverable white-text orange darken-2");
+            ul.appendChild(li);
+        }
+
+    }
+    function readRestriction() {
+        var ids = [];
+        $('#sortable2 li').each(function () {
+            ids.push($(this).attr('id'));
+        });
+        document.getElementById("Restriction").value = ids.toString();
+    }
     function validate() {
         var isValid = $("#form").validate({
             errorElement: "span",
@@ -259,6 +275,24 @@
         padding-left: 2px;
         border: 2px red solid
     }
+
+    #sortable1, #sortable2 {
+        border: 1px solid #eee;
+        width: 142px;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 5px 0 0 0;
+        float: left;
+        margin-right: 10px;
+    }
+
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 120px;
+        }
 </style>
 
 

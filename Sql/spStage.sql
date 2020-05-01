@@ -8,7 +8,7 @@ FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 GO
 
-Create Proc pAddSetStageRestriction @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
+CREATE Proc pAddSetStageRestriction @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
 AS
 IF @New_IN = 1
 BEGIN
@@ -26,7 +26,7 @@ select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction wh
 and IDRestriction not in (select IDRestriction  from StageRestriction where IDRestriction in(@IDRestriction_IN) and [IDStage] = @IDStage_IN)
 
 UPDATE StageRestriction
-SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restrictions*/
+SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'ï¿½tat des restrictions*/
 WHERE [IDRestriction] in (@IDRestriction_IN) and IDStage = @IDStage_IN
 END
 GO
@@ -132,8 +132,8 @@ FROM Stage
 Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 
---INSERT INTO Stage ([IDMilieuStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
---VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', '2020-04-01', '2020-04-30', 'true', GETDATE(), GETDATE())
+--INSERT INTO Stage ([IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat], [DateHeureCreation], [DateHeureModification])
+--VALUES ('1', 'Chercheur test2', 'Chercheur pour la Corps.inc', '1', '1', '2', '40', GETDATE(), GETDATE(), 'true', GETDATE(), GETDATE())
 
 --INSERT INTO MilieuStage ([Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat],[DateHeureCreation],[DateHeureModification])
 --VALUES('Corps.inc','Entrepise Dragon Ball', '00300030we','rue principal','D5B7Z4','ouest city','Ouest','Dragon Ball','000-292-0000','true', GETDATE(), GETDATE())

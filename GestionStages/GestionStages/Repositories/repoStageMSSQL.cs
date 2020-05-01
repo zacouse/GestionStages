@@ -141,7 +141,7 @@ namespace GestionStages.Repositories
             }
             return lesStages;
         }
-        public void SaveStage(Stage stage, string[] idRestriction)
+        public void SaveStage(Stage stage, string idRestriction)
         {
             sql = new SqlCommand("pAddSetStage", conn);
             try
