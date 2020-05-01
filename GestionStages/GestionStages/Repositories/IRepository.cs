@@ -31,6 +31,7 @@ namespace GestionStages.Repositories
         List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
         void SaveRestriction(int id, string titre,string descr,bool etat);
+        List<int> GetRestrictionIDFromStageID(int StageId);
     }
 
     interface IEtudiantRepository

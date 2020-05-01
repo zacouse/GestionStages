@@ -33,6 +33,7 @@ namespace GestionStages.Controllers
             if (Duplicate)
             {
                 ViewBag.LeStage = repo.GetStageByID(idStage);
+                ViewBag.LesRestrictionUtilise = repoRestriction.GetRestrictionIDFromStageID(idStage);
                 ViewBag.LeStage.IDStage = 0;
                 idStage = 0;
             }
@@ -55,6 +56,7 @@ namespace GestionStages.Controllers
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
                 ViewBag.LinkBack = "../Stage/VisionnerStage/" + idStage;
+                ViewBag.LesRestrictionUtilise = repoRestriction.GetRestrictionIDFromStageID(idStage);
             }
             ViewBag.lesMilieus = repoMilieu.GetAllMilieuStage();
             ViewBag.LesRestriction = repoRestriction.GetAllRestriction();
@@ -83,7 +85,6 @@ namespace GestionStages.Controllers
         }
         public void SaveStage(int id)
         {
-            string s = Request.Form["Restriction"];
             repo.SaveStage(new Stage(id, Convert.ToInt32(Request.Form["TxtMilieuStage"]), Request.Form["TxtTitre"], Request.Form["TxtaDescription"],Convert.ToInt32(Request.Form["TxtNbPostes"]), Convert.ToInt32(Request.Form["TxtStatut"]), Convert.ToInt32(Request.Form["TxtPeriodeTravail"]), Convert.ToInt32(Request.Form["TxtNombreDHeureParSemaine"]), DateTime.Parse(Request.Form["TxtDateDeDebut"]), DateTime.Parse(Request.Form["TxtDateDeFin"]), Request.Form["ChkEtat"] == "on"), Request.Form["Restriction"]);
             Response.Redirect("../ListeStage");
         }

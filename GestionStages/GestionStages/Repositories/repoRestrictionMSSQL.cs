@@ -112,5 +112,24 @@ namespace GestionStages.Repositories
             sql.ExecuteNonQuery();
             conn.Close();
         }
+
+        public List<int> GetRestrictionIDFromStageID(int StageId)
+        {
+            List<int> lesIds = new List<int>();
+            sql = new SqlCommand("pGetRestrictionIdByIdStage", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = StageId;
+
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                lesIds.Add((int)dr.GetValue(0));
+            }
+            conn.Close();
+
+            return lesIds;
+        }
     }
 }

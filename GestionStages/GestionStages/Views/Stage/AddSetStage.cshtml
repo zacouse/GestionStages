@@ -180,13 +180,21 @@
 }
 <script type="text/javascript">
     function fillPossibleRestriction() {
-        var ul = document.getElementById("sortable1");
+        var ulNonActif = document.getElementById("sortable1");
+        var ulActif = document.getElementById("sortable2");
         @{
             List<Restriction> lesRestriction = ViewBag.LesRestriction;
+            List<int> lesIdRestrictionUtilise = ViewBag.LesRestrictionUtilise;
         }
         var lesRestric = [
         @for (int i = 0; lesRestriction.Count>i;i++ ) {
-            @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "' }");
+            if(lesIdRestrictionUtilise.Contains(@lesRestriction[i].IDRestriction))
+            {
+                @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "', Added:'TRUE' }");
+            } else
+            {
+                @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "', Added:'FALSE' }");
+            }
             if(i<lesRestriction.Count-1)
             {
                 @Html.Raw(",");
@@ -198,7 +206,12 @@
             li.appendChild(document.createTextNode(lesRestric[i].Titre.toString()));
             li.setAttribute("id", lesRestric[i].IDRestriction.toString());
             li.setAttribute("class", "ui-state-default ui-sortable-handle hoverable white-text orange darken-2");
-            ul.appendChild(li);
+            if (lesRestric[i].Added.toString() == "TRUE") {
+                ulActif.appendChild(li);
+            } else {
+                ulNonActif.appendChild(li);
+            }
+            
         }
 
     }
