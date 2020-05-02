@@ -15,7 +15,7 @@
 @{
     if (ViewBag.error != null && ViewBag.error != "")
     {
-    @Html.Raw(ViewBag.error);
+        @Html.Raw(ViewBag.error);
     }
 }
 
@@ -82,6 +82,21 @@
         </div>
     </div>
     <div class="row">
+        @Html.Label("Restrictions")
+        <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
+            <div class="col m4 s6 black-text">
+                @Html.Raw("Restrictions possibles")
+                <ul id="sortable1" class="connectedSortable grey">
+                </ul>
+            </div>
+            <div id="Apres" class="col push-m4 m4 s6">
+                @Html.Raw("Restrictions actives")
+                <ul id="sortable2" class="connectedSortable grey">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
             <div class="switch" style="text-align:center">
                 <label>
@@ -93,21 +108,80 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col push-m3 m2 s4">
-                <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
-            </div>
-            <div class="col push-m6 m2 push-s5 s3">
-                <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
-                    @Html.Raw(ViewBag.TexteBouton)
-                    <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconeBouton)</i>
-                </button>
-            </div>
+    <div class="row">
+        <div class="col push-m3 m2 s4">
+            <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
         </div>
+        <div class="col push-m6 m2 push-s5 s3">
+            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
+                @Html.Raw(ViewBag.TexteBouton)
+                <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconeBouton)</i>
+            </button>
+        </div>
+    </div>
+    <input id="Restriction" name="Restriction" type="hidden" value="">
 </form>
 
+@section Scripts {
+    <script >
+        $(document).ready(function () {
+            /***********************************************************/
+            $(function () {
+                $("#sortable1, #sortable2").sortable({
+                    connectWith: ".connectedSortable",
+                    update: function (event, ui) { readRestriction(); }
+                }).disableSelection();
+            });
 
+            fillPossibleRestriction();
+            /***********************************************************/
+        });
+    </script>
+}
 <script type='text/javascript'>
+    function fillPossibleRestriction() {
+        var ulNonActif = document.getElementById("sortable1");
+        var ulActif = document.getElementById("sortable2");
+        @{
+            List<Restriction> lesRestriction = ViewBag.LesRestriction;
+            List<int> lesIdRestrictionUtilise = ViewBag.LesRestrictionUtilise;
+        }
+        var lesRestric = [
+        @for (int i = 0; lesRestriction.Count>i;i++ ) {
+            if(lesIdRestrictionUtilise.Contains(@lesRestriction[i].IDRestriction))
+            {
+                @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "', Added:'TRUE' }");
+            } else
+            {
+                @Html.Raw("{ IDRestriction: '" + @lesRestriction[i].IDRestriction.ToString() + "', Titre: '" + @lesRestriction[i].Titre.ToString() + "', Added:'FALSE' }");
+            }
+            if(i<lesRestriction.Count-1)
+            {
+                @Html.Raw(",");
+            }
+        }
+        ];
+        for (i = 0; i < lesRestric.length; i++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(lesRestric[i].Titre.toString()));
+            li.setAttribute("id", lesRestric[i].IDRestriction.toString());
+            li.setAttribute("class", "ui-state-default ui-sortable-handle hoverable white-text orange darken-2");
+            if (lesRestric[i].Added.toString() == "TRUE") {
+                ulActif.appendChild(li);
+            } else {
+                ulNonActif.appendChild(li);
+            }
+
+        }
+
+    }
+    function readRestriction() {
+        var ids = [];
+        $('#sortable2 li').each(function () {
+            ids.push($(this).attr('id'));
+        });
+        document.getElementById("Restriction").value = ids.toString() ;
+    }
     function validate() {
         var isValid = $("#form").validate({
             errorElement: "span",
@@ -171,6 +245,7 @@
         }
     };
 </script>
+
 <style>
     span.error {
         color: red;
@@ -178,4 +253,21 @@
         padding-left: 2px;
         border: 2px red solid
     }
+    #sortable1, #sortable2 {
+        border: 1px solid #eee;
+        width: 142px;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 5px 0 0 0;
+        float: left;
+        margin-right: 10px;
+    }
+
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 120px;
+        }
 </style>

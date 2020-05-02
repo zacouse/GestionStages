@@ -9,7 +9,7 @@ namespace GestionStages.Repositories
     interface IMilieuStageRepository
     {
         List<MilieuStage> GetAllMilieuStage();
-        void SaveMilieuStage(MilieuStage milieu);
+        void SaveMilieuStage(MilieuStage milieu, string idRestriction);
         MilieuStage GetMilieuStageById(int id);
         List<MilieuStage> GetMilieuStage(string titre, string address);
     }
@@ -31,8 +31,10 @@ namespace GestionStages.Repositories
         List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
         List<Restriction> GetAllStageRestrictionByIdStage(int idStage);
+        List<Restriction> GetAllMilieuStageRestrictionByIdMilieuStage(int idMilieuStage);
         void SaveRestriction(int id, string titre,string descr,bool etat);
         List<int> GetRestrictionIDFromStageID(int StageId);
+        List<int> GetRestrictionIDFromMilieuStageID(int MilieuStageId);
     }
 
     interface IEtudiantRepository

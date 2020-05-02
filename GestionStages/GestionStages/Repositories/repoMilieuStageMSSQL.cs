@@ -92,22 +92,30 @@ namespace GestionStages.Repositories
             }
             return milieu;
         }
-        public void SaveMilieuStage(MilieuStage milieu)
+        public void SaveMilieuStage(MilieuStage milieu, string idRestriction)
         {
-            sql = new SqlCommand();
+            sql = new SqlCommand("pAddSetMilieuStage", conn);
             try
             {
+                sql.CommandType = CommandType.StoredProcedure;
+                sql.Parameters.Add("@IDMilieuStage_IN", SqlDbType.Int).Value = milieu.IDMilieuStage;
+                sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = milieu.Titre;
+                sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = milieu.Description;
+                sql.Parameters.Add("@NoCivique_IN", SqlDbType.VarChar).Value = milieu.NoCivique;
+                sql.Parameters.Add("@Rue_IN", SqlDbType.Int).Value = milieu.Rue;
+                sql.Parameters.Add("@CodePostal_IN", SqlDbType.VarChar).Value = milieu.CodePostal;
+                sql.Parameters.Add("@Ville_IN", SqlDbType.VarChar).Value = milieu.Ville;
+                sql.Parameters.Add("@Province_IN", SqlDbType.VarChar).Value = milieu.Province;
+                sql.Parameters.Add("@Pays_IN", SqlDbType.VarChar).Value = milieu.Pays;
+                sql.Parameters.Add("@NoTelephone_IN", SqlDbType.VarChar).Value = milieu.NoTelephone;
+                sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = milieu.Etat;
+                sql.Parameters.Add("@IDRestriction_IN", SqlDbType.VarChar).Value = idRestriction;
                 conn.Open();
-                sql.Connection = conn;
-                sql.CommandText = "EXEC pAddSetMilieuStage'" + milieu.IDMilieuStage + "','" + milieu.Titre + "','" +
-                    milieu.Description + "','" + milieu.NoCivique + "','" + milieu.Rue + "','" + milieu.CodePostal +
-                    "','" + milieu.Ville + "','" + milieu.Province + "','" + milieu.Pays + "','" + milieu.NoTelephone +
-                    "','" + milieu.Etat + "'";
-                int row = sql.ExecuteNonQuery();
+                sql.ExecuteNonQuery();
             }
-            catch
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             finally
             {

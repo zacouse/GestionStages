@@ -131,6 +131,24 @@ namespace GestionStages.Repositories
 
             return lesIds;
         }
+        public List<int> GetRestrictionIDFromMilieuStageID(int MilieuStageId)
+        {
+            List<int> lesIds = new List<int>();
+            sql = new SqlCommand("pGetRestrictionIdByIdMilieu", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDMilieu_IN", SqlDbType.Int).Value = MilieuStageId;
+
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                lesIds.Add((int)dr.GetValue(0));
+            }
+            conn.Close();
+
+            return lesIds;
+        }
 
         public List<Restriction> GetAllStageRestrictionByIdStage(int idStage)
         {
@@ -138,6 +156,25 @@ namespace GestionStages.Repositories
             sql = new SqlCommand("pGetAllStageRestrictionByIdStage", conn);
             sql.CommandType = CommandType.StoredProcedure;
             sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = idStage;
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                Restriction restriction = new Restriction();
+                restriction.Titre = (string)dr.GetValue(0);
+                restriction.Description = (string)dr.GetValue(1);
+                lesRestriction.Add(restriction);
+            }
+            conn.Close();
+            return lesRestriction;
+        }
+
+        public List<Restriction> GetAllMilieuStageRestrictionByIdMilieuStage(int idMilieuStage)
+        {
+            List<Restriction> lesRestriction = new List<Restriction>();
+            sql = new SqlCommand("pGetAllMilieuStageRestrictionByIdMilieuStage", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.Add("@IDMilieuStage_IN", SqlDbType.Int).Value = idMilieuStage;
             conn.Open();
             dr = sql.ExecuteReader();
             while (dr.Read())

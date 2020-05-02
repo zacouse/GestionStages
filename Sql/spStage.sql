@@ -134,16 +134,11 @@ GO
 
 GO
 
-create Proc pGetAllStageRestrictionByIdStage @IDStage_IN INT
-AS
-BEGIN
-SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
-Left join StageRestriction ON StageRestriction.IDRestriction = Restriction.IDRestriction
-WHERE StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1
-END
-GO
-
-
-
-
-
+--create Proc pGetAllStageRestrictionByIdStage @IDStage_IN INT
+--AS
+--BEGIN
+--SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
+--Left join StageRestriction ON StageRestriction.IDRestriction = Restriction.IDRestriction
+--WHERE StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1
+--END
+--GO

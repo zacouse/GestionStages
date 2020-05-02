@@ -70,3 +70,28 @@ GO
 CREATE PROC pGetRestrictionIdByIdStage(@IDStage_IN INT)
 AS
 SELECT IDRestriction FROM StageRestriction WHERE IDStage=@IDStage_IN AND Etat = 1
+go
+
+create Proc pGetAllStageRestrictionByIdStage @IDStage_IN INT
+AS
+BEGIN
+SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
+Left join StageRestriction ON StageRestriction.IDRestriction = Restriction.IDRestriction
+WHERE StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1
+END
+GO
+--RestrictionMilieu
+
+CREATE PROC pGetRestrictionIdByIdMilieu(@IDMilieu_IN INT)
+AS
+SELECT IDRestriction FROM MilieuStageRestriction WHERE IDMilieuStage=@IDMilieu_IN AND Etat = 1
+go
+
+create Proc pGetAllMilieuStageRestrictionByIdMilieuStage @IDMilieuStage_IN INT
+AS
+BEGIN
+SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
+Left join MilieuStageRestriction ON MilieuStageRestriction.IDRestriction = Restriction.IDRestriction
+WHERE MilieuStageRestriction.IDMilieuStage = @IDMilieuStage_IN  AND MilieuStageRestriction.Etat = 1
+END
+GO
