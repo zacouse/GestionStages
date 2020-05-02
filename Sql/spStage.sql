@@ -101,6 +101,7 @@ BEGIN
 
     SET @SQL = @SQL + ' ) '
 END
+
 EXEC sp_executesql @SQL
 GO
 
@@ -160,16 +161,16 @@ GO
 CREATE PROC pGetChoixStageByIdEtudiant
 @IdEtudiant_IN INT
 AS
-SELECT [IDStageEtudiant]
-      ,[IDStage]
-      ,[IDEtudiant]
-      ,[NumeroChoix]
-      ,[ChoixFinal]
+SELECT [IDStageEtudiant]
+      ,[IDStage]
+      ,[IDEtudiant]
+      ,[NumeroChoix]
+      ,[ChoixFinal]
       ,[Etat] FROM StageEtudiant WHERE IDEtudiant = @IdEtudiant_IN and Etat = '1' ;
 go
-CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
-AS
-SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
-FROM Stage
-WHERE [IDMilieuStage] = @IdMilieu_IN;
+CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
+AS
+SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
+FROM Stage
+WHERE [IDMilieuStage] = @IdMilieu_IN;
 GO

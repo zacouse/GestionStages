@@ -13,14 +13,6 @@
     </div>
 </div>
 
-@{
-    if (ViewBag.error != null && ViewBag.error != "")
-    {
-        @Html.Raw(ViewBag.error);
-    }
-
-}
-
 <div id="search" class="row">
     <h1>@lang.FiltreDeRecherche</h1>
     <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">

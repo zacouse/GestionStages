@@ -88,7 +88,16 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add an internship site.
+        ///   Looks up a localized string similar to Add a restriction.
+        /// </summary>
+        public static string AjouterRestriction {
+            get {
+                return ResourceManager.GetString("AjouterRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an internship site.
         /// </summary>
         public static string AjouterUnMilieuDeStage {
             get {
@@ -502,7 +511,16 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Internship list.
+        ///   Looks up a localized string similar to Restrictions list.
+        /// </summary>
+        public static string ListeRestriction {
+            get {
+                return ResourceManager.GetString("ListeRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internship list.
         /// </summary>
         public static string ListeStage {
             get {
@@ -655,7 +673,16 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Update an internship site.
+        ///   Looks up a localized string similar to Modify a restriction.
+        /// </summary>
+        public static string ModifierRestriction {
+            get {
+                return ResourceManager.GetString("ModifierRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update an internship site.
         /// </summary>
         public static string ModifierUnMilieuDeStage {
             get {
@@ -844,7 +871,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Reset.
+        ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Reset {
             get {
@@ -853,7 +880,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Back.
+        ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Retour {
             get {
