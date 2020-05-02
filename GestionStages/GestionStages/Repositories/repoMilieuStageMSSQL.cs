@@ -98,11 +98,11 @@ namespace GestionStages.Repositories
             try
             {
                 sql.CommandType = CommandType.StoredProcedure;
-                sql.Parameters.Add("@IDMilieuStage_IN", SqlDbType.Int).Value = milieu.IDMilieuStage;
+                sql.Parameters.Add("@Id_IN", SqlDbType.Int).Value = milieu.IDMilieuStage;
                 sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = milieu.Titre;
                 sql.Parameters.Add("@Description_IN", SqlDbType.VarChar).Value = milieu.Description;
                 sql.Parameters.Add("@NoCivique_IN", SqlDbType.VarChar).Value = milieu.NoCivique;
-                sql.Parameters.Add("@Rue_IN", SqlDbType.Int).Value = milieu.Rue;
+                sql.Parameters.Add("@Rue_IN", SqlDbType.VarChar).Value = milieu.Rue;
                 sql.Parameters.Add("@CodePostal_IN", SqlDbType.VarChar).Value = milieu.CodePostal;
                 sql.Parameters.Add("@Ville_IN", SqlDbType.VarChar).Value = milieu.Ville;
                 sql.Parameters.Add("@Province_IN", SqlDbType.VarChar).Value = milieu.Province;

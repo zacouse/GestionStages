@@ -135,6 +135,21 @@
                 </tbody>
             </table>
         </div>
+        <div class="row">
+            @Html.Label("AcordionRestriction", "Listes des restrictions", new { style="padding-bottom:5px;"})
+            <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
+                @{
+                    List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
+                    for (int i = 0; i < lesRestrictions.Count; i++)
+                    {
+                        <li>
+                            <div class="collapsible-header">@lesRestrictions[i].Titre</div>
+                            <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
         <div class="col s12">
             <hr />
             <div class="row">
@@ -150,4 +165,18 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    <script>
+        //$(document).ready(function () {
+        //    $("#Restriction").accordion({
+        //        collapsible: true
+        //    });
+        //});
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+
+    </script>
 }
