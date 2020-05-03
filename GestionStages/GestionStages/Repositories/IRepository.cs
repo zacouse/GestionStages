@@ -9,7 +9,7 @@ namespace GestionStages.Repositories
     interface IMilieuStageRepository
     {
         List<MilieuStage> GetAllMilieuStage();
-        void SaveMilieuStage(MilieuStage milieu);
+        void SaveMilieuStage(MilieuStage milieu, string idRestriction);
         MilieuStage GetMilieuStageById(int id);
         List<MilieuStage> GetMilieuStage(string titre, string address);
     }
@@ -19,7 +19,7 @@ namespace GestionStages.Repositories
         List<Stage> GetAllStage();
         List<Stage> GetAllStageActif();
         List<Stage> GetAllStageInactif();
-        void SaveStage(Stage stage);
+        void SaveStage(Stage stage, string idRestriction);
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive);
         List<Stage> GetStagesByIdMilieu(int milieu);
@@ -31,8 +31,13 @@ namespace GestionStages.Repositories
     interface IRestrictionRepository
     {
         List<Restriction> GetRestrictions(string titre,string descr);
+        List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
+        List<Restriction> GetAllStageRestrictionByIdStage(int idStage);
+        List<Restriction> GetAllMilieuStageRestrictionByIdMilieuStage(int idMilieuStage);
         void SaveRestriction(int id, string titre,string descr,bool etat);
+        List<int> GetRestrictionIDFromStageID(int StageId);
+        List<int> GetRestrictionIDFromMilieuStageID(int MilieuStageId);
     }
 
     interface IEtudiantRepository

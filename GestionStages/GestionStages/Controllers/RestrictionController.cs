@@ -47,10 +47,10 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public IActionResult SaveRestriction(int idRestriction,string txtTitre,string txtDescription, bool ChkEtat)
+        public void SaveRestriction(int id,string txtTitre,string txtDescription, bool ChkEtat)
         {
-            repo.SaveRestriction(idRestriction, txtTitre, txtDescription, ChkEtat);
-            return View("ListeRestriction");
+            repo.SaveRestriction(id, txtTitre, txtDescription, ChkEtat);
+            Response.Redirect("../ListeRestriction");
         }
     }
 }
