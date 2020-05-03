@@ -49,7 +49,7 @@ namespace GestionStages.Controllers
 
         public void SaveRestriction(int id,string txtTitre,string txtDescription, bool ChkEtat)
         {
-            repo.SaveRestriction(id, txtTitre, txtDescription, ChkEtat);
+            repo.SaveRestriction(id, txtTitre, txtDescription, Request.Form["ChkEtat"] == "on");
             Response.Redirect("../ListeRestriction");
         }
     }
