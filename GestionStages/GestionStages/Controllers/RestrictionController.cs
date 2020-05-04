@@ -33,17 +33,18 @@ namespace GestionStages.Controllers
                 ViewBag.IconButton = "send";
                 ViewBag.ColorButton = "green";
                 ViewBag.TextButton = lang.Creer;
+                ViewBag.LinkBack = "../Restriction/ListeRestriction";
             }
             else
             {
-                ViewBag.PageTitle = lang.AjouterUnMilieuDeStage;
+                ViewBag.PageTitle = lang.ModifierRestriction;
                 ViewBag.IconTitle = "create";
                 ViewBag.Restriction = repo.GetRestrictionByID(id);
                 ViewBag.IconButton = "create";
                 ViewBag.ColorButton = "orange";
                 ViewBag.TextButton = lang.Modifier;
+                ViewBag.LinkBack = "../ListeRestriction";
             }
-            ViewBag.LinkBack = "../ListeRestriction";
             return View();
         }
 
