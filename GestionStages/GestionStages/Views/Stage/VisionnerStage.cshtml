@@ -77,6 +77,21 @@
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
+        @if (!ViewBag.isStudent)
+        {
+            <div class="row">
+                <div class="input-field col push-s3 s6 ">
+                    <div class="switch" style="text-align:center">
+                        <label>
+                            @lang.Inactif
+                            <input disabled id="ChkEtat" name="ChkEtat" type="checkbox" checked="@VisionnerStage.Etat">
+                            <span class="lever"></span>
+                            @lang.Actif
+                        </label>
+                    </div>
+                </div>
+            </div>
+        }
         <div class="row">
             @Html.Label("AcordionRestriction", "Listes des restrictions")
             <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
@@ -114,11 +129,6 @@
 
 @section Scripts {
     <script>
-        //$(document).ready(function () {
-        //    $("#Restriction").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
