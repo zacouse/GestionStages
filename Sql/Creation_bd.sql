@@ -213,6 +213,14 @@ AS
 	WHERE Etudiant.Etat = 1
 GO
 
+CREATE PROC pGetAllActivePersonneContact
+AS
+	SELECT IDPersonneContact,Nom,Prenom,Courriel,Etat
+	FROM PersonneContact WHERE Etat=1
+GO
+insert into PersonneContact(Nom,Prenom,Courriel,Etat)
+values('Zeppeli','Cesar','Jo@Joke.ca',1)
+
 --INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
 --VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),
 --	('Milieu2','descr','2','2','B2B 2B2','Quebec','QC','Canada','(123) 123-5678',1)

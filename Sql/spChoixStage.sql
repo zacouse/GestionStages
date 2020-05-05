@@ -7,4 +7,5 @@ SELECT etu.IDEtudiant,prog.Nom as 'NomProgramme',etu.NoDA,etu.Prenom,etu.Nom,etu
 left join Etudiant etu ON StageEtudiant.IDEtudiant = etu.IDEtudiant 
 left join Programme prog on etu.IDProgramme = prog.IDProgramme
 WHERE IDStage = @IdStage_IN AND StageEtudiant.Etat = 1
+order by StageEtudiant.NumeroChoix
 GO
