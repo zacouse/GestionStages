@@ -92,20 +92,24 @@
                 </div>
             </div>
         }
+    <div class="row">
+        <div>
+            @Html.Label("AcordionRestriction", "Listes des restrictions", new { @class = "input-field col push-s3 s6" })
+        </div>
+    </div>
         <div class="row">
-            @Html.Label("AcordionRestriction", "Listes des restrictions")
-            <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
-                @{
-                    List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
-                    for (int i = 0; i < lesRestrictions.Count; i++)
-                    {
-                        <li>
-                            <div class="collapsible-header">@lesRestrictions[i].Titre</div>
-                            <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
-                        </li>
+                <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
+                    @{
+                        List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
+                        for (int i = 0; i < lesRestrictions.Count; i++)
+                        {
+                            <li>
+                                <div class="collapsible-header">@lesRestrictions[i].Titre</div>
+                                <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
+                            </li>
+                        }
                     }
-                }
-            </ul>
+                </ul>
         </div>
         <div class="col s12">
             <div class="row">
