@@ -13,23 +13,26 @@
     </div>
 </div>
 
-<div id="search" class="row">
-    <h1>@lang.FiltreDeRecherche</h1>
-    <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">
-        <div class="input-field col  m6 s12">
-            @Html.TextBox("txtTitre", "")
-            <label for="Title">@lang.Titre</label>
+<ul id="search" class="collapsible">
+    <li>
+        <div class="collapsible-header">@lang.FiltreDeRecherche</div>
+        <div class="collapsible-body">
+            <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">
+                <div class="  input-field col  m6 s12">
+                    @Html.TextBox("txtTitre", "")
+                    <label for="Title">@lang.Titre</label>
+                </div>
+                <div class=" input-field col  m6 s12">
+                    @Html.TextBox("txtAdresse", "")
+                    <label for="Address">@lang.Adresse</label>
+                </div>
+                <div class=" row">
+                    <div class="col xl3 push-xl9 l4 push-l8 m5 push-m7 s4 push-s8 right-align"><a class="btn light-blue white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a></div>
+                </div>
+            </form>
         </div>
-
-        <div class="input-field col  m6 s12">
-            @Html.TextBox("txtAdresse", "")
-            <label for="Address">@lang.Adresse</label>
-        </div>
-        <div class="row">
-            <div class="col xl3 push-xl9 l4 push-l8 m5 push-m7 s4 push-s8 right-align"><a class="btn light-blue white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a></div>
-        </div>
-    </form>
-</div>
+    </li>
+</ul>
 
 <table class="highlight">
     <thead>
@@ -65,10 +68,13 @@
 @section Scripts
 {
     <script>
+        //$(document).ready(function () {
+        //    $("#search").accordion({
+        //        collapsible: true
+        //    });
+        //});
         $(document).ready(function () {
-            $("#search").accordion({
-                collapsible: true
-            });
+            $('.collapsible').collapsible();
         });
     </script>
 }
