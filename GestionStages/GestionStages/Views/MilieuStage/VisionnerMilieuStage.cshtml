@@ -135,7 +135,11 @@
             </table>
         </div>
         <div class="row">
-            @Html.Label("AcordionRestriction", "Listes des restrictions", new { style="padding-bottom:5px;"})
+            <div>
+                @Html.Label("AcordionRestriction", "Listes des restrictions", new { @class = "input-field col push-s3 s6" })
+            </div>
+        </div>
+        <div class="row">
             <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
                 @{
                     List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
