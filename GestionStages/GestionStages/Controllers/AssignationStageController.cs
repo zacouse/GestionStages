@@ -26,7 +26,7 @@ namespace GestionStages.Controllers
 
         public IActionResult AddSetAssignationStage()
         {
-            List < AssignationStageEtudiant > lesStages = new List<AssignationStageEtudiant>();
+            List <AssignationStageEtudiant> lesStages = new List<AssignationStageEtudiant>();
             List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
             foreach(Stage stage in stagesToAssign)
             {

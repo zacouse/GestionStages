@@ -220,6 +220,14 @@ AS
 GO
 insert into PersonneContact(Nom,Prenom,Courriel,Etat)
 values('Zeppeli','Cesar','Jo@Joke.ca',1)
+GO
+
+CREATE PROC pGetPersonneContactByStageID(@IDStage_IN INT)
+AS
+SELECT PersonneContact.IDPersonneContact,PersonneContact.Nom,PersonneContact.Prenom,PersonneContact.Courriel,PersonneContact.Etat 
+FROM PersonneContact
+INNER JOIN PersonneContactStage ON PersonneContactStage.IDPersonneContact = PersonneContact.IDPersonneContact AND @IDStage_IN = PersonneContactStage.IDStage
+GO
 
 --INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
 --VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +41,30 @@ namespace GestionStages.Repositories
             }
             conn.Close();
             return lesPersonnesContact;
+        }
+
+        public PersonneContact GetPersonneContactByStageID(int stageID)
+        {
+            PersonneContact personneContact = new PersonneContact();
+
+            sql = new SqlCommand("pGetPersonneContactByStageID", conn);
+
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = stageID;
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                personneContact.IDPersonneContact = (int)dr.GetValue(0);
+                personneContact.Nom = (string)dr.GetValue(1);
+                personneContact.Prenom = (string)dr.GetValue(2);
+                personneContact.Courriel = (string)dr.GetValue(3);
+                personneContact.Etat = (bool)dr.GetValue(4);
+            }
+            conn.Close();
+
+            return null;
         }
     }
 }
