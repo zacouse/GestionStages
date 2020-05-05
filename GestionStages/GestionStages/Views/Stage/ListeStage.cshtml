@@ -12,104 +12,106 @@
     </div>
 </div>
 
-
-<div id="search">
-    <h3>@lang.FiltreDeRecherche</h3>
-    <div>
-        <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
-            <div class="row">
-                <div class="col s12 m6 l3">
-                    <div class="input-field">
-                        @Html.TextBox("txtTitre", "")
-                        <label for="txtTitre">@lang.Titre</label>
+<ul class="collapsible">
+    <li>
+        <div class="collapsible-header">@lang.FiltreDeRecherche</div>
+        <div class="collapsible-body">
+            <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
+                <div class="row">
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            @Html.TextBox("txtTitre", "")
+                            <label for="txtTitre">@lang.Titre</label>
+                        </div>
+                        <div class="input-field">
+                            @Html.TextBox("txtMilieu", "")
+                            <label for="txtMilieu">@lang.MilieuDeStage</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMilieu", "")
-                        <label for="txtMilieu">@lang.MilieuDeStage</label>
+                    <div class="col s12 m6 l3">
+                        <div class="input-field">
+                            @Html.TextBox("txtMinH", "")
+                            <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
+                        </div>
+                        <div class="input-field">
+                            @Html.TextBox("txtMaxH", "")
+                            <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col s12 m6 l3">
-                    <div class="input-field">
-                        @Html.TextBox("txtMinH", "")
-                        <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
+                    <div class="col s12 m6 l2">
+                        <div class="input-field">
+                            @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
+                            <label for="txtMinDate">@lang.DateDeDebut</label>
+                        </div>
+                        <div class="input-field">
+                            @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
+                            <label for="txtMaxDate">@lang.DateDeFin</label>
+                        </div>
                     </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMaxH", "")
-                        <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
-                    </div>
-                </div>
-                <div class="col s12 m6 l2">
-                    <div class="input-field">
-                        @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                        <label for="txtMinDate">@lang.DateDeDebut</label>
-                    </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                        <label for="txtMaxDate">@lang.DateDeFin</label>
-                    </div>
-                </div>
-                <div class="col s12 m3 l2">
-                    <label>@lang.PeriodeDeTravail</label>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsJour", true, new { @class = "filled-in" })
-                                <span>@lang.Jour</span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsSoir", true, new { @class = "filled-in" })
-                                <span>@lang.Soiree</span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsNuit", true, new { @class = "filled-in" })
-                                <span>@lang.Nuit</span>
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                @if (!ViewBag.isStudent)
-                {
                     <div class="col s12 m3 l2">
-                        <label>Etat</label>
+                        <label>@lang.PeriodeDeTravail</label>
                         <div class="input-field row">
                             <p>
                                 <label>
-                                    @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                                    <span>@lang.Actif</span>
+                                    @Html.CheckBox("chkIsJour", true, new { @class = "filled-in" })
+                                    <span>@lang.Jour</span>
                                 </label>
                             </p>
                         </div>
                         <div class="input-field row">
                             <p>
                                 <label>
-                                    @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                                    <span>@lang.Inactif</span>
+                                    @Html.CheckBox("chkIsSoir", true, new { @class = "filled-in" })
+                                    <span>@lang.Soiree</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsNuit", true, new { @class = "filled-in" })
+                                    <span>@lang.Nuit</span>
                                 </label>
                             </p>
                         </div>
                     </div>
-                }
-                <div class="hiddendiv">
-                    @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
+                    @if (!ViewBag.isStudent)
+                    {
+                        <div class="col s12 m3 l2">
+                            <label>Etat</label>
+                            <div class="input-field row">
+                                <p>
+                                    <label>
+                                        @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                        <span>@lang.Actif</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="input-field row">
+                                <p>
+                                    <label>
+                                        @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                        <span>@lang.Inactif</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    <div class="hiddendiv">
+                        @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
+                    </div>
+                    <div class="col s6 m6 l6">
+                        <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
+                    </div>
+                    <div class="col s6 m6 l6 right-align">
+                        <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                    </div>
                 </div>
-                <div class="col s6 m6 l6">
-                    <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
-                </div>
-                <div class="col s6 m6 l6 right-align">
-                    <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+            </form>
+        </div>
+
+    </li>
+</ul>
 
 <table id="liste" class="highlight responsive-table">
     <thead>
@@ -226,6 +228,7 @@
             $("#search").accordion({
                 collapsible: true
             });
+            $('.collapsible').collapsible();
             $('select').formSelect();
 
             $('.datepicker').datepicker({
