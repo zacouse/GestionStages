@@ -294,36 +294,8 @@ namespace GestionStages.Repositories
             return lesStages;
         }
 
-        public void SaveChoixStage(ChoixStageEtudiant choixStageEtudiant)
-        {
-
-            try
-            {
-                sql = new SqlCommand("pAddSetChoixStage", conn);
-                sql.CommandType = CommandType.StoredProcedure;
-
-                sql.Parameters.Add("@IdStageEtudiant_IN", SqlDbType.Int).Value = choixStageEtudiant.IDChoixStageEtudiant;
-                sql.Parameters.Add("@IdStage_IN", SqlDbType.Int).Value = choixStageEtudiant.IDStage;
-                sql.Parameters.Add("@IdEtudiant_IN", SqlDbType.Int).Value = choixStageEtudiant.IDEtudiant;
-                sql.Parameters.Add("@NumeroChoix_IN", SqlDbType.Int).Value = choixStageEtudiant.NumeroChoix;
-                sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = choixStageEtudiant.ChoixFinal;
-                sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = choixStageEtudiant.Etat;
-
-
-                conn.Open();
-                int row = sql.ExecuteNonQuery();
-            }
-            catch
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-
-        public List<ChoixStageEtudiant> getChoixStage(string idEtudiant)
+        public void SaveChoixStage(int IDChoixStageEtudiant,int IDStage, int IDEtudiant, int NumeroChoix, bool ChoixFinal, bool Etat)        {
+            try            {                sql = new SqlCommand("pAddSetChoixStage", conn);                sql.CommandType = CommandType.StoredProcedure;                sql.Parameters.Add("@IdStageEtudiant_IN", SqlDbType.Int).Value = IDChoixStageEtudiant;                sql.Parameters.Add("@IdStage_IN", SqlDbType.Int).Value = IDStage;                sql.Parameters.Add("@IdEtudiant_IN", SqlDbType.Int).Value = IDEtudiant;                sql.Parameters.Add("@NumeroChoix_IN", SqlDbType.Int).Value = NumeroChoix;                sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = ChoixFinal;                sql.Parameters.Add("@Etat_IN", SqlDbType.Bit).Value = Etat;                conn.Open();                int row = sql.ExecuteNonQuery();            }            catch            {            }            finally            {                conn.Close();            }        }        public List<ChoixStageEtudiant> getChoixStage(string idEtudiant)
         {
             List<ChoixStageEtudiant> lesChoix = new List<ChoixStageEtudiant>();
             sql = new SqlCommand("pGetChoixStageByIdEtudiant", conn);
@@ -337,7 +309,7 @@ namespace GestionStages.Repositories
             {
                 ChoixStageEtudiant choix = new ChoixStageEtudiant();
                 choix.IDChoixStageEtudiant = (int)dr.GetValue(0);
-                choix.IDStage = (int)dr.GetValue(1);
+                choix.setIDStage((int)dr.GetValue(1));
                 choix.IDEtudiant = (int)dr.GetValue(2);
                 choix.NumeroChoix = (int)dr.GetValue(3);
                 choix.ChoixFinal = (bool)dr.GetValue(4);
