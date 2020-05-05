@@ -14,12 +14,13 @@ namespace GestionStages.Controllers
     {
         Repositories.IStageRepository repo;
         Repositories.IMilieuStageRepository repoMilieu;
-        Repositories.IRestrictionRepository repoRestriction;
+        Repositories.IRestrictionRepository repoRestriction;        Repositories.IChoixStageEtudiantRepository repoChoixStageEtudiant;
         public StageController(IConfiguration configuration) : base()
         {
             repo = new Repositories.repoStageMSSQL(configuration);
             repoMilieu = new Repositories.repoMilieuStageMSSQL(configuration);
             repoRestriction = new Repositories.repoRestrictionMSSQL(configuration);
+            repoChoixStageEtudiant = new Repositories.repoChoixStageEtudiant(configuration);
         }
 
         public IActionResult AddSetStage(int idStage = 0, bool Duplicate = false)
@@ -86,7 +87,7 @@ namespace GestionStages.Controllers
             if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }            return View();
         }
         private void AfficherChoixEtudiant(string IdEtudiant)        {            if (int.TryParse(IdEtudiant, out int intIdEtudiant))            {
-                List<ChoixStageEtudiant> choixStages = repo.getChoixStage(IdEtudiant);
+                List<ChoixStageEtudiant> choixStages = repoChoixStageEtudiant.getChoixStage(IdEtudiant);
                 if (choixStages.Count > 0)                {
                     ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.getIDStage()).FirstOrDefault();                    ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.getIDStage()).FirstOrDefault();                    ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.getIDStage()).FirstOrDefault();                }            }        }
         [HttpGet]
@@ -97,9 +98,9 @@ namespace GestionStages.Controllers
             ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);            ViewBag.isStudent = isStudent;            if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }            return View("ListeStage");        }
 
         [HttpPost]
-        public void AddSetChoixStage(string Choix1, string Choix2, string Choix3, string IdEtudiant, bool isStudent = false)        {            if (int.TryParse(Choix1, out int Choix1Int))            {                repo.SaveChoixStage(0, Choix1Int, Convert.ToInt32(IdEtudiant), 1, false, true);            }            else            {                repo.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 1);            }
-            if (int.TryParse(Choix2, out int Choix2Int))            {                repo.SaveChoixStage(0, Choix2Int, Convert.ToInt32(IdEtudiant), 2, false, true);            }            else            {                repo.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 2);            }
-            if (int.TryParse(Choix3, out int Choix3Int))            {                repo.SaveChoixStage(0, Choix3Int, Convert.ToInt32(IdEtudiant), 3, false, true);            }            else            {                repo.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 3);            }
+        public void AddSetChoixStage(string Choix1, string Choix2, string Choix3, string IdEtudiant, bool isStudent = false)        {            if (int.TryParse(Choix1, out int Choix1Int))            {                repoChoixStageEtudiant.SaveChoixStage(0, Choix1Int, Convert.ToInt32(IdEtudiant), 1, false, true);            }            else            {                repoChoixStageEtudiant.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 1);            }
+            if (int.TryParse(Choix2, out int Choix2Int))            {                repoChoixStageEtudiant.SaveChoixStage(0, Choix2Int, Convert.ToInt32(IdEtudiant), 2, false, true);            }            else            {                repoChoixStageEtudiant.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 2);            }
+            if (int.TryParse(Choix3, out int Choix3Int))            {                repoChoixStageEtudiant.SaveChoixStage(0, Choix3Int, Convert.ToInt32(IdEtudiant), 3, false, true);            }            else            {                repoChoixStageEtudiant.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 3);            }
             ViewBag.lesStages = repo.GetAllStage();            ViewBag.isStudent = isStudent;
             if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }
             Response.Redirect("../Stage/ListeStage");        }
