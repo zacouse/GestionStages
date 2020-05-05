@@ -88,7 +88,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a restriction.
+        ///   Recherche une chaîne localisée semblable à Add a restriction.
         /// </summary>
         public static string AjouterRestriction {
             get {
@@ -97,7 +97,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add an internship site.
+        ///   Recherche une chaîne localisée semblable à Add an internship site.
         /// </summary>
         public static string AjouterUnMilieuDeStage {
             get {
@@ -138,6 +138,24 @@ namespace GestionStages.Properties {
         public static string AoutShort {
             get {
                 return ResourceManager.GetString("AoutShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Assign.
+        /// </summary>
+        public static string Assigner {
+            get {
+                return ResourceManager.GetString("Assigner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Assign internship to students.
+        /// </summary>
+        public static string AssignerLesStages {
+            get {
+                return ResourceManager.GetString("AssignerLesStages", resourceCulture);
             }
         }
         
@@ -268,6 +286,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Student detail.
+        /// </summary>
+        public static string DetailEtudiant {
+            get {
+                return ResourceManager.GetString("DetailEtudiant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sunday.
         /// </summary>
         public static string Dimanche {
@@ -345,6 +372,15 @@ namespace GestionStages.Properties {
         public static string Etudiant {
             get {
                 return ResourceManager.GetString("Etudiant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not assign student.
+        /// </summary>
+        public static string EtudiantNonAssigner {
+            get {
+                return ResourceManager.GetString("EtudiantNonAssigner", resourceCulture);
             }
         }
         
@@ -511,7 +547,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restrictions list.
+        ///   Recherche une chaîne localisée semblable à Restrictions list.
         /// </summary>
         public static string ListeRestriction {
             get {
@@ -520,7 +556,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Internship list.
+        ///   Recherche une chaîne localisée semblable à Internship list.
         /// </summary>
         public static string ListeStage {
             get {
@@ -673,7 +709,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modify a restriction.
+        ///   Recherche une chaîne localisée semblable à Modify a restriction.
         /// </summary>
         public static string ModifierRestriction {
             get {
@@ -682,7 +718,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update an internship site.
+        ///   Recherche une chaîne localisée semblable à Update an internship site.
         /// </summary>
         public static string ModifierUnMilieuDeStage {
             get {
@@ -696,6 +732,15 @@ namespace GestionStages.Properties {
         public static string ModifierUnStage {
             get {
                 return ResourceManager.GetString("ModifierUnStage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Last name.
+        /// </summary>
+        public static string Nom {
+            get {
+                return ResourceManager.GetString("Nom", resourceCulture);
             }
         }
         
@@ -853,6 +898,24 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Workstation.
+        /// </summary>
+        public static string Postes {
+            get {
+                return ResourceManager.GetString("Postes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à First name.
+        /// </summary>
+        public static string Prenom {
+            get {
+                return ResourceManager.GetString("Prenom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Province.
         /// </summary>
         public static string Province {
@@ -871,7 +934,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset.
+        ///   Recherche une chaîne localisée semblable à Reset.
         /// </summary>
         public static string Reset {
             get {
@@ -880,7 +943,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Recherche une chaîne localisée semblable à Back.
         /// </summary>
         public static string Retour {
             get {
@@ -925,6 +988,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save.
+        /// </summary>
+        public static string Sauvegarder {
+            get {
+                return ResourceManager.GetString("Sauvegarder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à September.
         /// </summary>
         public static string Septembre {
@@ -952,6 +1024,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Internship waiting to be assign.
+        /// </summary>
+        public static string StageEnAttenteAssignation {
+            get {
+                return ResourceManager.GetString("StageEnAttenteAssignation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Intership available at this site.
         /// </summary>
         public static string StagesDisponiblesDansCeMilieu {
@@ -966,6 +1047,15 @@ namespace GestionStages.Properties {
         public static string Statut {
             get {
                 return ResourceManager.GetString("Statut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supervisor.
+        /// </summary>
+        public static string Superviseur {
+            get {
+                return ResourceManager.GetString("Superviseur", resourceCulture);
             }
         }
         

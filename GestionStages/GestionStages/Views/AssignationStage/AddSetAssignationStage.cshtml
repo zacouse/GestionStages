@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewData["Title"] = ViewBag.TitrePage;
+}
+<br />
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col l7 s12">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+        @ViewBag.TitrePage
+        <hr />
+    </div>
+    <div class="col l5 hide-on-med-and-down">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.StagesDisponiblesDansCeMilieu
+        <hr />
+    </div>
+</div>
+
+@{
+    if (ViewBag.error != null && ViewBag.error != "")
+    {
+        @Html.Raw(ViewBag.error);
+    }
+}
+
+@{
+    List<ChoixStageEtudiant> ChoixDesEtudiants = ViewBag.Milieu;
+
+    @{
+        var nombrePosteOccupe = 0;
+        List<Object> lesStages = ViewBag.lesStages;
+        for (int i = 0; i < lesStages.Count; i++)
+        {
+            <div class="collapsible">
+                <h1>@lesStages[i].TitreMilieuStage</h1>
+                <h2>@lesStages[i].TitreStage</h2>
+                <h3 class="right">@lang.Postes : @nombrePosteOccupe / @lesStages[i].NombrePosteDisponnible</h3>
+                <table id="@lesStages[i].IdStage" class="highlight responsive-table">
+                    <thead>
+                        <tr>
+                            <td>@lang.DetailEtudiant</td>
+                            <td>DA</td>
+                            <td>@lang.Prenom</td>
+                            <td>@lang.Nom</td>
+                            <td>@lang.NumeroChoix</td>
+                            <td>@lang.Choisir ?</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            List<Etudiant> lesEtudiants2 = lesStages[i].lesEtudiants;
+                            for (int j = 0; j < lesEtudiants2.Count; j++)
+                            {
+                                <tr ondblclick="/*Modal*/">
+                                    <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                    <td>@lesEtudiants2[j].NoDA</td>
+                                    <td>@lesEtudiants2[j].Prenom</td>
+                                    <td>@lesEtudiants2[j].Nom</td>
+                                    <td>@lesEtudiants2[j].NoChoix</td>
+                                    <td><!--Case à cocher--></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="input-field col m6 s12">
+                        <select id="TxtSuperviseur" name="TxtSuperviseur" class="Validate" required>
+                            @{
+                                List<PersonneContact> lesSuperviseurs = ViewBag.lesSuperviseurs;
+                                for (int j = 0; j < lesSuperviseurs.Count; j++)
+                                {
+                                    <option value="@lesSuperviseurs[j].IDPersonneContact">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Prenom</option>
+                                }
+                            }
+                        </select>
+                        @Html.Label("TxtSuperviseur", @lang.Superviseur)
+                    </div>
+                    <div class="col m6 s12">
+                        <a class="btn light-blue white-text" href="@Url.Action("AssignStage", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
+    <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text col s12 hide-on-large-only hide-on-extra-large-only">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.StagesDisponiblesDansCeMilieu
+        <hr />
+    </div>
+    <div class="col l5 s12">
+        <table id="liste" class="highlight responsive-table">
+            <thead>
+                <tr>
+                    <td>@lang.DetailEtudiant</td>
+                    <td>DA</td>
+                    <td>@lang.Prenom</td>
+                    <td>@lang.Nom</td>
+                    <td>@lang.Choisir ?</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    List<Etudiant> lesEtudiants = ViewBag.lesStages;
+                    for (int i = 0; i < lesEtudiants.Count; i++)
+                    {
+                        <tr ondblclick="/*Modal*/">
+                            <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                            <td>@lesEtudiants[i].NoDA</td>
+                            <td>@lesEtudiants[i].Prenom</td>
+                            <td>@lesEtudiants[i].Nom</td>
+                            <td><!--Button assign-->></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col s12">
+        <hr />
+        <div class="row">
+            <div class="col push-l1 l3 s4">
+                <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeMilieuStage", "MilieuStage")">@lang.Retour</a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        //$(document).ready(function () {
+        //    $("#Restriction").accordion({
+        //        collapsible: true
+        //    });
+        //});
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+
+    </script>
+}

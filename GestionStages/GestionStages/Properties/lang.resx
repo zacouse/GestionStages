@@ -490,4 +490,34 @@
 	<data name="ModifierRestriction" xml:space="preserve">
 		<value>Modify a restriction</value>
 	</data>
+	<data name="EtudiantNonAssigner" xml:space="preserve">
+		<value>Not assign student</value>
+	</data>
+	<data name="StageEnAttenteAssignation" xml:space="preserve">
+		<value>Internship waiting to be assign</value>
+	</data>
+	<data name="DetailEtudiant" xml:space="preserve">
+		<value>Student detail</value>
+	</data>
+	<data name="Nom" xml:space="preserve">
+		<value>Last name</value>
+	</data>
+	<data name="Prenom" xml:space="preserve">
+		<value>First name</value>
+	</data>
+	<data name="Superviseur" xml:space="preserve">
+		<value>Supervisor</value>
+	</data>
+	<data name="Sauvegarder" xml:space="preserve">
+		<value>Save</value>
+	</data>
+	<data name="Postes" xml:space="preserve">
+		<value>Workstation</value>
+	</data>
+	<data name="Assigner" xml:space="preserve">
+		<value>Assign</value>
+	</data>
+	<data name="AssignerLesStages" xml:space="preserve">
+		<value>Assign internship to students</value>
+	</data>
 </root>
