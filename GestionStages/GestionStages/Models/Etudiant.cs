@@ -21,9 +21,10 @@ namespace GestionStages.Models
             Courriel = "";
             Programme = "";
             Photo = null;
+            Etat = false;
         }
 
-        public Etudiant(int id,string prenom,string nom,int noDA,string email,string progamme,byte[] photo)
+        public Etudiant(int id,string prenom,string nom,int noDA,string email,string progamme,byte[] photo,bool etat)
         {
             IDEtudiant = id;
             Prenom = prenom;
@@ -32,6 +33,7 @@ namespace GestionStages.Models
             Courriel = email;
             Programme = progamme;
             Photo = photo;
+            Etat = etat;
         }
     }
 }

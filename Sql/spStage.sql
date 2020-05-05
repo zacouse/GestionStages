@@ -209,3 +209,13 @@ SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], 
 FROM Stage
 WHERE [IDMilieuStage] = @IdMilieu_IN;
 GO
+
+CREATE PROC pGetStagesForAssignement
+AS
+SELECT Stage.[IDStage],Stage.[IDMilieuStage],Stage.[Titre],Stage.[NbPostes],Stage.[Etat],MilieuStage.[Titre] as 'TitreMilieu'from Stage 
+left outer join( select * from StageEtudiant where Etat = 1 ) StageEtu on Stage.IDStage = StageEtu.IDStage
+left join MilieuStage on Stage.IDMilieuStage = MilieuStage.IDMilieuStage
+WHERE Stage.Etat = 1
+GROUP BY Stage.[IDStage],Stage.[IDMilieuStage],Stage.[Titre],Stage.[NbPostes],Stage.[Etat],MilieuStage.[Titre]
+ORDER BY COUNT(StageEtu.IDStage) desc
+GO

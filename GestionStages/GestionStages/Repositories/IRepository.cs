@@ -23,6 +23,7 @@ namespace GestionStages.Repositories
         Stage GetStageByID(int stageId);
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive);
         List<Stage> GetStagesByIdMilieu(int milieu);
+        List<Stage> GetStagesForAssignement();
     }
 
     interface IRestrictionRepository
@@ -46,6 +47,12 @@ namespace GestionStages.Repositories
     {
         void SaveChoixStage(int IDChoixStageEtudiant, int IDStage, int IDEtudiant, int NumeroChoix, bool ChoixFinal, bool Etat);
         void RemoveChoixStage(int idEtudiant, int numeroChoix);
-        List<ChoixStageEtudiant> getChoixStage(string idEtudiant);
+        List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
+        List<ChoixEtudiant> GetChoixEtudiant(int idStage);
+    }
+
+    interface IPersonneContactRepository
+    {
+        List<PersonneContact> GetAllActivePersonneContact();
     }
 }

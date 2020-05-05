@@ -47,7 +47,7 @@ namespace GestionStages.Repositories
             }
         }
 
-        public List<ChoixStageEtudiant> getChoixStage(string idEtudiant)
+        public List<ChoixStageEtudiant> GetChoixStage(string idEtudiant)
         {
             List<ChoixStageEtudiant> lesChoix = new List<ChoixStageEtudiant>();
             sql = new SqlCommand("pGetChoixStageByIdEtudiant", conn);
@@ -61,7 +61,7 @@ namespace GestionStages.Repositories
             {
                 ChoixStageEtudiant choix = new ChoixStageEtudiant();
                 choix.IDChoixStageEtudiant = (int)dr.GetValue(0);
-                choix.setIDStage((int)dr.GetValue(1));
+                choix.IDStage = (int)dr.GetValue(1);
                 choix.IDEtudiant = (int)dr.GetValue(2);
                 choix.NumeroChoix = (int)dr.GetValue(3);
                 choix.ChoixFinal = (bool)dr.GetValue(4);
@@ -86,6 +86,36 @@ namespace GestionStages.Repositories
 
             conn.Close();
 
+        }
+
+        public List<ChoixEtudiant> GetChoixEtudiant(int idStage )
+        {
+            List<ChoixEtudiant> choix = new List<ChoixEtudiant>();
+            sql = new SqlCommand();
+            conn.Open();
+            sql.Connection = conn;
+            sql.CommandText = "EXEC pGetChoixEtudiantByIdStage'" + idStage + "'";
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                ChoixEtudiant choixEtudiant = new ChoixEtudiant();
+                Etudiant etudiant = new Etudiant();
+                etudiant.IDEtudiant = (int)dr.GetValue(0);
+                etudiant.Programme = (string)dr.GetValue(1);
+                etudiant.NoDA = (int)dr.GetValue(2);
+                etudiant.Prenom = (string)dr.GetValue(3);
+                etudiant.Nom = (string)dr.GetValue(4);
+                etudiant.Courriel = (string)dr.GetValue(5);
+                //etudiant.Photo = (Byte[])dr.GetValue(6);
+                etudiant.Etat = (bool)dr.GetValue(7);
+                choixEtudiant.Etudiant = etudiant;
+                choixEtudiant.NoChoix = ((int)dr.GetValue(8)).ToString();
+                choixEtudiant.ChoixFinal = (bool)dr.GetValue(9);
+                choix.Add(choixEtudiant);
+            }
+            conn.Close();
+            
+            return choix;
         }
     }
 }

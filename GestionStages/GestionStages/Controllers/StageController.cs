@@ -87,9 +87,9 @@ namespace GestionStages.Controllers
             if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }            return View();
         }
         private void AfficherChoixEtudiant(string IdEtudiant)        {            if (int.TryParse(IdEtudiant, out int intIdEtudiant))            {
-                List<ChoixStageEtudiant> choixStages = repoChoixStageEtudiant.getChoixStage(IdEtudiant);
+                List<ChoixStageEtudiant> choixStages = repoChoixStageEtudiant.GetChoixStage(IdEtudiant);
                 if (choixStages.Count > 0)                {
-                    ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.getIDStage()).FirstOrDefault();                    ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.getIDStage()).FirstOrDefault();                    ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.getIDStage()).FirstOrDefault();                }            }        }
+                    ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.IDStage).FirstOrDefault();                    ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.IDStage).FirstOrDefault();                    ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.IDStage).FirstOrDefault();                }            }        }
         [HttpGet]
         public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)        {            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);            return View();        }
 
