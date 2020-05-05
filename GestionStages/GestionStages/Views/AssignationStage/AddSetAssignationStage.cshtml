@@ -50,8 +50,8 @@
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                            <tr ondblclick="/*Modal*/">
-                                                <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                            <tr ondblclick="openModal(@lesChoixEtudiants[j].Etudiant.IDEtudiant)">
+                                                <td><a  href="javascript:openModal(@lesChoixEtudiants[j].Etudiant.IDEtudiant)"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
@@ -81,7 +81,6 @@
                             </div>
                         </div>
                     </li>
-
                 }
             }
         </ul>
@@ -131,6 +130,16 @@
     </div>
 </div>
 
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4 id="modalHeader">Erreur de chargement de l'étudiant</h4>
+        <p id="modalContent"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">J'accepte</a>
+    </div>
+</div>
+
 
 @section Scripts {
     <script>
@@ -141,8 +150,13 @@
         //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
+            $('.modal').modal()
+            $('select').formSelect();
         });
-        $('select').formSelect();
+        function openModal(idEtudiant) {
+            var instance = M.Modal.getInstance(document.getElementById("modal1"));
+            instance.open();
+        }
 
     </script>
 }
