@@ -27,21 +27,27 @@
         <div class="input-field col push-m3 m6 s12">
             <select id="TxtMilieuStage" name="TxtMilieuStage" required>
                 @{
-                    List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
-                    for (int i = 0; i < lesMilieus.Count; i++)
+                    List<MilieuStage> lesMilieu = ViewBag.lesMilieus;
+                    for (int i = 0; i < lesMilieu.Count; i++)
                     {
-                        if (StageAModifier.IDMilieuStage == @lesMilieus[i].IDMilieuStage)
+                        if (StageAModifier.IDMilieuStage == @lesMilieu[i].IDMilieuStage)
                         {
-                            <option type="hidden" selected value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                            <option type="hidden" selected value="@lesMilieu[i].IDMilieuStage">@lesMilieu[i].Titre</option>
                         }
                         else
                         {
-                            <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
+                            <option type="hidden" value="@lesMilieu[i].IDMilieuStage">@lesMilieu[i].Titre</option>
                         }
                     }
                 }
             </select>
             @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col push-m3 m6 s12">
+            @Html.TextBox("TxtMilieu", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete-input", required = "required" })
+            @Html.Label("TxtMilieu", @lang.MilieuDeStage)
         </div>
     </div>
     <div class="row">
@@ -168,6 +174,17 @@
 
             fillPossibleRestriction();
         /***********************************************************/
+            $('input.autocomplete').autocomplete({
+                data: {
+                        @{
+                            List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
+                            for (int i = 0; i < lesMilieus.Count; i++)
+                            {
+                                @Html.Raw("'") @Html.Raw(lesMilieus[i].Titre) @Html.Raw("'") @Html.Raw(": null,");
+                            }
+                        }
+                },
+            });
         });
     </script>
 }

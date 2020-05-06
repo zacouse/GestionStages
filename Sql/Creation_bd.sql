@@ -1,6 +1,5 @@
 USE [master]
 GO
-
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = N'GestionStage')
 BEGIN
 	CREATE DATABASE GestionStage 
@@ -238,4 +237,6 @@ GO
 --VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
 --	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
 --GO
+
+
 

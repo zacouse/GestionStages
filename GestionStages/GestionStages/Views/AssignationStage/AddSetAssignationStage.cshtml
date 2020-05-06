@@ -52,14 +52,14 @@
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                                <tr ondblclick="/*Modal*/">
-                                                    <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
-                                                    <td>@lesChoixEtudiants[j].NoChoix</td>
-                                                    <td><!--Case à cocher--></td>
-                                                </tr>
+                                            <tr ondblclick="/*Modal*/">
+                                                <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                                <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
+                                                <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
+                                                <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
+                                                <td>@lesChoixEtudiants[j].NoChoix</td>
+                                                <td>@Html.CheckBox("check", false, new { @class = "filled-in" })</td>
+                                            </tr>
                                             }
                                         }
                                     </tbody>
@@ -137,11 +137,6 @@
 
 @section Scripts {
     <script>
-        //$(document).ready(function () {
-        //    $("#Restriction").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
