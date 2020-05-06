@@ -69,7 +69,7 @@
                                             List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
                                             for (int j = 0; j < lesSuperviseurs.Count; j++)
                                             {
-                                                <option value="@lesSuperviseurs[j].IDPersonneContact">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
+                                                <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact==)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
                                             }
                                         }
                                     </select>

@@ -31,12 +31,18 @@ namespace GestionStages.Controllers
             foreach(Stage stage in stagesToAssign)
             {
                 List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
-                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, null));
+                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));
             }
             ViewBag.lesStages = lesStages;
             ViewBag.lesPersonnesContact = repoPersonneContact.GetAllActivePersonneContact();
             ViewBag.lesEtudiants = repoEtudiant.GetAllEtudiants();
             return View();
+        }
+
+        public void SaveOneStage()
+        {
+            repoChoixStage.SaveOneAssignationStage(0, "");
+            Response.Redirect("../AssignationStage/AddSetAssignationStage");
         }
     }
 }
