@@ -41,18 +41,26 @@ AS
 GO
 --RestrictionStage
 
-Create Proc pAddSetStageRestriction @IDStageRestriction_IN INT, @IDStage_IN INT,@Titre_IN Varchar(100), @Description_IN Varchar(1000),@Etat_IN Bit
+Create Proc [dbo].[pAddSetStageRestriction] @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
 AS
-IF @IDStageRestriction_IN = 0
+IF @New_IN = 1
 BEGIN
-    Insert into StageRestriction([IDStage],[Etat],[DateHeureCreation],[DateHeureModification])
-    Values (@IDStage_IN,@Etat_IN, GETDATE(), GETDATE())
+Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
+select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des restrictions*/
 END
 ELSE
 BEGIN
-    UPDATE StageRestriction
-    SET [IDStage] = @IDStage_IN,[Etat] = @Etat_IN,[DateHeureModification] = GETDATE()
-    WHERE [IDStageRestriction] = @IDStageRestriction_IN
+UPDATE StageRestriction
+SET [Etat] = 0 ,[DateHeureModification] =GETDATE()/*Enlever les ancients qui ne sont pas dans la nouvelle liste*/
+WHERE [IDRestriction] not in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN 
+
+Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
+select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des nouvelles restrictions*/
+and IDRestriction not in (select IDRestriction  from StageRestriction where IDRestriction in(select value from STRING_SPLIT(@IDRestriction_IN,',')) and [IDStage] = @IDStage_IN)
+
+UPDATE StageRestriction
+SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restrictions*/
+WHERE [IDRestriction] in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN
 END
 GO
 

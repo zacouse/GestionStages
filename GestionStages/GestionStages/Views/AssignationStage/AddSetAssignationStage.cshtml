@@ -56,7 +56,7 @@
                                                 <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
                                                 <td>@lesChoixEtudiants[j].NoChoix</td>
-                                                <td><!--Case à cocher--></td>
+                                                <td>@Html.CheckBox("check", false, new { @class = "filled-in" })</td>
                                             </tr>
                                         }
                                     }
@@ -134,11 +134,6 @@
 
 @section Scripts {
     <script>
-        //$(document).ready(function () {
-        //    $("#Restriction").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
