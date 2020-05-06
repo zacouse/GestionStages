@@ -34,51 +34,53 @@
                             <p class="col s2 ">@lang.Postes : @nombrePosteOccupe / @lesStages[i].getNbPostesStage()</p>
                         </div>
                         <div class="collapsible-body">
-                            <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
-                                <thead>
-                                    <tr>
-                                        <td>@lang.DetailEtudiant</td>
-                                        <td>DA</td>
-                                        <td>@lang.Prenom</td>
-                                        <td>@lang.Nom</td>
-                                        <td>@lang.NumeroChoix</td>
-                                        <td>@lang.Choisir ?</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
-                                        for (int j = 0; j < lesChoixEtudiants.Count; j++)
-                                        {
-                                            <tr ondblclick="/*Modal*/">
-                                                <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
-                                                <td>@lesChoixEtudiants[j].NoChoix</td>
-                                                <td><!--Case à cocher--></td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <select id="TxtSuperviseur" name="TxtSuperviseur" class="Validate" required>
+                            <form>
+                                <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <td>@lang.DetailEtudiant</td>
+                                            <td>DA</td>
+                                            <td>@lang.Prenom</td>
+                                            <td>@lang.Nom</td>
+                                            <td>@lang.NumeroChoix</td>
+                                            <td>@lang.Choisir ?</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         @{
-                                            List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
-                                            for (int j = 0; j < lesSuperviseurs.Count; j++)
+                                            List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
+                                            for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                                <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact==)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
+                                                <tr ondblclick="/*Modal*/">
+                                                    <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
+                                                    <td>@lesChoixEtudiants[j].NoChoix</td>
+                                                    <td><!--Case à cocher--></td>
+                                                </tr>
                                             }
                                         }
-                                    </select>
-                                    @Html.Label("TxtSuperviseur", @lang.Superviseur)
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select id="TxtSuperviseur" name="TxtSuperviseur" class="Validate" required>
+                                            @{
+                                                List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
+                                                for (int j = 0; j < lesSuperviseurs.Count; j++)
+                                                {
+                                                    <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
+                                                }
+                                            }
+                                        </select>
+                                        @Html.Label("TxtSuperviseur", @lang.Superviseur)
+                                    </div>
+                                    <div class="col center-align s12">
+                                        <a class="btn light-blue white-text" href="@Url.Action("SaveOneStage", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
+                                    </div>
                                 </div>
-                                <div class="col center-align s12">
-                                    <a class="btn light-blue white-text" href="@Url.Action("AssignStage", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </li>
 
