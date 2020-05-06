@@ -56,7 +56,15 @@
                                                 <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
                                                 <td>@lesChoixEtudiants[j].NoChoix</td>
-                                                <td>@Html.CheckBox("check", false, new { @class = "filled-in" })</td>
+                                                @*<td>@Html.CheckBox("check", false, new { @class = "filled-in" })</td>*@
+                                            <td>
+                                                <p>
+                                                    <label>
+                                                        <input type="checkbox" value="choixFinal"/>
+                                                        <span></span>
+                                                    </label>
+                                                </p>
+                                            </td>
                                             </tr>
                                         }
                                     }
