@@ -34,7 +34,8 @@
                             <p class="col s2 ">@lang.Postes : @nombrePosteOccupe / @lesStages[i].getNbPostesStage()</p>
                         </div>
                         <div class="collapsible-body">
-                            <form>
+                            <form  action="" method="post">
+                                <input type="hidden" name="txtIDStage" value="@lesStages[i].getIDStage()" />
                                 <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
                                     <thead>
                                         <tr>
@@ -70,7 +71,7 @@
                                                 List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
                                                 for (int j = 0; j < lesSuperviseurs.Count; j++)
                                                 {
-                                                    <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
+                                                    <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact==lesStages[i].Superviseur.IDPersonneContact)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
                                                 }
                                             }
                                         </select>

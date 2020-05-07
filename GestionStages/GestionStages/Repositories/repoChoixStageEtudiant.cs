@@ -118,13 +118,14 @@ namespace GestionStages.Repositories
             return choix;
         }
 
-        public void SaveOneAssignationStage(int IDStage,string listEtudiants)
+        public void SaveOneAssignationStage(int IDStage,string listEtudiants,int IDSuperviseur)
         {
             sql = new SqlCommand("pAddSetOneAssignationStage", conn);
             sql.CommandType = CommandType.StoredProcedure;
 
             sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = IDStage;
             sql.Parameters.Add("@ListEtudiants_IN", SqlDbType.VarChar,200).Value = listEtudiants;
+            sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
 
             conn.Open();
             sql.ExecuteNonQuery();

@@ -39,9 +39,9 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public void SaveOneStage()
+        public void SaveOneStage(int txtIDStage,string chkEtudiant,int TxtSuperviseur)
         {
-            repoChoixStage.SaveOneAssignationStage(0, "");
+            repoChoixStage.SaveOneAssignationStage(txtIDStage, "", TxtSuperviseur);
             Response.Redirect("../AssignationStage/AddSetAssignationStage");
         }
     }
