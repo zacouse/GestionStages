@@ -38,5 +38,14 @@ namespace GestionStages.Controllers
             ViewBag.lesEtudiants = repoEtudiant.GetAllEtudiants();
             return View();
         }
+
+        [HttpPost]
+        public void test()
+        {
+
+            repoChoixStage.test(Convert.ToInt32(Request.Form["FinalChoice"]));
+
+        }
+
     }
 }
