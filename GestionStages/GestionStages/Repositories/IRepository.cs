@@ -24,6 +24,8 @@ namespace GestionStages.Repositories
         List<Stage> GetStage(string titre, string descr,string milieu,int minh,int maxh,string minDate,string maxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive);
         List<Stage> GetStagesByIdMilieu(int milieu);
         List<Stage> GetStagesForAssignement();
+
+        
     }
 
     interface IRestrictionRepository
@@ -43,18 +45,19 @@ namespace GestionStages.Repositories
         List<Etudiant> GetAllEtudiants();
     }
 
-    interface IChoixStageEtudiantRepository
-    {
-        void SaveChoixStage(int IDChoixStageEtudiant, int IDStage, int IDEtudiant, int NumeroChoix, bool ChoixFinal, bool Etat);
-        void RemoveChoixStage(int idEtudiant, int numeroChoix);
-        List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
-        List<ChoixEtudiant> GetChoixEtudiant(int idStage);
-        void SaveOneAssignationStage(int IDStage, string listEtudiants,int idSuperviseur);
+    interface IChoixStageEtudiantRepository
+    {
+        void SaveChoixStage(int IDChoixStageEtudiant, int IDStage, int IDEtudiant, int NumeroChoix, bool ChoixFinal, bool Etat);
+        void RemoveChoixStage(int idEtudiant, int numeroChoix);
+        List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
+        List<ChoixEtudiant> GetChoixEtudiant(int idStage);
+        void SaveOneAssignationStage(int IDStage, string listEtudiants,int idSuperviseur);
+        void test(int ChoixFinal);
     }
 
-    interface IPersonneContactRepository
-    {
-        List<PersonneContact> GetAllActivePersonneContact();
-        PersonneContact GetPersonneContactByStageID(int stageID);
+    interface IPersonneContactRepository
+    {
+        List<PersonneContact> GetAllActivePersonneContact();
+        PersonneContact GetPersonneContactByStageID(int stageID);
     }
 }

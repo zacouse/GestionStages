@@ -34,21 +34,20 @@
                             <p class="col s2 ">@lang.Postes : @nombrePosteOccupe / @lesStages[i].getNbPostesStage()</p>
                         </div>
                         <div class="collapsible-body">
-                            <form  action="" method="post">
-                                <input type="hidden" name="txtIDStage" value="@lesStages[i].getIDStage()" />
-                                <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
-                                    <thead>
-                                        <tr>
-                                            <td>@lang.DetailEtudiant</td>
-                                            <td>DA</td>
-                                            <td>@lang.Prenom</td>
-                                            <td>@lang.Nom</td>
-                                            <td>@lang.NumeroChoix</td>
-                                            <td>@lang.Choisir ?</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
+                            <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="ListeEtudiant" value="" />
+                            <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
+                                <thead>
+                                    <tr>
+                                        <td>@lang.DetailEtudiant</td>
+                                        <td>DA</td>
+                                        <td>@lang.Prenom</td>
+                                        <td>@lang.Nom</td>
+                                        <td>@lang.NumeroChoix</td>
+                                        <td>@lang.Choisir ?</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
@@ -58,11 +57,10 @@
                                                 <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
                                                 <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
                                                 <td>@lesChoixEtudiants[j].NoChoix</td>
-                                                @*<td>@Html.CheckBox("check", false, new { @class = "filled-in" })</td>*@
                                             <td>
                                                 <p>
                                                     <label>
-                                                        <input type="checkbox" value="choixFinal"/>
+                                                        <input type="checkbox" onchange="getValueBox(this.value,this.checked,@lesStages[i].getIDStage())" id="@j" name="FinalChoice" value="@lesChoixEtudiants[j].Etudiant.IDEtudiant"/>
                                                         <span></span>
                                                     </label>
                                                 </p>
@@ -89,7 +87,10 @@
                                         <a class="btn light-blue white-text" href="@Url.Action("SaveOneStage", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col center-align s12">
+                                    <a class="btn light-blue white-text" href="@Url.Action("test", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
+                                </div>
+                            </div>
                         </div>
                     </li>
 
@@ -149,6 +150,19 @@
             $('.collapsible').collapsible();
         });
         $('select').formSelect();
+        function getValueBox(value, ischecked,stageId) {
+            if (ischecked) {
+                $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val() + value + ',');
+            }
+            else {
+                if ($('#ListeEtudiant' + stageId).val().replace(',' + value + ',', ',') != $('#ListeEtudiant' + stageId).val()) {
+                    $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val().replace(',' + value + ',', ','));
+                } else {
+                    $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val().replace(value + ',', ''));
+                }
+            }
+
+        }
 
     </script>
 }

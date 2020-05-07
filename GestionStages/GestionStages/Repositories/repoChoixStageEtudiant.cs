@@ -87,6 +87,12 @@ namespace GestionStages.Repositories
             conn.Close();
 
         }
+        
+        public void test(int ChoixFinal)
+        {
+            bool t = false;
+            //t = ChoixFinal;
+        }
 
         public List<ChoixEtudiant> GetChoixEtudiant(int idStage )
         {

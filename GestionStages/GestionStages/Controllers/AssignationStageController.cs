@@ -28,10 +28,10 @@ namespace GestionStages.Controllers
         {
             List <AssignationStageEtudiant> lesStages = new List<AssignationStageEtudiant>();
             List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
-            foreach(Stage stage in stagesToAssign)
-            {
-                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
-                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));
+            foreach(Stage stage in stagesToAssign)
+            {
+                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
+                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));
             }
             ViewBag.lesStages = lesStages;
             ViewBag.lesPersonnesContact = repoPersonneContact.GetAllActivePersonneContact();
@@ -39,10 +39,19 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        public void SaveOneStage(int txtIDStage,string chkEtudiant,int TxtSuperviseur)
-        {
-            repoChoixStage.SaveOneAssignationStage(txtIDStage, "", TxtSuperviseur);
-            Response.Redirect("../AssignationStage/AddSetAssignationStage");
+        public void SaveOneStage(int txtIDStage,string chkEtudiant,int TxtSuperviseur)
+        {
+            repoChoixStage.SaveOneAssignationStage(txtIDStage, "", TxtSuperviseur);
+            Response.Redirect("../AssignationStage/AddSetAssignationStage");
         }
+
+        [HttpPost]
+        public void test()
+        {
+
+            repoChoixStage.test(Convert.ToInt32(Request.Form["FinalChoice"]));
+
+        }
+
     }
 }
