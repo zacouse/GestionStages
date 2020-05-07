@@ -1,0 +1,6 @@
+Ligne 61 Milieu stage controller - changer le link back lorsqu'en dupliquer
+Date début - Date fin -> Mettre le bon format
+Événement qui trigger pas dasn les modification de restriction lorsqu'on enregistre si on touche pas aux restriction
+Ajouter les critères de recherche actif et incatif dans milieu stage.
+Mettre la date du calendrier à la date choisit si disponnible(Duplication)
+La recherche retire le choix de stage
