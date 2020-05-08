@@ -26,6 +26,25 @@
             @Html.TextBox("txtDescr", "")
             <label for="txtDescr">@lang.Description</label>
         </div>
+        <div class="col s12 m3 l2">
+            <label>Etat</label>
+            <div class="input-field row">
+                <p>
+                    <label>
+                        @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                        <span>@lang.Actif</span>
+                    </label>
+                </p>
+            </div>
+            <div class="input-field row">
+                <p>
+                    <label>
+                        @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                        <span>@lang.Inactif</span>
+                    </label>
+                </p>
+            </div>
+        </div>
         <div class="row">
             <div class="col xl3 push-xl9 l4 push-l8 m5 push-m7 s4 push-s8 right-align"><a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a></div>
         </div>
