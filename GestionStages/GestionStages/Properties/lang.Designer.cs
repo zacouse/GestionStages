@@ -223,6 +223,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Email.
+        /// </summary>
+        public static string Courriel {
+            get {
+                return ResourceManager.GetString("Courriel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Create.
         /// </summary>
         public static string Creer {
@@ -237,6 +246,15 @@ namespace GestionStages.Properties {
         public static string CreerUneCopie {
             get {
                 return ResourceManager.GetString("CreerUneCopie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DA.
+        /// </summary>
+        public static string DA {
+            get {
+                return ResourceManager.GetString("DA", resourceCulture);
             }
         }
         
@@ -286,7 +304,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Student detail.
+        ///   Recherche une chaîne localisée semblable à Detail.
         /// </summary>
         public static string DetailEtudiant {
             get {
@@ -345,6 +363,15 @@ namespace GestionStages.Properties {
         public static string Erreur {
             get {
                 return ResourceManager.GetString("Erreur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error while retreiving the current student.
+        /// </summary>
+        public static string ErreurChargementEtudiant {
+            get {
+                return ResourceManager.GetString("ErreurChargementEtudiant", resourceCulture);
             }
         }
         
@@ -417,6 +444,24 @@ namespace GestionStages.Properties {
         public static string FormatValide {
             get {
                 return ResourceManager.GetString("FormatValide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a valid number without decimal . .
+        /// </summary>
+        public static string FormatValideChiffre {
+            get {
+                return ResourceManager.GetString("FormatValideChiffre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a valid number with a maximum of 2 decimal..
+        /// </summary>
+        public static string FormatValideDecimale {
+            get {
+                return ResourceManager.GetString("FormatValideDecimale", resourceCulture);
             }
         }
         
@@ -736,6 +781,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à No email address .
+        /// </summary>
+        public static string NoEmail {
+            get {
+                return ResourceManager.GetString("NoEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Last name.
         /// </summary>
         public static string Nom {
@@ -898,6 +952,15 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Picture.
+        /// </summary>
+        public static string Photo {
+            get {
+                return ResourceManager.GetString("Photo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Workstation.
         /// </summary>
         public static string Postes {
@@ -912,6 +975,15 @@ namespace GestionStages.Properties {
         public static string Prenom {
             get {
                 return ResourceManager.GetString("Prenom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Course of study.
+        /// </summary>
+        public static string Programme {
+            get {
+                return ResourceManager.GetString("Programme", resourceCulture);
             }
         }
         
@@ -939,6 +1011,33 @@ namespace GestionStages.Properties {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Available restriction.
+        /// </summary>
+        public static string RestrictionDisponnible {
+            get {
+                return ResourceManager.GetString("RestrictionDisponnible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restrictions.
+        /// </summary>
+        public static string Restrictions {
+            get {
+                return ResourceManager.GetString("Restrictions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enabled restrictions.
+        /// </summary>
+        public static string RestrictionsActives {
+            get {
+                return ResourceManager.GetString("RestrictionsActives", resourceCulture);
             }
         }
         

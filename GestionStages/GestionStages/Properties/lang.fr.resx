@@ -440,13 +440,13 @@
 		<value>Liste des restrictions</value>
 	</data>
 	<data name="EtudiantNonAssigner" xml:space="preserve">
-		<value>Étudiants non-assigner</value>
+		<value>Étudiants non-assignés</value>
 	</data>
 	<data name="StageEnAttenteAssignation" xml:space="preserve">
 		<value>Stage en attente d'assignation</value>
 	</data>
 	<data name="DetailEtudiant" xml:space="preserve">
-		<value>Détails de l'étudiant</value>
+		<value>Détails </value>
 	</data>
 	<data name="Nom" xml:space="preserve">
 		<value>Nom</value>
@@ -468,5 +468,38 @@
 	</data>
 	<data name="AssignerLesStages" xml:space="preserve">
 		<value>Assigner les stages aux étudiants</value>
+	</data>
+	<data name="NoEmail" xml:space="preserve">
+		<value>Aucune adresse courriel </value>
+	</data>
+	<data name="DA" xml:space="preserve">
+		<value>DA</value>
+	</data>
+	<data name="Programme" xml:space="preserve">
+		<value>Programme</value>
+	</data>
+	<data name="Courriel" xml:space="preserve">
+		<value>Courriel</value>
+	</data>
+	<data name="ErreurChargementEtudiant" xml:space="preserve">
+		<value>Erreur lors du chargement de l'étudiant</value>
+	</data>
+	<data name="Photo" xml:space="preserve">
+		<value>Photo</value>
+	</data>
+	<data name="Restrictions" xml:space="preserve">
+		<value>Restrictions</value>
+	</data>
+	<data name="RestrictionDisponnible" xml:space="preserve">
+		<value>Restriction disponnible</value>
+	</data>
+	<data name="RestrictionsActives" xml:space="preserve">
+		<value>Restriction actives</value>
+	</data>
+	<data name="FormatValideChiffre" xml:space="preserve">
+		<value>Veuillez entrer un chiffre sans décimale.</value>
+	</data>
+	<data name="FormatValideDecimale" xml:space="preserve">
+		<value>Veuillez entrer un nombre valide avec un maximum de 2 décimales.</value>
 	</data>
 </root>

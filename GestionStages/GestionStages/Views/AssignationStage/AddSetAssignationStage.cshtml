@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = ViewBag.TitrePage;
+    ViewData["Title"] = @lang.AssignerLesStages;
 }
 <br />
 <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
@@ -38,7 +38,7 @@
                                 <thead>
                                     <tr>
                                         <td>@lang.DetailEtudiant</td>
-                                        <td>DA</td>
+                                        <td>@lang.DA</td>
                                         <td>@lang.Prenom</td>
                                         <td>@lang.Nom</td>
                                         <td>@lang.NumeroChoix</td>
@@ -99,7 +99,7 @@
             <thead>
                 <tr>
                     <td>@lang.DetailEtudiant</td>
-                    <td>DA</td>
+                    <td>@lang.DA</td>
                     <td>@lang.Prenom</td>
                     <td>@lang.Nom</td>
                     <td>@lang.Choisir ?</td>
@@ -137,7 +137,7 @@
 
 <div id="modal1" class="modal ">
     <div class="modal-content">
-        <h4 id="modalHeader">Erreur de chargement de l'étudiant</h4>
+        <h4 id="modalHeader">@lang.ErreurChargementEtudiant</h4>
         <p id="modalContent"></p>
         <img id="modalPicture" src="">
     </div>
@@ -149,11 +149,6 @@
 
 @section Scripts {
     <script>
-        //$(document).ready(function () {
-        //    $("#Restriction").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
             $('.modal').modal()
@@ -161,12 +156,12 @@
         });
         function openModal(nomPrenom,da,programme,courriel,photo) {
             var instance = M.Modal.getInstance(document.getElementById("modal1"));
-            if (courriel == "") {courriel="Aucune adresse courriel dans les dossiers."}
+            if (courriel == "") {courriel="@lang.NoEmail"}
             document.getElementById("modalHeader").innerText = nomPrenom;
-            document.getElementById("modalContent").innerHTML = "DA : " + da + "<br/> Programme : " + programme + "<br/> Courriel : " + courriel;
+            document.getElementById("modalContent").innerHTML = "@lang.DA : " + da + "<br/> @lang.Programme : " + programme + "<br/> @lang.Courriel : " + courriel;
             if (photo != null && photo != "") {
-            document.getElementById("modalContent").innerHTML += "<br/> Photo <br/>";
-                $('#modalPicture').attr('src', `data:image/png;base64,${photo}`);  // <----- Changer le data type pour image/{Le type de photo sauvegarder}
+            document.getElementById("modalContent").innerHTML += "<br/> @lang.Photo <br/>";
+                $('#modalPicture').attr('src', `data:image/jpeg;base64,${photo}`);  // <----- Changer le data type pour image/{Le type de photo sauvegarder} test avec -> R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7
             }
             instance.open();
         }
