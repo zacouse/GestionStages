@@ -177,6 +177,7 @@ SELECT [IDStageEtudiant]
       ,[ChoixFinal]
       ,[Etat] FROM StageEtudiant WHERE IDEtudiant = @IdEtudiant_IN and Etat = '1' ;
 go
+
 CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
 AS
 SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]

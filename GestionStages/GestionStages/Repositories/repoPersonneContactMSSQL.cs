@@ -64,7 +64,7 @@ namespace GestionStages.Repositories
             }
             conn.Close();
 
-            return null;
+            return personneContact;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = ViewBag.TitrePage;
+    int nombrePosteOccupe = 0;
 }
 <br />
 <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
@@ -18,27 +19,27 @@
 
 <div class="row">
     <div class="col l7 s12">
-        <ul class="collapsible">
-            @{
-                int nombrePosteOccupe = 0;
-                bool SupervisorSelected = false;
-                List<AssignationStageEtudiant> lesStages = ViewBag.lesStages;
-                for (int i = 0; i < lesStages.Count; i++)
-                {
-                    <li>
-                        <div class="collapsible-header">
-                            <p class="col s10">
-                                <b>@lesStages[i].getTitreStage()</b>
-                                <br />
-                                @lesStages[i].getTitreMilieuStage()
-                            </p>
-                            <p class="col s2 ">@lang.Postes : @nombrePosteOccupe / @lesStages[i].getNbPostesStage()</p>
-                        </div>
-                        <div class="collapsible-body">
-                            <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" value="" />
-                            <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
-                                <thead>
-                                    <tr>
+        <form name="formStage" action="@Url.Action("SaveOneStage", "AssignationStage")" method="post">
+            <input type="hidden" value="" name="txtIDStage" id="txtIDStage" />
+            <ul class="collapsible">
+                @{
+                    List<AssignationStageEtudiant> lesStages = ViewBag.lesStages;
+                    for (int i = 0; i < lesStages.Count; i++)
+                    {
+                        <li>
+                            <div class="collapsible-header">
+                                <p class="col s10">
+                                    <b>@lesStages[i].getTitreStage()</b>
+                                    <br />
+                                    @lesStages[i].getTitreMilieuStage()
+                                </p>
+                                <p class="col s2 ">@lang.Postes : <span id="spanPostes"></span> / @lesStages[i].getNbPostesStage()</p>
+                            </div>
+                            <div class="collapsible-body">
+                                <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" value="" />
+                                <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
+                                    <thead>
+                                        <tr>
                                         @*<td>@lang.DetailEtudiant</td>*@
                                         <td>Détails</td>
                                         <td>DA</td>
@@ -54,20 +55,24 @@
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                            <tr ondblclick="/*Modal*/">
-                                                <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
-                                                <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
-                                                <td>@lesChoixEtudiants[j].NoChoix</td>
-                                            <td>
-                                                <p>
-                                                    <label>
-                                                        <input type="checkbox" onchange="getValueBox(this.value,this.checked,@lesStages[i].getIDStage())" id="@j" name="FinalChoice" value="@lesChoixEtudiants[j].Etudiant.IDEtudiant"/>
-                                                        <span></span>
-                                                    </label>
-                                                </p>
-                                            </td>
+                                                <tr ondblclick="/*Modal*/">
+                                                    <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
+                                                    <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
+                                                    <td>@lesChoixEtudiants[j].NoChoix</td>
+                                                    <td>
+                                                        <p>
+                                                            <label>
+                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + lesStages[i].getIDStage() + ",this.checked," + lesStages[i].getIDStage() + ")" })
+                                                                @{ if (lesChoixEtudiants[j].ChoixFinal)
+                                                                   {
+                                                                       nombrePosteOccupe++;
+                                                                   } 
+                                                                }
+                                                                <span></span>
+                                                            </label>
+                                                        </p>
                                                 <td>
                                                     <select id="DropSuperviseur" name="DropSuperviseur" class="Validate">
                                                         @{
@@ -96,7 +101,8 @@
                                 </table>
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <select id="TxtSuperviseur" name="TxtSuperviseur" class="Validate" required>
+                                        <select id="TxtSuperviseur" name="@Html.Raw("txtSuperviseur" + lesStages[i].getIDStage())" class="Validate" required>
+                                            <option value="0"></option>
                                             @{
                                                 List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
                                                 for (int j = 0; j < lesSuperviseurs.Count; j++)
@@ -108,18 +114,16 @@
                                         @Html.Label("TxtSuperviseur", @lang.Superviseur)
                                     </div>
                                     <div class="col center-align s12">
-                                        <a class="btn light-blue white-text" href="@Url.Action("SaveOneStage", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
+                                        <a class="btn light-blue white-text" href="javascript:SaveStage(@lesStages[i].getIDStage())">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
                                     </div>
                                 </div>
-                                <div class="col center-align s12">
-                                    <a class="btn light-blue white-text" href="@Url.Action("test", "AssignationStage")">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
-                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+
+                    }
                 }
-            }
-        </ul>
+            </ul>
+        </form>
     </div>
 
     <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text col s12 hide-on-large-only hide-on-extra-large-only">
@@ -171,9 +175,11 @@
     <script>
         $(document).ready(function () {
             $('.collapsible').collapsible();
+            $('#spanPostes').html(@nombrePosteOccupe);
         });
         $('select').formSelect();
-        function getValueBox(value, ischecked,stageId) {
+
+        function getValueBox(value, ischecked, stageId) {
             if (ischecked) {
                 $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val() + value + ',');
             }
@@ -184,7 +190,11 @@
                     $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val().replace(value + ',', ''));
                 }
             }
+        }
 
+        function SaveStage(stageid) {
+            $('#txtIDStage').val(stageid);
+            document.formStage.submit();
         }
 
     </script>

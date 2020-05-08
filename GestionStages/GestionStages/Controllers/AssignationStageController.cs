@@ -28,21 +28,15 @@ namespace GestionStages.Controllers
         {
             List <AssignationStageEtudiant> lesStages = new List<AssignationStageEtudiant>();
             List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
-            foreach(Stage stage in stagesToAssign)
-            {
-                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
-                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));
-            }
+            foreach(Stage stage in stagesToAssign)            {                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));            }
             ViewBag.lesStages = lesStages;
             ViewBag.lesPersonnesContact = repoPersonneContact.GetAllActivePersonneContact();
             ViewBag.lesEtudiants = repoEtudiant.GetAllEtudiants();
             return View();
         }
 
-        public void SaveOneStage(int txtIDStage,string chkEtudiant,int TxtSuperviseur)
-        {
-            repoChoixStage.SaveOneAssignationStage(txtIDStage, "", TxtSuperviseur);
-            Response.Redirect("../AssignationStage/AddSetAssignationStage");
-        }
+        [HttpPost]
+        public void SaveOneStage(int txtIDStage)        {            string txtEtudiants = Request.Form["ListeEtudiant" + txtIDStage];            int idSuperviseur = Convert.ToInt32(Request.Form["TxtSuperviseur" + txtIDStage]);            repoChoixStage.SaveOneAssignationStage(txtIDStage, txtEtudiants, idSuperviseur);            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+
     }
 }

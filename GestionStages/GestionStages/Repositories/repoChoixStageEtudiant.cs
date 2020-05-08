@@ -87,20 +87,16 @@ namespace GestionStages.Repositories
             conn.Close();
 
         }
-        
-        public void test(int ChoixFinal)
-        {
-            bool t = false;
-            //t = ChoixFinal;
-        }
 
         public List<ChoixEtudiant> GetChoixEtudiant(int idStage )
         {
             List<ChoixEtudiant> choix = new List<ChoixEtudiant>();
-            sql = new SqlCommand();
+
+            sql = new SqlCommand("pGetChoixEtudiantByIdStage", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+
+            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = idStage;
             conn.Open();
-            sql.Connection = conn;
-            sql.CommandText = "EXEC pGetChoixEtudiantByIdStage'" + idStage + "'";
             dr = sql.ExecuteReader();
             while (dr.Read())
             {
