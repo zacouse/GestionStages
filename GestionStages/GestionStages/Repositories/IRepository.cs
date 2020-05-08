@@ -11,7 +11,7 @@ namespace GestionStages.Repositories
         List<MilieuStage> GetAllMilieuStage();
         void SaveMilieuStage(MilieuStage milieu, string idRestriction);
         MilieuStage GetMilieuStageById(int id);
-        List<MilieuStage> GetMilieuStage(string titre, string address);
+        List<MilieuStage> GetMilieuStage(string titre, string address, bool chkIsActive, bool chkIsInactive);
     }
 
     interface IStageRepository
@@ -30,7 +30,7 @@ namespace GestionStages.Repositories
 
     interface IRestrictionRepository
     {
-        List<Restriction> GetRestrictions(string titre,string descr);
+        List<Restriction> GetRestrictions(string titre,string descr, bool chkIsActive, bool chkIsInactive);
         List<Restriction> GetAllRestriction();
         Restriction GetRestrictionByID(int id);
         List<Restriction> GetAllStageRestrictionByIdStage(int idStage);
@@ -52,7 +52,6 @@ namespace GestionStages.Repositories
         List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
         List<ChoixEtudiant> GetChoixEtudiant(int idStage);
         void SaveOneAssignationStage(int IDStage, string listEtudiants,int idSuperviseur);
-        void test(int ChoixFinal);
     }
 
     interface IPersonneContactRepository

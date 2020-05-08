@@ -44,14 +44,5 @@ namespace GestionStages.Controllers
             repoChoixStage.SaveOneAssignationStage(txtIDStage, "", TxtSuperviseur);
             Response.Redirect("../AssignationStage/AddSetAssignationStage");
         }
-
-        [HttpPost]
-        public void test()
-        {
-
-            repoChoixStage.test(Convert.ToInt32(Request.Form["FinalChoice"]));
-
-        }
-
     }
 }
