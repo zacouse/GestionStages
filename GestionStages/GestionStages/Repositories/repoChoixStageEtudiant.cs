@@ -82,7 +82,7 @@ namespace GestionStages.Repositories
             sql.Parameters.Add("@NumeroChoix_IN", SqlDbType.Int).Value = numeroChoix;
 
             conn.Open();
-            int row = sql.ExecuteNonQuery();
+            sql.ExecuteNonQuery();
 
             conn.Close();
 
