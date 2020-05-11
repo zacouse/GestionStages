@@ -502,4 +502,7 @@
 	<data name="FormatValideDecimale" xml:space="preserve">
 		<value>Veuillez entrer un nombre valide avec un maximum de 2 décimales.</value>
 	</data>
+	<data name="ListesDesRestrictionsDuMilieuDeStage" xml:space="preserve">
+		<value>Listes des restrictions du milieu de stage</value>
+	</data>
 </root>

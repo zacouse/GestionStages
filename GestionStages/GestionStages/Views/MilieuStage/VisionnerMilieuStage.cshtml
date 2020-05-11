@@ -2,22 +2,22 @@
 @{
     ViewData["Title"] = ViewBag.TitrePage;
 }
-    <br/>
-    <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
-        <div class="col l5 s12">
-            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
-            @ViewBag.TitrePage
-            <hr />
-        </div>
-        <!--<div class="col push-l4 l4 push-m3 m6 s12">
+<br />
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col l5 s12">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+        @ViewBag.TitrePage
+        <hr />
+    </div>
+    <!--<div class="col push-l4 l4 push-m3 m6 s12">
 
     </div>-->
-        <div class="col l7 hide-on-med-and-down">
-            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-            @lang.StagesDisponiblesDansCeMilieu
-            <hr />
-        </div>
+    <div class="col l7 hide-on-med-and-down">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.StagesDisponiblesDansCeMilieu
+        <hr />
     </div>
+</div>
 
 @{
     if (ViewBag.error != null && ViewBag.error != "")
@@ -29,7 +29,34 @@
 @{
     MilieuStage MilieuEnVisionnement = ViewBag.Milieu;
     <div class="row">
+
         <form class="col l5 s12">
+            @{
+                List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
+                if (lesRestrictions.Count > 0)
+                {
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s12 center">
+                                @Html.Label("AcordionRestriction", @lang.ListeRestriction)
+                            </div>
+                            <div class="col s12">
+                                <ul id="AcordionRestriction" class="collapsible input-field col s12">
+                                    @{
+                                        for (int i = 0; i < lesRestrictions.Count; i++)
+                                        {
+                                            <li>
+                                                <div class="collapsible-header">@lesRestrictions[i].Titre</div>
+                                                <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
             <div class="row">
                 <div class="input-field col s12 ">
                     <input disabled id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Titre)">
@@ -134,21 +161,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
-            @Html.Label("AcordionRestriction", @lang.ListeRestriction , new { style="padding-bottom:5px;"})
-            <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
-                @{
-                    List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
-                    for (int i = 0; i < lesRestrictions.Count; i++)
-                    {
-                        <li>
-                            <div class="collapsible-header">@lesRestrictions[i].Titre</div>
-                            <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
+
         <div class="col s12">
             <hr />
             <div class="row">

@@ -63,8 +63,10 @@ namespace GestionStages.Controllers
         {
             ViewBag.PageTitle = lang.VisionnerUnStage;
             ViewBag.IconTitle = "remove_red_eye";
-            ViewBag.LeStage = repo.GetStageByID(id);
+            Stage leStage = repo.GetStageByID(id);
+            ViewBag.LeStage = leStage;
             ViewBag.LesRestrictions = repoRestriction.GetAllStageRestrictionByIdStage(id);
+            ViewBag.lesRestrictionsMilieu = repoRestriction.GetAllMilieuStageRestrictionByIdMilieuStage(leStage.IDMilieuStage);
             ViewBag.ColorButtonBack = "grey";
             ViewBag.TextButtonBack = lang.Retour;
             ViewBag.ColorButtonCopy = "blue";

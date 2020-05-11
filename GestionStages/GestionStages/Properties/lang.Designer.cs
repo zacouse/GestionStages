@@ -439,7 +439,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Use a valid format..
+        ///   Recherche une chaîne localisée semblable à Please use a valid format..
         /// </summary>
         public static string FormatValide {
             get {
@@ -448,7 +448,7 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please enter a valid number without decimal . .
+        ///   Recherche une chaîne localisée semblable à Please enter a valid number without decimal. .
         /// </summary>
         public static string FormatValideChiffre {
             get {
@@ -597,6 +597,15 @@ namespace GestionStages.Properties {
         public static string ListeRestriction {
             get {
                 return ResourceManager.GetString("ListeRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Restrictions list from the internship site.
+        /// </summary>
+        public static string ListesDesRestrictionsDuMilieuDeStage {
+            get {
+                return ResourceManager.GetString("ListesDesRestrictionsDuMilieuDeStage", resourceCulture);
             }
         }
         

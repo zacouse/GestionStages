@@ -272,7 +272,7 @@
 		<value>Form contain one or more error</value>
 	</data>
 	<data name="FormatValide" xml:space="preserve">
-		<value>Use a valid format.</value>
+		<value>Please use a valid format.</value>
 	</data>
 	<data name="ChampRequis" xml:space="preserve">
 		<value>Required field</value>
@@ -548,9 +548,12 @@
 		<value>Enabled restrictions</value>
 	</data>
 	<data name="FormatValideChiffre" xml:space="preserve">
-		<value>Please enter a valid number without decimal . </value>
+		<value>Please enter a valid number without decimal. </value>
 	</data>
 	<data name="FormatValideDecimale" xml:space="preserve">
 		<value>Please enter a valid number with a maximum of 2 decimal.</value>
+	</data>
+	<data name="ListesDesRestrictionsDuMilieuDeStage" xml:space="preserve">
+		<value>Restrictions list from the internship site</value>
 	</data>
 </root>
