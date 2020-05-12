@@ -5,7 +5,7 @@
 <div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text row">
     <div class="col s12">
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-        @lang.ListeStage
+        @lang.ListeStage @ViewBag.IdEtudiant
     </div>
     <div class="col push-l4 l4 push-m3 m6 s12">
         <hr />
@@ -16,7 +16,7 @@
     <li class="active">
         <div class="collapsible-header"><b>@lang.FiltreDeRecherche</b></div>
         <div class="collapsible-body">
-            <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
+            <form name="searchform" method="post" action="@Url.Action("ListeStage", "Stage")">
                 <div class="row">
                     <div class="col s12 m6 l3">
                         <div class="input-field">
@@ -100,6 +100,18 @@
                     <div class="hiddendiv">
                         @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
                     </div>
+                    <div class="hiddendiv">
+                        <input id="ChoixCourant1" name="ChoixCourant1" type="text" value="@ViewBag.Choix1">
+                    </div>
+                    <div class="hiddendiv">
+                        <input id="ChoixCourant2" name="ChoixCourant2" type="text" value="@ViewBag.Choix2">
+                    </div>
+                    <div class="hiddendiv">
+                        <input id="ChoixCourant3" name="ChoixCourant3" type="text" value="@ViewBag.Choix3">
+                    </div>
+                    <div class="hiddendiv">
+                        @Html.TextBox("IdEtudiant", (string)ViewBag.IdEtudiant)
+                    </div>
                     <div class="col s6 m6 l6">
                         <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
                     </div>
@@ -148,7 +160,7 @@
                     {
                         <td>
                             <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" class="choixPossible browser-default">
-                                <option></option>
+                                <option value=""></option>
                                 @if (@ViewBag.Choix1 == @lesStages[i].IDStage)
                                 {
                                     <option selected value="1">1</option>
@@ -255,11 +267,28 @@
                     document.getElementById('Choix' + i).value = ""; //Vide les autre choix avec cet id ou les choix vide si un sumbit a été fait sans être completé
                 }
             }
-
-            if (document.getElementById('Choix' + sel.value).value != "") {//Vide le select avec le même numéro de choix
-                document.getElementById(document.getElementById('Choix' + sel.value).value).value = "";
+            if (sel.value != "") {
+                if (document.getElementById('Choix' + sel.value).value != "") {//Vide le select avec le même numéro de choix
+                    document.getElementById(document.getElementById('Choix' + sel.value).value).value = "";
+                }
+                document.getElementById('Choix' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
             }
-            document.getElementById('Choix' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
+            applyChoiceTemp(sel);
+        }
+
+        function applyChoiceTemp(sel) {
+            //enlever les autre select avec la même valeur
+            for (var i = 1; i < 4; i++) {
+                if (document.getElementById('ChoixCourant' + i).value == sel.id || document.getElementById('ChoixCourant' + i).value == 0) {
+                    document.getElementById('ChoixCourant' + i).value = ""; //Vide les autre choix avec cet id ou les choix vide si un sumbit a été fait sans être completé
+                }
+            }
+            if (sel.value != "") {
+                if (document.getElementById('ChoixCourant' + sel.value).value != "") {//Vide le select avec le même numéro de choix
+                    document.getElementById(document.getElementById('ChoixCourant' + sel.value).value).value = "";
+                }
+                    document.getElementById('ChoixCourant' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
+            }
         }
 
         function PrintElem(elem) {
