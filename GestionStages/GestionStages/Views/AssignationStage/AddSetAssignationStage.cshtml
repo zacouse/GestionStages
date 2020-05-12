@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = ViewBag.TitrePage;
     int nombrePosteOccupe = 0;
-    bool SupervisorSelected = false;
 }
 <br />
 <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
@@ -41,18 +40,18 @@
                                 <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
                                     <thead>
                                         <tr>
-                                        @*<td>@lang.DetailEtudiant</td>*@
-                                        <td>Détails</td>
-                                        <td>DA</td>
-                                        <td>@lang.Prenom</td>
-                                        <td>@lang.Nom</td>
-                                        <td>@lang.NumeroChoix</td>
-                                        <td>@lang.Choisir ?</td>
-                                        <td>@lang.Superviseur</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
+                                            @*<td>@lang.DetailEtudiant</td>*@
+                                            <td>Détails</td>
+                                            <td>DA</td>
+                                            <td>@lang.Prenom</td>
+                                            <td>@lang.Nom</td>
+                                            <td>@lang.NumeroChoix</td>
+                                            <td>@lang.Choisir ?</td>
+                                            <td>@lang.Superviseur</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
@@ -67,35 +66,30 @@
                                                             <label>
                                                                 @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + lesStages[i].getIDStage() + ",this.checked," + lesStages[i].getIDStage() + ")" })
                                                                 @{ if (lesChoixEtudiants[j].ChoixFinal)
-                                                                   {
-                                                                       nombrePosteOccupe++;
-                                                                   } 
+                                                                    {
+                                                                        nombrePosteOccupe++;
+                                                                    }
                                                                 }
                                                                 <span></span>
                                                             </label>
                                                         </p>
-                                                <td>
-                                                    <select id="DropSuperviseur" name="DropSuperviseur" class="Validate">
-                                                        @{
-                                                            List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact;
-                                                            for (int x = 0; x < lesSuperviseur.Count; x++)
-                                                            {
-                                                                if (!SupervisorSelected) //true
-                                                                {
-                                                                    x = j;
-                                                                    <option type="hidden" selected value="@lesSuperviseur[x].IDPersonneContact">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
-                                                                    SupervisorSelected = false;
+                                                    </td>
+                                                    <td>
+                                                        <div id="test">
+                                                            <select id="DropSuperviseur" name="@Html.Raw("DropSuperviseur" + lesChoixEtudiants[j].Etudiant.IDEtudiant)" class="Validate" required>
+                                                                <option value="0"></option>
+                                                                @{
+                                                                    List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact;
+                                                                    for (int x = 0; x < lesSuperviseur.Count; x++)
+                                                                    {
+                                                                        <option value="@lesSuperviseur[x].IDPersonneContact">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
+
+                                                                    }
                                                                 }
-                                                                else //false
-                                                                {
-                                                                    <option value="@lesSuperviseur[x].IDPersonneContact">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
-                                                                }
-                                                                
-                                                            }
-                                                        }
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             }
                                         }
                                     </tbody>
@@ -179,7 +173,41 @@
             $('#spanPostes').html(@nombrePosteOccupe);
         });
         $('select').formSelect();
+       // $("#DropSuperviseur").val('2');
+        $('#TxtSuperviseur').on('change', function () {
+            //$("#DropSuperviseur").val(this.value).change();
+            //alert(this.value);
+            $("#DropSuperviseur").val(this.value);
+            alert(this.selectedIndex);
+            //selectedDropdownElement('#DropSuperviseur', this.value, this.selectedIndex);
+        });
 
+        //$('#TxtSuperviseur').on("change", "select", function () {
+        //    $("option[value=" + this.value + "]", this)
+        //        .attr("selected", true).siblings()
+        //        .removeAttr("selected")
+        //});
+
+        //$('#TxtSuperviseur').change(function () {
+        //    //$('#test').html($(this).val());
+        //    var value = $(this).val();
+        //    $('#Test').val(value);
+        //    //$('#DropSuperviseur').select2().trigger('change');
+        //}).trigger('change');
+        //$('#DropSuperviseur').select2();
+        //$('#TxtSuperviseur').change(function () {
+        //    var value = $(this).val();
+        //    $('#Test').val(value);
+        //    $('#Test').select2().trigger('change');
+        //});
+
+        function selectedDropdownElement(id, valueToSelect, index) {
+            let element = document.getElementById(id);
+
+            element.value = valueToSelect;
+            element.selectedIndex = index;
+
+        }
         function getValueBox(value, ischecked, stageId) {
             if (ischecked) {
                 $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val() + value + ',');
@@ -200,3 +228,6 @@
 
     </script>
 }
+<script type="text/javascript">
+
+</script>

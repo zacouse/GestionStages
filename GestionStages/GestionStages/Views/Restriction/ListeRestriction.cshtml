@@ -3,53 +3,57 @@
     ViewData["Title"] = "ListeRestriction";
 }
 
-    <div style="font-size:36px;padding-top:5%" class="light-blue-text  row">
-        <div class="col s12">
-            <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-            @lang.ListeRestriction
-        </div>
-        <div class="col xl5 l7 m8 s12">
-            <hr />
-        </div>
+<div style="font-size:36px;padding-top:5%" class="light-blue-text  row">
+    <div class="col s12">
+        <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.ListeRestriction
     </div>
-
-
-<div id="search" class="row">
-    <h1>@lang.FiltreDeRecherche</h1>
-    <form name="searchform" method="post" action="@Url.Action("ListeRestriction", "Restriction")">
-        <div class="input-field col  m6 s12">
-            @Html.TextBox("txtTitre", "")
-            <label for="txtTitre">@lang.Titre</label>
-        </div>
-
-        <div class="input-field col  m6 s12">
-            @Html.TextBox("txtDescr", "")
-            <label for="txtDescr">@lang.Description</label>
-        </div>
-        <div class="col s12 m3 l2">
-            <label>Etat</label>
-            <div class="input-field row">
-                <p>
-                    <label>
-                        @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                        <span>@lang.Actif</span>
-                    </label>
-                </p>
-            </div>
-            <div class="input-field row">
-                <p>
-                    <label>
-                        @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                        <span>@lang.Inactif</span>
-                    </label>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col xl3 push-xl9 l4 push-l8 m5 push-m7 s4 push-s8 right-align"><a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a></div>
-        </div>
-    </form>
+    <div class="col xl5 l7 m8 s12">
+        <hr />
+    </div>
 </div>
+
+
+<ul class="collapsible">
+    <li class="active">
+        <div class="collapsible-header">@lang.FiltreDeRecherche</div>
+        <div class="collapsible-body">
+            <form name="searchform" method="post" action="@Url.Action("ListeRestriction", "Restriction")">
+                <div class="input-field col  m6 s12">
+                    @Html.TextBox("txtTitre", "")
+                    <label for="txtTitre">@lang.Titre</label>
+                </div>
+
+                <div class="input-field col  m6 s12">
+                    @Html.TextBox("txtDescr", "")
+                    <label for="txtDescr">@lang.Description</label>
+                </div>
+                <div class="col s12 m3 l2">
+                    <label>Etat</label>
+                    <div class="input-field row">
+                        <p>
+                            <label>
+                                @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                <span>@lang.Actif</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field row">
+                        <p>
+                            <label>
+                                @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                <span>@lang.Inactif</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+                <div class="col s5 m8 l10 right-align">
+                    <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                </div>
+            </form>
+        </div>
+    </li>
+</ul>
 
 <table class="highlight">
     <thead>
@@ -83,9 +87,7 @@
 {
     <script>
         $(document).ready(function () {
-            $("#search").accordion({
-                collapsible: true
-            });
+            $('.collapsible').collapsible();
         });
     </script>
 }

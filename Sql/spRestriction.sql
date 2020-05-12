@@ -2,14 +2,31 @@ USE MASTER
 GO
 USE GestionStage
 GO
-CREATE PROC pGetRestriction(@Titre_IN VARCHAR(100) = '',@Descr_IN VARCHAR(1000) = '')
+CREATE PROC pGetRestriction(@Titre_IN VARCHAR(100) = '',@Descr_IN VARCHAR(1000) = '',@isActive_IN BIT = 0,@isInactive_IN BIT = 0)
 AS
-SELECT IDRestriction,Titre,Description,Etat 
-FROM Restriction 
-WHERE Titre LIKE '%'+@Titre_IN+'%'
-AND Description LIKE '%'+@Descr_IN+'%'
-GO
+DECLARE @SQL NVARCHAR(4000)
+SET @SQL = 'SELECT IDRestriction,Titre,Description,Etat FROM Restriction WHERE 0 = 0'
 
+IF ISNULL(@Titre_IN,'') <> ''
+    SET @SQL = @SQL + ' AND Restriction.Titre LIKE ''%' + @Titre_IN + '%'' '
+
+IF ISNULL(@Descr_IN,'') <> ''
+    SET @SQL = @SQL + ' AND Restriction.Description LIKE ''%' + @Descr_IN + '%'' '
+	IF @isActive_IN = 1 OR @isInactive_IN = 1
+BEGIN
+    SET @SQL = @SQL + ' AND ( 1 = 0 '
+
+    IF @isActive_IN = 1
+        SET @SQL = @SQL + ' OR Restriction.Etat = 1 '
+
+    IF @isInactive_IN = 1
+        SET @SQL = @SQL + ' OR Restriction.Etat = 0 '
+
+    SET @SQL = @SQL + ' ) '
+END
+
+EXEC sp_executesql @SQL
+GO
 CREATE PROC pGetRestrictionByID(@IDRestriction_IN INT)
 AS
 

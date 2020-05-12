@@ -14,7 +14,7 @@
 </div>
 
 <ul id="search" class="collapsible">
-    <li>
+    <li class="active">
         <div class="collapsible-header">@lang.FiltreDeRecherche</div>
         <div class="collapsible-body">
             <form name="searchform" method="post" action="@Url.Action("SearchListeMilieuStage", "MilieuStage")">
@@ -88,11 +88,6 @@
 @section Scripts
 {
     <script>
-        //$(document).ready(function () {
-        //    $("#search").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
