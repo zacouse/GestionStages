@@ -202,7 +202,6 @@
 }
 <div class="row" style="padding-top:5px;">
     <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
-    @*mettre le if*@
     @if (!ViewBag.isStudent)
     {
         <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>

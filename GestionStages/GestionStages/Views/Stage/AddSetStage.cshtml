@@ -15,7 +15,6 @@
 
 @{
     Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
-    if (StageAModifier.DateDebut == DateTime.MinValue) {}
     if (StageAModifier.IDStage == 0)
     {
         StageAModifier.Etat = true;
