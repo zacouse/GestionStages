@@ -44,15 +44,15 @@ Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 GO
 
-Create PROC [dbo].[pGetStage](
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0
+CREATE PROC pGetStage(
+@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0,@chosenStages_IN VARCHAR(200) = '0,0,0'
 )AS
 	
 DECLARE @SQL NVARCHAR(4000)
 
 SET @SQL = ' SELECT [IDStage], Stage.IDMilieuStage, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre '
          + ' FROM Stage '
-         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage WHERE 0 = 0 '
+         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage WHERE (0 = 0 '
 	
 IF ISNULL(@Titre_IN,'') <> ''
     SET @SQL = @SQL + ' AND Stage.Titre LIKE ''%' + @Titre_IN + '%'' '
@@ -104,6 +104,9 @@ BEGIN
     SET @SQL = @SQL + ' ) '
 END
 
+SET @SQL = @SQL + ' ) '
+SET @SQL = @SQL + ' OR IDStage IN (' + @chosenStages_IN + ')'
+SET @SQL = @SQL + ' ORDER BY Stage.[Titre]'
 EXEC sp_executesql @SQL
 GO
 

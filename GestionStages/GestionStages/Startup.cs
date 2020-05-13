@@ -59,7 +59,7 @@ namespace GestionStages
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Test}/{id?}");
+                    template: "{controller=Stage}/{action=ListeStage}/{id?}");
             });
         }
     }

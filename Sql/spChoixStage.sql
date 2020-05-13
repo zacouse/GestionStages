@@ -21,6 +21,7 @@ AS
     SET ChoixFinal = 1
     WHERE IDStage = @IDStage_IN
     AND IDEtudiant IN (select value from @List)
+	AND Etat = 1
 
     UPDATE StageEtudiant
     SET ChoixFinal = 0

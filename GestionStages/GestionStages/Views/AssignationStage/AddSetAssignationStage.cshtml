@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = ViewBag.TitrePage;
+    ViewData["Title"] = @lang.AssignerLesStages;
     int nombrePosteOccupe = 0;
 }
 <br />
@@ -40,9 +40,8 @@
                                 <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
                                     <thead>
                                         <tr>
-                                            @*<td>@lang.DetailEtudiant</td>*@
-                                            <td>Détails</td>
-                                            <td>DA</td>
+                                            <td>@lang.DetailEtudiant</td>
+                                            <td>@lang.DA</td>
                                             <td>@lang.Prenom</td>
                                             <td>@lang.Nom</td>
                                             <td>@lang.NumeroChoix</td>
@@ -55,8 +54,14 @@
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                                <tr ondblclick="/*Modal*/">
-                                                    <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                                                <tr ondblclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA',
+                                            '@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                    <td>
+                                                        <a href="javascript:openModal('@lesChoixEtudiants[j].Etudiant.Prenom'+' '+'@lesChoixEtudiants[j].Etudiant.Nom','@lesChoixEtudiants[j].Etudiant.NoDA',
+                                                       '@lesChoixEtudiants[j].Etudiant.Programme','@lesChoixEtudiants[j].Etudiant.Courriel','@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                            <i class="material-icons orange-text">remove_red_eye</i>
+                                                        </a>
+                                                    </td>
                                                     <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
                                                     <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
                                                     <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
@@ -64,7 +69,7 @@
                                                     <td>
                                                         <p>
                                                             <label>
-                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + lesStages[i].getIDStage() + ",this.checked," + lesStages[i].getIDStage() + ")" })
+                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + @lesChoixEtudiants[j].Etudiant.IDEtudiant + ",this.checked," + lesStages[i].getIDStage() + ")" })
                                                                 @{ if (lesChoixEtudiants[j].ChoixFinal)
                                                                     {
                                                                         nombrePosteOccupe++;
@@ -131,7 +136,7 @@
             <thead>
                 <tr>
                     <td>@lang.DetailEtudiant</td>
-                    <td>DA</td>
+                    <td>@lang.DA</td>
                     <td>@lang.Prenom</td>
                     <td>@lang.Nom</td>
                     <td>@lang.Choisir ?</td>
@@ -142,8 +147,12 @@
                     List<Etudiant> lesEtudiants = ViewBag.lesEtudiants;
                     for (int i = 0; i < lesEtudiants.Count; i++)
                     {
-                        <tr id="@lesEtudiants[i].IDEtudiant" ondblclick="/*Modal*/">
-                            <td><!--<a href="Modal">--><i class="material-icons orange-text">remove_red_eye</i><!--</a>--></td>
+                        <tr id="@lesEtudiants[i].IDEtudiant" ondblclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
+                                            '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">
+                            <td>
+                                <a href="javascript:openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
+                                            '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')"><i class="material-icons orange-text">remove_red_eye</i></a>
+                            </td>
                             <td>@lesEtudiants[i].NoDA</td>
                             <td>@lesEtudiants[i].Prenom</td>
                             <td>@lesEtudiants[i].Nom</td>
@@ -165,14 +174,37 @@
     </div>
 </div>
 
+<div id="modal1" class="modal ">
+    <div class="modal-content">
+        <h4 id="modalHeader">@lang.ErreurChargementEtudiant</h4>
+        <p id="modalContent"></p>
+        <img id="modalPicture" src="">
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+</div>
+
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             $('.collapsible').collapsible();
             $('#spanPostes').html(@nombrePosteOccupe);
+            $('.modal').modal()
+            $('select').formSelect();
         });
-        $('select').formSelect();
+        function openModal(nomPrenom,da,programme,courriel,photo) {
+            var instance = M.Modal.getInstance(document.getElementById("modal1"));
+            if (courriel == "") {courriel="@lang.NoEmail"}
+            document.getElementById("modalHeader").innerText = nomPrenom;
+            document.getElementById("modalContent").innerHTML = "@lang.DA : " + da + "<br/> @lang.Programme : " + programme + "<br/> @lang.Courriel : " + courriel;
+            if (photo != null && photo != "") {
+            document.getElementById("modalContent").innerHTML += "<br/> @lang.Photo <br/>";
+                $('#modalPicture').attr('src', `data:image/jpeg;base64,${photo}`);  // <----- Changer le data type pour image/{Le type de photo sauvegarder} test avec -> R0lGODlhDAAMAKIFAF5LAP/zxAAAANyuAP/gaP///wAAAAAAACH5BAEAAAUALAAAAAAMAAwAAAMlWLPcGjDKFYi9lxKBOaGcF35DhWHamZUW0K4mAbiwWtuf0uxFAgA7
+            }
+            instance.open();
+        }
        // $("#DropSuperviseur").val('2');
         $('#TxtSuperviseur').on('change', function () {
             //$("#DropSuperviseur").val(this.value).change();

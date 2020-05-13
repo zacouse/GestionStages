@@ -63,8 +63,9 @@ namespace GestionStages.Controllers
         {
             ViewBag.PageTitle = lang.VisionnerUnStage;
             ViewBag.IconTitle = "remove_red_eye";
-            ViewBag.LeStage = repo.GetStageByID(id);
-            ViewBag.LesRestrictions = repoRestriction.GetAllStageRestrictionByIdStage(id);
+            Stage leStage = repo.GetStageByID(id);
+            ViewBag.LeStage = leStage;
+            ViewBag.LesRestrictions = repoRestriction.GetAllRestrictionForStageWithMilieuIncludedByIds(id, leStage.IDMilieuStage);
             ViewBag.ColorButtonBack = "grey";
             ViewBag.TextButtonBack = lang.Retour;
             ViewBag.ColorButtonCopy = "blue";
@@ -78,24 +79,23 @@ namespace GestionStages.Controllers
             Response.Redirect("../ListeStage");
         }
 
-        public IActionResult ListeStage(bool isStudent = false, string IdEtudiant = "")
+        public IActionResult ListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive, int ChoixCourant1 = 0, int ChoixCourant2 = 0, int ChoixCourant3 = 0, bool isStudent = false, string IdEtudiant = "")
         {
-            if (isStudent)            {                ViewBag.lesStages = repo.GetAllStageActif();            }            else            {                ViewBag.lesStages = repo.GetAllStage();            }
-
+            if (isStudent)            {                chkIsActive = true;                chkIsInactive = false;            }
+            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive,$"{ChoixCourant1},{ChoixCourant2},{ChoixCourant3}");
             ViewBag.isStudent = isStudent;
             ViewBag.IdEtudiant = IdEtudiant;
-            if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }            return View();
+            if (isStudent && IdEtudiant != null)            {                ViewBag.Choix1 = ChoixCourant1;
+                ViewBag.Choix2 = ChoixCourant2;
+                ViewBag.Choix3 = ChoixCourant3;                if (ChoixCourant1 == 0 && ChoixCourant2 == 0 && ChoixCourant3 == 0) {                 AfficherChoixEtudiant(IdEtudiant);
+                }            }            return View();
         }
         private void AfficherChoixEtudiant(string IdEtudiant)        {            if (int.TryParse(IdEtudiant, out int intIdEtudiant))            {
                 List<ChoixStageEtudiant> choixStages = repoChoixStageEtudiant.GetChoixStage(IdEtudiant);
                 if (choixStages.Count > 0)                {
                     ViewBag.Choix1 = choixStages.Where(c => c.NumeroChoix == 1).Select(c => c.IDStage).FirstOrDefault();                    ViewBag.Choix2 = choixStages.Where(c => c.NumeroChoix == 2).Select(c => c.IDStage).FirstOrDefault();                    ViewBag.Choix3 = choixStages.Where(c => c.NumeroChoix == 3).Select(c => c.IDStage).FirstOrDefault();                }            }        }
         [HttpGet]
-        public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)        {            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);            return View();        }
-
-        [HttpPost]
-        public IActionResult SearchListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive, bool isStudent = false, string IdEtudiant = "")        {            if (isStudent)            {                chkIsActive = true;                chkIsInactive = false;            }
-            ViewBag.lesStages = repo.GetStage(txtTitre?.ToString() ?? "", txtDescription?.ToString() ?? "", txtMilieu?.ToString() ?? "", txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive);            ViewBag.isStudent = isStudent;            if (isStudent && IdEtudiant != null)            {                AfficherChoixEtudiant(IdEtudiant);            }            return View("ListeStage");        }
+        public IActionResult PrintListeStage(string txtTitre, string txtDescription, string txtMilieu, int txtMinH, int txtMaxH, string txtMinDate, string txtMaxDate, bool chkIsJour, bool chkIsSoir, bool chkIsNuit, bool chkIsActive, bool chkIsInactive)        {            ViewBag.lesStages = repo.GetStage(txtTitre, txtDescription, txtMilieu, txtMinH, txtMaxH, txtMinDate, txtMaxDate, chkIsJour, chkIsSoir, chkIsNuit, chkIsActive, chkIsInactive,"0,0,0");            return View();        }
 
         [HttpPost]
         public void AddSetChoixStage(string Choix1, string Choix2, string Choix3, string IdEtudiant, bool isStudent = false)        {            if (int.TryParse(Choix1, out int Choix1Int))            {                repoChoixStageEtudiant.SaveChoixStage(0, Choix1Int, Convert.ToInt32(IdEtudiant), 1, false, true);            }            else            {                repoChoixStageEtudiant.RemoveChoixStage(Convert.ToInt32(IdEtudiant), 1);            }

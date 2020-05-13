@@ -15,7 +15,6 @@
 
 @{
     Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
-
     if (StageAModifier.IDStage == 0)
     {
         StageAModifier.Etat = true;
@@ -95,26 +94,26 @@
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
+            @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut.ToShortDateString()), new { @class = "validate datepicker", placeholder = "AAAA-MM-JJ", required = "required" })
             @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
+            @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin.ToShortDateString()), new { @class = "validate datepicker", placeholder = "AAAA-MM-JJ", required = "required" })
             @Html.Label("TxtDateDeFin", @lang.DateDeFin)
         </div>
     </div>
     <div class="row">
-        @Html.Label("Restrictions")
+        @Html.Label(@lang.Restrictions)
         <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
             <div class="col m4 s6 black-text">
-                @Html.Raw("Restrictions possibles")
+                @Html.Raw(@lang.RestrictionDisponnible)
                 <ul id="sortable1" class="connectedSortable grey">
                 </ul>
             </div>
             <div id="Apres" class="col push-m4 m4 s6">
-                @Html.Raw("Restrictions actives")
+                @Html.Raw(@lang.RestrictionsActives)
                 <ul id="sortable2" class="connectedSortable grey">
                 </ul>
             </div>
@@ -164,7 +163,6 @@
                     dateFormat: 'dd-mm-yy'
                 }
             });
-            /***********************************************************/
             $(function () {
                 $("#sortable1, #sortable2").sortable({
                     connectWith: ".connectedSortable",
@@ -173,7 +171,6 @@
             });
 
             fillPossibleRestriction();
-        /***********************************************************/
             $('input.autocomplete').autocomplete({
                 data: {
                         @{
@@ -233,6 +230,7 @@
         document.getElementById("Restriction").value = ids.toString() ;
     }
     function validate() {
+        readRestriction();
         var isValid = $("#form").validate({
             errorElement: "span",
             rules: {
@@ -251,7 +249,7 @@
                 },
                 TxtNombreDHeureParSemaine: {
                     required: true,
-                    pattern: new RegExp(/^\d+$/)
+                    pattern: new RegExp(/^(0|[1-9]\d*)([,.]\d{1,2})*$/)
                 },
                 TxtDateDeDebut: {
                     required: true
@@ -266,11 +264,11 @@
                 TxtaDescription: "@lang.ChampRequis",
                 TxtNbPostes: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide Seulement des chiffres"
+                    pattern: "@lang.FormatValideChiffre"
                 },
                 TxtNombreDHeureParSemaine: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide Seulement des chiffres"
+                    pattern: "@lang.FormatValideDecimale"
                 },
                 TxtDateDeDebut: "@lang.ChampRequis",
                 TxtDateDeFin: "@lang.ChampRequis",

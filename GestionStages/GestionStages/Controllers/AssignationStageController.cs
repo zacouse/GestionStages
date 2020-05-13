@@ -35,7 +35,7 @@ namespace GestionStages.Controllers
             return View();
         }
 
-        [HttpPost]
+        //[HttpPost]
         public void SaveOneStage(int txtIDStage)        {            string txtEtudiants = Request.Form["ListeEtudiant" + txtIDStage];            int idSuperviseur = Convert.ToInt32(Request.Form["TxtSuperviseur" + txtIDStage]);            repoChoixStage.SaveOneAssignationStage(txtIDStage, txtEtudiants, idSuperviseur);            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
     }

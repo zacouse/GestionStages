@@ -22,58 +22,84 @@
 
 @{
     Stage VisionnerStage = ViewBag.LeStage;
+    <div class="row">
+        @{
+                        List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
+                        if (lesRestrictions.Count > 0)
+                        {
+                <div class="col push-m3 m6 s12">
+                    <div class="col s12 center">
+                        @Html.Label("AcordionRestriction", @lang.ListeRestriction)
+                    </div>
+                    <div class="col s12">
+                        <ul id="AcordionRestriction" class="collapsible input-field col s12">
+                            @{
+                                for (int i = 0; i < lesRestrictions.Count; i++)
+                                {
+                                    <li>
+                                        <div class="collapsible-header">@lesRestrictions[i].Titre</div>
+                                        <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
+                                    </li>
+                                }
+            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        }
+    </div>
     <form class="col s4">
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtIDMilieuStage", @Html.Raw(@VisionnerStage.TitreMilieuStage), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtIDMilieuStage", @Html.Raw(@VisionnerStage.TitreMilieuStage), new { disabled = "disabled" })
                 @Html.Label("TxtIDMilieuStage", @lang.MilieuDeStage)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtTitre", @Html.Raw(@VisionnerStage.Titre), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtTitre", @Html.Raw(@VisionnerStage.Titre), new { disabled = "disabled" })
                 @Html.Label("TxtTitre", @lang.Titre)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDescription", @Html.Raw(@VisionnerStage.Description), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea" disabled >@Html.Raw(@VisionnerStage.Description)</textarea>
                 @Html.Label("TxtDescription", @lang.Description)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNombreDePostes", @Html.Raw(@VisionnerStage.NbPostes), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtNombreDePostes", @Html.Raw(@VisionnerStage.NbPostes), new { disabled = "disabled" })
                 @Html.Label("TxtNombreDePostes", @lang.NombreDePostes)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtStatut", @Html.Raw(@VisionnerStage.GetStatus()), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtStatut", @Html.Raw(@VisionnerStage.GetStatus()), new { disabled = "disabled"})
                 @Html.Label("TxtStatut", @lang.Statut)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtPeriodeDeTravail", @Html.Raw(@VisionnerStage.GetPeriode()), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtPeriodeDeTravail", @Html.Raw(@VisionnerStage.GetPeriode()), new { disabled = "disabled" })
                 @Html.Label("TxtPeriodeDeTravail", @lang.PeriodeDeTravail)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(@VisionnerStage.NbHeureSemaine), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtNombreDHeureParSemaine", @Html.Raw(@VisionnerStage.NbHeureSemaine), new { disabled = "disabled" })
                 @Html.Label("TxtNombreDHeureParSemaine", @lang.NombreDHeureParSemaine)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeDebut", @Html.Raw(@VisionnerStage.DateDebut), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtDateDeDebut", @Html.Raw(@VisionnerStage.DateDebut.ToShortDateString()), new { disabled = "disabled" })
                 @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
             </div>
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                @Html.TextBox("TxtDateDeFin", @Html.Raw(@VisionnerStage.DateFin), new { @class = "validate", disabled = "disabled", placeholder = "Placeholder" })
+                @Html.TextBox("TxtDateDeFin", @Html.Raw(@VisionnerStage.DateFin.ToShortDateString()), new { disabled = "disabled" })
                 @Html.Label("TxtDateDeFin", @lang.DateDeFin)
             </div>
         </div>
@@ -92,25 +118,7 @@
                 </div>
             </div>
         }
-    <div class="row">
-        <div>
-            @Html.Label("AcordionRestriction", "Listes des restrictions", new { @class = "input-field col push-s3 s6" })
-        </div>
-    </div>
-        <div class="row">
-                <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
-                    @{
-                        List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
-                        for (int i = 0; i < lesRestrictions.Count; i++)
-                        {
-                            <li>
-                                <div class="collapsible-header">@lesRestrictions[i].Titre</div>
-                                <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
-                            </li>
-                        }
-                    }
-                </ul>
-        </div>
+
         <div class="col s12">
             <div class="row">
                 <div class="col push-s2 s2">

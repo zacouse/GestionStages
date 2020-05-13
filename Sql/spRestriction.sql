@@ -107,3 +107,13 @@ AS
         Left join MilieuStageRestriction ON MilieuStageRestriction.IDRestriction = Restriction.IDRestriction
     WHERE MilieuStageRestriction.IDMilieuStage = @IDMilieuStage_IN  AND MilieuStageRestriction.Etat = 1
 GO
+
+CREATE PROC pGetAllRestrictionForStageWithMilieuIncludedByIds
+@IDMilieu_IN int,
+@IDStage_IN int
+AS
+SELECT DISTINCT Restriction.Titre, Restriction.Description From Restriction 
+        left join MilieuStageRestriction ON MilieuStageRestriction.IDRestriction = Restriction.IDRestriction
+		left join StageRestriction ON StageRestriction.IDRestriction = Restriction.IDRestriction
+    WHERE (MilieuStageRestriction.IDMilieuStage = @IDMilieu_IN  AND MilieuStageRestriction.Etat = 1) OR (StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1)
+GO
