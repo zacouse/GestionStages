@@ -6,7 +6,7 @@
 <br />
 <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
     <div class="col l7 s12">
-        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        <i style="font-size:42px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
         @lang.AssignerLesStages
         <hr />
     </div>
@@ -69,7 +69,7 @@
                                                     <td>
                                                         <p>
                                                             <label>
-                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + @lesChoixEtudiants[j].Etudiant.IDEtudiant + ",this.checked," + lesStages[i].getIDStage() + ")" })
+                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + @lesChoixEtudiants[j].Etudiant.IDEtudiant + ",this.checked," + lesStages[i].getIDStage() + ")", @class = "filled-in" })
                                                                 @{ if (lesChoixEtudiants[j].ChoixFinal)
                                                                     {
                                                                         nombrePosteOccupe++;
@@ -155,7 +155,7 @@
                             <td>@lesEtudiants[i].NoDA</td>
                             <td>@lesEtudiants[i].Prenom</td>
                             <td>@lesEtudiants[i].Nom</td>
-                            <td><!--Button assign--></td>
+                            <td><a class="btn green" href="#">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></td>
                         </tr>
                     }
                 }
@@ -167,7 +167,7 @@
         <hr />
         <div class="row">
             <div class="col push-l1 l3 s4">
-                <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeMilieuStage", "MilieuStage")">@lang.Retour</a>
+                <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a>
             </div>
             <div class="col push-l1 l3 s4 hiddendiv">
                 <a class="waves-effect waves-light btn grey" href="javascript:SaveAll();">@lang.Sauvegarder</a>
@@ -197,7 +197,7 @@
             $('select').formSelect();
         });
         function showConfirmation() {
-            M.toast({ html: '@lang.EnregistreSucces', displayLength: 1000, classes: 'rounded' })
+            M.toast({ html: '@lang.EnregistreSucces', displayLength: 1500, classes: 'rounded' })
         }
 
         function openModal(nomPrenom,da,programme,courriel,photo) {
@@ -262,3 +262,17 @@
 <script type="text/javascript">
 
 </script>
+
+<style>
+
+    .ui-state-active {
+        background: none;
+        background-color: orange;
+        color: white;
+    }
+
+    [type="checkbox"].filled-in:checked + span:not(.lever):after {
+        background-color: orange;
+        border: 2px solid grey;
+    }
+</style>
