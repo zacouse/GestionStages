@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col l7 s12">
-        <form name="formStage" action="@Url.Action("SaveOneStage", "AssignationStage")" method="post">
+        <form name="formStage" action="@Url.Action("SaveAllStage", "AssignationStage")" method="post">
             <input type="hidden" value="" name="txtIDStage" id="txtIDStage" />
             <ul class="collapsible">
                 @{
@@ -34,7 +34,7 @@
                                     <br />
                                     @lesStages[i].getTitreMilieuStage()
                                 </p>
-                                <p class="col s2 ">@lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">0</span> / @lesStages[i].getNbPostesStage()</p>
+                                <p class="col s2 ">@lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">@lesStages[i].LesChoixEtudiants.Where(s=>s.ChoixFinal == true).Count()</span> / @lesStages[i].getNbPostesStage()</p>
                             </div>
                             <div class="collapsible-body">
                                 <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" value="" />
@@ -165,6 +165,9 @@
             <div class="col push-l1 l3 s4">
                 <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeMilieuStage", "MilieuStage")">@lang.Retour</a>
             </div>
+            <div class="col push-l1 l3 s4">
+                <a class="waves-effect waves-light btn grey" href="javascript:SaveAll();">@lang.Sauvegarder</a>
+            </div>
         </div>
     </div>
 </div>
@@ -174,10 +177,6 @@
     <script>
         $(document).ready(function () {
             $('.collapsible').collapsible();
-            @for (int i = 0; i < lesStages.Count; i++)
-            {
-                @Html.Raw("$('#spanPostes" + lesStages[i].getIDStage() + "').html(" + lesStages[i].LesChoixEtudiants.Where(s=>s.ChoixFinal == true).Count() + ");");
-            }
             });
         $('select').formSelect();
 
@@ -197,16 +196,19 @@
         }
 
         function SaveStage(stageid) {
-            $('#txtIDStage').val(stageid);
+            $.post('@Url.Action("SaveOneStage", "AssignationStage")', { txtIDStage: stageid, txtEtudiants: $('#ListeEtudiant' + stageid).val() }, function () { });
+        }
+
+        function SaveAll() {
             document.formStage.submit();
         }
 
         function AddPoste(stageid) {
-            $('#spanPostes').html(parseInt($('#spanPostes').html()) + 1);
+            $('#spanPostes' + stageid).html(parseInt($('#spanPostes' + stageid).html()) + 1);
         }
 
         function RemovePoste(stageid) {
-            $('#spanPostes').html(parseInt($('#spanPostes').html()) - 1);
+            $('#spanPostes' + stageid).html(parseInt($('#spanPostes' + stageid).html()) - 1);
         }
 
     </script>

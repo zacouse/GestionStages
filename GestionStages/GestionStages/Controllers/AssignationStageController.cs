@@ -36,7 +36,12 @@ namespace GestionStages.Controllers
         }
 
         [HttpPost]
-        public void SaveOneStage(int txtIDStage)        {            string txtEtudiants = Request.Form["ListeEtudiant" + txtIDStage];            int idSuperviseur = Convert.ToInt32(Request.Form["TxtSuperviseur" + txtIDStage]);            repoChoixStage.SaveOneAssignationStage(txtIDStage, txtEtudiants, idSuperviseur);            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+        public void SaveOneStage(int txtIDStage,string txtEtudiants)        {            int idSuperviseur = Convert.ToInt32(Request.Form["TxtSuperviseur" + txtIDStage]);            repoChoixStage.SaveOneAssignationStage(txtIDStage, txtEtudiants, idSuperviseur);            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+
+        [HttpPost]
+        public void SaveAllStage()        {            List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
+            foreach (Stage stage in stagesToAssign)            {
+                repoChoixStage.SaveOneAssignationStage(stage.IDStage, Request.Form["ListeEtudiant" + stage.IDStage], Convert.ToInt32(Request.Form["TxtSuperviseur" + stage.IDStage]));            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
     }
 }
