@@ -214,32 +214,12 @@
             //selectedDropdownElement('#DropSuperviseur', this.value, this.selectedIndex);
         });
 
-        //$('#TxtSuperviseur').on("change", "select", function () {
-        //    $("option[value=" + this.value + "]", this)
-        //        .attr("selected", true).siblings()
-        //        .removeAttr("selected")
-        //});
-
-        //$('#TxtSuperviseur').change(function () {
-        //    //$('#test').html($(this).val());
-        //    var value = $(this).val();
-        //    $('#Test').val(value);
-        //    //$('#DropSuperviseur').select2().trigger('change');
-        //}).trigger('change');
-        //$('#DropSuperviseur').select2();
-        //$('#TxtSuperviseur').change(function () {
-        //    var value = $(this).val();
-        //    $('#Test').val(value);
-        //    $('#Test').select2().trigger('change');
-        //});
-
         function selectedDropdownElement(id, valueToSelect, index) {
             let element = document.getElementById(id);
-
             element.value = valueToSelect;
             element.selectedIndex = index;
-
         }
+
         function getValueBox(value, ischecked, stageId) {
             if (ischecked) {
                 $('#ListeEtudiant' + stageId).val($('#ListeEtudiant' + stageId).val() + value + ',');
