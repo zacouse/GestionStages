@@ -23,12 +23,12 @@
                     <div class="col m8 s12 l8">
                         <div class="input-field col s12">
                             @Html.TextBox("txtTitre", "")
-                            <label for="txtTitre">@lang.Titre</label>
+                            @Html.Label("txtTitre", @lang.Titre)
                         </div>
 
                         <div class="input-field col s12">
                             @Html.TextBox("txtDescr", "")
-                            <label for="txtDescr">@lang.Description</label>
+                            @Html.Label("txtDescr", @lang.Description)
                         </div>
                     </div>
                     <div class="col center-on-small-only s12 m4 push-l2 l2">

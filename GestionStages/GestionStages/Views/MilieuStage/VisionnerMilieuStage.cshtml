@@ -56,56 +56,56 @@
             }
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Titre)">
-                    <label for="TxtTitre">@lang.Titre</label>
+                    @Html.TextBox("TxtTitre", @Html.Raw(@MilieuEnVisionnement.Titre), new { disabled = "disabled" })
+                    @Html.Label("TxtTitre", @lang.Titre)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <textarea disabled id="TxaDescription" name="TxaDescription" class="materialize-textarea">@Html.Raw(@MilieuEnVisionnement.Description)</textarea>
-                    <label for="TxaDescription">@lang.Description</label>
+                    @Html.TextArea("TxaDescription", @MilieuEnVisionnement.Description, new { disabled = "disabled" })
+                    @Html.Label("TxaDescription", @lang.Description)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoCivique)">
-                    <label for="TxtNoCivique">@lang.NumeroCivique</label>
+                    @Html.TextBox("TxtNoCivique", @Html.Raw(@MilieuEnVisionnement.NoCivique), new { disabled = "disabled" })
+                    @Html.Label("TxtNoCivique", @lang.NumeroCivique)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Rue)">
-                    <label for="TxtRue">@lang.Rue</label>
+                    @Html.TextBox("TxtRue", @Html.Raw(@MilieuEnVisionnement.Rue), new { disabled = "disabled" })
+                    @Html.Label("TxtRue", @lang.Rue)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.CodePostal)">
-                    <label for="TxtCodePostal">@lang.CodePostal</label>
+                    @Html.TextBox("TxtCodePostal", @Html.Raw(@MilieuEnVisionnement.CodePostal), new { disabled = "disabled" })
+                    @Html.Label("TxtCodePostal", @lang.CodePostal)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Ville)">
-                    <label for="TxtVille">@lang.Ville</label>
+                    @Html.TextBox("TxtVille", @Html.Raw(@MilieuEnVisionnement.Ville), new { disabled = "disabled" })
+                    @Html.Label("TxtVille", @lang.Ville)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Province)">
-                    <label for="TxtProvince">@lang.Province</label>
+                    @Html.TextBox("TxtProvince", @Html.Raw(@MilieuEnVisionnement.Province), new { disabled = "disabled" })
+                    @Html.Label("TxtProvince", @lang.Province)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Pays)">
-                    <label for="TxtPays">@lang.Pays</label>
+                    @Html.TextBox("TxtPays", @Html.Raw(@MilieuEnVisionnement.Pays), new { disabled = "disabled" })
+                    @Html.Label("TxtPays", @lang.Pays)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoTelephone)">
-                    <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+                    @Html.TextBox("TxtNumeroTelephone", @Html.Raw(@MilieuEnVisionnement.NoTelephone), new { disabled = "disabled" })
+                    @Html.Label("TxtNumeroTelephone", @lang.NumeroDeTelephone)
                 </div>
             </div>
             <div class="row">

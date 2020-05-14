@@ -23,11 +23,11 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 @Html.TextBox("txtTitre", "")
-                                <label for="Title">@lang.Titre</label>
+                                @Html.Label("txtTitre", @lang.Titre)
                             </div>
                             <div class="input-field col s12 ">
                                 @Html.TextBox("txtAdresse", "")
-                                <label for="Address">@lang.Adresse</label>
+                                @Html.Label("txtAdresse", @lang.Adresse)
                             </div>
                         </div>
                     </div>
