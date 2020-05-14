@@ -5,7 +5,7 @@
 <div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text row">
     <div class="col s12">
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-        @lang.ListeStage @ViewBag.IdEtudiant
+        @lang.ListeStage
     </div>
     <div class="col push-l4 l4 push-m3 m6 s12">
         <hr />
@@ -13,8 +13,8 @@
 </div>
 
 <ul class="collapsible">
-    <li class="active">
-        <div class="collapsible-header"><b>@lang.FiltreDeRecherche</b></div>
+    <li class="active" >
+        <div class="collapsible-header row" onclick="changeChevron()"><b class="col s11">@lang.FiltreDeRecherche</b><span class="col right s1"><i id="iconChevron" style="vertical-align:middle;" class="material-icons">expand_less</i></span></div>
         <div class="collapsible-body">
             <form name="searchform" method="post" action="@Url.Action("ListeStage", "Stage")">
                 <div class="row">
@@ -260,6 +260,15 @@
             });
         });
 
+        function changeChevron() {
+            if (document.getElementById('iconChevron').innerHTML == "expand_more") {
+                document.getElementById('iconChevron').innerHTML = "expand_less"
+            } else {
+                document.getElementById('iconChevron').innerHTML = "expand_more"
+            }
+            
+        }
+
         function applyChoice(sel) {
              //enlever les autre select avec la même valeur
             for (var i = 1; i < 4; i++) {
@@ -391,5 +400,10 @@
     [type="checkbox"].filled-in:checked + span:not(.lever):after {
         background-color: orange;
         border: 2px solid grey;
+    }
+
+    li.active div.collapsible-header {
+        background-color: #ff9800;
+        color: white;
     }
 </style>

@@ -26,14 +26,18 @@
                     List<AssignationStageEtudiant> lesStages = ViewBag.lesStages;
                     for (int i = 0; i < lesStages.Count; i++)
                     {
-                        <li>
-                            <div class="collapsible-header">
+                        <li >
+                            <div class="collapsible-header "onclick="changeChevron(@lesStages[i].getIDStage())">
                                 <p class="col s10">
                                     <b>@lesStages[i].getTitreStage()</b>
                                     <br />
                                     @lesStages[i].getTitreMilieuStage()
                                 </p>
-                                <p class="col s2 ">@lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">@lesStages[i].LesChoixEtudiants.Where(s=>s.ChoixFinal == true).Count()</span> / @lesStages[i].getNbPostesStage()</p>
+                                <p class="col s2 ">
+                                    @lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">@lesStages[i].LesChoixEtudiants.Where(s => s.ChoixFinal == true).Count()</span> / @lesStages[i].getNbPostesStage()
+                                    <br />
+                                    <span><i id="iconChevron+@lesStages[i].getIDStage()" style="vertical-align:middle;" class="material-icons">expand_more</i></span>
+                                </p>
                             </div>
                             <div class="collapsible-body">
                                 <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" value="" />
@@ -49,7 +53,7 @@
                                             <td>@lang.Superviseur</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="TBodyStage+@lesStages[i].getIDStage()">
                                         @{
                                             List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
@@ -97,6 +101,7 @@
                                                 </tr>
                                             }
                                         }
+                                        <tr id="toAdd+@lesStages[i].getIDStage()" class="hide "></tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
@@ -146,8 +151,8 @@
                     List<Etudiant> lesEtudiants = ViewBag.lesEtudiants;
                     for (int i = 0; i < lesEtudiants.Count; i++)
                     {
-                        <tr id="@lesEtudiants[i].IDEtudiant" ondblclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
-                                            '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">
+                        <tr id="etu+@lesEtudiants[i].IDEtudiant" ondblclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
+                                            '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')" >
                             <td>
                                 <a href="javascript:openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
                                             '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')"><i class="material-icons orange-text">remove_red_eye</i></a>
@@ -155,7 +160,8 @@
                             <td>@lesEtudiants[i].NoDA</td>
                             <td>@lesEtudiants[i].Prenom</td>
                             <td>@lesEtudiants[i].Nom</td>
-                            <td><a class="btn green" href="#">@lang.Ajouter<i class="material-icons right hide-on-small-and-down">add</i></a></td>
+                            <td><a style="font-size:9px" class="btn green assignationStageVeto disabled" href="javascript:EnvoyerVersStageOuvert('@lesEtudiants[i].Nom',
+                                   '@lesEtudiants[i].Prenom','@lesEtudiants[i].NoDA','@lesEtudiants[i].Programme','@lesEtudiants[i].Courriel','@lesEtudiants[i].Photo','@lesEtudiants[i].IDEtudiant');">@lang.Assigner</a></td>
                         </tr>
                     }
                 }
@@ -190,14 +196,64 @@
 
 @section Scripts {
     <script>
+        var openedStage = -1;
         $(document).ready(function () {
             $('.collapsible').collapsible();
             $('#spanPostes').html(@nombrePosteOccupe);
             $('.modal').modal()
             $('select').formSelect();
         });
+
+        function EnvoyerVersStageOuvert(nom, prenom, da, programme, courriel, photo, idEtu) {
+            var bigString = "<td> <a href=\"javascript:openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\"><i class='material-icons orange-text'>remove_red_eye</i></a></td>";
+            bigString += "<td>" + da + "</td>";
+            bigString += "<td>" + prenom + "</td>";
+            bigString += "<td>" + nom + "</td>";
+            bigString += "<td>Veto</td>";
+            bigString += "<td><p><label><input id='FinalChoice" + openedStage + "-" + idEtu + "' name='FinalChoice" + openedStage + "-" + idEtu + "' type='checkbox' checked='true' class='filled-in' onchange='getValueBox(" + idEtu + ",this.checked," + openedStage + ")'><span></span></label></p></td>";
+            bigString += "<td><div><select id='DropSuperviseur" + openedStage + "-" + idEtu + "' name='DropSuperviseur" + openedStage + "-" + idEtu + "' class='Validate' required> <option value='0'></option>";
+            bigString += "@{ List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact; for (int x = 0; x < lesSuperviseur.Count; x++) { <option value = '@lesSuperviseur[x].IDPersonneContact' >@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>} }";
+            bigString += "</select></div></td>";
+            document.getElementById("toAdd+" + openedStage).outerHTML = "<tr ondblclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + bigString+"</tr><tr id='toAdd+"+openedStage+"' class='hide'></tr>";
+            $('#DropSuperviseur' + openedStage + '-' + idEtu).formSelect();
+            $('#FinalChoice' + openedStage + '-' + idEtu).ready();
+            AddPoste(openedStage);
+            var row = document.getElementById('etu+' + idEtu).closest('tr');
+            var arr = row.className.split(" ");
+            if (arr.indexOf("hide") == -1) {
+                row.className += " " + "hide";
+            }
+        }
+
+
         function showConfirmation() {
             M.toast({ html: '@lang.EnregistreSucces', displayLength: 1500, classes: 'rounded' })
+        }
+
+        function changeChevron(idStage) {
+            if (document.getElementById("iconChevron+"+idStage).innerHTML == "expand_more") {
+                document.getElementById("iconChevron+" + idStage).innerHTML = "expand_less"
+            } else {
+                document.getElementById("iconChevron+" + idStage).innerHTML = "expand_more"
+            }
+            if (idStage == openedStage) {
+                openedStage = -1;
+                var lesBoutons = document.getElementsByClassName("assignationStageVeto");
+                for (var i = 0; i < lesBoutons.length; i++) {
+                    var arr = lesBoutons[i].className.split(" ");
+                    if (arr.indexOf("disabled") == -1) {
+                        lesBoutons[i].className += " " + "disabled";
+                    }
+                }
+
+            } else {
+                openedStage = idStage;
+                var lesBoutons = document.getElementsByClassName("assignationStageVeto");
+                for (var i = 0; i < lesBoutons.length; i++) {
+                    lesBoutons[i].className = lesBoutons[i].className.replace(/\b disabled\b/g, "");
+                }
+            }
+
         }
 
         function openModal(nomPrenom,da,programme,courriel,photo) {
@@ -274,5 +330,10 @@
     [type="checkbox"].filled-in:checked + span:not(.lever):after {
         background-color: orange;
         border: 2px solid grey;
+    }
+
+    li.active div.collapsible-header {
+        background-color: #ff9800;
+        color: white;
     }
 </style>

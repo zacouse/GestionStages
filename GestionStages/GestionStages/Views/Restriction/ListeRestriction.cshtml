@@ -16,7 +16,7 @@
 
 <ul class="collapsible">
     <li class="active">
-        <div class="collapsible-header"><b>@lang.FiltreDeRecherche</b></div>
+        <div class="collapsible-header row " onclick="changeChevron()"><b class="col s11">@lang.FiltreDeRecherche</b><span class="col right s1"><i id="iconChevron" style="vertical-align:middle;" class="material-icons">expand_less</i></span></div>
         <div class="collapsible-body">
             <form name="searchform" method="post" action="@Url.Action("ListeRestriction", "Restriction")">
                 <div class="row">
@@ -94,6 +94,14 @@
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
+        function changeChevron() {
+            if (document.getElementById('iconChevron').innerHTML == "expand_more") {
+                document.getElementById('iconChevron').innerHTML = "expand_less"
+            } else {
+                document.getElementById('iconChevron').innerHTML = "expand_more"
+            }
+
+        }
     </script>
 }
 
@@ -108,5 +116,10 @@
     [type="checkbox"].filled-in:checked + span:not(.lever):after {
         background-color: orange;
         border: 2px solid grey;
+    }
+
+    li.active div.collapsible-header {
+        background-color: #ff9800;
+        color: white;
     }
 </style>
