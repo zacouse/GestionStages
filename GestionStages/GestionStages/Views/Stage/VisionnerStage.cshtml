@@ -63,7 +63,7 @@
         </div>
         <div class="row">
             <div class="input-field col push-s3 s6 ">
-                <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea" disabled >@Html.Raw(@VisionnerStage.Description)</textarea>
+                @Html.TextArea("TxtaDescription", @VisionnerStage.Description, new { @class = "materialize-textarea", disabled = "disabled" })
                 @Html.Label("TxtDescription", @lang.Description)
             </div>
         </div>

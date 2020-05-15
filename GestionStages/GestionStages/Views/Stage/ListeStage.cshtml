@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="col s12 m3 l2">
-                        <label>@lang.PeriodeDeTravail</label>
+                        @Html.Label("periodeTravail", @lang.PeriodeDeTravail)
                         <div class="input-field row">
                             <p>
                                 <label>
@@ -81,37 +81,37 @@
                     </div>
                     @if (!ViewBag.isStudent)
                     {
-                        <div class="col s12 m3 l2">
-                            <label>@lang.Etat</label>
-                            <div class="input-field row">
-                                <p>
-                                    <label>
-                                        @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                                        <span>@lang.Actif</span>
-                                    </label>
-                                </p>
-                            </div>
-                            <div class="input-field row">
-                                <p>
-                                    <label>
-                                        @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                                        <span>@lang.Inactif</span>
-                                    </label>
-                                </p>
-                            </div>
-                        </div>
+                <div class="col s12 m3 l2">
+                    @Html.Label("etat", @lang.Etat)
+                    <div class="input-field row">
+                        <p>
+                            <label>
+                                @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                <span>@lang.Actif</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field row">
+                        <p>
+                            <label>
+                                @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                <span>@lang.Inactif</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
                     }
                     <div class="hiddendiv">
                         @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
                     </div>
                     <div class="hiddendiv">
-                        <input id="ChoixCourant1" name="ChoixCourant1" type="text" value="@ViewBag.Choix1">
+                        @Html.TextBox("ChoixCourant1", (string)ViewBag.Choix1)
                     </div>
                     <div class="hiddendiv">
-                        <input id="ChoixCourant2" name="ChoixCourant2" type="text" value="@ViewBag.Choix2">
+                        @Html.TextBox("ChoixCourant2", (string)ViewBag.Choix2)
                     </div>
                     <div class="hiddendiv">
-                        <input id="ChoixCourant3" name="ChoixCourant3" type="text" value="@ViewBag.Choix3">
+                        @Html.TextBox("ChoixCourant3", (string)ViewBag.Choix3)
                     </div>
                     <div class="hiddendiv">
                         @Html.TextBox("IdEtudiant", (string)ViewBag.IdEtudiant)
@@ -125,7 +125,6 @@
                 </div>
             </form>
         </div>
-
     </li>
 </ul>
 
@@ -166,7 +165,7 @@
                     @if (ViewBag.isStudent)
                     {
                         <td>
-                            <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" class="choixPossible browser-default">
+                            <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" name="choixEtudiants" class="choixPossible browser-default">
                                 <option value=""></option>
                                 @if (@ViewBag.Choix1 == @lesStages[i].IDStage)
                                 {
@@ -192,7 +191,6 @@
                                 {
                                     <option value="3">3</option>
                                 }
-
                             </select>
                         </td>
                     }
@@ -206,16 +204,16 @@
 {
     <form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
         <div class="hiddendiv">
-            <input id="Choix1" name="Choix1" type="text" value="@ViewBag.Choix1">
+            @Html.CheckBox("Choix1", (string)ViewBag.Choix1)
         </div>
         <div class="hiddendiv">
-            <input id="Choix2" name="Choix2" type="text" value="@ViewBag.Choix2">
+            @Html.CheckBox("Choix2", (string)ViewBag.Choix2)
         </div>
         <div class="hiddendiv">
-            <input id="Choix3" name="Choix3" type="text" value="@ViewBag.Choix3">
+            @Html.CheckBox("Choix3", (string)ViewBag.Choix3)
         </div>
         <div class="hiddendiv">
-            <input id="IdEtudiant" name="IdEtudiant" type="text" value="@ViewBag.IdEtudiant" required>
+            @Html.CheckBox("IdEtudiant", (bool)ViewBag.IdEtudiant, new { required = "required" })
         </div>
     </form>
 }
