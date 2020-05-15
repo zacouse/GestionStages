@@ -178,7 +178,19 @@ CREATE TABLE Etudiant (
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate()
 )
+GO
 
+CREATE TABLE Superviseur(
+    IDSuperviseur INT IDENTITY PRIMARY KEY,
+    Prenom VARCHAR(50),
+	Nom VARCHAR(50),
+	Fonction VARCHAR(100),
+	NoTelephone VARCHAR(20),
+	Courriel VARCHAR(50),
+	Etat BIT,
+	DateHeureCreation DATETIME DEFAULT GetDate(),
+	DateHeureModification DATETIME DEFAULT GetDate()
+)
 GO
 
 CREATE TABLE StageEtudiant (
@@ -187,11 +199,13 @@ CREATE TABLE StageEtudiant (
 	IDEtudiant INT,
 	NumeroChoix INT,
 	ChoixFinal BIT,
+    IDSuperviseur INT,
 	Etat BIT,
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate(),
 	FOREIGN KEY (IDStage) REFERENCES Stage(IDStage),
-	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant)
+	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant),
+    FOREIGN KEY (IDSuperviseur) REFERENCES Superviseur(IDSuperviseur)
 )
 GO
 

@@ -10,41 +10,12 @@ WHERE IDStage = @IdStage_IN AND StageEtudiant.Etat = 1
 order by StageEtudiant.NumeroChoix
 GO
 
-CREATE PROC pAddSetOneAssignationStage(@IDStage_IN INT, @ListEtudiants_IN VARCHAR(200), @IDSuperviseur_IN INT)
+CREATE PROC pAddSetOneAssignationStage(@IDStage_IN INT, @IDEtudiants_IN INT, @IDSuperviseur_IN INT, @ChoixFinal_IN BIT)
 AS
-    DECLARE @List AS TABLE(value varchar)
-
-    INSERT INTO @List
-    select value from STRING_SPLIT(@ListEtudiants_IN,',')
-
     UPDATE StageEtudiant
-    SET ChoixFinal = 1
+    SET ChoixFinal = @ChoixFinal_IN
+    ,   IDSuperviseur = @IDSuperviseur_IN
     WHERE IDStage = @IDStage_IN
-    AND IDEtudiant IN (select value from @List)
+    AND IDEtudiant = @IDEtudiants_IN
 	AND Etat = 1
-
-    UPDATE StageEtudiant
-    SET ChoixFinal = 0
-    WHERE IDStage = @IDStage_IN
-    AND IDEtudiant NOT IN (select value from @List)
-
-
-
-    UPDATE PersonneContactStage
-    SET Etat = 0
-    WHERE IDStage = @IDStage_IN 
-    AND IDPersonneContact <> @IDSuperviseur_IN
-
-    IF EXISTS(SELECT IDPersonneContactStage FROM PersonneContactStage WHERE IDStage = @IDStage_IN AND IDPersonneContact = @IDSuperviseur_IN)
-    BEGIN
-        UPDATE PersonneContactStage
-        SET Etat = 1
-        WHERE IDStage = @IDStage_IN 
-        AND IDPersonneContact = @IDSuperviseur_IN
-    END
-    ELSE
-    BEGIN
-        INSERT INTO PersonneContactStage(IDStage,IDPersonneContact)
-        VALUES (@IDStage_IN,@IDSuperviseur_IN)
-    END
 GO

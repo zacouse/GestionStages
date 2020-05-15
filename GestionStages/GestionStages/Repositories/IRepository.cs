@@ -53,6 +53,7 @@ namespace GestionStages.Repositories
         List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
         List<ChoixEtudiant> GetChoixEtudiant(int idStage);
         void SaveOneAssignationStage(int IDStage, string listEtudiants,int idSuperviseur);
+        void SaveOneAssignationStage(int IDStage, int idEtudiant,int idSuperviseur,bool choixFinal);
     }
 
     interface IPersonneContactRepository

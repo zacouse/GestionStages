@@ -26,6 +26,7 @@
                     List<AssignationStageEtudiant> lesStages = ViewBag.lesStages;
                     for (int i = 0; i < lesStages.Count; i++)
                     {
+                        List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                         <li>
                             <div class="collapsible-header">
                                 <p class="col s10">
@@ -33,7 +34,7 @@
                                     <br />
                                     @lesStages[i].getTitreMilieuStage()
                                 </p>
-                                <p class="col s2 ">@lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">@lesStages[i].LesChoixEtudiants.Where(s=>s.ChoixFinal == true).Count()</span> / @lesStages[i].getNbPostesStage()</p>
+                                <p class="col s2 ">@lang.Postes : <span id="@Html.Raw("spanPostes" + lesStages[i].getIDStage())">@lesStages[i].LesChoixEtudiants.Where(s => s.ChoixFinal == true).Count()</span> / @lesStages[i].getNbPostesStage()</p>
                             </div>
                             <div class="collapsible-body">
                                 <input type="hidden" id="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" name="@Html.Raw("ListeEtudiant" + lesStages[i].getIDStage())" value="" />
@@ -51,7 +52,6 @@
                                     </thead>
                                     <tbody>
                                         @{
-                                            List<ChoixEtudiant> lesChoixEtudiants = lesStages[i].LesChoixEtudiants;
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
                                                 <tr ondblclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA',
@@ -69,26 +69,20 @@
                                                     <td>
                                                         <p>
                                                             <label>
-                                                                @Html.CheckBox("FinalChoice", lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + @lesChoixEtudiants[j].Etudiant.IDEtudiant + ",this.checked," + lesStages[i].getIDStage() + ")" })
-                                                                @{ if (lesChoixEtudiants[j].ChoixFinal)
-                                                                    {
-                                                                        nombrePosteOccupe++;
-                                                                    }
-                                                                }
+                                                                @Html.CheckBox("FinalChoice" + lesStages[i].getIDStage() + "-" + lesChoixEtudiants[j].Etudiant.IDEtudiant, lesChoixEtudiants[j].ChoixFinal, new { @onchange = "getValueBox(" + @lesChoixEtudiants[j].Etudiant.IDEtudiant + ",this.checked," + lesStages[i].getIDStage() + ")" })
                                                                 <span></span>
                                                             </label>
                                                         </p>
                                                     </td>
                                                     <td>
                                                         <div id="test">
-                                                            <select id="DropSuperviseur" name="@Html.Raw("DropSuperviseur" + lesChoixEtudiants[j].Etudiant.IDEtudiant)" class="Validate" required>
+                                                            <select id="DropSuperviseur" name="@Html.Raw("DropSuperviseur"+ lesStages[i].getIDStage() + "-" + lesChoixEtudiants[j].Etudiant.IDEtudiant)" class="Validate" required>
                                                                 <option value="0"></option>
                                                                 @{
                                                                     List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact;
                                                                     for (int x = 0; x < lesSuperviseur.Count; x++)
                                                                     {
                                                                         <option value="@lesSuperviseur[x].IDPersonneContact">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
-
                                                                     }
                                                                 }
                                                             </select>
@@ -242,7 +236,12 @@
         }
 
         function SaveStage(stageid) {
-            $.post('@Url.Action("SaveOneStage", "AssignationStage")', { txtIDStage: stageid, txtEtudiants: $('#ListeEtudiant' + stageid).val() }, function () { });
+            //$.post('@Url.Action("SaveOneStage", "AssignationStage")', { txtIDStage: stageid, txtEtudiants: $('#ListeEtudiant' + stageid).val() }, function () { });
+            $('#txtIDStage').val(stageid);
+            //$("#formStage").ajaxSubmit({ url: '@Url.Action("SaveOneStage", "AssignationStage")', type: 'post' });
+            //$.post('@Url.Action("SaveOneStage", "AssignationStage")', $("#formStage").serialize());
+
+
         }
 
         function SaveAll() {

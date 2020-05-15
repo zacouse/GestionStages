@@ -36,12 +36,23 @@ namespace GestionStages.Controllers
         }
 
         [HttpPost]
-        public void SaveOneStage(int txtIDStage,string txtEtudiants)        {            int idSuperviseur = Convert.ToInt32(Request.Form["TxtSuperviseur" + txtIDStage]);            repoChoixStage.SaveOneAssignationStage(txtIDStage, txtEtudiants, idSuperviseur);            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+        public void SaveOneStage(string )        {
+            //SaveStage(txtIDStage);            List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(txtIDStage);            foreach (ChoixEtudiant choix in ChoixEtudiants)
+            {
+                repoChoixStage.SaveOneAssignationStage(txtIDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + txtIDStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + txtIDStage + "-" + choix.Etudiant.IDEtudiant] == "on");
+            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
         [HttpPost]
         public void SaveAllStage()        {            List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
             foreach (Stage stage in stagesToAssign)            {
-                repoChoixStage.SaveOneAssignationStage(stage.IDStage, Request.Form["ListeEtudiant" + stage.IDStage], Convert.ToInt32(Request.Form["TxtSuperviseur" + stage.IDStage]));            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+                SaveStage(stage.IDStage);            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
+        private void SaveStage(int idStage)
+        {
+            List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(idStage);            foreach (ChoixEtudiant choix in ChoixEtudiants)
+            {
+                repoChoixStage.SaveOneAssignationStage(idStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + idStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + idStage + "-" + choix.Etudiant.IDEtudiant] == "on");
+            }
+        }
     }
 }
