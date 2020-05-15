@@ -13,12 +13,12 @@
 </div>
 
 <ul class="collapsible">
-    <li class="active" >
+    <li class="active">
         <div class="collapsible-header row" onclick="changeChevron()"><b class="col s11">@lang.FiltreDeRecherche</b><span class="col right s1"><i id="iconChevron" style="vertical-align:middle;" class="material-icons">expand_less</i></span></div>
         <div class="collapsible-body">
             <form name="searchform" method="post" action="@Url.Action("ListeStage", "Stage")">
                 <div class="row">
-                    <div class="col s12 m6 l3">
+                    <div class="col s12 m6 @if (!ViewBag.isStudent) { @Html.Raw("l3") } else { @Html.Raw("l4") }">
                         <div class="input-field">
                             @Html.TextBox("txtTitre", "")
                             @Html.Label("txtTitre", @lang.Titre)
@@ -42,7 +42,7 @@
                         </div>
                     }
 
-                    <div class="col s12 m6 l2">
+                    <div class="col s12 m6 @if (!ViewBag.isStudent) { @Html.Raw("l2") } else { @Html.Raw("l4") } ">
                         <div class="input-field">
                             @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
                             @Html.Label("txtMinDate", @lang.DateDeDebut)
@@ -52,7 +52,7 @@
                             @Html.Label("txtMaxDate", @lang.DateDeFin)
                         </div>
                     </div>
-                    <div class="col s12 m3 l2">
+                    <div class="col s12 m3  @if (!ViewBag.isStudent) { @Html.Raw("l2") } else { @Html.Raw("push-l2 l2") }">
                         @Html.Label("periodeTravail", @lang.PeriodeDeTravail)
                         <div class="input-field row">
                             <p>
@@ -131,20 +131,20 @@
 <table id="liste" class="highlight responsive-table">
     <thead>
         <tr>
-            <td>@lang.Titre</td>
-            <td>@lang.MilieuDeStage</td>
-            <td>@lang.PeriodeDeTravail</td>
-            <td>@lang.Statut</td>
+            <td><b>@lang.Titre</b></td>
+            <td><b>@lang.MilieuDeStage</b></td>
+            <td><b>@lang.PeriodeDeTravail</b></td>
+            <td><b>@lang.Statut</b></td>
             @if (!ViewBag.isStudent)
             {
-                <td>@lang.NombreDHeureParSemaine</td>
+                <td><b>@lang.NombreDHeureParSemaine</b></td>
             }
-            <td>@lang.DateDeDebut</td>
-            <td>@lang.DateDeFin</td>
-            <td>@lang.Voir</td>
+            <td><b>@lang.DateDeDebut</b></td>
+            <td><b>@lang.DateDeFin</b></td>
+            <td><b>@lang.Voir</b></td>
             @if (ViewBag.isStudent)
             {
-                <td>@lang.NumeroChoix</td>
+                <td><b>@lang.NumeroChoix</b></td>
             }
         </tr>
     </thead>
@@ -153,14 +153,17 @@
             List<Stage> lesStages = ViewBag.lesStages;
             for (int i = 0; i < lesStages.Count; i++)
             {
-                <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">
-                    <td>@lesStages[i].Titre</td>
-                    <td>@lesStages[i].TitreMilieuStage</td>
-                    <td>@lesStages[i].GetPeriode()</td>
-                    <td>@lesStages[i].GetStatus()</td>
-                    <td>@lesStages[i].NbHeureSemaine h</td>
-                    <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
-                    <td>@{@lesStages[i].DateFin.ToString("d");}</td>
+                <tr>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].Titre</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].TitreMilieuStage</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].GetPeriode()</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].GetStatus()</td>
+                    @if (!ViewBag.isStudent)
+                    {
+                        <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].NbHeureSemaine h</td>
+                    }
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@{@lesStages[i].DateDebut.ToString("d");}</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@{@lesStages[i].DateFin.ToString("d");}</td>
                     <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                     @if (ViewBag.isStudent)
                     {
@@ -271,7 +274,7 @@
             } else {
                 document.getElementById('iconChevron').innerHTML = "expand_more"
             }
-            
+
         }
 
         function applyChoice(sel) {

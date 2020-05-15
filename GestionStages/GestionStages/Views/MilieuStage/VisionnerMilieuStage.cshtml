@@ -130,13 +130,13 @@
             <table id="liste" class="highlight responsive-table">
                 <thead>
                     <tr>
-                        <td>@lang.Titre</td>
-                        <td>@lang.PeriodeDeTravail</td>
-                        <td>@lang.Statut</td>
-                        <td>@lang.NombreDHeureParSemaine</td>
-                        <td>@lang.DateDeDebut</td>
-                        <td>@lang.DateDeFin</td>
-                        <td>@lang.Voir</td>
+                        <td><b>@lang.Titre</b></td>
+                        <td><b>@lang.PeriodeDeTravail</b></td>
+                        <td><b>@lang.Statut</b></td>
+                        <td><b>@lang.NombreDHeureParSemaine</b></td>
+                        <td><b>@lang.DateDeDebut</b></td>
+                        <td><b>@lang.DateDeFin</b></td>
+                        <td><b>@lang.Voir</b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,7 +144,7 @@
                         List<Stage> lesStages = ViewBag.lesStages;
                         for (int i = 0; i < lesStages.Count; i++)
                         {
-                            <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })'">
+                            <tr onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })'">
                                 <td>@lesStages[i].Titre</td>
                                 <td>@lesStages[i].GetPeriode()</td>
                                 <td>@lesStages[i].GetStatus()</td>

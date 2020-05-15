@@ -556,4 +556,10 @@
 	<data name="ListesDesRestrictionsDuMilieuDeStage" xml:space="preserve">
 		<value>Restrictions list from the internship site</value>
 	</data>
+	<data name="EtudiantDejaDansLesChoixStages" xml:space="preserve">
+		<value>The student already made a choice for this internship</value>
+	</data>
+	<data name="EtudiantsRestants" xml:space="preserve">
+		<value>Remaining students</value>
+	</data>
 </root>

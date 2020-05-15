@@ -505,4 +505,10 @@
 	<data name="ListesDesRestrictionsDuMilieuDeStage" xml:space="preserve">
 		<value>Listes des restrictions du milieu de stage</value>
 	</data>
+	<data name="EtudiantDejaDansLesChoixStages" xml:space="preserve">
+		<value>Le stage est déjà dans les choix de l'étudiant</value>
+	</data>
+	<data name="EtudiantsRestants" xml:space="preserve">
+		<value>Étudiants Restants</value>
+	</data>
 </root>

@@ -62,10 +62,10 @@
 <table class="highlight">
     <thead>
         <tr>
-            <td>@lang.Titre</td>
-            <td>@lang.Adresse</td>
-            <td>@lang.Telephone</td>
-            <td>@lang.Voir</td>
+            <td><b>@lang.Titre</b></td>
+            <td><b>@lang.Adresse</b></td>
+            <td><b>@lang.Telephone</b></td>
+            <td><b>@lang.Voir</b></td>
         </tr>
     </thead>
     <tbody>
@@ -73,7 +73,7 @@
             List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
             for (int i = 0; i < lesMilieus.Count; i++)
             {
-                <tr ondblclick="location.href='@Url.Action("VisionnerMilieuStage", "MilieuStage", new { id = lesMilieus[i].IDMilieuStage })'">
+                <tr onclick="location.href='@Url.Action("VisionnerMilieuStage", "MilieuStage", new { id = lesMilieus[i].IDMilieuStage })'">
                     <td>@lesMilieus[i].Titre</td>
                     <td>@lesMilieus[i].NoCivique @lesMilieus[i].Rue, @lesMilieus[i].Ville&nbsp;@lesMilieus[i].Province, @lesMilieus[i].Pays </td>
                     <td>@lesMilieus[i].NoTelephone</td>

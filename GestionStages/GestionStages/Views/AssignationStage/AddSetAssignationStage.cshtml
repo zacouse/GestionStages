@@ -45,21 +45,20 @@
                                 <table id="@lesStages[i].getIDStage()" class="highlight responsive-table">
                                     <thead>
                                         <tr>
-                                            <td>@lang.DetailEtudiant</td>
-                                            <td>@lang.DA</td>
-                                            <td>@lang.Prenom</td>
-                                            <td>@lang.Nom</td>
-                                            <td>@lang.NumeroChoix</td>
-                                            <td>@lang.Choisir ?</td>
-                                            <td>@lang.Superviseur</td>
+                                            <td><b>@lang.DetailEtudiant</b></td>
+                                            <td><b>@lang.DA</b></td>
+                                            <td><b>@lang.Prenom</b></td>
+                                            <td><b>@lang.Nom</b></td>
+                                            <td><b>@lang.NumeroChoix</b></td>
+                                            <td><b>@lang.Choisir ?</b></td>
+                                            <td><b>@lang.Superviseur</b></td>
                                         </tr>
                                     </thead>
                                     <tbody id="TBodyStage+@lesStages[i].getIDStage()">
                                         @{
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                                <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()" ondblclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA',
-                                            '@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()" >
                                                     <td>
                                                         <input type="hidden" id="@Html.Raw("line" + lesStages[i].getIDStage() + "-" + j)" value="@lesChoixEtudiants[j].IDStageEtudiant" />
                                                         <a href="javascript:openModal('@lesChoixEtudiants[j].Etudiant.Prenom'+' '+'@lesChoixEtudiants[j].Etudiant.Nom','@lesChoixEtudiants[j].Etudiant.NoDA',
@@ -67,10 +66,18 @@
                                                             <i class="material-icons orange-text">remove_red_eye</i>
                                                         </a>
                                                     </td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.NoDA</td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.Prenom</td>
-                                                    <td>@lesChoixEtudiants[j].Etudiant.Nom</td>
-                                                    <td>@lesChoixEtudiants[j].NoChoix</td>
+                                                    <td onclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA','@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                        @lesChoixEtudiants[j].Etudiant.NoDA
+                                                    </td>
+                                                    <td onclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA','@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                        @lesChoixEtudiants[j].Etudiant.Prenom
+                                                    </td>
+                                                    <td onclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA','@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                        @lesChoixEtudiants[j].Etudiant.Nom
+                                                    </td>
+                                                    <td onclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA','@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
+                                                        @lesChoixEtudiants[j].NoChoix
+                                                    </td>
                                                     <td>
                                                         <p>
                                                             <label>
@@ -117,31 +124,33 @@
         @lang.StagesDisponiblesDansCeMilieu
         <hr />
     </div>
+    @{
+        List<Etudiant> lesEtudiants = ViewBag.lesEtudiants;
+    }
     <div class="col l4 push-l1 s12">
+        <span class="right light-blue-text">@lang.EtudiantsRestants : <span id="EtudiantRestant"> @lesEtudiants.Count() </span> / @lesEtudiants.Count()</span>
         <table id="liste" class="highlight responsive-table">
             <thead>
                 <tr>
-                    <td>@lang.DetailEtudiant</td>
-                    <td>@lang.DA</td>
-                    <td>@lang.Prenom</td>
-                    <td>@lang.Nom</td>
-                    <td>@lang.Choisir ?</td>
+                    <td><b>@lang.DetailEtudiant</b></td>
+                    <td><b>@lang.DA</b></td>
+                    <td><b>@lang.Prenom</b></td>
+                    <td><b>@lang.Nom</b></td>
+                    <td><b>@lang.Choisir ?</b></td>
                 </tr>
             </thead>
             <tbody id="TBodyEtudiant">
                 @{
-                    List<Etudiant> lesEtudiants = ViewBag.lesEtudiants;
                     for (int i = 0; i < lesEtudiants.Count; i++)
                     {
-                        <tr id="etu+@lesEtudiants[i].IDEtudiant" ondblclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
-                                            '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">
+                        <tr id="etu+@lesEtudiants[i].IDEtudiant" >
                             <td>
                                 <a href="javascript:openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
                                             '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')"><i class="material-icons orange-text">remove_red_eye</i></a>
                             </td>
-                            <td>@lesEtudiants[i].NoDA</td>
-                            <td>@lesEtudiants[i].Prenom</td>
-                            <td>@lesEtudiants[i].Nom</td>
+                            <td onclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA','@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">@lesEtudiants[i].NoDA</td>
+                            <td onclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA','@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">@lesEtudiants[i].Prenom</td>
+                            <td onclick="openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA','@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')">@lesEtudiants[i].Nom</td>
                             <td>
                                 <a style="font-size:9px" class="btn green assignationStageVeto disabled" href="javascript:EnvoyerVersStageOuvert('@lesEtudiants[i].Nom',
                                    '@lesEtudiants[i].Prenom','@lesEtudiants[i].NoDA','@lesEtudiants[i].Programme','@lesEtudiants[i].Courriel','@lesEtudiants[i].Photo','@lesEtudiants[i].IDEtudiant');">@lang.Assigner</a>
@@ -197,15 +206,15 @@
                 {
                     List<ChoixEtudiant> lesChoixEtudiants2 = lesStages2[i].LesChoixEtudiants;
 
-                    for (int j = 0; j < lesChoixEtudiants2.Count;j++)
+                    for (int j = 0; j < lesChoixEtudiants2.Count; j++)
                     {
                         if (lesChoixEtudiants2[j].ChoixFinal && !idEtudiantToRemove.Contains(lesChoixEtudiants2[j].Etudiant.IDEtudiant + ","))
                         {
-                        idEtudiantToRemove += lesChoixEtudiants2[j].Etudiant.IDEtudiant + ",";
+                            idEtudiantToRemove += lesChoixEtudiants2[j].Etudiant.IDEtudiant + ",";
                         }
                     }
                 }
-                if(idEtudiantToRemove.Length>1)
+                if (idEtudiantToRemove.Length > 1)
                 {
                     idEtudiantToRemove = idEtudiantToRemove.Substring(0, idEtudiantToRemove.Length - 1);
                 }
@@ -214,6 +223,7 @@
             for (var i = 0; i < IdArray.length; i++) {
                 hideEtudiant(IdArray[i]);
             }
+            $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) - IdArray.length);
         }
 
         function EnvoyerVersStageOuvert(nom, prenom, da, programme, courriel, photo, idEtu) {
@@ -223,21 +233,22 @@
                 RowEtudiantString += '<input type="hidden" id="idStage' + openedStage + "-" + idEtu + '" value="' + openedStage + '" />';
                 RowEtudiantString += '<input type="hidden" id="idEtudiant' + openedStage + "-" + idEtu + '" value="' + idEtu + '" />';
                 RowEtudiantString += " <a href=\"javascript:openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\"><i class='material-icons orange-text'>remove_red_eye</i></a></td>";
-                RowEtudiantString += "<td>" + da + "</td>";
-                RowEtudiantString += "<td>" + prenom + "</td>";
-                RowEtudiantString += "<td>" + nom + "</td>";
-                RowEtudiantString += "<td>Veto</td>";
+                RowEtudiantString += "<td onclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + da + "</td>";
+                RowEtudiantString += "<td onclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + prenom + "</td>";
+                RowEtudiantString += "<td onclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + nom + "</td>";
+                RowEtudiantString += "<td onclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">Veto</td>";
                 RowEtudiantString += "<td><p><label><input id='FinalChoice" + openedStage + "-" + idEtu + "' name='FinalChoice" + openedStage + "-" + idEtu + "' type='checkbox' checked='true' class='filled-in' onchange='getValueBox(" + idEtu + ",this.checked," + openedStage + ",true)'><span></span></label></p></td>";
                 RowEtudiantString += "<td><div><select id='DropSuperviseur" + openedStage + "-" + idEtu + "' name='DropSuperviseur" + openedStage + "-" + idEtu + "' class='Validate' required> <option value='0'></option>";
                 RowEtudiantString += "@{ List<Superviseur> lesSuperviseur = ViewBag.lesPersonnesContact; for (int x = 0; x < lesSuperviseur.Count; x++) { <option value = '@lesSuperviseur[x].IDSuperviseur' >@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>} }";
                 RowEtudiantString += "</select></div></td>";
-                document.getElementById("toAdd+" + openedStage).outerHTML = "<tr id='Veto" + idEtu + "' ondblclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + RowEtudiantString + "</tr><tr id='toAdd+" + openedStage + "' class='hide'></tr>";
+                document.getElementById("toAdd+" + openedStage).outerHTML = "<tr id='Veto" + idEtu + "'>" + RowEtudiantString + "</tr><tr id='toAdd+" + openedStage + "' class='hide'></tr>";
                 $('#DropSuperviseur' + openedStage + '-' + idEtu).formSelect();
                 AddPoste(openedStage);
                 hideEtudiant(idEtu);
+                AdjustOtherChoiceRow(idEtu, openedStage, true);
             }
             else {
-                M.toast({ html: "Le stage est déjà dans les choix de l'étudiant", displayLength: 1500, classes: 'rounded' })
+                M.toast({ html: '@lang.EtudiantDejaDansLesChoixStages', displayLength: 1500, classes: 'rounded' })
             }
         }
 
@@ -312,14 +323,63 @@
             if (ischecked) {
                 AddPoste(stageId);
                 hideEtudiant(idEtudiant);
+                AdjustOtherChoiceRow(idEtudiant, stageId,true);
             }
             else {
                 RemovePoste(stageId);
                 showEtudiant(idEtudiant);
+                AdjustOtherChoiceRow(idEtudiant, stageId, false);
                 if (document.getElementById('Veto' + idEtudiant) != null && VetoSender) { //Détruit la ligne du veto si c'est elle qui ce fait décoché
                     document.getElementById('Veto' + idEtudiant).outerHTML = "";
                 }
             }
+        }
+
+        function AdjustOtherChoiceRow(idEtudiant, stageId, checked) {
+            @{
+                string idStageToCheck = "";
+                for (int i = 0; i < lesStages2.Count; i++)
+                {
+                    idStageToCheck += lesStages2[i].getIDStage() + ",";
+                }
+                if (idStageToCheck.Length > 1)
+                {
+                    idStageToCheck = idStageToCheck.Substring(0, idStageToCheck.Length - 1);
+                }
+             }
+            var IdArray = '@idStageToCheck'.split(',')
+            for (var i = 0; i < IdArray.length; i++) {
+                if (IdArray[i] != stageId || !checked) {
+                    if (document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]) != null) {
+                        if (checked) {
+                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).style.backgroundColor = "lightgrey";
+                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).children;
+                            var checkbox = child[5].children[0];
+                            var select = child[6].children[0];
+                            var arr = checkbox.className.split(" ");
+                            if (arr.indexOf("hide") == -1) {
+                                checkbox.className += " " + "hide";
+                            }
+                            arr = select.className.split(" ");
+                            if (arr.indexOf("hide") == -1) {
+                                select.className += " " + "hide";
+                            }
+                            
+                        }
+                        else {
+                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).style.backgroundColor = "white";
+                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).children;
+                            var checkbox = child[5].children[0];
+                            var select = child[6].children[0];
+                            checkbox.className = checkbox.className.replace(/\bhide\b/g, "");
+                            select.className = select.className.replace(/\bhide\b/g, "");
+                        }
+                        
+                    }
+                }
+                
+            }
+            
         }
 
         function SaveStage(stageid) {
@@ -348,10 +408,12 @@
 
         function AddPoste(stageid) {
             $('#spanPostes' + stageid).html(parseInt($('#spanPostes' + stageid).html()) + 1);
+            $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) - 1);
         }
 
         function RemovePoste(stageid) {
             $('#spanPostes' + stageid).html(parseInt($('#spanPostes' + stageid).html()) - 1);
+            $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) + 1);
         }
 
     </script>

@@ -403,11 +403,29 @@ namespace GestionStages.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The student already made a choice for this internship.
+        /// </summary>
+        public static string EtudiantDejaDansLesChoixStages {
+            get {
+                return ResourceManager.GetString("EtudiantDejaDansLesChoixStages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Not assign student.
         /// </summary>
         public static string EtudiantNonAssigner {
             get {
                 return ResourceManager.GetString("EtudiantNonAssigner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remaining students.
+        /// </summary>
+        public static string EtudiantsRestants {
+            get {
+                return ResourceManager.GetString("EtudiantsRestants", resourceCulture);
             }
         }
         
