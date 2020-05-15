@@ -88,7 +88,7 @@ namespace GestionStages.Repositories
 
         }
 
-        public List<ChoixEtudiant> GetChoixEtudiant(int idStage )
+        public List<ChoixEtudiant> GetChoixEtudiant(int idStage)
         {
             List<ChoixEtudiant> choix = new List<ChoixEtudiant>();
 
@@ -118,22 +118,32 @@ namespace GestionStages.Repositories
                 choix.Add(choixEtudiant);
             }
             conn.Close();
-            
+
             return choix;
         }
 
         public void SaveOneAssignationStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)
         {
-            sql = new SqlCommand("pAddSetOneAssignationStage", conn);
-            sql.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                sql = new SqlCommand("pAddSetOneAssignationStage", conn);
+                sql.CommandType = CommandType.StoredProcedure;
 
-            sql.Parameters.Add("@IDStageEtudiant_IN", SqlDbType.Int).Value = idStageEtudiant;
-            sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = ChoixFinal;
-            sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
+                sql.Parameters.Add("@IDStageEtudiant_IN", SqlDbType.Int).Value = idStageEtudiant;
+                sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = ChoixFinal;
+                sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
 
-            conn.Open();
-            sql.ExecuteNonQuery();
-            conn.Close();
+                conn.Open();
+                sql.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

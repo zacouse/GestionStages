@@ -218,14 +218,16 @@
 
         function EnvoyerVersStageOuvert(nom, prenom, da, programme, courriel, photo, idEtu) {
             if (document.getElementById("choixEtudiant+" + idEtu + "+" + openedStage) == null) {
-                var RowEtudiantString = "<td> <a href=\"javascript:openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\"><i class='material-icons orange-text'>remove_red_eye</i></a></td>";
+                var RowEtudiantString = "<td>";
+                RowEtudiantString += '<input type="hidden" id="lineV" value="' + openedStage + "-" + idEtu + '" />';
+                RowEtudiantString += " <a href=\"javascript:openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\"><i class='material-icons orange-text'>remove_red_eye</i></a></td>";
                 RowEtudiantString += "<td>" + da + "</td>";
                 RowEtudiantString += "<td>" + prenom + "</td>";
                 RowEtudiantString += "<td>" + nom + "</td>";
                 RowEtudiantString += "<td>Veto</td>";
                 RowEtudiantString += "<td><p><label><input id='FinalChoice" + openedStage + "-" + idEtu + "' name='FinalChoice" + openedStage + "-" + idEtu + "' type='checkbox' checked='true' class='filled-in' onchange='getValueBox(" + idEtu + ",this.checked," + openedStage + ",true)'><span></span></label></p></td>";
                 RowEtudiantString += "<td><div><select id='DropSuperviseur" + openedStage + "-" + idEtu + "' name='DropSuperviseur" + openedStage + "-" + idEtu + "' class='Validate' required> <option value='0'></option>";
-                RowEtudiantString += "@{ List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact; for (int x = 0; x < lesSuperviseur.Count; x++) { <option value = '@lesSuperviseur[x].IDPersonneContact' >@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>} }";
+                RowEtudiantString += "@{ List<Superviseur> lesSuperviseur = ViewBag.lesPersonnesContact; for (int x = 0; x < lesSuperviseur.Count; x++) { <option value = '@lesSuperviseur[x].IDSuperviseur' >@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>} }";
                 RowEtudiantString += "</select></div></td>";
                 document.getElementById("toAdd+" + openedStage).outerHTML = "<tr id='Veto" + idEtu + "' ondblclick=\"openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\">" + RowEtudiantString + "</tr><tr id='toAdd+" + openedStage + "' class='hide'></tr>";
                 $('#DropSuperviseur' + openedStage + '-' + idEtu).formSelect();
@@ -292,13 +294,10 @@
             }
             instance.open();
         }
-       // $("#DropSuperviseur").val('2');
+
         $('#TxtSuperviseur').on('change', function () {
-            //$("#DropSuperviseur").val(this.value).change();
-            //alert(this.value);
             $("#DropSuperviseur").val(this.value);
             alert(this.selectedIndex);
-            //selectedDropdownElement('#DropSuperviseur', this.value, this.selectedIndex);
         });
 
         function selectedDropdownElement(id, valueToSelect, index) {
@@ -322,11 +321,6 @@
         }
 
         function SaveStage(stageid) {
-            //$.post('@Url.Action("SaveOneStage", "AssignationStage")', { txtIDStage: stageid, txtEtudiants: $('#ListeEtudiant' + stageid).val() }, function () { });
-            $('#txtIDStage').val(stageid);
-            //$("#formStage").ajaxSubmit({ url: '@Url.Action("SaveOneStage", "AssignationStage")', type: 'post' });
-            //$.post('@Url.Action("SaveOneStage", "AssignationStage")', $("#formStage").serialize());
-
             var isdone = false;
             var cpt = 0;
             while (!isdone) {
@@ -338,6 +332,11 @@
                 else {
                     isdone = true;
                 }
+            }
+
+            var elem = document.getElementsByName('lineV');
+            for (var i = 0; i < elem.length; i++) {
+                $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + elem[i].value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + elem[i].value).val() });
             }
         }
 
