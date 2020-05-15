@@ -21,31 +21,35 @@
                     <div class="col s12 m6 l3">
                         <div class="input-field">
                             @Html.TextBox("txtTitre", "")
-                            <label for="txtTitre">@lang.Titre</label>
+                            @Html.Label("txtTitre", @lang.Titre)
                         </div>
                         <div class="input-field">
                             @Html.TextBox("txtMilieu", "")
-                            <label for="txtMilieu">@lang.MilieuDeStage</label>
+                            @Html.Label("txtMilieu", @lang.MilieuDeStage)
                         </div>
                     </div>
-                    <div class="col s12 m6 l3">
-                        <div class="input-field">
-                            @Html.TextBox("txtMinH", "")
-                            <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
+                    @if (!ViewBag.isStudent)
+                    {
+                        <div class="col s12 m6 l3">
+                            <div class="input-field">
+                                @Html.TextBox("txtMinH", "")
+                                @Html.Label("txtMinH", @lang.NombreMinimumDHeureSemaine)
+                            </div>
+                            <div class="input-field">
+                                @Html.TextBox("txtMaxH", "")
+                                @Html.Label("txtMaxH", @lang.NombreMaximumDHeureSemaine)
+                            </div>
                         </div>
-                        <div class="input-field">
-                            @Html.TextBox("txtMaxH", "")
-                            <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
-                        </div>
-                    </div>
+                    }
+
                     <div class="col s12 m6 l2">
                         <div class="input-field">
                             @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                            <label for="txtMinDate">@lang.DateDeDebut</label>
+                            @Html.Label("txtMinDate", @lang.DateDeDebut)
                         </div>
                         <div class="input-field">
                             @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                            <label for="txtMaxDate">@lang.DateDeFin</label>
+                            @Html.Label("txtMaxDate", @lang.DateDeFin)
                         </div>
                     </div>
                     <div class="col s12 m3 l2">
@@ -78,7 +82,7 @@
                     @if (!ViewBag.isStudent)
                     {
                         <div class="col s12 m3 l2">
-                            <label>Etat</label>
+                            <label>@lang.Etat</label>
                             <div class="input-field row">
                                 <p>
                                     <label>
@@ -132,7 +136,10 @@
             <td>@lang.MilieuDeStage</td>
             <td>@lang.PeriodeDeTravail</td>
             <td>@lang.Statut</td>
-            <td>@lang.NombreDHeureParSemaine</td>
+            @if (!ViewBag.isStudent)
+            {
+                <td>@lang.NombreDHeureParSemaine</td>
+            }
             <td>@lang.DateDeDebut</td>
             <td>@lang.DateDeFin</td>
             <td>@lang.Voir</td>
@@ -213,7 +220,7 @@
     </form>
 }
 <div class="row" style="padding-top:5px;">
-    <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
+    <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a></div>
     @if (!ViewBag.isStudent)
     {
         <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>

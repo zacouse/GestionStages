@@ -491,10 +491,10 @@
 		<value>Restrictions</value>
 	</data>
 	<data name="RestrictionDisponnible" xml:space="preserve">
-		<value>Restriction disponnible</value>
+		<value>Restrictions disponnibles</value>
 	</data>
 	<data name="RestrictionsActives" xml:space="preserve">
-		<value>Restriction actives</value>
+		<value>Restrictions actives</value>
 	</data>
 	<data name="FormatValideChiffre" xml:space="preserve">
 		<value>Veuillez entrer un chiffre sans décimale.</value>

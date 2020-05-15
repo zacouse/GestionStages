@@ -24,29 +24,8 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            <select id="TxtMilieuStage" name="TxtMilieuStage" required>
-                @{
-                    List<MilieuStage> lesMilieu = ViewBag.lesMilieus;
-                    for (int i = 0; i < lesMilieu.Count; i++)
-                    {
-                        if (StageAModifier.IDMilieuStage == @lesMilieu[i].IDMilieuStage)
-                        {
-                            <option type="hidden" selected value="@lesMilieu[i].IDMilieuStage">@lesMilieu[i].Titre</option>
-                        }
-                        else
-                        {
-                            <option type="hidden" value="@lesMilieu[i].IDMilieuStage">@lesMilieu[i].Titre</option>
-                        }
-                    }
-                }
-            </select>
-            @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtMilieu", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete-input", required = "required" })
-            @Html.Label("TxtMilieu", @lang.MilieuDeStage)
+            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete-input", required = "required" })
+            @Html.Label("TxtMilieuStage", @lang.MilieuDeStage)
         </div>
     </div>
     <div class="row">
@@ -227,7 +206,7 @@
         $('#sortable2 li').each(function () {
             ids.push($(this).attr('id'));
         });
-        document.getElementById("Restriction").value = ids.toString() ;
+        document.getElementById("Restriction").value = ids.toString();
     }
     function validate() {
         readRestriction();

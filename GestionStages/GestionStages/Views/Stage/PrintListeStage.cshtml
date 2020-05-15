@@ -13,8 +13,8 @@
             <td>@lang.Description</td>
             <td>@lang.MilieuDeStage</td>
             <td>@lang.PeriodeDeTravail</td>
-            <td>@lang.Statut</td>
-            <td>@lang.NombreDHeureParSemaine</td>
+            @*<td>@lang.Statut</td>
+            <td>@lang.NombreDHeureParSemaine</td>*@
             <td>@lang.DateDeDebut</td>
             <td>@lang.DateDeFin</td>
         </tr>
@@ -29,8 +29,8 @@
                     <td>@lesStages[i].Description</td>
                     <td>@lesStages[i].TitreMilieuStage</td>
                     <td>@lesStages[i].GetPeriode()</td>
-                    <td>@lesStages[i].GetStatus()</td>
-                    <td>@lesStages[i].NbHeureSemaine h</td>
+                    @*<td>@lesStages[i].GetStatus()</td>
+                    <td>@lesStages[i].NbHeureSemaine h</td>*@
                     <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
                     <td>@{@lesStages[i].DateFin.ToString("d");}</td>
                 </tr>
