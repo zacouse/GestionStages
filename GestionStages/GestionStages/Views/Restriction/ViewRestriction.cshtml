@@ -24,14 +24,14 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveRestriction", "Restriction", new { id = @laRestriction.IDRestriction })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@laRestriction.Titre" maxlength="100" required>
-            <label for="TxtTitre">@lang.Titre</label>
+            @Html.TextBox("TxtTitre", Html.Raw(laRestriction.Titre), new { @class = "validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtTitre", @lang.Titre)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <textarea id="TxtDescription" name="TxtDescription" class="materialize-textarea validate" maxlength="1000" required>@laRestriction.Description</textarea>
-            <label for="TxtDescription">@lang.Description</label>
+            @Html.TextArea("TxtDescription", laRestriction.Description, new { @class = "materialize-textarea validate", maxlength = "1000", required = "required" })
+            @Html.Label("TxtDescription", @lang.Description)
         </div>
     </div>
     <div class="row">

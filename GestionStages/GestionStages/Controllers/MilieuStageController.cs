@@ -77,6 +77,7 @@ namespace GestionStages.Controllers
                 ViewBag.LienRetour = "../VisionnerMilieuStage/" + id;
                 ViewBag.LesRestrictionUtilise = repoRestriction.GetRestrictionIDFromMilieuStageID(id);
             }
+            ViewBag.TexteBoutonRetour = lang.Retour;
             ViewBag.LesRestriction = repoRestriction.GetAllRestriction();
             return View();
         }

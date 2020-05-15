@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    @Html.TextArea("TxaDescription", @MilieuEnVisionnement.Description, new { disabled = "disabled" })
+                    @Html.TextArea("TxaDescription", @MilieuEnVisionnement.Description, new { @class = "materialize-textarea", disabled = "disabled" })
                     @Html.Label("TxaDescription", @lang.Description)
                 </div>
             </div>
