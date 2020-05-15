@@ -113,6 +113,8 @@ namespace GestionStages.Repositories
                 choixEtudiant.Etudiant = etudiant;
                 choixEtudiant.NoChoix = ((int)dr.GetValue(8)).ToString();
                 choixEtudiant.ChoixFinal = (bool)dr.GetValue(9);
+                choixEtudiant.IDSuperviseur = (int)dr.GetValue(10);
+                choixEtudiant.IDStageEtudiant = (int)dr.GetValue(11);
                 choix.Add(choixEtudiant);
             }
             conn.Close();
@@ -120,29 +122,14 @@ namespace GestionStages.Repositories
             return choix;
         }
 
-        public void SaveOneAssignationStage(int IDStage,string listEtudiants = "",int IDSuperviseur = 0)
+        public void SaveOneAssignationStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)
         {
             sql = new SqlCommand("pAddSetOneAssignationStage", conn);
             sql.CommandType = CommandType.StoredProcedure;
 
-            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = IDStage;
-            sql.Parameters.Add("@ListEtudiants_IN", SqlDbType.VarChar,200).Value = listEtudiants;
+            sql.Parameters.Add("@IDStageEtudiant_IN", SqlDbType.Int).Value = idStageEtudiant;
+            sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = ChoixFinal;
             sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
-
-            conn.Open();
-            sql.ExecuteNonQuery();
-            conn.Close();
-        }
-
-        public void SaveOneAssignationStage(int IDStage, int idEtudiant, int IDSuperviseur,bool choixFinal)
-        {
-            sql = new SqlCommand("pAddSetOneAssignationStage", conn);
-            sql.CommandType = CommandType.StoredProcedure;
-
-            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = IDStage;
-            sql.Parameters.Add("@IDEtudiant_IN", SqlDbType.Int).Value = idEtudiant;
-            sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
-            sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = choixFinal;
 
             conn.Open();
             sql.ExecuteNonQuery();

@@ -52,13 +52,12 @@ namespace GestionStages.Repositories
         void RemoveChoixStage(int idEtudiant, int numeroChoix);
         List<ChoixStageEtudiant> GetChoixStage(string idEtudiant);
         List<ChoixEtudiant> GetChoixEtudiant(int idStage);
-        void SaveOneAssignationStage(int IDStage, string listEtudiants,int idSuperviseur);
-        void SaveOneAssignationStage(int IDStage, int idEtudiant,int idSuperviseur,bool choixFinal);
+        void SaveOneAssignationStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur);
     }
 
-    interface IPersonneContactRepository
+    interface ISuperviseurRepository
     {
-        List<PersonneContact> GetAllActivePersonneContact();
-        PersonneContact GetPersonneContactByStageID(int stageID);
+        List<Superviseur> GetAllActiveSuperviseur();
+        //Superviseur GetPersonneContactByStageID(int stageID);
     }
 }

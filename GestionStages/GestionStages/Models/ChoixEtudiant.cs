@@ -11,6 +11,7 @@ namespace GestionStages.Models
         public string NoChoix { get; set; }
         public bool ChoixFinal { get; set; }
         public int IDSuperviseur { get; set; }
+        public int IDStageEtudiant { get; set; }
 
         public ChoixEtudiant()
         {

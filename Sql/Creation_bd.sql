@@ -231,6 +231,7 @@ AS
 	SELECT IDPersonneContact,Nom,Prenom,Courriel,Etat
 	FROM PersonneContact WHERE Etat=1
 GO
+
 insert into PersonneContact(Nom,Prenom,Courriel,Etat)
 values('Zeppeli','Cesar','Jo@Joke.ca',1)
 GO
@@ -240,6 +241,15 @@ AS
 SELECT PersonneContact.IDPersonneContact,PersonneContact.Nom,PersonneContact.Prenom,PersonneContact.Courriel,PersonneContact.Etat 
 FROM PersonneContact
 INNER JOIN PersonneContactStage ON PersonneContactStage.IDPersonneContact = PersonneContact.IDPersonneContact AND @IDStage_IN = PersonneContactStage.IDStage
+GO
+
+CREATE PROC pGetAllSuperviseur
+AS
+    SELECT IDSuperviseur,Nom,Prenom,Courriel,Etat
+	FROM Superviseur WHERE Etat=1
+GO
+insert into Superviseur(Nom,Prenom,Courriel,Etat)
+values('Zeppeli','Cesar','Jo@Joke.ca',1)
 GO
 
 --INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])

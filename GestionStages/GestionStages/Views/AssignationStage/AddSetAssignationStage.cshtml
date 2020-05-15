@@ -61,6 +61,7 @@
                                                 <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()" ondblclick="openModal('@lesChoixEtudiants[j].Etudiant.Prenom' + ' ' + '@lesChoixEtudiants[j].Etudiant.Nom', '@lesChoixEtudiants[j].Etudiant.NoDA',
                                             '@lesChoixEtudiants[j].Etudiant.Programme', '@lesChoixEtudiants[j].Etudiant.Courriel', '@lesChoixEtudiants[j].Etudiant.Photo')">
                                                     <td>
+                                                        <input type="hidden" id="@Html.Raw("line" + lesStages[i].getIDStage() + "-" + j)" value="@lesChoixEtudiants[j].IDStageEtudiant" />
                                                         <a href="javascript:openModal('@lesChoixEtudiants[j].Etudiant.Prenom'+' '+'@lesChoixEtudiants[j].Etudiant.Nom','@lesChoixEtudiants[j].Etudiant.NoDA',
                                                        '@lesChoixEtudiants[j].Etudiant.Programme','@lesChoixEtudiants[j].Etudiant.Courriel','@lesChoixEtudiants[j].Etudiant.Photo')">
                                                             <i class="material-icons orange-text">remove_red_eye</i>
@@ -80,13 +81,13 @@
                                                     </td>
                                                     <td>
                                                         <div id="test">
-                                                            <select id="DropSuperviseur" name="@Html.Raw("DropSuperviseur"+ lesStages[i].getIDStage() + "-" + lesChoixEtudiants[j].Etudiant.IDEtudiant)" class="Validate" required>
+                                                            <select id="@Html.Raw("DropSuperviseur"+ lesChoixEtudiants[j].IDStageEtudiant)" name="@Html.Raw("DropSuperviseur"+ lesChoixEtudiants[j].IDStageEtudiant)" class="Validate" required>
                                                                 <option value="0"></option>
                                                                 @{
-                                                                    List<PersonneContact> lesSuperviseur = ViewBag.lesPersonnesContact;
+                                                                    List<Superviseur> lesSuperviseur = ViewBag.lesPersonnesContact;
                                                                     for (int x = 0; x < lesSuperviseur.Count; x++)
                                                                     {
-                                                                        <option value="@lesSuperviseur[x].IDPersonneContact">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
+                                                                        <option value="@lesSuperviseur[x].IDSuperviseur" selected="@(lesSuperviseur[x].IDSuperviseur==lesChoixEtudiants[j].IDSuperviseur)">@lesSuperviseur[x].Prenom @lesSuperviseur[x].Nom</option>
                                                                     }
                                                                 }
                                                             </select>
@@ -99,19 +100,6 @@
                                     </tbody>
                                 </table>
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <select id="TxtSuperviseur" name="@Html.Raw("txtSuperviseur" + lesStages[i].getIDStage())" class="Validate" required>
-                                            <option value="0"></option>
-                                            @{
-                                                List<PersonneContact> lesSuperviseurs = ViewBag.lesPersonnesContact;
-                                                for (int j = 0; j < lesSuperviseurs.Count; j++)
-                                                {
-                                                    <option value="@lesSuperviseurs[j].IDPersonneContact" selected="@(lesSuperviseurs[j].IDPersonneContact==lesStages[i].Superviseur.IDPersonneContact)">@lesSuperviseurs[j].Prenom @lesSuperviseurs[j].Nom</option>
-                                                }
-                                            }
-                                        </select>
-                                        @Html.Label("TxtSuperviseur", @lang.Superviseur)
-                                    </div>
                                     <div class="col center-align s12">
                                         <a class="btn light-blue white-text" href="javascript:SaveStage(@lesStages[i].getIDStage());showConfirmation()">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
                                     </div>
@@ -339,7 +327,18 @@
             //$("#formStage").ajaxSubmit({ url: '@Url.Action("SaveOneStage", "AssignationStage")', type: 'post' });
             //$.post('@Url.Action("SaveOneStage", "AssignationStage")', $("#formStage").serialize());
 
-
+            var isdone = false;
+            var cpt = 0;
+            while (!isdone) {
+                if (document.getElementById('line' + stageid + '-' + cpt)) {
+                    var idstageetudiant = $('#line' + stageid + '-' + cpt).val();
+                    $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + idstageetudiant).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + idstageetudiant).val() });
+                    cpt++;
+                }
+                else {
+                    isdone = true;
+                }
+            }
         }
 
         function SaveAll() {

@@ -14,45 +14,41 @@ namespace GestionStages.Controllers
         Repositories.IStageRepository repoStage;
         Repositories.IEtudiantRepository repoEtudiant;
         Repositories.IChoixStageEtudiantRepository repoChoixStage;
-        Repositories.IPersonneContactRepository repoPersonneContact;
+        Repositories.ISuperviseurRepository repoSuperviseur;
 
         public AssignationStageController(IConfiguration configuration) : base()
         {
             repoStage = new Repositories.repoStageMSSQL(configuration);
             repoEtudiant = new Repositories.repoEtudiantMSSQL(configuration);
             repoChoixStage = new Repositories.repoChoixStageEtudiant(configuration);
-            repoPersonneContact = new Repositories.repoPersonneContactMSSQL(configuration);
+            repoSuperviseur = new Repositories.repoSuperviseurMSSQL(configuration);
         }
 
         public IActionResult AddSetAssignationStage()
         {
-            List <AssignationStageEtudiant> lesStages = new List<AssignationStageEtudiant>();
+            List<AssignationStageEtudiant> lesStages = new List<AssignationStageEtudiant>();
             List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
-            foreach(Stage stage in stagesToAssign)            {                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage, repoPersonneContact.GetPersonneContactByStageID(stage.IDStage)));            }
+            foreach (Stage stage in stagesToAssign)            {                List<ChoixEtudiant> stageEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);                lesStages.Add(new AssignationStageEtudiant(stageEtudiants, stage));            }
             ViewBag.lesStages = lesStages;
-            ViewBag.lesPersonnesContact = repoPersonneContact.GetAllActivePersonneContact();
+            ViewBag.lesPersonnesContact = repoSuperviseur.GetAllActiveSuperviseur();
             ViewBag.lesEtudiants = repoEtudiant.GetAllEtudiants();
             return View();
         }
 
         [HttpPost]
-        public void SaveOneStage(string )        {
-            //SaveStage(txtIDStage);            List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(txtIDStage);            foreach (ChoixEtudiant choix in ChoixEtudiants)
-            {
-                repoChoixStage.SaveOneAssignationStage(txtIDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + txtIDStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + txtIDStage + "-" + choix.Etudiant.IDEtudiant] == "on");
-            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+        public void SaveOneStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)        {
+            //repoChoixStage.SaveOneAssignationStage(txtIDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + txtIDStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + txtIDStage + "-" + choix.Etudiant.IDEtudiant] == "on");
+            repoChoixStage.SaveOneAssignationStage(idStageEtudiant, ChoixFinal, IDSuperviseur);
+            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
         [HttpPost]
         public void SaveAllStage()        {            List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
             foreach (Stage stage in stagesToAssign)            {
-                SaveStage(stage.IDStage);            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
-
-        private void SaveStage(int idStage)
-        {
-            List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(idStage);            foreach (ChoixEtudiant choix in ChoixEtudiants)
-            {
-                repoChoixStage.SaveOneAssignationStage(idStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + idStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + idStage + "-" + choix.Etudiant.IDEtudiant] == "on");
-            }
-        }
+                List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
+                foreach (ChoixEtudiant choix in ChoixEtudiants)
+                {
+                    //repoChoixStage.SaveOneAssignationStage(stage.IDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]), Request.Form["FinalChoice" + choix.IDStageEtudiant] == "on");
+                    repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, Request.Form["FinalChoice" + choix.IDStageEtudiant] == "on", Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
+                }            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
     }
 }

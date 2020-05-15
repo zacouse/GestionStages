@@ -8,7 +8,6 @@ namespace GestionStages.Models
     public class AssignationStageEtudiant
     {
         public List<ChoixEtudiant> LesChoixEtudiants { get; set; }
-        public PersonneContact Superviseur { get; set; }
 
         private Stage stage;
 
@@ -16,14 +15,12 @@ namespace GestionStages.Models
         {
             LesChoixEtudiants = new List<ChoixEtudiant>();
             stage = new Stage();
-            Superviseur = new PersonneContact();
         }
 
-        public AssignationStageEtudiant(List<ChoixEtudiant> lesChoixEtudiants, Stage stage, PersonneContact superviseur)
+        public AssignationStageEtudiant(List<ChoixEtudiant> lesChoixEtudiants, Stage stage)
         {
             LesChoixEtudiants = lesChoixEtudiants;
             this.stage = stage;
-            Superviseur = superviseur;
         }
 
         public int getIDStage()
