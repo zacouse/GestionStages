@@ -1,0 +1,20 @@
+Demander drop des champs Prenom nom NoTelephone Courriel dans PersonneContactStage et PersonneContactMilieuStage  -On les enlèves
+	Bold single click Chevron(Fait)
+
+Question client:
+Description dans le print -Oui
+AutoComplete dans add set stage -Oui
+Choix de superviseur individuel 
+
+Client questionnement :
+Titre -> Clientèle
+Période de travail- > fin de semaine
+Impression-> restriction a la place de statut et Heures
+Note -> Demande de Natalie pour avoir les note sur un étudiant
+
+
+Si l'étudiant à un choix final , le stage est highlight et c'est read-only
+
+
+
+Lors de la confirmation, le module lorsqu'il est ajouter 
