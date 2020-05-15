@@ -37,8 +37,12 @@ namespace GestionStages.Controllers
 
         [HttpPost]
         public void SaveOneStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)        {
-            //repoChoixStage.SaveOneAssignationStage(txtIDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + txtIDStage + "-" + choix.Etudiant.IDEtudiant]), Request.Form["FinalChoice" + txtIDStage + "-" + choix.Etudiant.IDEtudiant] == "on");
             repoChoixStage.SaveOneAssignationStage(idStageEtudiant, ChoixFinal, IDSuperviseur);
+            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+
+        [HttpPost]
+        public void SaveOneVeto(int idStage,int idEtudiant, bool ChoixFinal, int IDSuperviseur)        {
+            repoChoixStage.SaveOneVeto(idStage, idEtudiant, ChoixFinal, IDSuperviseur);
             Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
 
         [HttpPost]
@@ -47,7 +51,6 @@ namespace GestionStages.Controllers
                 List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
                 foreach (ChoixEtudiant choix in ChoixEtudiants)
                 {
-                    //repoChoixStage.SaveOneAssignationStage(stage.IDStage, choix.Etudiant.IDEtudiant, Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]), Request.Form["FinalChoice" + choix.IDStageEtudiant] == "on");
                     repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, Request.Form["FinalChoice" + choix.IDStageEtudiant] == "on", Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
                 }            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
     }

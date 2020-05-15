@@ -145,5 +145,30 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
+
+        public void SaveOneVeto(int idStage,int idEtudiant, bool ChoixFinal, int IDSuperviseur)
+        {
+            try
+            {
+                sql = new SqlCommand("pAddSetDroitVeto", conn);
+                sql.CommandType = CommandType.StoredProcedure;
+
+                sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = idStage;
+                sql.Parameters.Add("@IDEtudiant_IN", SqlDbType.Int).Value = idEtudiant;
+                sql.Parameters.Add("@ChoixFinal_IN", SqlDbType.Bit).Value = ChoixFinal;
+                sql.Parameters.Add("@IDSuperviseur_IN", SqlDbType.Int).Value = IDSuperviseur;
+
+                conn.Open();
+                sql.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

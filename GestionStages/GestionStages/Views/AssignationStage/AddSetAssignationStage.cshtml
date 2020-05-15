@@ -219,7 +219,9 @@
         function EnvoyerVersStageOuvert(nom, prenom, da, programme, courriel, photo, idEtu) {
             if (document.getElementById("choixEtudiant+" + idEtu + "+" + openedStage) == null) {
                 var RowEtudiantString = "<td>";
-                RowEtudiantString += '<input type="hidden" id="lineV" value="' + openedStage + "-" + idEtu + '" />';
+                RowEtudiantString += '<input type="hidden" id="lineV" value="' + openedStage + '-' + idEtu + '" />';
+                RowEtudiantString += '<input type="hidden" id="idStage' + openedStage + "-" + idEtu + '" value="' + openedStage + '" />';
+                RowEtudiantString += '<input type="hidden" id="idEtudiant' + openedStage + "-" + idEtu + '" value="' + idEtu + '" />';
                 RowEtudiantString += " <a href=\"javascript:openModal('" + prenom + "' + ' ' + '" + nom + "', '" + da + "','" + programme + "', '" + courriel + "', '" + photo + "')\"><i class='material-icons orange-text'>remove_red_eye</i></a></td>";
                 RowEtudiantString += "<td>" + da + "</td>";
                 RowEtudiantString += "<td>" + prenom + "</td>";
@@ -336,7 +338,7 @@
 
             var elem = document.getElementsByName('lineV');
             for (var i = 0; i < elem.length; i++) {
-                $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + elem[i].value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + elem[i].value).val() });
+                $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + elem[i].value).val(), idEtudiant: $('#idEtudiant' + elem[i].value).val(), ChoixFinal: $('#FinalChoice' + elem[i].value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + elem[i].value).val() });
             }
         }
 
