@@ -24,7 +24,7 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete-input", required = "required" })
+            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete", required = "required" })
             @Html.Label("TxtMilieuStage", @lang.MilieuDeStage)
         </div>
     </div>

@@ -113,3 +113,10 @@ BEGIN
 END
 EXEC sp_executesql @SQL
 GO
+
+CREATE PROC pGetMilieuStageByTitle(@Titre_IN VARCHAR(100))
+AS
+BEGIN
+SELECT DISTINCT IDMilieuStage FROM MilieuStage WHERE @Titre_IN = Titre
+END
+GO

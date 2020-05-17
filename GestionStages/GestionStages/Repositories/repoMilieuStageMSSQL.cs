@@ -122,6 +122,33 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
+        public MilieuStage GetMilieuStagteByTitle(string titre)
+        {
+            MilieuStage Milieu = new MilieuStage();
+            try
+            {
+                sql = new SqlCommand("pGetMilieuStageByTitle", conn);
+                sql.CommandType = CommandType.StoredProcedure;
+                sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
+
+                conn.Open();
+                dr = sql.ExecuteReader();
+                while (dr.Read())
+                {
+                    Milieu.IDMilieuStage = (int)dr.GetValue(0);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return Milieu;
+        }
         public List<MilieuStage> GetMilieuStage(string titre, string adresse, bool chkIsActive, bool chkIsInactive)
         {
             List<MilieuStage> lesMilieus = new List<MilieuStage>();
