@@ -36,14 +36,30 @@ namespace GestionStages.Controllers
         }
 
         [HttpPost]
-        public void SaveOneStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)        {
-            repoChoixStage.SaveOneAssignationStage(idStageEtudiant, ChoixFinal, IDSuperviseur);
-            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+        public string SaveOneStage(int idStageEtudiant, bool ChoixFinal, int IDSuperviseur)        {
+            string message = "";
+            if (IDSuperviseur != 0)
+            {
+                repoChoixStage.SaveOneAssignationStage(idStageEtudiant, ChoixFinal, IDSuperviseur);
+            }
+            else
+            {
+                message = "error";
+            }            return message;        }
 
         [HttpPost]
-        public void SaveOneVeto(int idStage,int idEtudiant, bool ChoixFinal, int IDSuperviseur)        {
-            repoChoixStage.SaveOneVeto(idStage, idEtudiant, ChoixFinal, IDSuperviseur);
-            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+        public string SaveOneVeto(int idStage,int idEtudiant, bool ChoixFinal, int IDSuperviseur)        {
+            string message = "";
+            if (IDSuperviseur != 0)
+            {
+                repoChoixStage.SaveOneVeto(idStage, idEtudiant, ChoixFinal, IDSuperviseur);
+            }
+            else
+            {
+                message = "error";
+            }
+            return message;
+        }
 
         [HttpPost]
         public void SaveAllStage()        {            List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
@@ -53,6 +69,6 @@ namespace GestionStages.Controllers
                 {
                     string test = Request.Form["FinalChoice" + choix.IDStageEtudiant];
                     repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, (((string)Request.Form["FinalChoice" + choix.IDStageEtudiant]) != null && Request.Form["FinalChoice" + choix.IDStageEtudiant] != ""), Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
-                }            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
+                }            }            //Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
     }
 }

@@ -60,7 +60,7 @@
                                             {
                                                 <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()">
                                                     <td>
-                                                        <input type="hidden" id="@Html.Raw("line" + lesStages[i].getIDStage() + "-" + j)" value="@lesChoixEtudiants[j].IDStageEtudiant" />
+                                                        <input type="hidden" id="@Html.Raw("lineC" + lesStages[i].getIDStage() + "-" + j)" value="@lesChoixEtudiants[j].IDStageEtudiant" />
                                                         <a href="javascript:openModal('@lesChoixEtudiants[j].Etudiant.Prenom'+' '+'@lesChoixEtudiants[j].Etudiant.Nom','@lesChoixEtudiants[j].Etudiant.NoDA',
                                                        '@lesChoixEtudiants[j].Etudiant.Programme','@lesChoixEtudiants[j].Etudiant.Courriel','@lesChoixEtudiants[j].Etudiant.Photo')">
                                                             <i class="material-icons orange-text">remove_red_eye</i>
@@ -89,7 +89,7 @@
                                                     <td>
                                                         <div id="test">
                                                             <select id="@Html.Raw("DropSuperviseur"+ lesChoixEtudiants[j].IDStageEtudiant)" name="@Html.Raw("DropSuperviseur"+ lesChoixEtudiants[j].IDStageEtudiant)" class="Validate" required>
-                                                                <option value="0"></option>
+                                                                <option disabled value="0"></option>
                                                                 @{
                                                                     List<Superviseur> lesSuperviseur = ViewBag.lesPersonnesContact;
                                                                     for (int x = 0; x < lesSuperviseur.Count; x++)
@@ -372,7 +372,7 @@
                             if (arr.indexOf("hide") == -1) {
                                 select.className += " " + "hide";
                             }
-                            
+
                         }
                         else {
                             document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]).style.backgroundColor = "white";
@@ -382,21 +382,25 @@
                             checkbox.className = checkbox.className.replace(/\bhide\b/g, "");
                             select.className = select.className.replace(/\bhide\b/g, "");
                         }
-                        
+
                     }
                 }
-                
+
             }
-            
+
         }
 
         function SaveStage(stageid) {
             var isdone = false;
             var cpt = 0;
             while (!isdone) {
-                if (document.getElementById('line' + stageid + '-' + cpt)) {
-                    var idstageetudiant = $('#line' + stageid + '-' + cpt).val();
-                    $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + idstageetudiant).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + idstageetudiant).val() });
+                if (document.getElementById('lineC' + stageid + '-' + cpt)) {
+                    var idstageetudiant = $('#lineC' + stageid + '-' + cpt).val();
+                    $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + idstageetudiant).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + idstageetudiant).val() }, function (message) {
+                        if (message != "" && $('#FinalChoice' + idstageetudiant).is(':checked')) {
+                            M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                        }
+                    });
                     cpt++;
                 }
                 else {
@@ -404,17 +408,31 @@
                 }
             }
 
-            var elem = document.getElementsByName('lineV'+stageid);
-            for (var i = 0; i < elem.length; i++) {
-                $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + elem[i].value).val(), idEtudiant: $('#idEtudiant' + elem[i].value).val(), ChoixFinal: $('#FinalChoice' + elem[i].value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + elem[i].value).val() });
-            }
+            $("input[id^='lineV" + stageid + "']").each(function (i, e) {
+                $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + e.value).val(), idEtudiant: $('#idEtudiant' + e.value).val(), ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
+                    if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
+                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                    }
+                });
+            });
         }
 
         function SaveAll() {
-            $("input[name^='lineV']").each(function (i, e) {
-                $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + e.value).val(), idEtudiant: $('#idEtudiant' + e.value).val(), ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() });
+            $("input[id^='lineV']").each(function (i, e) {
+                $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + e.value).val(), idEtudiant: $('#idEtudiant' + e.value).val(), ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
+                    if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
+                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                    }
+                });
             });
-            document.formStage.submit();
+            $("input[id^='lineC']").each(function (i, e) {
+                $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: e.value, ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
+                    if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
+                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                    }
+                });
+            });
+            //document.formStage.submit();
         }
 
         function AddPoste(stageid) {
@@ -425,6 +443,10 @@
         function RemovePoste(stageid) {
             $('#spanPostes' + stageid).html(parseInt($('#spanPostes' + stageid).html()) - 1);
             $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) + 1);
+        }
+
+        function removeError(elem) {
+            elem.parentElement.parentElement.className = '';
         }
 
     </script>
@@ -453,4 +475,5 @@
         background-color: #ff9800;
         color: white;
     }
+
 </style>
