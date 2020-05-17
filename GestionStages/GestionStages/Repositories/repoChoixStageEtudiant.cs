@@ -111,7 +111,7 @@ namespace GestionStages.Repositories
                 //etudiant.Photo = (Byte[])dr.GetValue(6);
                 etudiant.Etat = (bool)dr.GetValue(7);
                 choixEtudiant.Etudiant = etudiant;
-                choixEtudiant.NoChoix = ((int)dr.GetValue(8)).ToString();
+                choixEtudiant.NoChoix = ((int)dr.GetValue(8)).ToString() == "0"? "Veto" : ((int)dr.GetValue(8)).ToString();
                 choixEtudiant.ChoixFinal = (bool)dr.GetValue(9);
                 choixEtudiant.IDSuperviseur = (int)dr.GetValue(10);
                 choixEtudiant.IDStageEtudiant = (int)dr.GetValue(11);
