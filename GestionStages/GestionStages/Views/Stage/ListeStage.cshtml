@@ -1,8 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = lang.ListeStage;
+    ViewData["Title"] = @lang.ListeStage;
 }
-<div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text  row">
+<div style="font-size:36px;text-align:center;padding-top:5%" class="light-blue-text row">
     <div class="col s12">
         <i style="font-size:48px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
         @lang.ListeStage
@@ -12,119 +12,139 @@
     </div>
 </div>
 
+<ul class="collapsible">
+    <li class="active">
+        <div class="collapsible-header row" onclick="changeChevron()"><b class="col s11">@lang.FiltreDeRecherche</b><span class="col right s1"><i id="iconChevron" style="vertical-align:middle;" class="material-icons">expand_less</i></span></div>
+        <div class="collapsible-body">
+            <form name="searchform" method="post" action="@Url.Action("ListeStage", "Stage")">
+                <div class="row">
+                    <div class="col s12 m6 @if (!ViewBag.isStudent) { @Html.Raw("l3") } else { @Html.Raw("l4") }">
+                        <div class="input-field">
+                            @Html.TextBox("txtTitre", "")
+                            @Html.Label("txtTitre", @lang.Titre)
+                        </div>
+                        <div class="input-field">
+                            @Html.TextBox("txtMilieu", "")
+                            @Html.Label("txtMilieu", @lang.MilieuDeStage)
+                        </div>
+                    </div>
+                    @if (!ViewBag.isStudent)
+                    {
+                        <div class="col s12 m6 l3">
+                            <div class="input-field">
+                                @Html.TextBox("txtMinH", "")
+                                @Html.Label("txtMinH", @lang.NombreMinimumDHeureSemaine)
+                            </div>
+                            <div class="input-field">
+                                @Html.TextBox("txtMaxH", "")
+                                @Html.Label("txtMaxH", @lang.NombreMaximumDHeureSemaine)
+                            </div>
+                        </div>
+                    }
 
-<div id="search">
-    <h3>@lang.FiltreDeRecherche</h3>
-    <div>
-        <form name="searchform" method="post" action="@Url.Action("SearchListeStage", "Stage")">
-            <div class="row">
-                <div class="col s12 m6 l3">
-                    <div class="input-field">
-                        @Html.TextBox("txtTitre", "")
-                        <label for="txtTitre">@lang.Titre</label>
+                    <div class="col s12 m6 @if (!ViewBag.isStudent) { @Html.Raw("l2") } else { @Html.Raw("l4") } ">
+                        <div class="input-field">
+                            @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
+                            @Html.Label("txtMinDate", @lang.DateDeDebut)
+                        </div>
+                        <div class="input-field">
+                            @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
+                            @Html.Label("txtMaxDate", @lang.DateDeFin)
+                        </div>
                     </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMilieu", "")
-                        <label for="txtMilieu">@lang.MilieuDeStage</label>
+                    <div class="col s12 m3  @if (!ViewBag.isStudent) { @Html.Raw("l2") } else { @Html.Raw("push-l2 l2") }">
+                        @Html.Label("periodeTravail", @lang.PeriodeDeTravail)
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsJour", true, new { @class = "filled-in" })
+                                    <span>@lang.Jour</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsSoir", true, new { @class = "filled-in" })
+                                    <span>@lang.Soiree</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="input-field row">
+                            <p>
+                                <label>
+                                    @Html.CheckBox("chkIsNuit", true, new { @class = "filled-in" })
+                                    <span>@lang.Nuit</span>
+                                </label>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="col s12 m6 l3">
-                    <div class="input-field">
-                        @Html.TextBox("txtMinH", "")
-                        <label for="txtMinH">@lang.NombreMinimumDHeureSemaine</label>
-                    </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMaxH", "")
-                        <label for="txtMaxH">@lang.NombreMaximumDHeureSemaine</label>
-                    </div>
-                </div>
-                <div class="col s12 m6 l2">
-                    <div class="input-field">
-                        @Html.TextBox("txtMinDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                        <label for="txtMinDate">@lang.DateDeDebut</label>
-                    </div>
-                    <div class="input-field">
-                        @Html.TextBox("txtMaxDate", "", new { @class = "datepicker", placeholder = "AAAA-MM-JJ" })
-                        <label for="txtMaxDate">@lang.DateDeFin</label>
-                    </div>
-                </div>
+                    @if (!ViewBag.isStudent)
+                    {
                 <div class="col s12 m3 l2">
-                    <label>@lang.PeriodeDeTravail</label>
+                    @Html.Label("etat", @lang.Etat)
                     <div class="input-field row">
                         <p>
                             <label>
-                                @Html.CheckBox("chkIsJour", true, new { @class = "filled-in" })
-                                <span>@lang.Jour</span>
+                                @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
+                                <span>@lang.Actif</span>
                             </label>
                         </p>
                     </div>
                     <div class="input-field row">
                         <p>
                             <label>
-                                @Html.CheckBox("chkIsSoir", true, new { @class = "filled-in" })
-                                <span>@lang.Soiree</span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="input-field row">
-                        <p>
-                            <label>
-                                @Html.CheckBox("chkIsNuit", true, new { @class = "filled-in" })
-                                <span>@lang.Nuit</span>
+                                @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
+                                <span>@lang.Inactif</span>
                             </label>
                         </p>
                     </div>
                 </div>
-                @if (!ViewBag.isStudent)
-                {
-                    <div class="col s12 m3 l2">
-                        <label>Etat</label>
-                        <div class="input-field row">
-                            <p>
-                                <label>
-                                    @Html.CheckBox("chkIsActive", true, new { @class = "filled-in" })
-                                    <span>@lang.Actif</span>
-                                </label>
-                            </p>
-                        </div>
-                        <div class="input-field row">
-                            <p>
-                                <label>
-                                    @Html.CheckBox("chkIsInactive", true, new { @class = "filled-in" })
-                                    <span>@lang.Inactif</span>
-                                </label>
-                            </p>
-                        </div>
+                    }
+                    <div class="hiddendiv">
+                        @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
                     </div>
-                }
-                <div class="hiddendiv">
-                    @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
+                    <div class="hiddendiv">
+                        @Html.TextBox("ChoixCourant1", (int?)ViewBag.Choix1)
+                    </div>
+                    <div class="hiddendiv">
+                        @Html.TextBox("ChoixCourant2", (int?)ViewBag.Choix2)
+                    </div>
+                    <div class="hiddendiv">
+                        @Html.TextBox("ChoixCourant3", (int?)ViewBag.Choix3)
+                    </div>
+                    <div class="hiddendiv">
+                        @Html.TextBox("IdEtudiant", (int?)ViewBag.IdEtudiant)
+                    </div>
+                    <div class="col s6 m6 l6">
+                        <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
+                    </div>
+                    <div class="col s6 m6 l6 right-align">
+                        <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
+                    </div>
                 </div>
-                <div class="col s6 m6 l6">
-                    <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
-                </div>
-                <div class="col s6 m6 l6 right-align">
-                    <a class="btn green darken-1 white-text" href="javascript:document.searchform.submit();">@lang.Rechercher<i class="material-icons right hide-on-small-and-down">search</i></a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+            </form>
+        </div>
+    </li>
+</ul>
 
 <table id="liste" class="highlight responsive-table">
     <thead>
         <tr>
-            <td>@lang.Titre</td>
-            <td>@lang.MilieuDeStage</td>
-            <td>@lang.PeriodeDeTravail</td>
-            <td>@lang.Statut</td>
-            <td>@lang.NombreDHeureParSemaine</td>
-            <td>@lang.DateDeDebut</td>
-            <td>@lang.DateDeFin</td>
-            <td>@lang.Voir</td>
+            <td><b>@lang.Titre</b></td>
+            <td><b>@lang.MilieuDeStage</b></td>
+            <td><b>@lang.PeriodeDeTravail</b></td>
+            <td><b>@lang.Statut</b></td>
+            @if (!ViewBag.isStudent)
+            {
+                <td><b>@lang.NombreDHeureParSemaine</b></td>
+            }
+            <td><b>@lang.DateDeDebut</b></td>
+            <td><b>@lang.DateDeFin</b></td>
+            <td><b>@lang.Voir</b></td>
             @if (ViewBag.isStudent)
             {
-                <td>@lang.NumeroChoix</td>
+                <td><b>@lang.NumeroChoix</b></td>
             }
         </tr>
     </thead>
@@ -133,20 +153,23 @@
             List<Stage> lesStages = ViewBag.lesStages;
             for (int i = 0; i < lesStages.Count; i++)
             {
-                <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">
-                    <td>@lesStages[i].Titre</td>
-                    <td>@lesStages[i].TitreMilieuStage</td>
-                    <td>@lesStages[i].GetPeriode()</td>
-                    <td>@lesStages[i].GetStatus()</td>
-                    <td>@lesStages[i].NbHeureSemaine h</td>
-                    <td>@{@lesStages[i].DateDebut.ToString("d");}</td>
-                    <td>@{@lesStages[i].DateFin.ToString("d");}</td>
+                <tr>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].Titre</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].TitreMilieuStage</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].GetPeriode()</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].GetStatus()</td>
+                    @if (!ViewBag.isStudent)
+                    {
+                        <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@lesStages[i].NbHeureSemaine h</td>
+                    }
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@{@lesStages[i].DateDebut.ToString("d");}</td>
+                    <td onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })'">@{@lesStages[i].DateFin.ToString("d");}</td>
                     <td><a href="@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage, isStudent = false })"><i class="material-icons orange-text">remove_red_eye</i></a></td>
                     @if (ViewBag.isStudent)
                     {
                         <td>
-                            <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" class="choixPossible browser-default">
-                                <option></option>
+                            <select onchange="applyChoice(this);" id="@lesStages[i].IDStage" name="choixEtudiants" class="choixPossible browser-default">
+                                <option value=""></option>
                                 @if (@ViewBag.Choix1 == @lesStages[i].IDStage)
                                 {
                                     <option selected value="1">1</option>
@@ -171,7 +194,6 @@
                                 {
                                     <option value="3">3</option>
                                 }
-
                             </select>
                         </td>
                     }
@@ -185,22 +207,21 @@
 {
     <form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
         <div class="hiddendiv">
-            <input id="Choix1" name="Choix1" type="text" value="@ViewBag.Choix1">
+            @Html.TextBox("Choix1", (int?)ViewBag.Choix1)
         </div>
         <div class="hiddendiv">
-            <input id="Choix2" name="Choix2" type="text" value="@ViewBag.Choix2">
+            @Html.TextBox("Choix2", (int?)ViewBag.Choix2)
         </div>
         <div class="hiddendiv">
-            <input id="Choix3" name="Choix3" type="text" value="@ViewBag.Choix3">
+            @Html.TextBox("Choix3", (int?)ViewBag.Choix3)
         </div>
         <div class="hiddendiv">
-            <input id="IdEtudiant" name="IdEtudiant" type="text" value="@ViewBag.IdEtudiant" required>
+            @Html.TextBox("IdEtudiant", (int?)ViewBag.IdEtudiant, new { required = "required" })
         </div>
     </form>
 }
 <div class="row" style="padding-top:5px;">
-    <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("Index", "Home")">@lang.Retour</a></div>
-    @*mettre le if*@
+    <div class="col push-l1 l2 s2"><a class="btn grey" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a></div>
     @if (!ViewBag.isStudent)
     {
         <div class="col s2 push-s3"><a class="btn blue" href="javascript:PrintElem('liste');">@lang.Imprimer<i class="material-icons right hide-on-small-and-down">print</i></a></div>
@@ -226,6 +247,7 @@
             $("#search").accordion({
                 collapsible: true
             });
+            $('.collapsible').collapsible();
             $('select').formSelect();
 
             $('.datepicker').datepicker({
@@ -246,6 +268,15 @@
             });
         });
 
+        function changeChevron() {
+            if (document.getElementById('iconChevron').innerHTML == "expand_more") {
+                document.getElementById('iconChevron').innerHTML = "expand_less"
+            } else {
+                document.getElementById('iconChevron').innerHTML = "expand_more"
+            }
+
+        }
+
         function applyChoice(sel) {
              //enlever les autre select avec la même valeur
             for (var i = 1; i < 4; i++) {
@@ -253,11 +284,28 @@
                     document.getElementById('Choix' + i).value = ""; //Vide les autre choix avec cet id ou les choix vide si un sumbit a été fait sans être completé
                 }
             }
-
-            if (document.getElementById('Choix' + sel.value).value != "") {//Vide le select avec le même numéro de choix
-                document.getElementById(document.getElementById('Choix' + sel.value).value).value = "";
+            if (sel.value != "") {
+                if (document.getElementById('Choix' + sel.value).value != "") {//Vide le select avec le même numéro de choix
+                    document.getElementById(document.getElementById('Choix' + sel.value).value).value = "";
+                }
+                document.getElementById('Choix' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
             }
-            document.getElementById('Choix' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
+            applyChoiceTemp(sel);
+        }
+
+        function applyChoiceTemp(sel) {
+            //enlever les autre select avec la même valeur
+            for (var i = 1; i < 4; i++) {
+                if (document.getElementById('ChoixCourant' + i).value == sel.id || document.getElementById('ChoixCourant' + i).value == 0) {
+                    document.getElementById('ChoixCourant' + i).value = ""; //Vide les autre choix avec cet id ou les choix vide si un sumbit a été fait sans être completé
+                }
+            }
+            if (sel.value != "") {
+                if (document.getElementById('ChoixCourant' + sel.value).value != "") {//Vide le select avec le même numéro de choix
+                    document.getElementById(document.getElementById('ChoixCourant' + sel.value).value).value = "";
+                }
+                    document.getElementById('ChoixCourant' + sel.value).value = sel.id;//Ajoute l'id au choix demandé
+            }
         }
 
         function PrintElem(elem) {
@@ -351,6 +399,11 @@
     </script>
 }
 <style>
+
+    td {
+        cursor: pointer;
+    }
+
     .ui-state-active {
         background: none;
         background-color: orange;
@@ -360,5 +413,10 @@
     [type="checkbox"].filled-in:checked + span:not(.lever):after {
         background-color: orange;
         border: 2px solid grey;
+    }
+
+    li.active div.collapsible-header {
+        background-color: #ff9800;
+        color: white;
     }
 </style>

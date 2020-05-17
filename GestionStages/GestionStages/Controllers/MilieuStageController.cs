@@ -58,7 +58,12 @@ namespace GestionStages.Controllers
                 ViewBag.IconeBouton = "send";
                 ViewBag.CouleurBouton = "green";
                 ViewBag.TexteBouton = lang.Creer;
-                ViewBag.LienRetour = "../MilieuStage/ListeMilieuStage";
+                if (CreationCopie) {
+                    ViewBag.LienRetour = "../ListeMilieuStage";
+                } else {
+                    ViewBag.LienRetour = "../MilieuStage/ListeMilieuStage";
+                }
+               
                 ViewBag.LesRestrictionUtilise = new List<int>();
             }
             else
@@ -72,6 +77,7 @@ namespace GestionStages.Controllers
                 ViewBag.LienRetour = "../VisionnerMilieuStage/" + id;
                 ViewBag.LesRestrictionUtilise = repoRestriction.GetRestrictionIDFromMilieuStageID(id);
             }
+            ViewBag.TexteBoutonRetour = lang.Retour;
             ViewBag.LesRestriction = repoRestriction.GetAllRestriction();
             return View();
         }
@@ -83,9 +89,9 @@ namespace GestionStages.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchListeMilieuStage(string txtTitre,string txtAdresse)
+        public IActionResult SearchListeMilieuStage(string txtTitre,string txtAdresse, bool chkIsActive, bool chkIsInactive)
         {
-            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtAdresse);
+            ViewBag.lesMilieus = repo.GetMilieuStage(txtTitre,txtAdresse, chkIsActive, chkIsInactive);
             return View("ListeMilieuStage");
         }
     }

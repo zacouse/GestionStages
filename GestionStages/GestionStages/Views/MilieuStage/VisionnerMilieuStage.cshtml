@@ -2,22 +2,19 @@
 @{
     ViewData["Title"] = ViewBag.TitrePage;
 }
-    <br/>
-    <div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
-        <div class="col l5 s12">
-            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
-            @ViewBag.TitrePage
-            <hr />
-        </div>
-        <!--<div class="col push-l4 l4 push-m3 m6 s12">
-
-    </div>-->
-        <div class="col l7 hide-on-med-and-down">
-            <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
-            @lang.StagesDisponiblesDansCeMilieu
-            <hr />
-        </div>
+<br />
+<div style="font-size:24px;text-align:center;padding-top:5%" class="light-blue-text row">
+    <div class="col l5 s12">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">@Html.Raw(ViewBag.IconeTitre)</i>
+        @ViewBag.TitrePage
+        <hr />
     </div>
+    <div class="col l7 hide-on-med-and-down">
+        <i style="font-size:36px;vertical-align:middle;" class="material-icons orange-text">dehaze</i>
+        @lang.StagesDisponiblesDansCeMilieu
+        <hr />
+    </div>
+</div>
 
 @{
     if (ViewBag.error != null && ViewBag.error != "")
@@ -29,59 +26,86 @@
 @{
     MilieuStage MilieuEnVisionnement = ViewBag.Milieu;
     <div class="row">
+
         <form class="col l5 s12">
+            @{
+                List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
+                if (lesRestrictions.Count > 0)
+                {
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col s12 center">
+                                @Html.Label("AcordionRestriction", @lang.ListeRestriction)
+                            </div>
+                            <div class="col s12">
+                                <ul id="AcordionRestriction" class="collapsible input-field col s12">
+                                    @{
+                                        for (int i = 0; i < lesRestrictions.Count; i++)
+                                        {
+                                            <li>
+                                                <div class="collapsible-header">@lesRestrictions[i].Titre</div>
+                                                <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Titre)">
-                    <label for="TxtTitre">@lang.Titre</label>
+                    @Html.TextBox("TxtTitre", @Html.Raw(@MilieuEnVisionnement.Titre), new { disabled = "disabled" })
+                    @Html.Label("TxtTitre", @lang.Titre)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <textarea disabled id="TxaDescription" name="TxaDescription" class="materialize-textarea">@Html.Raw(@MilieuEnVisionnement.Description)</textarea>
-                    <label for="TxaDescription">@lang.Description</label>
+                    @Html.TextArea("TxaDescription", @MilieuEnVisionnement.Description, new { @class = "materialize-textarea", disabled = "disabled" })
+                    @Html.Label("TxaDescription", @lang.Description)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoCivique)">
-                    <label for="TxtNoCivique">@lang.NumeroCivique</label>
+                    @Html.TextBox("TxtNoCivique", @Html.Raw(@MilieuEnVisionnement.NoCivique), new { disabled = "disabled" })
+                    @Html.Label("TxtNoCivique", @lang.NumeroCivique)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Rue)">
-                    <label for="TxtRue">@lang.Rue</label>
+                    @Html.TextBox("TxtRue", @Html.Raw(@MilieuEnVisionnement.Rue), new { disabled = "disabled" })
+                    @Html.Label("TxtRue", @lang.Rue)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.CodePostal)">
-                    <label for="TxtCodePostal">@lang.CodePostal</label>
+                    @Html.TextBox("TxtCodePostal", @Html.Raw(@MilieuEnVisionnement.CodePostal), new { disabled = "disabled" })
+                    @Html.Label("TxtCodePostal", @lang.CodePostal)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Ville)">
-                    <label for="TxtVille">@lang.Ville</label>
+                    @Html.TextBox("TxtVille", @Html.Raw(@MilieuEnVisionnement.Ville), new { disabled = "disabled" })
+                    @Html.Label("TxtVille", @lang.Ville)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Province)">
-                    <label for="TxtProvince">@lang.Province</label>
+                    @Html.TextBox("TxtProvince", @Html.Raw(@MilieuEnVisionnement.Province), new { disabled = "disabled" })
+                    @Html.Label("TxtProvince", @lang.Province)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.Pays)">
-                    <label for="TxtPays">@lang.Pays</label>
+                    @Html.TextBox("TxtPays", @Html.Raw(@MilieuEnVisionnement.Pays), new { disabled = "disabled" })
+                    @Html.Label("TxtPays", @lang.Pays)
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 ">
-                    <input disabled id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuEnVisionnement.NoTelephone)">
-                    <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+                    @Html.TextBox("TxtNumeroTelephone", @Html.Raw(@MilieuEnVisionnement.NoTelephone), new { disabled = "disabled" })
+                    @Html.Label("TxtNumeroTelephone", @lang.NumeroDeTelephone)
                 </div>
             </div>
             <div class="row">
@@ -106,13 +130,13 @@
             <table id="liste" class="highlight responsive-table">
                 <thead>
                     <tr>
-                        <td>@lang.Titre</td>
-                        <td>@lang.PeriodeDeTravail</td>
-                        <td>@lang.Statut</td>
-                        <td>@lang.NombreDHeureParSemaine</td>
-                        <td>@lang.DateDeDebut</td>
-                        <td>@lang.DateDeFin</td>
-                        <td>@lang.Voir</td>
+                        <td><b>@lang.Titre</b></td>
+                        <td><b>@lang.PeriodeDeTravail</b></td>
+                        <td><b>@lang.Statut</b></td>
+                        <td><b>@lang.NombreDHeureParSemaine</b></td>
+                        <td><b>@lang.DateDeDebut</b></td>
+                        <td><b>@lang.DateDeFin</b></td>
+                        <td><b>@lang.Voir</b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -120,7 +144,7 @@
                         List<Stage> lesStages = ViewBag.lesStages;
                         for (int i = 0; i < lesStages.Count; i++)
                         {
-                            <tr ondblclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })'">
+                            <tr onclick="location.href='@Url.Action("VisionnerStage", "Stage", new { id = lesStages[i].IDStage })'">
                                 <td>@lesStages[i].Titre</td>
                                 <td>@lesStages[i].GetPeriode()</td>
                                 <td>@lesStages[i].GetStatus()</td>
@@ -134,21 +158,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="row">
-            @Html.Label("AcordionRestriction", "Listes des restrictions", new { style="padding-bottom:5px;"})
-            <ul id="AcordionRestriction" class="collapsible input-field col push-s3 s6">
-                @{
-                    List<Restriction> lesRestrictions = ViewBag.LesRestrictions;
-                    for (int i = 0; i < lesRestrictions.Count; i++)
-                    {
-                        <li>
-                            <div class="collapsible-header">@lesRestrictions[i].Titre</div>
-                            <div class="collapsible-body"><span>@lesRestrictions[i].Description</span></div>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
+
         <div class="col s12">
             <hr />
             <div class="row">
@@ -168,14 +178,15 @@
 
 @section Scripts {
     <script>
-        //$(document).ready(function () {
-        //    $("#Restriction").accordion({
-        //        collapsible: true
-        //    });
-        //});
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });
 
     </script>
 }
+
+<style>
+    td {
+        cursor: pointer;
+    }
+</style>

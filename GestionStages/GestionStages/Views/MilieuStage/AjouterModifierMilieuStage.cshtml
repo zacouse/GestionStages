@@ -29,68 +29,68 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveMilieuStage", "MilieuStage", new { id = @MilieuAModifier.IDMilieuStage })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtTitre" name="TxtTitre" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Titre)" maxlength="100" required>
-            <label for="TxtTitre">@lang.Titre</label>
+            @Html.TextBox("TxtTitre", Html.Raw(@MilieuAModifier.Titre), new { @class="validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtTitre", @lang.Titre)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <textarea id="TxaDescription" name="TxaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(@MilieuAModifier.Description)</textarea>
-            <label for="TxaDescription">@lang.Description</label>
+            @Html.TextArea("TxaDescription", @MilieuAModifier.Description, new { @class = "materialize-textarea validate", maxlength = "100", required = "required" })
+            @Html.Label("TxaDescription", @lang.Description)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtNoCivique" name="TxtNoCivique" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoCivique)" maxlength="10" required>
-            <label for="TxtNoCivique">@lang.NumeroCivique</label>
+            @Html.TextBox("TxtNoCivique", Html.Raw(@MilieuAModifier.NoCivique), new { @class = "validate", maxlength = "10", required = "required" })
+            @Html.Label("TxtNoCivique", @lang.NumeroCivique)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtRue" name="TxtRue" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Rue)" maxlength="100" required>
-            <label for="TxtRue">@lang.Rue</label>
+            @Html.TextBox("TxtRue", Html.Raw(@MilieuAModifier.Rue), new { @class = "validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtRue", @lang.Rue)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtCodePostal" name="TxtCodePostal" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.CodePostal)" maxlength="7" required>
-            <label for="TxtCodePostal">@lang.CodePostal</label>
+            @Html.TextBox("TxtCodePostal", Html.Raw(@MilieuAModifier.CodePostal), new { @class = "validate", maxlength = "7", required = "required" })
+            @Html.Label("TxtCodePostal", @lang.CodePostal)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtVille" name="TxtVille" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Ville)" maxlength="100" required>
-            <label for="TxtVille">@lang.Ville</label>
+            @Html.TextBox("TxtVille", Html.Raw(@MilieuAModifier.Ville), new { @class = "validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtVille", @lang.Ville)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtProvince" name="TxtProvince" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Province)" maxlength="100" required>
-            <label for="TxtProvince">@lang.Province</label>
+            @Html.TextBox("TxtProvince", Html.Raw(@MilieuAModifier.Province), new { @class = "validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtProvince", @lang.Province)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtPays" name="TxtPays" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.Pays)" maxlength="100" required>
-            <label for="TxtPays">@lang.Pays</label>
+            @Html.TextBox("TxtPays", Html.Raw(@MilieuAModifier.Pays), new { @class = "validate", maxlength = "100", required = "required" })
+            @Html.Label("TxtPays", @lang.Pays)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12 ">
-            <input id="TxtNumeroTelephone" name="TxtNumeroTelephone" type="text" class="validate" value="@Html.Raw(@MilieuAModifier.NoTelephone)" maxlength="20" required>
-            <label for="TxtNumeroTelephone">@lang.NumeroDeTelephone</label>
+            @Html.TextBox("TxtNumeroTelephone", Html.Raw(@MilieuAModifier.NoTelephone), new { @class = "validate", maxlength = "20", required = "required" })
+            @Html.Label("TxtNumeroTelephone", @lang.NumeroDeTelephone)
         </div>
     </div>
     <div class="row">
-        @Html.Label("Restrictions")
+        @Html.Label(@lang.Restrictions)
         <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
             <div class="col m4 s6 black-text">
-                @Html.Raw("Restrictions possibles")
+                @Html.Raw(@lang.RestrictionDisponnible)
                 <ul id="sortable1" class="connectedSortable grey">
                 </ul>
             </div>
             <div id="Apres" class="col push-m4 m4 s6">
-                @Html.Raw("Restrictions actives")
+                @Html.Raw(@lang.RestrictionsActives)
                 <ul id="sortable2" class="connectedSortable grey">
                 </ul>
             </div>
@@ -113,7 +113,7 @@
             <a class="waves-effect waves-light btn grey" href="@ViewBag.LienRetour">@lang.Retour</a>
         </div>
         <div class="col push-m6 m2 push-s5 s3">
-            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="button" name="action">
+            <button onclick="validate()" class="btn waves-effect waves-light darken-1 @Html.Raw(ViewBag.CouleurBouton)" type="submit" name="action">
                 @Html.Raw(ViewBag.TexteBouton)
                 <i class="material-icons right hide-on-small-and-down">@Html.Raw(ViewBag.IconeBouton)</i>
             </button>
@@ -125,16 +125,13 @@
 @section Scripts {
     <script >
         $(document).ready(function () {
-            /***********************************************************/
             $(function () {
                 $("#sortable1, #sortable2").sortable({
                     connectWith: ".connectedSortable",
                     update: function (event, ui) { readRestriction(); }
                 }).disableSelection();
             });
-
             fillPossibleRestriction();
-            /***********************************************************/
         });
     </script>
 }
@@ -183,6 +180,7 @@
         document.getElementById("Restriction").value = ids.toString() ;
     }
     function validate() {
+        readRestriction();
         var isValid = $("#form").validate({
             errorElement: "span",
             rules: {
@@ -264,10 +262,10 @@
         margin-right: 10px;
     }
 
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 1.2em;
-            width: 120px;
-        }
+    #sortable1 li, #sortable2 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 1.2em;
+        width: 120px;
+    }
 </style>

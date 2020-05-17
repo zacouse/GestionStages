@@ -122,7 +122,8 @@ namespace GestionStages.Repositories
                 conn.Close();
             }
         }
-        public List<MilieuStage> GetMilieuStage(string titre, string adresse)
+        
+        public List<MilieuStage> GetMilieuStage(string titre, string adresse, bool chkIsActive, bool chkIsInactive)
         {
             List<MilieuStage> lesMilieus = new List<MilieuStage>();
             try
@@ -132,6 +133,9 @@ namespace GestionStages.Repositories
 
                 sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
                 sql.Parameters.Add("@Adresse_IN", SqlDbType.VarChar).Value = adresse;
+                sql.Parameters.Add("@isActive_IN", SqlDbType.Bit).Value = chkIsActive;
+                sql.Parameters.Add("@isInactive_IN", SqlDbType.Bit).Value = chkIsInactive;
+
 
                 conn.Open();
                 dr = sql.ExecuteReader();

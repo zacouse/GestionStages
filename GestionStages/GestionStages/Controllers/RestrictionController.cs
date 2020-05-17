@@ -18,9 +18,9 @@ namespace GestionStages.Controllers
             repo = new repoRestrictionMSSQL(configuration);
         }
 
-        public IActionResult ListeRestriction(string txtTitre = "", string txtDescr = "")
+        public IActionResult ListeRestriction(string txtTitre = "", string txtDescr = "", bool chkIsActive =false, bool chkIsInactive =false)
         {
-            ViewBag.lesRestrictions = repo.GetRestrictions(txtTitre, txtDescr);
+            ViewBag.lesRestrictions = repo.GetRestrictions(txtTitre, txtDescr, chkIsActive, chkIsInactive);
             return View();
         }
 

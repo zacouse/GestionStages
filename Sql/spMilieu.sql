@@ -84,17 +84,14 @@ GO
 
 --exec pAddSetMilieuStage'3','Test','test','213','Avenue','G0M 0G4','ROKE','SOLYD','MEME','6(969)-696-9696','0';
 
-CREATE PROC pGetMilieuStage(
-@Titre_IN VARCHAR(100) = '',@Adresse_IN VARCHAR(1000) =''
+CREATE PROC [dbo].[pGetMilieuStage](
+@Titre_IN VARCHAR(100) = '',@Adresse_IN VARCHAR(1000) ='',@isActive_IN BIT = 0,@isInactive_IN BIT = 0
 )AS
 	
 DECLARE @SQL NVARCHAR(4000)
 
 SET @SQL = 'SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat] '
-         + 'FROM MilieuStage '
-
-IF @Titre_IN <> '' OR @Adresse_IN <> ''
-    SET @SQL = @SQL + ' WHERE 0 = 0 '
+         + 'FROM MilieuStage WHERE 0 = 0 '
 	
 IF @Titre_IN <> ''
     SET @SQL = @SQL + ' AND Titre LIKE ''%' + @Titre_IN + '%'' '
@@ -102,5 +99,17 @@ IF @Titre_IN <> ''
 IF @Adresse_IN <> ''
     SET @SQL = @SQL + ' AND NoCivique + '' '' + Rue + '', '' + Ville + ''   '' + Province + '', '' + Pays LIKE ''%' + @Adresse_IN + '%'' '
 
+IF @isActive_IN = 1 OR @isInactive_IN = 1
+BEGIN
+    SET @SQL = @SQL + ' AND ( 1 = 0 '
+
+    IF @isActive_IN = 1
+        SET @SQL = @SQL + ' OR MilieuStage.Etat = 1 '
+
+    IF @isInactive_IN = 1
+        SET @SQL = @SQL + ' OR MilieuStage.Etat = 0 '
+
+    SET @SQL = @SQL + ' ) '
+END
 EXEC sp_executesql @SQL
 GO

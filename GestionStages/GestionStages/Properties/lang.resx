@@ -272,7 +272,7 @@
 		<value>Form contain one or more error</value>
 	</data>
 	<data name="FormatValide" xml:space="preserve">
-		<value>Use a valid format.</value>
+		<value>Please use a valid format.</value>
 	</data>
 	<data name="ChampRequis" xml:space="preserve">
 		<value>Required field</value>
@@ -489,5 +489,80 @@
 	</data>
 	<data name="ModifierRestriction" xml:space="preserve">
 		<value>Modify a restriction</value>
+	</data>
+	<data name="EtudiantNonAssigner" xml:space="preserve">
+		<value>Not assign student</value>
+	</data>
+	<data name="StageEnAttenteAssignation" xml:space="preserve">
+		<value>Internship waiting to be assign</value>
+	</data>
+	<data name="DetailEtudiant" xml:space="preserve">
+		<value>Detail</value>
+	</data>
+	<data name="Nom" xml:space="preserve">
+		<value>Last name</value>
+	</data>
+	<data name="Prenom" xml:space="preserve">
+		<value>First name</value>
+	</data>
+	<data name="Superviseur" xml:space="preserve">
+		<value>Supervisor</value>
+	</data>
+	<data name="Sauvegarder" xml:space="preserve">
+		<value>Save</value>
+	</data>
+	<data name="Postes" xml:space="preserve">
+		<value>Workstation</value>
+	</data>
+	<data name="Assigner" xml:space="preserve">
+		<value>Assign</value>
+	</data>
+	<data name="AssignerLesStages" xml:space="preserve">
+		<value>Assign internship to students</value>
+	</data>
+	<data name="NoEmail" xml:space="preserve">
+		<value>No email address </value>
+	</data>
+	<data name="DA" xml:space="preserve">
+		<value>DA</value>
+	</data>
+	<data name="Programme" xml:space="preserve">
+		<value>Course of study</value>
+	</data>
+	<data name="Courriel" xml:space="preserve">
+		<value>Email</value>
+	</data>
+	<data name="ErreurChargementEtudiant" xml:space="preserve">
+		<value>Error while retreiving the current student</value>
+	</data>
+	<data name="Photo" xml:space="preserve">
+		<value>Picture</value>
+	</data>
+	<data name="Restrictions" xml:space="preserve">
+		<value>Restrictions</value>
+	</data>
+	<data name="RestrictionDisponnible" xml:space="preserve">
+		<value>Available restriction</value>
+	</data>
+	<data name="RestrictionsActives" xml:space="preserve">
+		<value>Enabled restrictions</value>
+	</data>
+	<data name="FormatValideChiffre" xml:space="preserve">
+		<value>Please enter a valid number without decimal. </value>
+	</data>
+	<data name="FormatValideDecimale" xml:space="preserve">
+		<value>Please enter a valid number with a maximum of 2 decimal.</value>
+	</data>
+	<data name="ListesDesRestrictionsDuMilieuDeStage" xml:space="preserve">
+		<value>Restrictions list from the internship site</value>
+	</data>
+	<data name="EtudiantDejaDansLesChoixStages" xml:space="preserve">
+		<value>The student already made a choice for this internship</value>
+	</data>
+	<data name="EtudiantsRestants" xml:space="preserve">
+		<value>Remaining students</value>
+	</data>
+	<data name="ErreurSuperviseur" xml:space="preserve">
+		<value>You must give a supervisor</value>
 	</data>
 </root>

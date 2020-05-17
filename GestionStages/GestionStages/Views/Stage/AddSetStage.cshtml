@@ -15,7 +15,6 @@
 
 @{
     Stage StageAModifier = ViewBag.LeStage != null ? ViewBag.LeStage : new Stage();
-
     if (StageAModifier.IDStage == 0)
     {
         StageAModifier.Etat = true;
@@ -25,23 +24,8 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            <select id="TxtMilieuStage" name="TxtMilieuStage" required>
-                @{
-                    List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
-                    for (int i = 0; i < lesMilieus.Count; i++)
-                    {
-                        if (StageAModifier.IDMilieuStage == @lesMilieus[i].IDMilieuStage)
-                        {
-                            <option type="hidden" selected value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
-                        }
-                        else
-                        {
-                            <option type="hidden" value="@lesMilieus[i].IDMilieuStage">@lesMilieus[i].Titre</option>
-                        }
-                    }
-                }
-            </select>
-            @Html.Label("TxtMilieuStage", @lang.ListeMilieuStage)
+            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete", required = "required", @onchange = "ValidateAutocomplete();" })
+            @Html.Label("TxtMilieuStage", @lang.MilieuDeStage)
         </div>
     </div>
     <div class="row">
@@ -52,7 +36,7 @@
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            <textarea id="TxtaDescription" name="TxtaDescription" class="materialize-textarea validate" maxlength="1000" required>@Html.Raw(StageAModifier.Description)</textarea>
+            @Html.TextArea("TxtaDescription", StageAModifier.Description, new { @class = "materialize-textarea validate", maxlength = "1000", required = "required" })
             @Html.Label("TxtaDescription", @lang.Description)
         </div>
     </div>
@@ -89,26 +73,26 @@
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
+            @Html.TextBox("TxtDateDeDebut", @Html.Raw(StageAModifier.DateDebut.ToShortDateString()), new { @class = "validate datepicker", placeholder = "AAAA-MM-JJ", required = "required" })
             @Html.Label("TxtDateDeDebut", @lang.DateDeDebut)
         </div>
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin), new { @class = "validate datepicker", placeholder = "Placeholder", required = "required" })
+            @Html.TextBox("TxtDateDeFin", @Html.Raw(StageAModifier.DateFin.ToShortDateString()), new { @class = "validate datepicker", placeholder = "AAAA-MM-JJ", required = "required" })
             @Html.Label("TxtDateDeFin", @lang.DateDeFin)
         </div>
     </div>
     <div class="row">
-        @Html.Label("Restrictions")
+        @Html.Label(@lang.Restrictions)
         <div id="ListesRestrictions" class="input-field col push-m3 m6 s12">
             <div class="col m4 s6 black-text">
-                @Html.Raw("Restrictions possibles")
+                @Html.Raw(@lang.RestrictionDisponnible)
                 <ul id="sortable1" class="connectedSortable grey">
                 </ul>
             </div>
             <div id="Apres" class="col push-m4 m4 s6">
-                @Html.Raw("Restrictions actives")
+                @Html.Raw(@lang.RestrictionsActives)
                 <ul id="sortable2" class="connectedSortable grey">
                 </ul>
             </div>
@@ -158,7 +142,6 @@
                     dateFormat: 'dd-mm-yy'
                 }
             });
-            /***********************************************************/
             $(function () {
                 $("#sortable1, #sortable2").sortable({
                     connectWith: ".connectedSortable",
@@ -167,11 +150,48 @@
             });
 
             fillPossibleRestriction();
-        /***********************************************************/
+            $('input.autocomplete').autocomplete({
+                data: {
+                        @{
+                            List<MilieuStage> lesMilieus = ViewBag.lesMilieus;
+                            for (int i = 0; i < lesMilieus.Count; i++)
+                            {
+                                @Html.Raw("'") @Html.Raw(lesMilieus[i].Titre) @Html.Raw("'") @Html.Raw(": null,");
+                            }
+                        }
+                },
+            });
         });
     </script>
 }
 <script type="text/javascript">
+    function ValidateAutocomplete() {
+        if (document.getElementById("autocomplete").value != "") {
+            @{List<MilieuStage> lesMilieus2 = ViewBag.lesMilieus;
+                string milieuValide = "";
+                for (int i = 0; i < lesMilieus2.Count; i++)
+                {
+                    milieuValide += lesMilieus2[i].Titre + ",";
+                }
+                if (milieuValide.Length > 1)
+                {
+                    milieuValide = milieuValide.Substring(0, milieuValide.Length - 1);
+                }
+             }
+        
+            var arrayValide = '@milieuValide'.split(',');
+            var valide = false;
+            for (var i = 0; i < arrayValide.length; i++) {
+                if (document.getElementById("autocomplete").value == arrayValide[i]) {
+                    valide = true;
+                }
+            }
+            if (!valide) {
+                document.getElementById("autocomplete").value = "";
+            }
+        }
+    }
+
     function fillPossibleRestriction() {
         var ulNonActif = document.getElementById("sortable1");
         var ulActif = document.getElementById("sortable2");
@@ -213,14 +233,15 @@
         $('#sortable2 li').each(function () {
             ids.push($(this).attr('id'));
         });
-        document.getElementById("Restriction").value = ids.toString() ;
+        document.getElementById("Restriction").value = ids.toString();
     }
     function validate() {
+        readRestriction();
         var isValid = $("#form").validate({
             errorElement: "span",
             rules: {
                 TxtMilieuStage: {
-                    required: true
+                    required: true,
                 },
                 TxtTitre: {
                     required: true
@@ -234,7 +255,7 @@
                 },
                 TxtNombreDHeureParSemaine: {
                     required: true,
-                    pattern: new RegExp(/^\d+$/)
+                    pattern: new RegExp(/^(0|[1-9]\d*)([,.]\d{1,2})*$/)
                 },
                 TxtDateDeDebut: {
                     required: true
@@ -249,11 +270,11 @@
                 TxtaDescription: "@lang.ChampRequis",
                 TxtNbPostes: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide Seulement des chiffres"
+                    pattern: "@lang.FormatValideChiffre"
                 },
                 TxtNombreDHeureParSemaine: {
                     required: "@lang.ChampRequis",
-                    pattern: "@lang.FormatValide Seulement des chiffres"
+                    pattern: "@lang.FormatValideDecimale"
                 },
                 TxtDateDeDebut: "@lang.ChampRequis",
                 TxtDateDeFin: "@lang.ChampRequis",
@@ -290,12 +311,12 @@
         margin-right: 10px;
     }
 
-    #sortable1 li, #sortable2 li {
-        margin: 0 5px 5px 5px;
-        padding: 5px;
-        font-size: 1.2em;
-        width: 120px;
-    }
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 120px;
+        }
 </style>
 
 

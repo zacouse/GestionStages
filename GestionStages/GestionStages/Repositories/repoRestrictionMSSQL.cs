@@ -72,7 +72,7 @@ namespace GestionStages.Repositories
             }
             return lesRestrictions;
         }
-        public List<Restriction> GetRestrictions(string titre, string descr)
+        public List<Restriction> GetRestrictions(string titre, string descr, bool chkIsActive, bool chkIsInactive)
         {
             List<Restriction> lesRestrictions = new List<Restriction>();
 
@@ -80,7 +80,7 @@ namespace GestionStages.Repositories
             sql.CommandType = CommandType.StoredProcedure;
 
             sql.Parameters.Add("@Titre_IN", SqlDbType.VarChar).Value = titre;
-            sql.Parameters.Add("@Descr_IN", SqlDbType.VarChar).Value = descr;
+            sql.Parameters.Add("@Descr_IN", SqlDbType.VarChar).Value = descr;            sql.Parameters.Add("@isActive_IN", SqlDbType.Bit).Value = chkIsActive;            sql.Parameters.Add("@isInactive_IN", SqlDbType.Bit).Value = chkIsInactive;
 
             conn.Open();
             dr = sql.ExecuteReader();
@@ -175,6 +175,26 @@ namespace GestionStages.Repositories
             sql = new SqlCommand("pGetAllMilieuStageRestrictionByIdMilieuStage", conn);
             sql.CommandType = CommandType.StoredProcedure;
             sql.Parameters.Add("@IDMilieuStage_IN", SqlDbType.Int).Value = idMilieuStage;
+            conn.Open();
+            dr = sql.ExecuteReader();
+            while (dr.Read())
+            {
+                Restriction restriction = new Restriction();
+                restriction.Titre = (string)dr.GetValue(0);
+                restriction.Description = (string)dr.GetValue(1);
+                lesRestriction.Add(restriction);
+            }
+            conn.Close();
+            return lesRestriction;
+        }
+
+        public List<Restriction> GetAllRestrictionForStageWithMilieuIncludedByIds(int idStage, int idMilieuStage)
+        {
+            List<Restriction> lesRestriction = new List<Restriction>();
+            sql = new SqlCommand("pGetAllRestrictionForStageWithMilieuIncludedByIds", conn);
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.Add("@IDStage_IN", SqlDbType.Int).Value = idStage;
+            sql.Parameters.Add("@IDMilieu_IN", SqlDbType.Int).Value = idMilieuStage;
             conn.Open();
             dr = sql.ExecuteReader();
             while (dr.Read())

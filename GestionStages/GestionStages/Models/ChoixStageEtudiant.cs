@@ -11,7 +11,7 @@ namespace GestionStages.Models
         public int IDStage { get; set; }
         public int IDEtudiant { get; set; }
         public int NumeroChoix { get; set; }
-        public bool ChoixFinal {get;set;} 
+        public bool ChoixFinal { get; set; }
         public bool Etat { get; set; }
 
         public ChoixStageEtudiant()
@@ -24,7 +24,7 @@ namespace GestionStages.Models
             Etat = false;
         }
 
-        public ChoixStageEtudiant(int idchoix,int idstage, int idetudiant, int numeroChoix,bool choixFinal, bool etat)
+        public ChoixStageEtudiant(int idchoix, int idstage, int idetudiant, int numeroChoix, bool choixFinal, bool etat)
         {
             IDChoixStageEtudiant = idchoix;
             IDStage = idstage;

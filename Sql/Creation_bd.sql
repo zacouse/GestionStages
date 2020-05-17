@@ -1,6 +1,5 @@
 USE [master]
 GO
-
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = N'GestionStage')
 BEGIN
 	CREATE DATABASE GestionStage 
@@ -179,7 +178,19 @@ CREATE TABLE Etudiant (
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate()
 )
+GO
 
+CREATE TABLE Superviseur(
+    IDSuperviseur INT IDENTITY PRIMARY KEY,
+    Prenom VARCHAR(50),
+	Nom VARCHAR(50),
+	Fonction VARCHAR(100),
+	NoTelephone VARCHAR(20),
+	Courriel VARCHAR(50),
+	Etat BIT,
+	DateHeureCreation DATETIME DEFAULT GetDate(),
+	DateHeureModification DATETIME DEFAULT GetDate()
+)
 GO
 
 CREATE TABLE StageEtudiant (
@@ -188,11 +199,13 @@ CREATE TABLE StageEtudiant (
 	IDEtudiant INT,
 	NumeroChoix INT,
 	ChoixFinal BIT,
+    IDSuperviseur INT,
 	Etat BIT,
 	DateHeureCreation DATETIME DEFAULT GetDate(),
 	DateHeureModification DATETIME DEFAULT GetDate(),
 	FOREIGN KEY (IDStage) REFERENCES Stage(IDStage),
-	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant)
+	FOREIGN KEY (IDEtudiant) REFERENCES Etudiant(IDEtudiant),
+    FOREIGN KEY (IDSuperviseur) REFERENCES Superviseur(IDSuperviseur)
 )
 GO
 
@@ -213,6 +226,32 @@ AS
 	WHERE Etudiant.Etat = 1
 GO
 
+CREATE PROC pGetAllActivePersonneContact
+AS
+	SELECT IDPersonneContact,Nom,Prenom,Courriel,Etat
+	FROM PersonneContact WHERE Etat=1
+GO
+
+insert into PersonneContact(Nom,Prenom,Courriel,Etat)
+values('Zeppeli','Cesar','Jo@Joke.ca',1)
+GO
+
+CREATE PROC pGetPersonneContactByStageID(@IDStage_IN INT)
+AS
+SELECT PersonneContact.IDPersonneContact,PersonneContact.Nom,PersonneContact.Prenom,PersonneContact.Courriel,PersonneContact.Etat 
+FROM PersonneContact
+INNER JOIN PersonneContactStage ON PersonneContactStage.IDPersonneContact = PersonneContact.IDPersonneContact AND @IDStage_IN = PersonneContactStage.IDStage
+GO
+
+CREATE PROC pGetAllSuperviseur
+AS
+    SELECT IDSuperviseur,Nom,Prenom,Courriel,Etat
+	FROM Superviseur WHERE Etat=1
+GO
+insert into Superviseur(Nom,Prenom,Courriel,Etat)
+values('Zeppeli','Cesar','Jo@Joke.ca',1)
+GO
+
 --INSERT INTO MilieuStage([Titre], [Description], [NoCivique], [Rue], [CodePostal], [Ville], [Province], [Pays], [NoTelephone], [Etat])
 --VALUES('Milieu1','descr','1','1','A1A 1A1','Quebec','QC','Canada','(123) 123-5678',1),
 --	('Milieu2','descr','2','2','B2B 2B2','Quebec','QC','Canada','(123) 123-5678',1)
@@ -222,4 +261,6 @@ GO
 --VALUES(1,'Stage1','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1),
 --	(2,'Stage2','descr',1,1,1,40,GETDATE(),GETDATE()+1000,1)
 --GO
+
+
 

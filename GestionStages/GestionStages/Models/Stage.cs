@@ -36,8 +36,8 @@ namespace GestionStages.Models
             Statut = 0;
             PeriodeTravail = 0;
             NbHeureSemaine = 0;
-            DateDebut = DateTime.MinValue;
-            DateFin = DateTime.MinValue;
+            DateDebut = DateTime.Now;
+            DateFin = DateTime.Now;
             Etat = false;
         }
 

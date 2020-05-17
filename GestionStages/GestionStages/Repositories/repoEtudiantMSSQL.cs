@@ -24,8 +24,7 @@ namespace GestionStages.Repositories
         {
             List<Etudiant> lesEtudiants = new List<Etudiant>();
             sql = new SqlCommand();
-            try
-            {
+           
                 conn.Open();
                 sql.Connection = conn;
                 sql.CommandText = "EXEC pGetAllActiveEtudiant";
@@ -39,17 +38,10 @@ namespace GestionStages.Repositories
                     etudiant.Prenom = (string)dr.GetValue(3);
                     etudiant.Nom = (string)dr.GetValue(4);
                     etudiant.Courriel = (string)dr.GetValue(5);
+                    //etudiant.Photo = (Byte[])dr.GetValue(6);
                     lesEtudiants.Add(etudiant);
                 }
-            }
-            catch
-            {
-
-            }
-            finally
-            {
                 conn.Close();
-            }
             return lesEtudiants;
         }
     }

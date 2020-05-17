@@ -15,29 +15,6 @@ FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage] where Stage.Etat = 1
 GO
 
-Create Proc [dbo].[pAddSetStageRestriction] @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
-AS
-IF @New_IN = 1
-BEGIN
-Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
-select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des restrictions*/
-END
-ELSE
-BEGIN
-UPDATE StageRestriction
-SET [Etat] = 0 ,[DateHeureModification] =GETDATE()/*Enlever les ancients qui ne sont pas dans la nouvelle liste*/
-WHERE [IDRestriction] not in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN 
-
-Insert into StageRestriction([IDStage],[IDRestriction],[Etat])
-select  @IDStage_IN as 'IDStage', IDRestriction, 1 as 'Etat' From Restriction where IDRestriction IN(select value from STRING_SPLIT(@IDRestriction_IN,',')) /*Ajout des nouvelles restrictions*/
-and IDRestriction not in (select IDRestriction  from StageRestriction where IDRestriction in(select value from STRING_SPLIT(@IDRestriction_IN,',')) and [IDStage] = @IDStage_IN)
-
-UPDATE StageRestriction
-SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restrictions*/
-WHERE [IDRestriction] in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN
-END
-GO
-
 Create PROC [dbo].[pAddSetStage] @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPostes_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit, @IDRestriction_IN Varchar(4000)
 AS
 DECLARE @isNew Bit;
@@ -68,17 +45,14 @@ WHERE [IDStage] = @IDStage_IN;
 GO
 
 CREATE PROC pGetStage(
-@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0
+@Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0,@chosenStages_IN VARCHAR(200) = '0,0,0'
 )AS
 	
 DECLARE @SQL NVARCHAR(4000)
 
 SET @SQL = ' SELECT [IDStage], Stage.IDMilieuStage, Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.Titre '
          + ' FROM Stage '
-         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage '
-
-IF ISNULL(@Titre_IN,'') <> '' OR ISNULL(@Description_IN,'') <> '' OR ISNULL(@Milieu_IN,'') <> '' OR ISNULL(@Minh_IN,0) <> 0 OR ISNULL(@Maxh_IN,0) <> 0 OR ISNULL(@MinDate_IN,0) <> 0 OR ISNULL(@MaxDate_IN,0) <> 0
-    SET @SQL = @SQL + ' WHERE 0 = 0 '
+         + ' INNER JOIN MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage WHERE (0 = 0 '
 	
 IF ISNULL(@Titre_IN,'') <> ''
     SET @SQL = @SQL + ' AND Stage.Titre LIKE ''%' + @Titre_IN + '%'' '
@@ -130,6 +104,9 @@ BEGIN
     SET @SQL = @SQL + ' ) '
 END
 
+SET @SQL = @SQL + ' ) '
+SET @SQL = @SQL + ' OR IDStage IN (' + @chosenStages_IN + ')'
+SET @SQL = @SQL + ' ORDER BY Stage.[Titre]'
 EXEC sp_executesql @SQL
 GO
 
@@ -203,9 +180,20 @@ SELECT [IDStageEtudiant]
       ,[ChoixFinal]
       ,[Etat] FROM StageEtudiant WHERE IDEtudiant = @IdEtudiant_IN and Etat = '1' ;
 go
+
 CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
 AS
 SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
 FROM Stage
 WHERE [IDMilieuStage] = @IdMilieu_IN;
+GO
+
+CREATE PROC pGetStagesForAssignement
+AS
+SELECT Stage.[IDStage],Stage.[IDMilieuStage],Stage.[Titre],Stage.[NbPostes],Stage.[Etat],MilieuStage.[Titre] as 'TitreMilieu'from Stage 
+left outer join( select * from StageEtudiant where Etat = 1 ) StageEtu on Stage.IDStage = StageEtu.IDStage
+left join MilieuStage on Stage.IDMilieuStage = MilieuStage.IDMilieuStage
+WHERE Stage.Etat = 1
+GROUP BY Stage.[IDStage],Stage.[IDMilieuStage],Stage.[Titre],Stage.[NbPostes],Stage.[Etat],MilieuStage.[Titre]
+ORDER BY COUNT(StageEtu.IDStage) desc
 GO
