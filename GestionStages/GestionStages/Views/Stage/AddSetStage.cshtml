@@ -24,7 +24,7 @@
 <form class="col s12" name="form" id="form" method="post" onsubmit="return validateForm()" action="@Url.Action("SaveStage", "Stage", new { id = StageAModifier.IDStage })">
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete", required = "required" })
+            @Html.TextBox("TxtMilieuStage", Html.Raw(StageAModifier.TitreMilieuStage), new { @class = "autocomplete", id = "autocomplete", required = "required", @onchange = "ValidateAutocomplete();" })
             @Html.Label("TxtMilieuStage", @lang.MilieuDeStage)
         </div>
     </div>
@@ -36,7 +36,7 @@
     </div>
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
-            @Html.TextArea("TxtaDescription", StageAModifier.Description, new { @class= "materialize-textarea validate", maxlength = "1000", required = "required" })
+            @Html.TextArea("TxtaDescription", StageAModifier.Description, new { @class = "materialize-textarea validate", maxlength = "1000", required = "required" })
             @Html.Label("TxtaDescription", @lang.Description)
         </div>
     </div>
@@ -165,6 +165,33 @@
     </script>
 }
 <script type="text/javascript">
+    function ValidateAutocomplete() {
+        if (document.getElementById("autocomplete").value != "") {
+            @{List<MilieuStage> lesMilieus2 = ViewBag.lesMilieus;
+                string milieuValide = "";
+                for (int i = 0; i < lesMilieus2.Count; i++)
+                {
+                    milieuValide += lesMilieus2[i].Titre + ",";
+                }
+                if (milieuValide.Length > 1)
+                {
+                    milieuValide = milieuValide.Substring(0, milieuValide.Length - 1);
+                }
+             }
+        
+            var arrayValide = '@milieuValide'.split(',');
+            var valide = false;
+            for (var i = 0; i < arrayValide.length; i++) {
+                if (document.getElementById("autocomplete").value == arrayValide[i]) {
+                    valide = true;
+                }
+            }
+            if (!valide) {
+                document.getElementById("autocomplete").value = "";
+            }
+        }
+    }
+
     function fillPossibleRestriction() {
         var ulNonActif = document.getElementById("sortable1");
         var ulActif = document.getElementById("sortable2");
@@ -214,7 +241,7 @@
             errorElement: "span",
             rules: {
                 TxtMilieuStage: {
-                    required: true
+                    required: true,
                 },
                 TxtTitre: {
                     required: true
@@ -284,12 +311,12 @@
         margin-right: 10px;
     }
 
-    #sortable1 li, #sortable2 li {
-        margin: 0 5px 5px 5px;
-        padding: 5px;
-        font-size: 1.2em;
-        width: 120px;
-    }
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 120px;
+        }
 </style>
 
 

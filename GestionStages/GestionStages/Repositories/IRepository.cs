@@ -12,8 +12,6 @@ namespace GestionStages.Repositories
         void SaveMilieuStage(MilieuStage milieu, string idRestriction);
         MilieuStage GetMilieuStageById(int id);
         List<MilieuStage> GetMilieuStage(string titre, string address, bool chkIsActive, bool chkIsInactive);
-
-        MilieuStage GetMilieuStagteByTitle(string titre);
     }
 
     interface IStageRepository
