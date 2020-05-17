@@ -169,7 +169,7 @@
                 <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a>
             </div>
             <div class="col push-l7 l2 s3 push-s7">
-                <a class="waves-effect waves-light btn green" href="javascript:SaveAll();">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">save</i></a>
+                <a class="waves-effect waves-light btn green" href="javascript:SaveAll();showConfirmation()">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">save</i></a>
             </div>
         </div>
     </div>
@@ -398,7 +398,7 @@
                     var idstageetudiant = $('#lineC' + stageid + '-' + cpt).val();
                     $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: idstageetudiant, ChoixFinal: $('#FinalChoice' + idstageetudiant).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + idstageetudiant).val() }, function (message) {
                         if (message != "" && $('#FinalChoice' + idstageetudiant).is(':checked')) {
-                            M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                            M.toast({ html: '@lang.ErreurSuperviseur', classes: 'rounded', displayLength: 5000 });
                         }
                     });
                     cpt++;
@@ -411,7 +411,7 @@
             $("input[id^='lineV" + stageid + "']").each(function (i, e) {
                 $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + e.value).val(), idEtudiant: $('#idEtudiant' + e.value).val(), ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
                     if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
-                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                        M.toast({ html: '@lang.ErreurSuperviseur', classes: 'rounded', displayLength: 5000 });
                     }
                 });
             });
@@ -421,14 +421,14 @@
             $("input[id^='lineV']").each(function (i, e) {
                 $.post('@Url.Action("SaveOneVeto", "AssignationStage")', { idStage: $('#idStage' + e.value).val(), idEtudiant: $('#idEtudiant' + e.value).val(), ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
                     if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
-                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                        M.toast({ html: '@lang.ErreurSuperviseur', classes: 'rounded', displayLength: 5000 });
                     }
                 });
             });
             $("input[id^='lineC']").each(function (i, e) {
                 $.post('@Url.Action("SaveOneStage", "AssignationStage")', { idStageEtudiant: e.value, ChoixFinal: $('#FinalChoice' + e.value).is(':checked'), IDSuperviseur: $('#DropSuperviseur' + e.value).val() }, function (message) {
                     if (message != "" && $('#FinalChoice' + e.value).is(':checked')) {
-                        M.toast({ html: '@lang.ErreurPresenteFormulaire', classes: 'rounded', displayLength: 5000 });
+                        M.toast({ html: '@lang.ErreurSuperviseur', classes: 'rounded', displayLength: 5000 });
                     }
                 });
             });

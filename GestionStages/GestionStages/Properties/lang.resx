@@ -562,4 +562,7 @@
 	<data name="EtudiantsRestants" xml:space="preserve">
 		<value>Remaining students</value>
 	</data>
+	<data name="ErreurSuperviseur" xml:space="preserve">
+		<value>You must give a supervisor</value>
+	</data>
 </root>
