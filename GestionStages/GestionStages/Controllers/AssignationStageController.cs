@@ -51,7 +51,8 @@ namespace GestionStages.Controllers
                 List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
                 foreach (ChoixEtudiant choix in ChoixEtudiants)
                 {
-                    repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, Request.Form["FinalChoice" + choix.IDStageEtudiant] == "on", Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
+                    string test = Request.Form["FinalChoice" + choix.IDStageEtudiant];
+                    repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, (((string)Request.Form["FinalChoice" + choix.IDStageEtudiant]) != null && Request.Form["FinalChoice" + choix.IDStageEtudiant] != ""), Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
                 }            }            Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
     }
 }
