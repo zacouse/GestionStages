@@ -105,16 +105,16 @@
                         @Html.CheckBox("isStudent", (bool)ViewBag.isStudent)
                     </div>
                     <div class="hiddendiv">
-                        @Html.TextBox("ChoixCourant1", (string)ViewBag.Choix1)
+                        @Html.TextBox("ChoixCourant1", (int?)ViewBag.Choix1)
                     </div>
                     <div class="hiddendiv">
-                        @Html.TextBox("ChoixCourant2", (string)ViewBag.Choix2)
+                        @Html.TextBox("ChoixCourant2", (int?)ViewBag.Choix2)
                     </div>
                     <div class="hiddendiv">
-                        @Html.TextBox("ChoixCourant3", (string)ViewBag.Choix3)
+                        @Html.TextBox("ChoixCourant3", (int?)ViewBag.Choix3)
                     </div>
                     <div class="hiddendiv">
-                        @Html.TextBox("IdEtudiant", (string)ViewBag.IdEtudiant)
+                        @Html.TextBox("IdEtudiant", (int?)ViewBag.IdEtudiant)
                     </div>
                     <div class="col s6 m6 l6">
                         <a class="btn light-blue white-text" href="@Url.Action("ListeStage", "Stage")">@lang.Reset<i class="material-icons right hide-on-small-and-down">autorenew</i></a>
@@ -207,16 +207,16 @@
 {
     <form name="ChoiceForm" method="post" action="@Url.Action("AddSetChoixStage", "Stage")">
         <div class="hiddendiv">
-            @Html.CheckBox("Choix1", (string)ViewBag.Choix1)
+            @Html.TextBox("Choix1", (int?)ViewBag.Choix1)
         </div>
         <div class="hiddendiv">
-            @Html.CheckBox("Choix2", (string)ViewBag.Choix2)
+            @Html.TextBox("Choix2", (int?)ViewBag.Choix2)
         </div>
         <div class="hiddendiv">
-            @Html.CheckBox("Choix3", (string)ViewBag.Choix3)
+            @Html.TextBox("Choix3", (int?)ViewBag.Choix3)
         </div>
         <div class="hiddendiv">
-            @Html.CheckBox("IdEtudiant", (bool)ViewBag.IdEtudiant, new { required = "required" })
+            @Html.TextBox("IdEtudiant", (int?)ViewBag.IdEtudiant, new { required = "required" })
         </div>
     </form>
 }
@@ -399,6 +399,11 @@
     </script>
 }
 <style>
+
+    td {
+        cursor: pointer;
+    }
+
     .ui-state-active {
         background: none;
         background-color: orange;

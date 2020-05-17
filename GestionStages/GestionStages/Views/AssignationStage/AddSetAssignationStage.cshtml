@@ -58,7 +58,7 @@
                                         @{
                                             for (int j = 0; j < lesChoixEtudiants.Count; j++)
                                             {
-                                                <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()" >
+                                                <tr id="choixEtudiant+@lesChoixEtudiants[j].Etudiant.IDEtudiant+@lesStages[i].getIDStage()">
                                                     <td>
                                                         <input type="hidden" id="@Html.Raw("line" + lesStages[i].getIDStage() + "-" + j)" value="@lesChoixEtudiants[j].IDStageEtudiant" />
                                                         <a href="javascript:openModal('@lesChoixEtudiants[j].Etudiant.Prenom'+' '+'@lesChoixEtudiants[j].Etudiant.Nom','@lesChoixEtudiants[j].Etudiant.NoDA',
@@ -106,9 +106,9 @@
                                         <tr id="toAdd+@lesStages[i].getIDStage()" class="hide "></tr>
                                     </tbody>
                                 </table>
-                                <div class="row">
+                                <div class="row" style="padding-top:10px;">
                                     <div class="col center-align s12">
-                                        <a class="btn light-blue white-text" href="javascript:SaveStage(@lesStages[i].getIDStage());showConfirmation()">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">add</i></a>
+                                        <a class="btn light-blue white-text" href="javascript:SaveStage(@lesStages[i].getIDStage());showConfirmation()">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">save</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                 @{
                     for (int i = 0; i < lesEtudiants.Count; i++)
                     {
-                        <tr id="etu+@lesEtudiants[i].IDEtudiant" >
+                        <tr id="etu+@lesEtudiants[i].IDEtudiant">
                             <td>
                                 <a href="javascript:openModal('@lesEtudiants[i].Prenom' + ' ' + '@lesEtudiants[i].Nom', '@lesEtudiants[i].NoDA',
                                             '@lesEtudiants[i].Programme', '@lesEtudiants[i].Courriel', '@lesEtudiants[i].Photo')"><i class="material-icons orange-text">remove_red_eye</i></a>
@@ -164,12 +164,12 @@
 
     <div class="col s12">
         <hr />
-        <div class="row">
-            <div class="col push-l1 l3 s4">
+        <div class="row" style="padding-top:5px;">
+            <div class="col push-l1 l2 s2">
                 <a class="waves-effect waves-light btn grey" href="@Url.Action("ListeStage", "Stage")">@lang.Retour</a>
             </div>
-            <div class="col push-l1 l3 s4">
-                <a class="waves-effect waves-light btn grey" href="javascript:SaveAll();">@lang.Sauvegarder</a>
+            <div class="col push-l7 l2 s3 push-s7">
+                <a class="waves-effect waves-light btn green" href="javascript:SaveAll();">@lang.Sauvegarder<i class="material-icons right hide-on-small-and-down">save</i></a>
             </div>
         </div>
     </div>
@@ -202,6 +202,7 @@
             @{
                 List<AssignationStageEtudiant> lesStages2 = ViewBag.lesStages;
                 string idEtudiantToRemove = "";
+                string idStageEtudiantToRemove = "";
                 for (int i = 0; i < lesStages2.Count; i++)
                 {
                     List<ChoixEtudiant> lesChoixEtudiants2 = lesStages2[i].LesChoixEtudiants;
@@ -211,6 +212,7 @@
                         if (lesChoixEtudiants2[j].ChoixFinal && !idEtudiantToRemove.Contains(lesChoixEtudiants2[j].Etudiant.IDEtudiant + ","))
                         {
                             idEtudiantToRemove += lesChoixEtudiants2[j].Etudiant.IDEtudiant + ",";
+                            idStageEtudiantToRemove += lesStages2[i].getIDStage() + ",";
                         }
                     }
                 }
@@ -218,12 +220,18 @@
                 {
                     idEtudiantToRemove = idEtudiantToRemove.Substring(0, idEtudiantToRemove.Length - 1);
                 }
+                if (idStageEtudiantToRemove.Length > 1)
+                {
+                    idStageEtudiantToRemove = idStageEtudiantToRemove.Substring(0, idStageEtudiantToRemove.Length - 1);
+                }
             }
-            var IdArray = '@idEtudiantToRemove'.split(',')
-            for (var i = 0; i < IdArray.length; i++) {
-                hideEtudiant(IdArray[i]);
+            var IdEtudiantArray = '@idEtudiantToRemove'.split(',');
+            var IdStageArray = '@idStageEtudiantToRemove'.split(',');
+            for (var i = 0; i < IdEtudiantArray.length; i++) {
+                hideEtudiant(IdEtudiantArray[i]);
+                AdjustOtherChoiceRow(IdEtudiantArray[i], IdStageArray[i], true);
             }
-            $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) - IdArray.length);
+            $('#EtudiantRestant').html(parseInt($('#EtudiantRestant').html()) - IdEtudiantArray.length);
         }
 
         function EnvoyerVersStageOuvert(nom, prenom, da, programme, courriel, photo, idEtu) {
@@ -347,13 +355,13 @@
                     idStageToCheck = idStageToCheck.Substring(0, idStageToCheck.Length - 1);
                 }
              }
-            var IdArray = '@idStageToCheck'.split(',')
-            for (var i = 0; i < IdArray.length; i++) {
-                if (IdArray[i] != stageId || !checked) {
-                    if (document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]) != null) {
+            var IdStageArray = '@idStageToCheck'.split(',')
+            for (var i = 0; i < IdStageArray.length; i++) {
+                if (IdStageArray[i] != stageId || !checked) {
+                    if (document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]) != null) {
                         if (checked) {
-                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).style.backgroundColor = "lightgrey";
-                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).children;
+                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]).style.backgroundColor = "lightgrey";
+                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]).children;
                             var checkbox = child[5].children[0];
                             var select = child[6].children[0];
                             var arr = checkbox.className.split(" ");
@@ -367,8 +375,8 @@
                             
                         }
                         else {
-                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).style.backgroundColor = "white";
-                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdArray[i]).children;
+                            document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]).style.backgroundColor = "white";
+                            var child = document.getElementById("choixEtudiant+" + idEtudiant + "+" + IdStageArray[i]).children;
                             var checkbox = child[5].children[0];
                             var select = child[6].children[0];
                             checkbox.className = checkbox.className.replace(/\bhide\b/g, "");
@@ -426,6 +434,9 @@
 </script>
 
 <style>
+    td {
+        cursor:pointer;
+    }
 
     .ui-state-active {
         background: none;

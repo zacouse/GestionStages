@@ -9,8 +9,8 @@ Choix de superviseur individuel
 Client questionnement :
 Titre -> Clientèle
 Période de travail- > fin de semaine
-Impression-> restriction a la place de statut et Heures
-Note -> Demande de Natalie pour avoir les note sur un étudiant
+Impression-> restriction a la place des champs statut et Heures
+Note -> Demande de Natalie pour avoir les note sur un étudiant dans le modal de Assigner les stages au étudiant
 
 
 Si l'étudiant à un choix final , le stage est highlight et c'est read-only

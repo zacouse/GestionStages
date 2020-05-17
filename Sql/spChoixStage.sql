@@ -24,5 +24,5 @@ GO
 CREATE PROC pAddSetDroitVeto(@IDStage_IN INT,@IDEtudiant_IN INT, @ChoixFinal_IN BIT, @IDSuperviseur_IN INT)
 AS
     INSERT INTO StageEtudiant(IDStage,IDEtudiant,ChoixFinal,NumeroChoix,IDSuperviseur)
-    VALUES(@IDStage_IN,@IDEtudiant_IN,@ChoixFinal_IN,@IDSuperviseur_IN)
+    VALUES(@IDStage_IN,@IDEtudiant_IN,@ChoixFinal_IN,0,@IDSuperviseur_IN)
 GO
