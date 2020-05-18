@@ -2,6 +2,9 @@ USE MASTER
 GO
 USE GestionStage
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetRestriction')
+DROP PROCEDURE pGetRestriction
+GO
 CREATE PROC pGetRestriction(@Titre_IN VARCHAR(100) = '',@Descr_IN VARCHAR(1000) = '',@isActive_IN BIT = 0,@isInactive_IN BIT = 0)
 AS
 DECLARE @SQL NVARCHAR(4000)
@@ -27,6 +30,9 @@ END
 
 EXEC sp_executesql @SQL
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetRestrictionByID')
+DROP PROCEDURE pGetRestrictionByID
+GO
 CREATE PROC pGetRestrictionByID(@IDRestriction_IN INT)
 AS
 
@@ -34,7 +40,9 @@ SELECT IDRestriction,Titre,[Description],Etat FROM Restriction
 WHERE IDRestriction = @IDRestriction_IN
 
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetRestriction')
+DROP PROCEDURE pAddSetRestriction
+GO
 CREATE PROC pAddSetRestriction(@IDRestriction_IN INT,@Titre_IN VARCHAR(100),@Descr_IN VARCHAR(1000),@Etat_IN BIT)
 AS
 IF @IDRestriction_IN = 0
@@ -52,12 +60,17 @@ BEGIN
     WHERE IDRestriction = @IDRestriction_IN
 END
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllRestriction')
+DROP PROCEDURE pGetAllRestriction
+GO
 Create Proc pGetAllRestriction
 AS
     Select [IDRestriction],[Titre],[Description],[Etat] FROM Restriction
 GO
 --RestrictionStage
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetStageRestriction')
+DROP PROCEDURE pAddSetStageRestriction
+GO
 Create Proc [dbo].[pAddSetStageRestriction] @IDStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN Bit
 AS
 IF @New_IN = 1
@@ -80,13 +93,17 @@ SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restri
 WHERE [IDRestriction] in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDStage = @IDStage_IN
 END
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetRestrictionIdByIdStage')
+DROP PROCEDURE pGetRestrictionIdByIdStage
+GO
 CREATE PROC pGetRestrictionIdByIdStage(@IDStage_IN INT)
 AS
     SELECT IDRestriction FROM StageRestriction WHERE IDStage=@IDStage_IN AND Etat = 1
 go
-
-create Proc pGetAllStageRestrictionByIdStage @IDStage_IN INT
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllStageRestrictionByIdStage')
+DROP PROCEDURE pGetAllStageRestrictionByIdStage
+GO
+CREATE PROC pGetAllStageRestrictionByIdStage @IDStage_IN INT
 AS
     SELECT DISTINCT Restriction.Titre, Restriction.Description 
     From Restriction 
@@ -94,20 +111,26 @@ AS
     WHERE StageRestriction.IDStage = @IDStage_IN  AND StageRestriction.Etat = 1
 GO
 --RestrictionMilieu
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetRestrictionIdByIdMilieu')
+DROP PROCEDURE pGetRestrictionIdByIdMilieu
+GO
 CREATE PROC pGetRestrictionIdByIdMilieu(@IDMilieu_IN INT)
 AS
     SELECT IDRestriction FROM MilieuStageRestriction WHERE IDMilieuStage=@IDMilieu_IN AND Etat = 1
 go
-
-create Proc pGetAllMilieuStageRestrictionByIdMilieuStage @IDMilieuStage_IN INT
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllMilieuStageRestrictionByIdMilieuStage')
+DROP PROCEDURE pGetAllMilieuStageRestrictionByIdMilieuStage
+GO
+CREATE PROC pGetAllMilieuStageRestrictionByIdMilieuStage @IDMilieuStage_IN INT
 AS
     SELECT DISTINCT Restriction.Titre, Restriction.Description 
     From Restriction 
         Left join MilieuStageRestriction ON MilieuStageRestriction.IDRestriction = Restriction.IDRestriction
     WHERE MilieuStageRestriction.IDMilieuStage = @IDMilieuStage_IN  AND MilieuStageRestriction.Etat = 1
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllRestrictionForStageWithMilieuIncludedByIds')
+DROP PROCEDURE pGetAllRestrictionForStageWithMilieuIncludedByIds
+GO
 CREATE PROC pGetAllRestrictionForStageWithMilieuIncludedByIds
 @IDMilieu_IN int,
 @IDStage_IN int

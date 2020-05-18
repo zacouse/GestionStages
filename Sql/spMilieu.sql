@@ -1,6 +1,8 @@
 use [GestionStage]
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllMilieuStage')
+DROP PROCEDURE pGetAllMilieuStage
+GO
 CREATE PROC pGetAllMilieuStage
 AS
 
@@ -8,13 +10,18 @@ SELECT [IDMilieuStage], [Titre], [Description], [NoCivique], [Rue], [CodePostal]
 FROM MilieuStage
 
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetMilieuStageById')
+DROP PROCEDURE pGetMilieuStageById
+GO
 CREATE PROC pGetMilieuStageById
 	@Id_IN INT
 AS
 	SELECT [IDMilieuStage],[Titre],[Description],[NoCivique],[Rue],[CodePostal],[Ville],[Province],[Pays],[NoTelephone],[Etat]
 	FROM MilieuStage WHERE [IDMilieuStage]= @Id_IN
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetMilieuStageRestriction')
+DROP PROCEDURE pAddSetMilieuStageRestriction
+GO
 CREATE PROC pAddSetMilieuStageRestriction @IDMilieuStage_IN INT, @IDRestriction_IN Varchar(4000),@New_IN BIT
 AS
 IF @New_IN = 1
@@ -37,7 +44,9 @@ SET [Etat] = 1 ,[DateHeureModification] =GETDATE()/*Actualiser l'état des restri
 WHERE [IDRestriction] in (select value from STRING_SPLIT(@IDRestriction_IN,',')) and IDMilieuStage = @IDMilieuStage_IN
 END
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetMilieuStage')
+DROP PROCEDURE pAddSetMilieuStage
+GO
 CREATE PROC pAddSetMilieuStage
 	@Id_IN INT,
 	@Titre_IN VARCHAR(100),
@@ -83,7 +92,9 @@ AS
 GO
 
 --exec pAddSetMilieuStage'3','Test','test','213','Avenue','G0M 0G4','ROKE','SOLYD','MEME','6(969)-696-9696','0';
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetMilieuStage')
+DROP PROCEDURE pGetMilieuStage
+GO
 CREATE PROC [dbo].[pGetMilieuStage](
 @Titre_IN VARCHAR(100) = '',@Adresse_IN VARCHAR(1000) ='',@isActive_IN BIT = 0,@isInactive_IN BIT = 0
 )AS

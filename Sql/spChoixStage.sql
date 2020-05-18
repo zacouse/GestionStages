@@ -1,6 +1,8 @@
 USE GestionStage
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetChoixEtudiantByIdStage')
+DROP PROCEDURE pGetChoixEtudiantByIdStage
+GO
 CREATE PROC pGetChoixEtudiantByIdStage
 @IdStage_IN int
 AS
@@ -11,7 +13,9 @@ left join Programme prog on etu.IDProgramme = prog.IDProgramme
 WHERE IDStage = @IdStage_IN AND StageEtudiant.Etat = 1
 order by StageEtudiant.NumeroChoix
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetOneAssignationStage')
+DROP PROCEDURE pAddSetOneAssignationStage
+GO
 CREATE PROC pAddSetOneAssignationStage(@IDStageEtudiant_IN INT, @ChoixFinal_IN BIT, @IDSuperviseur_IN INT)
 AS
     UPDATE StageEtudiant
@@ -20,7 +24,9 @@ AS
     ,   DateHeureModification = GetDate()
     WHERE IDStageEtudiant = @IDStageEtudiant_IN
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetDroitVeto')
+DROP PROCEDURE pAddSetDroitVeto
+GO
 CREATE PROC pAddSetDroitVeto(@IDStage_IN INT,@IDEtudiant_IN INT, @ChoixFinal_IN BIT, @IDSuperviseur_IN INT)
 AS
 IF NOT EXISTS(SELECT * FROM StageEtudiant WHERE IDStage = @IDStage_IN AND IDEtudiant = @IDEtudiant_IN)

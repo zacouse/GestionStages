@@ -1,20 +1,26 @@
 use [GestionStage]
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllStage')
+DROP PROCEDURE pGetAllStage
+GO
 CREATE PROC pGetAllStage
 AS
 SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat], MilieuStage.Titre
 FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage]
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetAllStageActif')
+DROP PROCEDURE pGetAllStageActif
+GO
 CREATE PROC pGetAllStageActif
 AS
 SELECT [IDStage], Stage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat], MilieuStage.Titre
 FROM Stage
 left join MilieuStage ON Stage.[IDMilieuStage] = MilieuStage.[IDMilieuStage] where Stage.Etat = 1
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetStage')
+DROP PROCEDURE pAddSetStage
+GO
 Create PROC [dbo].[pAddSetStage] @IDStage_IN INT, @IDMilieuStage_IN INT, @Titre_IN Varchar(100), @Description_IN Varchar(1000), @NbPostes_IN INT, @Statut_IN TINYINT, @PeriodeTravail_IN TINYINT, @NbHeureSemaine_IN INT, @DateDebut_IN DateTime, @DateFin_IN DateTime, @Etat_IN Bit, @IDRestriction_IN Varchar(4000)
 AS
 DECLARE @isNew Bit;
@@ -35,7 +41,9 @@ Set @isNew = 0
 END
 exec pAddSetStageRestriction @IDStage_IN, @IDRestriction_IN , @isNew
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetStageByID')
+DROP PROCEDURE pGetStageByID
+GO
 CREATE PROC pGetStageByID(@IDStage_IN INT)
 AS
 SELECT [IDStage],MilieuStage.[IDMilieuStage], Stage.[Titre], Stage.[Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], Stage.[Etat],MilieuStage.[Titre]
@@ -43,7 +51,9 @@ FROM Stage
 Left Join MilieuStage ON MilieuStage.IDMilieuStage = Stage.IDMilieuStage
 WHERE [IDStage] = @IDStage_IN;
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetStage')
+DROP PROCEDURE pGetStage
+GO
 CREATE PROC pGetStage(
 @Titre_IN VARCHAR(100) = '',@Description_IN VARCHAR(1000)= '',@Milieu_IN VARCHAR(100) = '',@Minh_IN INT = 0,@Maxh_IN INT = 0,@MinDate_IN DATETIME = 0,@MaxDate_IN DATETIME = 0,@isJour_IN BIT = 0,@isSoir_IN BIT = 0,@isNuit_IN BIT = 0,@isActive_IN BIT = 0,@isInactive_IN BIT = 0,@chosenStages_IN VARCHAR(200) = '0,0,0'
 )AS
@@ -130,6 +140,9 @@ GO
 --END
 --GO
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetChoixStage')
+DROP PROCEDURE pAddSetChoixStage
+GO
 CREATE PROC pAddSetChoixStage
 	@IdStageEtudiant_IN INT,
 	@IdStage_IN INT,
@@ -162,6 +175,9 @@ CREATE PROC pAddSetChoixStage
 	END
 GO
 --exec pAddSetChoixStage'0','1','1','2','0','1'
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pAddSetRetirerChoixStage')
+DROP PROCEDURE pAddSetRetirerChoixStage
+GO
 CREATE PROC pAddSetRetirerChoixStage
 @IdEtudiant_IN INT,
 @NumeroChoix_IN INT
@@ -169,6 +185,9 @@ AS
 UPDATE  [dbo].[StageEtudiant]
 		SET [Etat] = '0',[DateHeureModification] = GETDATE()
 		WHERE [IDEtudiant] = @IdEtudiant_IN AND [NumeroChoix] = @NumeroChoix_IN ;
+GO
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetChoixStageByIdEtudiant')
+DROP PROCEDURE pGetChoixStageByIdEtudiant
 GO
 CREATE PROC pGetChoixStageByIdEtudiant
 @IdEtudiant_IN INT
@@ -180,14 +199,18 @@ SELECT [IDStageEtudiant]
       ,[ChoixFinal]
       ,[Etat] FROM StageEtudiant WHERE IDEtudiant = @IdEtudiant_IN and Etat = '1' ;
 go
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetStagesByIdMilieu')
+DROP PROCEDURE pGetStagesByIdMilieu
+GO
 CREATE PROC pGetStagesByIdMilieu(@IdMilieu_IN INT)
 AS
 SELECT [IDStage],[IDMilieuStage], [Titre], [Description], [NbPostes], [Statut], [PeriodeTravail], [NbHeureSemaine], [DateDebut], [DateFin], [Etat]
 FROM Stage
 WHERE [IDMilieuStage] = @IdMilieu_IN;
 GO
-
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'pGetStagesForAssignement')
+DROP PROCEDURE pGetStagesForAssignement
+GO
 CREATE PROC pGetStagesForAssignement
 AS
 SELECT Stage.[IDStage],Stage.[IDMilieuStage],Stage.[Titre],Stage.[NbPostes],Stage.[Etat],MilieuStage.[Titre] as 'TitreMilieu'from Stage 
