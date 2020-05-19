@@ -60,15 +60,5 @@ namespace GestionStages.Controllers
             }
             return message;
         }
-
-        [HttpPost]
-        public void SaveAllStage()        {            List<Stage> stagesToAssign = repoStage.GetStagesForAssignement();
-            foreach (Stage stage in stagesToAssign)            {
-                List<ChoixEtudiant> ChoixEtudiants = repoChoixStage.GetChoixEtudiant(stage.IDStage);
-                foreach (ChoixEtudiant choix in ChoixEtudiants)
-                {
-                    string test = Request.Form["FinalChoice" + choix.IDStageEtudiant];
-                    repoChoixStage.SaveOneAssignationStage(choix.IDStageEtudiant, (((string)Request.Form["FinalChoice" + choix.IDStageEtudiant]) != null && Request.Form["FinalChoice" + choix.IDStageEtudiant] != ""), Convert.ToInt32(Request.Form["DropSuperviseur" + choix.IDStageEtudiant]));
-                }            }            //Response.Redirect("../AssignationStage/AddSetAssignationStage");        }
     }
 }
