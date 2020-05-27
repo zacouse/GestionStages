@@ -49,8 +49,8 @@
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
             <select id="TxtStatut" name="TxtStatut" class="Validate" required>
-                <option value="0">@lang.TempsPleins</option>
-                <option value="1">@lang.TempsPartiel</option>
+                <option value="0" selected="@(StageAModifier.Statut == 0)">@lang.TempsPleins</option>
+                <option value="1"selected="@(StageAModifier.Statut == 1)">@lang.TempsPartiel</option>
             </select>
             @Html.Label("TxtStatut", @lang.Statut)
         </div>
@@ -58,9 +58,9 @@
     <div class="row">
         <div class="input-field col push-m3 m6 s12">
             <select id="TxtPeriodeTravail" name="TxtPeriodeTravail" class="Validate" required>
-                <option value="0">@lang.Jour</option>
-                <option value="1">@lang.Soiree</option>
-                <option value="2">@lang.Nuit</option>
+                <option value="0" selected="@(StageAModifier.PeriodeTravail == 0)">@lang.Jour</option>
+                <option value="1" selected="@(StageAModifier.PeriodeTravail == 1)">@lang.Soiree</option>
+                <option value="2" selected="@(StageAModifier.PeriodeTravail == 2)">@lang.Nuit</option>
             </select>
             @Html.Label("TxtPeriodeTravail", @lang.PeriodeDeTravail)
         </div>
