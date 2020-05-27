@@ -12,8 +12,13 @@ Période de travail- > fin de semaine
 Impression-> restriction a la place des champs statut et Heures
 Note -> Demande de Natalie pour avoir les note sur un étudiant dans le modal de Assigner les stages au étudiant
 
-
 Si l'étudiant à un choix final , le stage est highlight et c'est read-only
+
+Amélioration:
+Map google pour l'adresse de lieu de stage
+Feedback lorsque l'étudiant est accepté autre que dans notre module
+Voir la photo de l'étudiant à la place de l'oeil visionner en petit dans la liste Étudiant non-assigner
+
 
 
 
